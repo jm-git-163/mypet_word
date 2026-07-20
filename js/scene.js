@@ -226,14 +226,42 @@
           g += `<path d="${ridge(rng, 196 + i * 30, 22 + i * 8, W)}" fill="${ink(i + 1)}"/>`;
         }
       } else if (land === '바다') {
-        // 수평선과 밀려오는 물결 — 멀리 작은 섬 하나
-        g += `<rect y="196" width="${W}" height="${H - 196}" fill="${hsl(hSky + 4, sat, time.skyL[1] - 10)}"/>`;
-        const ix = 60 + rng() * (W - 160);
-        g += `<path d="M${ix.toFixed(0)} 196 q18 -22 36 0 Z" fill="${ink(0)}" opacity=".8"/>`;
-        for (let i = 0; i < 6; i++) {
-          const y = 210 + i * 15;
-          g += `<path d="M0 ${y} q${(W / 6).toFixed(0)} -7 ${(W / 3).toFixed(0)} 0 t${(W / 3).toFixed(0)} 0 t${(W / 3).toFixed(0)} 0"
-                 stroke="${hsl(hSky, 26, 97)}" stroke-width="${(1.4 + i * .3).toFixed(1)}" fill="none" opacity="${(.24 + i * .07).toFixed(2)}"/>`;
+        /* 바다 — 선 하나만 있으면 너무 밋밋합니다.
+           먼 섬 둘, 물빛 두 겹, 햇빛이 부서지는 길, 물결,
+           그리고 앞쪽 갯바위와 갈매기까지 얹습니다. */
+        // 먼바다와 앞바다 (색을 나눠 깊이를 냅니다)
+        g += `<rect y="192" width="${W}" height="${H - 192}" fill="${hsl(hSky + 4, sat, time.skyL[1] - 8)}"/>`;
+        g += `<rect y="240" width="${W}" height="${H - 240}" fill="${hsl(hSky + 10, sat * 1.1, time.skyL[1] - 15)}" opacity=".7"/>`;
+
+        // 멀리 보이는 섬 둘 (하나는 작게 겹쳐서)
+        const ix = 40 + rng() * (W - 180);
+        g += `<path d="M${ix.toFixed(0)} 192 q14 -16 26 -17 q14 1 30 17 Z" fill="${ink(0)}" opacity=".85"/>`;
+        g += `<path d="M${(ix + 44).toFixed(0)} 192 q9 -10 18 -11 q9 1 19 11 Z" fill="${ink(1)}" opacity=".7"/>`;
+
+        // 해가 물에 부서지는 길
+        if (time.sun !== 'none') {
+          for (let i = 0; i < 7; i++) {
+            const y = 200 + i * 13, w2 = 10 + i * 7;
+            g += `<rect x="${(W * .62 - w2 / 2).toFixed(0)}" y="${y}" width="${w2.toFixed(0)}" height="3.4" rx="1.7"
+                   fill="${hsl(hSky - 8, 30, 97)}" opacity="${(.34 - i * .035).toFixed(2)}"/>`;
+          }
+        }
+
+        // 물결 — 멀수록 촘촘하고 옅게
+        for (let i = 0; i < 9; i++) {
+          const y = 202 + i * 11 + i * i * .5;
+          g += `<path d="M0 ${y.toFixed(0)} q${(W / 6).toFixed(0)} -${(4 + i * .7).toFixed(0)} ${(W / 3).toFixed(0)} 0 t${(W / 3).toFixed(0)} 0 t${(W / 3).toFixed(0)} 0"
+                 stroke="${hsl(hSky, 26, 97)}" stroke-width="${(1.2 + i * .28).toFixed(1)}" fill="none" opacity="${(.2 + i * .06).toFixed(2)}"/>`;
+        }
+
+        // 앞쪽 갯바위
+        const bx = rng() < .5 ? 26 : W - 86;
+        g += `<path d="M${bx} 300 q10 -30 30 -26 q16 -14 30 6 q10 8 8 20 Z" fill="${ink(2, -10)}" opacity=".62"/>`;
+        // 갈매기 둘
+        for (let i = 0; i < 2; i++) {
+          const gx = 60 + rng() * (W - 120), gy = 96 + rng() * 46;
+          g += `<path d="M${gx.toFixed(0)} ${gy.toFixed(0)} q5 -5 10 0 q5 -5 10 0"
+                 stroke="${hsl(hRidge, 18, 52)}" stroke-width="1.5" fill="none" opacity=".4"/>`;
         }
       } else if (land === '설산') {
         // 눈 덮인 산 — 봉우리 위쪽만 하얗게
@@ -327,6 +355,26 @@
           }
         }
       }
+
+      /* 앞쪽 잔풀과 돌 — 어느 풍경이든 아래쪽이 휑하지 않게.
+         바다는 물이라 넣지 않습니다. */
+      if (land !== '바다') {
+        for (let i = 0; i < 12; i++) {
+          const x = rng() * W, y = 276 + rng() * 26;
+          if (rng() < .45) {
+            g += `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${(3 + rng() * 5).toFixed(1)}" ry="${(2 + rng() * 2.4).toFixed(1)}"
+                   fill="${ink(2, -8)}" opacity="${(.22 + rng() * .2).toFixed(2)}"/>`;
+          } else {
+            for (let k = 0; k < 3; k++) {
+              g += `<path d="M${(x + k * 2.6).toFixed(1)} ${y.toFixed(0)} q2 -${(5 + rng() * 6).toFixed(0)} ${(3 + rng() * 3).toFixed(0)} -${(8 + rng() * 7).toFixed(0)}"
+                     stroke="${ink(2, -4)}" stroke-width="1.3" fill="none" opacity="${(.24 + rng() * .2).toFixed(2)}"/>`;
+            }
+          }
+        }
+      }
+
+      // 옅은 안개 한 겹 — 멀고 가까움이 살아납니다
+      g += `<rect y="188" width="${W}" height="52" fill="${hsl(hSky, 20, 96)}" opacity=".22"/>`;
 
       // 새 몇 마리
       if (rng() < .45) {

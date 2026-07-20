@@ -1503,3 +1503,84 @@ body.contrast .xwrap {
 
 /* 물결이 테마 빛깔을 따르게 */
 .ripple { background: color-mix(in srgb, var(--primary-c) 34%, transparent) !important; }
+
+/* ══════════════════════════════════════════════════════
+   더 비치게
+
+   풍경을 애써 그려 놓고 상자들이 다 가리면 소용이 없습니다.
+   글자가 걸린 곳은 읽히는 선을 지키면서, 나머지는 더 열어 둡니다.
+   ══════════════════════════════════════════════════════ */
+
+/* 낱말판 — 58% → 42% */
+.xwrap {
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--board-tint) 0%, transparent 74%),
+    color-mix(in srgb, var(--white) 42%, transparent) !important;
+  backdrop-filter: saturate(140%) blur(18px);
+  -webkit-backdrop-filter: saturate(140%) blur(18px);
+}
+body.dark .xwrap {
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--board-tint) 0%, transparent 74%),
+    color-mix(in srgb, var(--white) 50%, transparent) !important;
+}
+
+/* 낱말 칸 — 글자가 걸려 있어 조금만 엽니다 */
+.xcell:not(.gap) {
+  background: color-mix(in srgb, var(--cell-bg) 84%, transparent);
+}
+.xcell.fixed { background: color-mix(in srgb, var(--tertiary-c) 88%, transparent); }
+.xcell.cur { background: color-mix(in srgb, var(--primary-fixed) 90%, transparent); }
+/* 맞힌 칸은 그대로 둡니다 — 다 맞혔다는 표시가 흐려지면 안 됩니다 */
+
+/* 글자 쟁반 카드 */
+.tile {
+  background: color-mix(in srgb, var(--white) 78%, transparent);
+  backdrop-filter: saturate(130%) blur(10px);
+  -webkit-backdrop-filter: saturate(130%) blur(10px);
+}
+
+/* 글상자·목록·토글 — 84% → 70% */
+#view > .card, .list-item, .toggle, .hue, .preview-box {
+  background-color: color-mix(in srgb, var(--white) 70%, transparent);
+  backdrop-filter: saturate(130%) blur(14px);
+  -webkit-backdrop-filter: saturate(130%) blur(14px);
+}
+
+/* 보조 단추 — 78% → 62% */
+.btn:not(.primary):not(.quiet) {
+  background: color-mix(in srgb, var(--white) 62%, transparent);
+  backdrop-filter: saturate(130%) blur(12px);
+  -webkit-backdrop-filter: saturate(130%) blur(12px);
+}
+
+/* 도구 단추 */
+.tool-btn {
+  background: color-mix(in srgb, var(--white) 68%, transparent) !important;
+  backdrop-filter: saturate(130%) blur(12px);
+  -webkit-backdrop-filter: saturate(130%) blur(12px);
+}
+
+/* 주단추는 조금만 — 글자가 걸려 있고 가장 중요한 자리입니다 */
+.btn.primary {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--primary-c) 88%, #fff) 0%,
+    color-mix(in srgb, var(--primary-c) 93%, transparent) 55%,
+    color-mix(in srgb, var(--primary-c) 90%, var(--primary-c-dark)) 100%) !important;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+
+/* 아래·위 띠도 조금 더 */
+.tabbar { background: color-mix(in srgb, var(--white) 66%, transparent); }
+.topbar { background: color-mix(in srgb, var(--surface) 62%, transparent); }
+
+/* 「또렷하게 보기」에서는 비침을 모두 끕니다 */
+body.contrast .xwrap, body.contrast .xcell, body.contrast .tile,
+body.contrast #view > .card, body.contrast .list-item, body.contrast .toggle,
+body.contrast .btn, body.contrast .tool-btn, body.contrast .tabbar, body.contrast .topbar {
+  backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+}
+body.contrast .xwrap { background: var(--white) !important; }
+body.contrast .xcell:not(.gap) { background: var(--cell-bg) !important; }
+body.contrast .tile, body.contrast #view > .card,
+body.contrast .list-item, body.contrast .toggle { background: var(--white) !important; }

@@ -119,12 +119,18 @@
     lastTap = { x: ev.clientX, y: ev.clientY, t: now };
   }, true);
 
-  /** 지금 쓸 빛깔 이름 ('자동'이면 지금 동네의 빛깔) */
+  /**
+   * 지금 쓸 빛깔 이름.
+   * 「동네 따라」로 두시면 한 판 걸을 때마다 빛깔이 바뀝니다.
+   * 백 걸음마다 바뀌게 두었더니 한참을 같은 색으로 걸어야 했습니다.
+   * (풍경의 생김새는 동네가 정하므로, 색만 매 판 바뀌고 땅은 그대로입니다)
+   */
   function hueNow() {
     const s = Store.data.settings;
     if (s.hue && s.hue !== 'auto') return s.hue;
-    const i = Math.floor((Store.data.level - 1) / 100) % NEIGHBORHOODS.length;
-    return NEIGHBORHOODS[i].hue || 'coral';
+    // 이웃한 판끼리 비슷한 색이 이어지지 않도록 다섯 칸씩 건너뜁니다
+    const i = ((Store.data.level - 1) * 5) % HUES.length;
+    return HUES[i][0];
   }
 
   function applySettings() {
