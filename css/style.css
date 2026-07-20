@@ -1277,21 +1277,24 @@ body.reduce-motion .sheet, body.reduce-motion .sheet-back { animation: none; }
      ② 아래로 부드러운 그림자를 드리워
    '떠 있는 것'으로 보이게 합니다. 어느 빛깔에서도 통합니다.
    ══════════════════════════════════════════════════════ */
-.dog { position: relative; }
+.dog { position: relative; isolation: isolate; }
+/* 핀 조명이 강아지 상자를 넘어가면 옆의 말풍선 글자를 하얗게 덮습니다.
+   상자 안에 가두고, 가장자리는 완전히 투명해지도록 둡니다. */
 .dog::before {
-  content: ''; position: absolute; left: 50%; top: 52%;
-  width: 128%; height: 128%; transform: translate(-50%, -50%);
+  content: ''; position: absolute; inset: -2%;
   border-radius: 50%;
   background: radial-gradient(circle,
-    rgba(255,255,255,.92) 0%, rgba(255,255,255,.55) 42%, rgba(255,255,255,0) 70%);
+    rgba(255,255,255,.90) 0%, rgba(255,255,255,.60) 40%, rgba(255,255,255,0) 66%);
   z-index: 0; pointer-events: none;
 }
 .dog svg { position: relative; z-index: 1; }
+/* 말풍선은 조명보다 위에 둡니다 */
+.dog-area .speech { position: relative; z-index: 2; }
 .dogsvg { filter: drop-shadow(0 6px 10px rgba(45,21,13,.16)) drop-shadow(0 1px 1px rgba(45,21,13,.10)); }
 
 body.dark .dog::before {
   background: radial-gradient(circle,
-    rgba(255,236,214,.16) 0%, rgba(255,236,214,.08) 45%, rgba(255,236,214,0) 70%);
+    rgba(255,236,214,.15) 0%, rgba(255,236,214,.07) 42%, rgba(255,236,214,0) 66%);
 }
 body.dark .dogsvg { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
 body.contrast .dog::before { display: none; }

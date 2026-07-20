@@ -359,7 +359,9 @@
 
     /** 쟁반 글자를 지금 낱말의 빈 칸에 넣습니다 */
     tapTile(i, el) {
-      if (this.usedTiles.includes(i)) return;
+      // 이미 놓은 글자를 한 번 더 누르면 도로 빼냅니다.
+      // 잘못 넣었을 때 「지우기」를 찾아 누르지 않아도 되게 합니다.
+      if (this.usedTiles.includes(i)) return this.pullBack(i);
       const it = this.item, g = it.grid;
       const w = g.words[this.wordIdx];
       if (!w) return;
@@ -374,6 +376,26 @@
       this.tileAt = this.tileAt || {};
       this.tileAt[target] = i;                    // 어느 쟁반 글자가 들어갔는지 기억
       this.checkWords();
+      this.redrawGrid();
+    },
+
+    /**
+     * 쟁반 글자 하나를 도로 빼냅니다.
+     * 이미 맞힌 낱말에 들어간 글자는 건드리지 않습니다.
+     */
+    pullBack(i) {
+      this.tileAt = this.tileAt || {};
+      const key = Object.keys(this.tileAt).find(k => this.tileAt[k] === i);
+      if (key === undefined) return;
+
+      // 맞힌 낱말에 속한 칸이면 그대로 둡니다
+      const [r, c] = key.split(',').map(Number);
+      if (this.isCellSolved(r, c)) return;
+
+      delete this.gridState[key];
+      delete this.tileAt[key];
+      this.usedTiles = this.usedTiles.filter(x => x !== i);
+      Sound.tap();
       this.redrawGrid();
     },
 
@@ -703,12 +725,6 @@
         if (e.type === 'PROVERB') box.appendChild(h('details', { class: 'fold' },
           h('summary', null, '속담 전체'),
           h('div', { class: 'body' }, e.front + ' ' + e.back)));
-        box.appendChild(h('details', { class: 'fold' },
-          h('summary', null, '어떤 낱말인가요'),
-          h('div', { class: 'body' },
-            `갈래: ${e.category}`, h('br'), `어려운 정도: ${GRADE_NAME[e.grade]}`,
-            e.choseong ? [h('br'), `첫소리: ${e.choseong}`] : null)));
-
         // 간직하기는 판이 끝난 뒤 낱말 목록에서 합니다.
         // 여기에도 두면 같은 일을 두 군데서 하게 되어 번거롭습니다.
         box.appendChild(h('button', {
