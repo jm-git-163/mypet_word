@@ -1104,3 +1104,142 @@ h1, h2, .bignum, .big, .word-title, .qbig {
   background: var(--primary-fixed); color: var(--primary);
   font-size: var(--t-caption); font-weight: 700; letter-spacing: .01em;
 }
+
+/* ══════════════════════════════════════════════════════
+   빛깔 여섯 벌
+
+   동네가 바뀔 때마다(백 단계마다) 화면의 빛깔이 함께 바뀝니다.
+   수천 단계를 걸으시는 분께 같은 빛깔만 보여 드리면 지루합니다.
+   설정에서 마음에 드는 하나로 고정하실 수도 있습니다.
+
+   ★ 바꾸는 것은 '주색 한 갈래'뿐입니다.
+     바탕과 글자색은 건드리지 않습니다. 그래야 명암비가 그대로 지켜지고,
+     빛깔을 바꿔도 촌스러워지지 않습니다.
+   ══════════════════════════════════════════════════════ */
+
+/* 감빛 — 기본 */
+body.t-coral {
+  --primary: #9a5200; --primary-c: #ef8f22; --primary-c-dark: #c26c05;
+  --on-primary-c: #3d1f00; --primary-fixed: #ffe0c2;
+  --board-tint: #fff1e2; --cur-halo: rgba(239,143,34,.18);
+}
+body.dark.t-coral {
+  --primary: #ffb974; --primary-c: #d47c1c; --primary-c-dark: #a65f0c;
+  --on-primary-c: #241200; --primary-fixed: #4a3221;
+  --board-tint: #2a211a; --cur-halo: rgba(212,124,28,.28);
+}
+
+/* 숲 */
+body.t-forest {
+  --primary: #2f6b3f; --primary-c: #57a86c; --primary-c-dark: #3d8351;
+  --on-primary-c: #0d2c17; --primary-fixed: #d6ecd9;
+  --board-tint: #eaf5ec; --cur-halo: rgba(87,168,108,.20);
+}
+body.dark.t-forest {
+  --primary: #92d3a3; --primary-c: #63ab77; --primary-c-dark: #438255;
+  --on-primary-c: #08210f; --primary-fixed: #24382b;
+  --board-tint: #1a241d; --cur-halo: rgba(70,135,90,.30);
+}
+
+/* 바다 */
+body.t-ocean {
+  --primary: #1f5f79; --primary-c: #4595b0; --primary-c-dark: #2f7791;
+  --on-primary-c: #06242f; --primary-fixed: #d3e9f0;
+  --board-tint: #e8f3f7; --cur-halo: rgba(69,149,176,.20);
+}
+body.dark.t-ocean {
+  --primary: #86c8de; --primary-c: #59a3bb; --primary-c-dark: #3b7c93;
+  --on-primary-c: #04191f; --primary-fixed: #1f333c;
+  --board-tint: #161f24; --cur-halo: rgba(58,125,149,.30);
+}
+
+/* 라벤더 */
+body.t-lavender {
+  --primary: #5c4a86; --primary-c: #8c78bd; --primary-c-dark: #6c5a9c;
+  --on-primary-c: #1f1636; --primary-fixed: #e4dcf4;
+  --board-tint: #f0ecf9; --cur-halo: rgba(140,120,189,.20);
+}
+body.dark.t-lavender {
+  --primary: #c0aef0; --primary-c: #9a87cc; --primary-c-dark: #6f5da0;
+  --on-primary-c: #150e28; --primary-fixed: #2e2745;
+  --board-tint: #1d1a29; --cur-halo: rgba(111,93,160,.30);
+}
+
+/* 노을 */
+body.t-sunset {
+  --primary: #99354a; --primary-c: #dd6a7e; --primary-c-dark: #b74a5f;
+  --on-primary-c: #3a0c17; --primary-fixed: #fbdbe1;
+  --board-tint: #fdeef1; --cur-halo: rgba(221,106,126,.20);
+}
+body.dark.t-sunset {
+  --primary: #f2a3b1; --primary-c: #d4788b; --primary-c-dark: #a2566a;
+  --on-primary-c: #2a070f; --primary-fixed: #43242b;
+  --board-tint: #26191d; --cur-halo: rgba(169,79,97,.30);
+}
+
+/* 흙 */
+body.t-clay {
+  --primary: #6d5334; --primary-c: #a98953; --primary-c-dark: #8a6d3d;
+  --on-primary-c: #2b1e0c; --primary-fixed: #eee2cd;
+  --board-tint: #f6efe3; --cur-halo: rgba(169,137,83,.20);
+}
+body.dark.t-clay {
+  --primary: #ddc394; --primary-c: #b0905d; --primary-c-dark: #866a41;
+  --on-primary-c: #1e1507; --primary-fixed: #392f21;
+  --board-tint: #211c14; --cur-halo: rgba(134,106,65,.30);
+}
+
+/* 빛깔 고르는 칸 */
+.hues { display: flex; gap: 10px; flex-wrap: wrap; }
+.hue {
+  flex: 1 1 84px; min-height: calc(78px * var(--fs));
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  border: none; border-radius: 20px; cursor: pointer;
+  background: var(--surface-low); color: var(--on-surface);
+  font-family: inherit; font-size: var(--t-caption); font-weight: 700;
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: transform 180ms cubic-bezier(.34,1.56,.64,1), box-shadow 180ms ease;
+}
+.hue .dot {
+  width: calc(30px * var(--fs)); height: calc(30px * var(--fs)); border-radius: 50%;
+  box-shadow: inset 0 -3px 6px rgba(0,0,0,.10);
+}
+.hue.on { box-shadow: inset 0 0 0 2.5px var(--primary-c); background: var(--primary-fixed); }
+.hue:active { transform: scale(.95); }
+
+/* ── 화면 사이 숨 고르기 ──────────────────────────
+   상자들이 바짝 붙어 있으면 어디부터 어디까지가 한 덩어리인지
+   알기 어렵습니다. 사이를 넉넉히 벌리고, 상자 안쪽도 늘립니다. */
+#view > .card { margin-bottom: 18px; padding: 22px 20px; }
+#view > .card:last-child { margin-bottom: 8px; }
+#view > .list-item { margin-bottom: 8px; }
+#view > .section-title { margin: 26px 0 10px; }
+.card h2 { margin: 0 0 14px; letter-spacing: -0.02em; }
+.card > .muted.small:first-of-type { margin-top: -8px; }
+
+/* ── 눌림 모션 ────────────────────────────────
+   딱딱하게 꺼지는 대신 살짝 오므라졌다 튀어나오게 합니다. */
+.list-item, .toggle, .iconbtn, .tool-btn, .hue, .chip {
+  transition: transform 200ms cubic-bezier(.34,1.56,.64,1),
+              background-color 200ms ease, box-shadow 200ms ease;
+}
+.list-item:active, .toggle:active { transform: scale(.985); }
+
+/* 화면이 바뀔 때 부드럽게 올라옵니다 */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+#view > * { animation: riseIn 320ms cubic-bezier(.22,1,.36,1) both; }
+#view > *:nth-child(2) { animation-delay: 40ms; }
+#view > *:nth-child(3) { animation-delay: 80ms; }
+#view > *:nth-child(4) { animation-delay: 110ms; }
+#view > *:nth-child(n+5) { animation-delay: 140ms; }
+body.reduce-motion #view > * { animation: none; }
+
+/* 아래에서 올라오는 창도 부드럽게 */
+.sheet { animation: sheetUp 340ms cubic-bezier(.22,1,.36,1); }
+@keyframes sheetUp { from { transform: translateY(28px); opacity: .4 } to { transform: none; opacity: 1 } }
+.sheet-back { animation: fadeIn 220ms ease; }
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+body.reduce-motion .sheet, body.reduce-motion .sheet-back { animation: none; }

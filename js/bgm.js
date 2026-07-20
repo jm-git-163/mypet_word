@@ -213,6 +213,32 @@
       ], 'bell', 0.17);
     },
 
+    /**
+     * 멍멍 — 간식을 드릴 때.
+     * 소리가 아래로 미끄러지면 '멍', 두 번 겹치면 '멍멍' 이 됩니다.
+     * 짖는 소리는 배음이 촘촘해야 개소리처럼 들려서 톱니를 씁니다.
+     */
+    bark() {
+      if (!global.Store || !global.Store.data.settings.sfx) return;
+      const c = this.ensure(); if (!c) return;
+      this.resume();
+      const one = (at, hi, lo) => {
+        const o = c.createOscillator(), g = c.createGain(), f = c.createBiquadFilter();
+        o.type = 'sawtooth';
+        o.frequency.setValueAtTime(hi, at);
+        o.frequency.exponentialRampToValueAtTime(lo, at + 0.11);   // 아래로 미끄러집니다
+        f.type = 'bandpass'; f.frequency.value = 900; f.Q.value = 1.1;
+        g.gain.setValueAtTime(0.0001, at);
+        g.gain.linearRampToValueAtTime(0.16, at + 0.012);          // 툭 터지듯
+        g.gain.exponentialRampToValueAtTime(0.0001, at + 0.15);
+        o.connect(f); f.connect(g); g.connect(this.sfxGain);
+        o.start(at); o.stop(at + 0.18);
+      };
+      const t = c.currentTime + 0.02;
+      one(t, 520, 240);
+      one(t + 0.19, 470, 215);
+    },
+
     /** 판을 다 채웠을 때 — 작은 축하 가락 */
     clear() {
       this.placeRun = 0;

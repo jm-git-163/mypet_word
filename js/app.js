@@ -20,7 +20,7 @@
         memory: {}, fav: [], recent: [],
         pet: { name: '복실이', bond: 1 },
         onboarded: false,
-        settings: { fs: 1, sfx: true, bgm: false, gentle: false, theme: 'light', contrast: false, motion: false }
+        settings: { fs: 1, sfx: true, bgm: false, hue: 'auto', gentle: false, theme: 'light', contrast: false, motion: false }
       };
     },
     load() {
@@ -58,7 +58,8 @@
     place() { global.Audio2.place(); },
     right() { global.Audio2.word(); },
     hint() { global.Audio2.hint(); },
-    clear() { global.Audio2.clear(); }
+    clear() { global.Audio2.clear(); },
+    bark() { global.Audio2.bark(); }
   };
 
   /* ══════════ 화면 도구 ══════════════════════════ */
@@ -118,9 +119,20 @@
     lastTap = { x: ev.clientX, y: ev.clientY, t: now };
   }, true);
 
+  /** 지금 쓸 빛깔 이름 ('자동'이면 지금 동네의 빛깔) */
+  function hueNow() {
+    const s = Store.data.settings;
+    if (s.hue && s.hue !== 'auto') return s.hue;
+    const i = Math.floor((Store.data.level - 1) / 100) % NEIGHBORHOODS.length;
+    return NEIGHBORHOODS[i].hue || 'coral';
+  }
+
   function applySettings() {
     const s = Store.data.settings;
     document.documentElement.style.setProperty('--fs', s.fs);
+    // 빛깔 한 벌만 남기고 나머지는 벗깁니다
+    HUES.forEach(([id]) => document.body.classList.remove('t-' + id));
+    document.body.classList.add('t-' + hueNow());
     document.body.classList.toggle('dark', s.theme === 'dark');
     document.body.classList.toggle('contrast', !!s.contrast);
     document.body.classList.toggle('reduce-motion', !!s.motion);
@@ -192,6 +204,16 @@
       setTimeout(() => { input.focus(); input.select(); }, 120);
     });
   }
+
+  /* 고를 수 있는 빛깔 — [이름표, 보이는 이름, 동그라미 색] */
+  const HUES = [
+    ['coral', '감빛', '#ef8f22'],
+    ['forest', '숲', '#57a86c'],
+    ['ocean', '바다', '#4595b0'],
+    ['lavender', '라벤더', '#8c78bd'],
+    ['sunset', '노을', '#dd6a7e'],
+    ['clay', '흙', '#a98953']
+  ];
 
   /* ══════════ 아래 띠 아이콘 ══════════════════════
      이모지(🏡🐕📖⚙️) 대신 직접 그립니다.
@@ -460,7 +482,8 @@
           h('button', {
             class: 'btn', onclick: () => {
               if (d.footprints < 8) return say('발자국이 조금 모자라요. 산책을 다녀오면 채워져요.', '🐾');
-              d.footprints -= 8; Store.save(); Sound.right();
+              d.footprints -= 8; Store.save();
+              Sound.bark();                     // 멍멍!
               // 간식을 주면 아주 신나서 방방 뜁니다
               dogMood('petdog', '신남', 150);
               const sv = $('petdog').querySelector('.dogsvg');
@@ -507,13 +530,13 @@
         due.length ? h('button', { class: 'btn go wide', onclick: () => global.Game.startReview() }, '되새기러 가기') : null));
 
       const nav = [
-        ['🧧', '속담 마당', () => global.Game.startProverbs()],
-        ['📚', '최근 만난 낱말', () => this.listWords(d.recent.map(id => DB.byId[id]).filter(Boolean), '최근 만난 낱말')],
-        ['♡', '간직한 낱말', () => this.listWords(d.fav.map(id => DB.byId[id]).filter(Boolean), '간직한 낱말')],
-        ['📈', '나의 기록', () => this.stats()]
+        ['속담 마당', () => global.Game.startProverbs()],
+        ['최근 만난 낱말', () => this.listWords(d.recent.map(id => DB.byId[id]).filter(Boolean), '최근 만난 낱말')],
+        ['간직한 낱말', () => this.listWords(d.fav.map(id => DB.byId[id]).filter(Boolean), '간직한 낱말')],
+        ['나의 기록', () => this.stats()]
       ];
-      nav.forEach(([ic, name, fn]) => v.appendChild(
-        h('button', { class: 'list-item', onclick: fn }, h('span', { class: 'lead' }, ic), h('span', { class: 'grow' }, name), h('span', { class: 'badge' }, '보기'))));
+      nav.forEach(([name, fn]) => v.appendChild(
+        h('button', { class: 'list-item', onclick: fn }, h('span', { class: 'grow' }, name), h('span', { class: 'badge' }, '보기'))));
 
       v.appendChild(h('div', { class: 'card center' },
         h('div', { class: 'muted small' }, '지금까지 만난 낱말'),
@@ -544,13 +567,13 @@
         // 게임을 하는 데 실제로 쓰이는 것만 둡니다.
         // 갈래별 순위·달력 같은 것은 재미로 보는 것일 뿐 놀이에 쓰이지 않아 뺐습니다.
         const rows = [
-          ['📅', '함께한 날', d.days.length + '일'],
-          ['🚶', '마친 산책', d.totalDone + '번'],
-          ['📖', '만난 낱말', Object.keys(d.memory).length + '개'],
-          ['🐾', '모은 발자국', d.footprints + '개']
+          ['함께한 날', d.days.length + '일'],
+          ['마친 산책', d.totalDone + '번'],
+          ['만난 낱말', Object.keys(d.memory).length + '개'],
+          ['모은 발자국', d.footprints + '개']
         ];
-        rows.forEach(([ic, k, val]) => box.appendChild(h('div', { class: 'list-item' },
-          h('span', { class: 'lead' }, ic), h('span', { class: 'grow' }, k), h('span', { class: 'badge' }, val))));
+        rows.forEach(([k, val]) => box.appendChild(h('div', { class: 'list-item' },
+          h('span', { class: 'grow' }, k), h('span', { class: 'badge' }, val))));
 
         box.appendChild(h('button', { class: 'btn primary wide', style: 'margin-top:16px', onclick: close }, '닫기'));
       });
@@ -560,6 +583,28 @@
     scrSet(v) {
       const s = Store.data.settings;
       this.top('설정');
+
+      v.appendChild(h('div', { class: 'card' },
+        h('h2', null, '빛깔'),
+        h('p', { class: 'muted small', style: 'margin:-6px 0 14px' },
+          '「동네 따라」로 두시면 백 걸음마다 분위기가 바뀝니다.'),
+        (() => {
+          const box = h('div', { class: 'hues' });
+          const mk = (id, label, dot) => {
+            const b = h('button', {
+              class: 'hue' + (s.hue === id ? ' on' : ''),
+              onclick: () => { s.hue = id; Store.save(); applySettings(); Sound.tap(); this.go('set'); }
+            });
+            const d = h('span', { class: 'dot' });
+            d.style.background = dot;
+            b.appendChild(d); b.appendChild(h('span', null, label));
+            return b;
+          };
+          box.appendChild(mk('auto', '동네 따라',
+            'conic-gradient(#ef8f22,#57a86c,#4595b0,#8c78bd,#dd6a7e,#a98953,#ef8f22)'));
+          HUES.forEach(([id, label, dot]) => box.appendChild(mk(id, label, dot)));
+          return box;
+        })()));
 
       v.appendChild(h('div', { class: 'card' },
         h('h2', null, '글씨 크기'),
@@ -605,8 +650,8 @@
 
       v.appendChild(h('div', { class: 'card' },
         h('h2', null, '도움말과 정보'),
-        h('button', { class: 'list-item', onclick: () => this.help() }, h('span', { class: 'lead' }, '❓'), h('span', { class: 'grow' }, '사용법 보기')),
-        h('button', { class: 'list-item', onclick: () => this.about() }, h('span', { class: 'lead' }, 'ℹ️'), h('span', { class: 'grow' }, '앱 정보와 자료 출처')),
+        h('button', { class: 'list-item', onclick: () => this.help() }, h('span', { class: 'grow' }, '사용법 보기'), h('span', { class: 'badge' }, '보기')),
+        h('button', { class: 'list-item', onclick: () => this.about() }, h('span', { class: 'grow' }, '앱 정보와 자료 출처'), h('span', { class: 'badge' }, '보기')),
         h('button', {
           class: 'list-item', onclick: () => {
             sheet((box, close) => {
