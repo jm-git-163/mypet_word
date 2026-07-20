@@ -81,15 +81,28 @@
       return new URL('images/bg/' + pick, document.baseURI).href;
     },
 
+    /** 지금 테마의 색상각 — 풍경도 이 빛깔을 따릅니다 */
+    hueDeg() {
+      const cls = [...document.body.classList].find(c => c.startsWith('t-'));
+      return ({
+        't-coral': 28, 't-forest': 138, 't-ocean': 197,
+        't-lavender': 262, 't-sunset': 344, 't-clay': 36
+      })[cls] !== undefined ? ({
+        't-coral': 28, 't-forest': 138, 't-ocean': 197,
+        't-lavender': 262, 't-sunset': 344, 't-clay': 36
+      })[cls] : 28;
+    },
+
     /** 그 단계의 풍경 정보 (그림은 한 번 그리면 재활용합니다) */
     forLevel(level) {
-      if (!this.cache[level]) {
-        this.cache[level] = global.Scene.make(level);
+      const key = level + '|' + this.hueDeg();
+      if (!this.cache[key]) {
+        this.cache[key] = global.Scene.make(level, this.hueDeg());
         // 오래된 것은 버립니다 (메모리 아끼기)
         const keys = Object.keys(this.cache);
         if (keys.length > 40) delete this.cache[keys[0]];
       }
-      return this.cache[level];
+      return this.cache[key];
     },
 
     apply(level) {

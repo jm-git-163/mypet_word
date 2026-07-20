@@ -101,8 +101,13 @@
   const Scene = {
     SEASONS, TIMES, WEATHERS, PLACES,
 
-    /** 레벨 번호 → 풍경 정보 (이름·색·그림) */
-    make(level) {
+    /**
+     * 레벨 번호 → 풍경 정보 (이름·색·그림)
+     * @param level 단계
+     * @param hue   테마 빛깔의 색상각(0~360). 주면 하늘·능선을 그 빛깔로 맞춥니다.
+     *              (테마를 바꿔도 배경이 분홍으로 남으면 화면이 따로 놉니다)
+     */
+    make(level, hue) {
       const rng = rngFrom('scene|' + level);
       const W = 400, H = 300;
 
@@ -120,8 +125,13 @@
 
       // 같은 색조 안에서 아주 조금씩만 흔듭니다 (톤이 흐트러지지 않게)
       const jitter = (rng() - .5) * 14;
-      const hSky = season.hue + jitter;
-      const hRidge = season.hue2 + jitter * 0.6;
+      /* 테마 빛깔이 주어지면 그 색을 따르고, 계절은 색조를 살짝 밀어 주는
+         역할만 합니다. 그래야 '숲 테마의 봄'과 '바다 테마의 봄'이
+         각각 다르면서도 화면 전체와는 어울립니다. */
+      const base = (typeof hue === 'number') ? hue : season.hue;
+      const lean = (typeof hue === 'number') ? 14 : 0;   // 계절 쪽으로 기울이는 정도
+      const hSky = base + jitter + (season.hue - base) * 0 + lean * Math.sin(season.hue / 57);
+      const hRidge = base + 18 + jitter * 0.6;
       const sat = time.sat;
 
       const skyTop = hsl(hSky, sat, time.skyL[0]);
@@ -155,10 +165,64 @@
         g += `</g>`;
       }
 
-      // 능선 세 겹 (멀수록 옅게)
-      const bases = [168, 198, 232];
-      for (let i = 0; i < 3; i++) {
-        g += `<path d="${ridge(rng, bases[i], 16 + i * 9, W)}" fill="${hsl(hRidge, sat * (.5 + i * .16), time.ridgeL[i])}"/>`;
+      /* ── 땅의 생김새 ────────────────────────────
+         산만 나오면 몇 판 지나 똑같아 보입니다.
+         동네(백 단계)마다 생김새를 바꿔 다른 곳에 온 느낌을 냅니다. */
+      const LANDS = ['산', '들', '물가', '숲', '마을', '언덕'];
+      const land = LANDS[Math.floor((level - 1) / 100) % LANDS.length];
+      const ink = (i, extra) => hsl(hRidge, sat * (.5 + i * .16), time.ridgeL[i] + (extra || 0));
+
+      if (land === '들') {
+        // 나지막한 밭이랑 — 지평선이 낮고 넓습니다
+        for (let i = 0; i < 3; i++) {
+          g += `<path d="${ridge(rng, 214 + i * 20, 5 + i * 3, W)}" fill="${ink(i)}"/>`;
+        }
+        for (let i = 0; i < 7; i++) {
+          const y = 250 + i * 7;
+          g += `<path d="M0 ${y} Q${(W / 2).toFixed(0)} ${(y - 6).toFixed(0)} ${W} ${y}" stroke="${ink(2, -4)}" stroke-width="1.4" fill="none" opacity=".35"/>`;
+        }
+      } else if (land === '물가') {
+        // 멀리 낮은 산, 앞쪽은 잔물결이 이는 물
+        for (let i = 0; i < 2; i++) {
+          g += `<path d="${ridge(rng, 176 + i * 16, 12 + i * 6, W)}" fill="${ink(i)}"/>`;
+        }
+        g += `<rect y="216" width="${W}" height="${H - 216}" fill="${hsl(hSky + 6, sat * .9, time.skyL[1] - 6)}" opacity=".85"/>`;
+        for (let i = 0; i < 9; i++) {
+          const y = 226 + i * 8, x = rng() * W * .6;
+          g += `<path d="M${x.toFixed(0)} ${y} q10 -3 20 0 q10 3 20 0" stroke="${hsl(hSky, 30, 98)}" stroke-width="1.5" fill="none" opacity="${(.28 + rng() * .22).toFixed(2)}"/>`;
+        }
+      } else if (land === '숲') {
+        // 나무가 빽빽한 숲 — 뒤로 갈수록 옅어집니다
+        g += `<path d="${ridge(rng, 186, 14, W)}" fill="${ink(0)}"/>`;
+        for (let layer = 0; layer < 3; layer++) {
+          const yb = 214 + layer * 26, op = .34 + layer * .2, c = ink(layer + 0, -layer * 3);
+          for (let i = 0; i < 14; i++) {
+            const x = (i * (W / 13)) + (rng() - .5) * 16, th = 26 + rng() * 22 + layer * 8;
+            g += `<path d="M${(x - th * .34).toFixed(0)} ${yb} L${x.toFixed(0)} ${(yb - th).toFixed(0)} L${(x + th * .34).toFixed(0)} ${yb} Z" fill="${c}" opacity="${op.toFixed(2)}"/>`;
+          }
+        }
+      } else if (land === '마을') {
+        // 기와지붕이 층층이 — 장터 거리·기와 골목에 어울립니다
+        g += `<path d="${ridge(rng, 172, 14, W)}" fill="${ink(0)}"/>`;
+        g += `<path d="${ridge(rng, 206, 8, W)}" fill="${ink(1)}"/>`;
+        for (let row = 0; row < 2; row++) {
+          const yb = 244 + row * 24;
+          for (let i = 0; i < 6; i++) {
+            const x = i * (W / 5.4) + (rng() - .5) * 18, w2 = 30 + rng() * 22;
+            g += `<path d="M${(x - w2 / 2).toFixed(0)} ${yb} q${(w2 / 2).toFixed(0)} -${(11 + rng() * 6).toFixed(0)} ${w2.toFixed(0)} 0 Z" fill="${ink(2 - row, -2)}" opacity="${(.5 + row * .2).toFixed(2)}"/>`;
+          }
+        }
+      } else if (land === '언덕') {
+        // 완만한 언덕 둘 — 들꽃 언덕처럼 부드러운 곳
+        for (let i = 0; i < 2; i++) {
+          g += `<path d="${ridge(rng, 196 + i * 30, 22 + i * 8, W)}" fill="${ink(i + 1)}"/>`;
+        }
+      } else {
+        // 산 — 능선 세 겹 (멀수록 옅게)
+        const bases = [168, 198, 232];
+        for (let i = 0; i < 3; i++) {
+          g += `<path d="${ridge(rng, bases[i], 16 + i * 9, W)}" fill="${ink(i)}"/>`;
+        }
       }
 
       // 앞쪽 나무나 억새
@@ -211,6 +275,7 @@
         name: `${seasonName} ${time.name} · ${weather.name} ${place}`,
         short: `${weather.name} ${place}`,
         season: season.name, time: time.name,
+        land: LANDS[Math.floor((level - 1) / 100) % LANDS.length],
         skyTop, skyBot, glow: glowC,
         svg,
         url: 'data:image/svg+xml;utf8,' + encodeURIComponent(svg)

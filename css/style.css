@@ -1119,11 +1119,15 @@ h1, h2, .bignum, .big, .word-title, .qbig {
 
 /* 감빛 — 기본 */
 body.t-coral {
+  --surface: #faf7f4; --surface-low: #f4eee8; --surface-c: #eae2d9; --surface-high: #ded2c6;
+  --white: #ffffff;
   --primary: #9a5200; --primary-c: #ef8f22; --primary-c-dark: #c26c05;
   --on-primary-c: #3d1f00; --primary-fixed: #ffe0c2;
   --board-tint: #fff1e2; --cur-halo: rgba(239,143,34,.18);
 }
 body.dark.t-coral {
+  --surface: #17130f; --surface-low: #201a15; --surface-c: #2b231c; --surface-high: #3a2f26;
+  --white: #201a15;
   --primary: #ffb974; --primary-c: #d47c1c; --primary-c-dark: #a65f0c;
   --on-primary-c: #241200; --primary-fixed: #4a3221;
   --board-tint: #2a211a; --cur-halo: rgba(212,124,28,.28);
@@ -1131,11 +1135,15 @@ body.dark.t-coral {
 
 /* 숲 */
 body.t-forest {
+  --surface: #f6f9f5; --surface-low: #eaf2e9; --surface-c: #dce9db; --surface-high: #c9dcc8;
+  --white: #ffffff;
   --primary: #2f6b3f; --primary-c: #57a86c; --primary-c-dark: #3d8351;
   --on-primary-c: #0d2c17; --primary-fixed: #d6ecd9;
   --board-tint: #eaf5ec; --cur-halo: rgba(87,168,108,.20);
 }
 body.dark.t-forest {
+  --surface: #111710; --surface-low: #182117; --surface-c: #212c20; --surface-high: #2c3a2b;
+  --white: #182117;
   --primary: #92d3a3; --primary-c: #63ab77; --primary-c-dark: #438255;
   --on-primary-c: #08210f; --primary-fixed: #24382b;
   --board-tint: #1a241d; --cur-halo: rgba(70,135,90,.30);
@@ -1143,11 +1151,15 @@ body.dark.t-forest {
 
 /* 바다 */
 body.t-ocean {
+  --surface: #f4f8fa; --surface-low: #e7f0f4; --surface-c: #d8e7ee; --surface-high: #c3d9e3;
+  --white: #ffffff;
   --primary: #1f5f79; --primary-c: #4595b0; --primary-c-dark: #2f7791;
   --on-primary-c: #06242f; --primary-fixed: #d3e9f0;
   --board-tint: #e8f3f7; --cur-halo: rgba(69,149,176,.20);
 }
 body.dark.t-ocean {
+  --surface: #0f1518; --surface-low: #161f23; --surface-c: #1e2a30; --surface-high: #28373f;
+  --white: #161f23;
   --primary: #86c8de; --primary-c: #59a3bb; --primary-c-dark: #3b7c93;
   --on-primary-c: #04191f; --primary-fixed: #1f333c;
   --board-tint: #161f24; --cur-halo: rgba(58,125,149,.30);
@@ -1155,11 +1167,15 @@ body.dark.t-ocean {
 
 /* 라벤더 */
 body.t-lavender {
+  --surface: #f8f6fb; --surface-low: #eeeaf6; --surface-c: #e2dcf0; --surface-high: #d0c7e5;
+  --white: #ffffff;
   --primary: #5c4a86; --primary-c: #8c78bd; --primary-c-dark: #6c5a9c;
   --on-primary-c: #1f1636; --primary-fixed: #e4dcf4;
   --board-tint: #f0ecf9; --cur-halo: rgba(140,120,189,.20);
 }
 body.dark.t-lavender {
+  --surface: #141220; --surface-low: #1b1829; --surface-c: #242036; --surface-high: #302b47;
+  --white: #1b1829;
   --primary: #c0aef0; --primary-c: #9a87cc; --primary-c-dark: #6f5da0;
   --on-primary-c: #150e28; --primary-fixed: #2e2745;
   --board-tint: #1d1a29; --cur-halo: rgba(111,93,160,.30);
@@ -1167,11 +1183,15 @@ body.dark.t-lavender {
 
 /* 노을 */
 body.t-sunset {
+  --surface: #fdf6f7; --surface-low: #f8ecee; --surface-c: #f1dee2; --surface-high: #e6c9cf;
+  --white: #ffffff;
   --primary: #99354a; --primary-c: #dd6a7e; --primary-c-dark: #b74a5f;
   --on-primary-c: #3a0c17; --primary-fixed: #fbdbe1;
   --board-tint: #fdeef1; --cur-halo: rgba(221,106,126,.20);
 }
 body.dark.t-sunset {
+  --surface: #1a1114; --surface-low: #231719; --surface-c: #2e1f23; --surface-high: #3d2a2f;
+  --white: #231719;
   --primary: #f2a3b1; --primary-c: #d4788b; --primary-c-dark: #a2566a;
   --on-primary-c: #2a070f; --primary-fixed: #43242b;
   --board-tint: #26191d; --cur-halo: rgba(169,79,97,.30);
@@ -1179,11 +1199,15 @@ body.dark.t-sunset {
 
 /* 흙 */
 body.t-clay {
+  --surface: #faf7f1; --surface-low: #f2ece1; --surface-c: #e8dfcd; --surface-high: #d9ccb2;
+  --white: #ffffff;
   --primary: #6d5334; --primary-c: #a98953; --primary-c-dark: #8a6d3d;
   --on-primary-c: #2b1e0c; --primary-fixed: #eee2cd;
   --board-tint: #f6efe3; --cur-halo: rgba(169,137,83,.20);
 }
 body.dark.t-clay {
+  --surface: #17140e; --surface-low: #201c14; --surface-c: #2a251a; --surface-high: #372f22;
+  --white: #201c14;
   --primary: #ddc394; --primary-c: #b0905d; --primary-c-dark: #866a41;
   --on-primary-c: #1e1507; --primary-fixed: #392f21;
   --board-tint: #211c14; --cur-halo: rgba(134,106,65,.30);
@@ -1243,3 +1267,32 @@ body.reduce-motion #view > * { animation: none; }
 .sheet-back { animation: fadeIn 220ms ease; }
 @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
 body.reduce-motion .sheet, body.reduce-motion .sheet-back { animation: none; }
+
+/* ══════════════════════════════════════════════════════
+   강아지가 잘 보이게
+
+   털이 크림빛이라 파스텔 바탕 위에서는 윤곽이 사라집니다.
+   테두리를 진하게 두르면 곧바로 촌스러워지므로,
+     ① 뒤에 아주 옅은 핀 조명을 깔고
+     ② 아래로 부드러운 그림자를 드리워
+   '떠 있는 것'으로 보이게 합니다. 어느 빛깔에서도 통합니다.
+   ══════════════════════════════════════════════════════ */
+.dog { position: relative; }
+.dog::before {
+  content: ''; position: absolute; left: 50%; top: 52%;
+  width: 128%; height: 128%; transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255,255,255,.92) 0%, rgba(255,255,255,.55) 42%, rgba(255,255,255,0) 70%);
+  z-index: 0; pointer-events: none;
+}
+.dog svg { position: relative; z-index: 1; }
+.dogsvg { filter: drop-shadow(0 6px 10px rgba(45,21,13,.16)) drop-shadow(0 1px 1px rgba(45,21,13,.10)); }
+
+body.dark .dog::before {
+  background: radial-gradient(circle,
+    rgba(255,236,214,.16) 0%, rgba(255,236,214,.08) 45%, rgba(255,236,214,0) 70%);
+}
+body.dark .dogsvg { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+body.contrast .dog::before { display: none; }
+body.contrast .dogsvg { filter: none; }
