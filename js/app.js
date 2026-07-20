@@ -546,15 +546,10 @@
       this.top('우리 강아지');
       const moods = ['편안함', '반가움', '신남'];
       const mood = moods[d.days.length % moods.length];
-      /* 강아지가 하얀 빈 공간에 덩그러니 있으면 쓸쓸해 보입니다.
-         아치 모양 '집' 안에 앉히고, 그 뒤로 오늘의 풍경이 비치게 합니다. */
-      const house = h('div', { class: 'doghouse' });
-      house.appendChild(h('div', { class: 'roof' }));
-      house.appendChild(h('div', { class: 'niche' }, dogEl(mood, 150, 'petdog')));
-      house.appendChild(h('div', { class: 'floor' }));
-
+      /* 강아지가 하얀 빈자리에 덩그러니 있으면 쓸쓸해 보입니다.
+         둥근 창(월문) 안에 앉히고, 창 너머로 오늘의 풍경이 비치게 합니다. */
       v.appendChild(h('div', { class: 'card center pet-card' },
-        house,
+        h('div', { class: 'moonwin' }, dogEl(mood, 150, 'petdog')),
         h('h2', { class: 'center', style: 'margin-top:14px' }, d.pet.name),
         h('p', { class: 'muted center' }, `함께한 지 ${d.days.length}일 · 유대 ${d.pet.bond}단계`),
         h('div', { class: 'petacts' },

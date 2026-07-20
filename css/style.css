@@ -523,16 +523,19 @@ body::before {
    (예전에는 이 그림을 만들어 놓고 어디에도 쓰지 않았습니다) */
 body::after {
   content: ''; position: fixed; left: 0; right: 0; bottom: 0; z-index: -2;
-  height: min(46vh, 420px); pointer-events: none;
+  /* 화면의 4분의 3까지 올립니다.
+     아래쪽에만 깔아 두면 글상자 뒤로 비칠 것이 없어
+     투명도를 아무리 높여도 '하나도 안 비치는' 것처럼 보입니다. */
+  height: min(78vh, 760px); pointer-events: none;
   background-image: var(--scene-img, none);
   background-size: cover; background-position: center bottom;
   background-repeat: no-repeat;
-  opacity: .55;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 42%, #000 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 42%, #000 100%);
+  opacity: .62;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.45) 26%, #000 58%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.45) 26%, #000 58%, #000 100%);
   transition: background-image 900ms ease;
 }
-body.dark::after { opacity: .34; }
+body.dark::after { opacity: .4; }
 body.contrast::before, body.contrast::after { background: #fff; opacity: 1; }
 
 /* ── 흩날리는 것 (꽃잎·단풍·눈·잎) ──────────────
@@ -1049,6 +1052,649 @@ body { background: transparent; }
   .topbar .iconbtn.back .tx { display: none; }
   .topbar .iconbtn.back { padding: 8px 10px; font-size: calc(22px * var(--fs)); }
   .topbar .footchip { padding: 5px 8px; }
+}
+
+/* ── 기록 세 칸 ────────────────────────────────
+   예전에는 칸마다 최소 120px 을 두어, 좁은 화면에서 셋째 칸이
+   아래로 떨어지며 줄이 어긋나 보였습니다. 늘 세 칸으로 둡니다. */
+.statrow { display: flex; gap: 10px; }
+.statrow > div { text-align: left; }
+.statrow .bignum { font-size: min(calc(30px * var(--fs)), 8vw); }
+
+/* ── 진행 발자국 ────────────────────────────────
+   열 개가 두 줄로 갈라지면 무엇을 뜻하는지 알기 어렵습니다.
+   좁으면 발자국을 줄여서라도 한 줄로 둡니다. */
+.steps { flex-wrap: nowrap; gap: min(10px, 1.8vw); }
+.steps .paw {
+  width: min(calc(26px * var(--fs)), 6.4vw);
+  height: min(calc(26px * var(--fs)), 6.4vw);
+}
+
+/* ── 그려 넣은 아이콘 ──────────────────────────
+   이모지를 대신합니다. currentColor 를 따라가므로
+   어둡게 보기에서도 저절로 맞습니다. */
+.chip-ic {
+  display: inline-block; width: 1.05em; height: 1.05em;
+  vertical-align: -0.16em; line-height: 0;
+}
+.footchip .chip-ic { margin-right: 5px; }
+.footchip b, .tool-cost b { font-weight: 800; font-variant-numeric: tabular-nums; }
+.tool-cost .chip-ic { margin-right: 4px; }
+.topbar .iconbtn .chip-ic { width: 1.5em; height: 1.5em; vertical-align: -0.35em; }
+.tool-ic { display: block; width: calc(28px * var(--fs)); height: calc(28px * var(--fs)); line-height: 0; }
+.tools .tool-btn .tool-ic { margin: 0 auto 4px; }
+
+/* ── 타이포 다듬기 ────────────────────────────
+   큰 글씨를 기본 자간 그대로 두면 글자가 흩어져 보입니다.
+   레퍼런스의 큰 제목들은 하나같이 자간이 좁습니다. */
+h1, h2, .bignum, .big, .word-title, .qbig {
+  letter-spacing: -0.025em;
+}
+.bignum, .big, .word-title { font-weight: 800; }
+.muted.small, .meta { letter-spacing: 0.01em; }
+
+/* 상자들의 테두리를 걷어내고 면과 그림자로만 층을 나눕니다 */
+.card {
+  border: none;
+  box-shadow: 0 1px 2px rgba(45,21,13,.04), 0 10px 26px -14px rgba(45,21,13,.18);
+}
+.list-item { border: none; box-shadow: inset 0 0 0 1px var(--line); }
+
+/* 지금 지나는 동네 — 이모지 대신 작은 알약으로 */
+.hood-tag {
+  display: inline-block; margin: 0 auto 2px;
+  padding: 4px 14px; border-radius: 999px;
+  background: var(--primary-fixed); color: var(--primary);
+  font-size: var(--t-caption); font-weight: 700; letter-spacing: .01em;
+}
+
+/* ══════════════════════════════════════════════════════
+   빛깔 여섯 벌
+
+   동네가 바뀔 때마다(백 단계마다) 화면의 빛깔이 함께 바뀝니다.
+   수천 단계를 걸으시는 분께 같은 빛깔만 보여 드리면 지루합니다.
+   설정에서 마음에 드는 하나로 고정하실 수도 있습니다.
+
+   ★ 바꾸는 것은 '주색 한 갈래'뿐입니다.
+     바탕과 글자색은 건드리지 않습니다. 그래야 명암비가 그대로 지켜지고,
+     빛깔을 바꿔도 촌스러워지지 않습니다.
+   ══════════════════════════════════════════════════════ */
+
+/* 감빛 — 기본 */
+body.t-coral {
+  --surface: #faf7f4; --surface-low: #f4eee8; --surface-c: #eae2d9; --surface-high: #ded2c6;
+  --white: #ffffff;
+  --primary: #9a5200; --primary-c: #ef8f22; --primary-c-dark: #c26c05;
+  --on-primary-c: #3d1f00; --primary-fixed: #ffe0c2;
+  --board-tint: #fff1e2; --cur-halo: rgba(239,143,34,.18);
+}
+body.dark.t-coral {
+  --surface: #17130f; --surface-low: #201a15; --surface-c: #2b231c; --surface-high: #3a2f26;
+  --white: #201a15;
+  --primary: #ffb974; --primary-c: #d47c1c; --primary-c-dark: #a65f0c;
+  --on-primary-c: #241200; --primary-fixed: #4a3221;
+  --board-tint: #2a211a; --cur-halo: rgba(212,124,28,.28);
+}
+
+/* 숲 */
+body.t-forest {
+  --surface: #f6f9f5; --surface-low: #eaf2e9; --surface-c: #dce9db; --surface-high: #c9dcc8;
+  --white: #ffffff;
+  --primary: #2f6b3f; --primary-c: #57a86c; --primary-c-dark: #3d8351;
+  --on-primary-c: #0d2c17; --primary-fixed: #d6ecd9;
+  --board-tint: #eaf5ec; --cur-halo: rgba(87,168,108,.20);
+}
+body.dark.t-forest {
+  --surface: #111710; --surface-low: #182117; --surface-c: #212c20; --surface-high: #2c3a2b;
+  --white: #182117;
+  --primary: #92d3a3; --primary-c: #63ab77; --primary-c-dark: #438255;
+  --on-primary-c: #08210f; --primary-fixed: #24382b;
+  --board-tint: #1a241d; --cur-halo: rgba(70,135,90,.30);
+}
+
+/* 바다 */
+body.t-ocean {
+  --surface: #f4f8fa; --surface-low: #e7f0f4; --surface-c: #d8e7ee; --surface-high: #c3d9e3;
+  --white: #ffffff;
+  --primary: #1f5f79; --primary-c: #4595b0; --primary-c-dark: #2f7791;
+  --on-primary-c: #06242f; --primary-fixed: #d3e9f0;
+  --board-tint: #e8f3f7; --cur-halo: rgba(69,149,176,.20);
+}
+body.dark.t-ocean {
+  --surface: #0f1518; --surface-low: #161f23; --surface-c: #1e2a30; --surface-high: #28373f;
+  --white: #161f23;
+  --primary: #86c8de; --primary-c: #59a3bb; --primary-c-dark: #3b7c93;
+  --on-primary-c: #04191f; --primary-fixed: #1f333c;
+  --board-tint: #161f24; --cur-halo: rgba(58,125,149,.30);
+}
+
+/* 라벤더 */
+body.t-lavender {
+  --surface: #f8f6fb; --surface-low: #eeeaf6; --surface-c: #e2dcf0; --surface-high: #d0c7e5;
+  --white: #ffffff;
+  --primary: #5c4a86; --primary-c: #8c78bd; --primary-c-dark: #6c5a9c;
+  --on-primary-c: #1f1636; --primary-fixed: #e4dcf4;
+  --board-tint: #f0ecf9; --cur-halo: rgba(140,120,189,.20);
+}
+body.dark.t-lavender {
+  --surface: #141220; --surface-low: #1b1829; --surface-c: #242036; --surface-high: #302b47;
+  --white: #1b1829;
+  --primary: #c0aef0; --primary-c: #9a87cc; --primary-c-dark: #6f5da0;
+  --on-primary-c: #150e28; --primary-fixed: #2e2745;
+  --board-tint: #1d1a29; --cur-halo: rgba(111,93,160,.30);
+}
+
+/* 노을 */
+body.t-sunset {
+  --surface: #fdf6f7; --surface-low: #f8ecee; --surface-c: #f1dee2; --surface-high: #e6c9cf;
+  --white: #ffffff;
+  --primary: #99354a; --primary-c: #dd6a7e; --primary-c-dark: #b74a5f;
+  --on-primary-c: #3a0c17; --primary-fixed: #fbdbe1;
+  --board-tint: #fdeef1; --cur-halo: rgba(221,106,126,.20);
+}
+body.dark.t-sunset {
+  --surface: #1a1114; --surface-low: #231719; --surface-c: #2e1f23; --surface-high: #3d2a2f;
+  --white: #231719;
+  --primary: #f2a3b1; --primary-c: #d4788b; --primary-c-dark: #a2566a;
+  --on-primary-c: #2a070f; --primary-fixed: #43242b;
+  --board-tint: #26191d; --cur-halo: rgba(169,79,97,.30);
+}
+
+/* 흙 */
+body.t-clay {
+  --surface: #faf7f1; --surface-low: #f2ece1; --surface-c: #e8dfcd; --surface-high: #d9ccb2;
+  --white: #ffffff;
+  --primary: #6d5334; --primary-c: #a98953; --primary-c-dark: #8a6d3d;
+  --on-primary-c: #2b1e0c; --primary-fixed: #eee2cd;
+  --board-tint: #f6efe3; --cur-halo: rgba(169,137,83,.20);
+}
+body.dark.t-clay {
+  --surface: #17140e; --surface-low: #201c14; --surface-c: #2a251a; --surface-high: #372f22;
+  --white: #201c14;
+  --primary: #ddc394; --primary-c: #b0905d; --primary-c-dark: #866a41;
+  --on-primary-c: #1e1507; --primary-fixed: #392f21;
+  --board-tint: #211c14; --cur-halo: rgba(134,106,65,.30);
+}
+
+/* 빛깔 고르는 칸 */
+.hues { display: flex; gap: 10px; flex-wrap: wrap; }
+.hue {
+  flex: 1 1 84px; min-height: calc(78px * var(--fs));
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  border: none; border-radius: 20px; cursor: pointer;
+  background: var(--surface-low); color: var(--on-surface);
+  font-family: inherit; font-size: var(--t-caption); font-weight: 700;
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: transform 180ms cubic-bezier(.34,1.56,.64,1), box-shadow 180ms ease;
+}
+.hue .dot {
+  width: calc(30px * var(--fs)); height: calc(30px * var(--fs)); border-radius: 50%;
+  box-shadow: inset 0 -3px 6px rgba(0,0,0,.10);
+}
+.hue.on { box-shadow: inset 0 0 0 2.5px var(--primary-c); background: var(--primary-fixed); }
+.hue:active { transform: scale(.95); }
+
+/* ── 화면 사이 숨 고르기 ──────────────────────────
+   상자들이 바짝 붙어 있으면 어디부터 어디까지가 한 덩어리인지
+   알기 어렵습니다. 사이를 넉넉히 벌리고, 상자 안쪽도 늘립니다. */
+#view > .card { margin-bottom: 18px; padding: 22px 20px; }
+#view > .card:last-child { margin-bottom: 8px; }
+#view > .list-item { margin-bottom: 8px; }
+#view > .section-title { margin: 26px 0 10px; }
+.card h2 { margin: 0 0 14px; letter-spacing: -0.02em; }
+.card > .muted.small:first-of-type { margin-top: -8px; }
+
+/* ── 눌림 모션 ────────────────────────────────
+   딱딱하게 꺼지는 대신 살짝 오므라졌다 튀어나오게 합니다. */
+.list-item, .toggle, .iconbtn, .tool-btn, .hue, .chip {
+  transition: transform 200ms cubic-bezier(.34,1.56,.64,1),
+              background-color 200ms ease, box-shadow 200ms ease;
+}
+.list-item:active, .toggle:active { transform: scale(.985); }
+
+/* 화면이 바뀔 때 부드럽게 올라옵니다 */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+#view > * { animation: riseIn 320ms cubic-bezier(.22,1,.36,1) both; }
+#view > *:nth-child(2) { animation-delay: 40ms; }
+#view > *:nth-child(3) { animation-delay: 80ms; }
+#view > *:nth-child(4) { animation-delay: 110ms; }
+#view > *:nth-child(n+5) { animation-delay: 140ms; }
+body.reduce-motion #view > * { animation: none; }
+
+/* 아래에서 올라오는 창도 부드럽게 */
+.sheet { animation: sheetUp 340ms cubic-bezier(.22,1,.36,1); }
+@keyframes sheetUp { from { transform: translateY(28px); opacity: .4 } to { transform: none; opacity: 1 } }
+.sheet-back { animation: fadeIn 220ms ease; }
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+body.reduce-motion .sheet, body.reduce-motion .sheet-back { animation: none; }
+
+/* ══════════════════════════════════════════════════════
+   강아지가 잘 보이게
+
+   털이 크림빛이라 파스텔 바탕 위에서는 윤곽이 사라집니다.
+   테두리를 진하게 두르면 곧바로 촌스러워지므로,
+     ① 뒤에 아주 옅은 핀 조명을 깔고
+     ② 아래로 부드러운 그림자를 드리워
+   '떠 있는 것'으로 보이게 합니다. 어느 빛깔에서도 통합니다.
+   ══════════════════════════════════════════════════════ */
+.dog { position: relative; isolation: isolate; }
+/* 핀 조명이 강아지 상자를 넘어가면 옆의 말풍선 글자를 하얗게 덮습니다.
+   상자 안에 가두고, 가장자리는 완전히 투명해지도록 둡니다. */
+.dog::before {
+  content: ''; position: absolute; inset: -2%;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255,255,255,.90) 0%, rgba(255,255,255,.60) 40%, rgba(255,255,255,0) 66%);
+  z-index: 0; pointer-events: none;
+}
+.dog svg { position: relative; z-index: 1; }
+/* 말풍선은 조명보다 위에 둡니다 */
+.dog-area .speech { position: relative; z-index: 2; }
+.dogsvg { filter: drop-shadow(0 6px 10px rgba(45,21,13,.16)) drop-shadow(0 1px 1px rgba(45,21,13,.10)); }
+
+body.dark .dog::before {
+  background: radial-gradient(circle,
+    rgba(255,236,214,.15) 0%, rgba(255,236,214,.07) 42%, rgba(255,236,214,0) 66%);
+}
+body.dark .dogsvg { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+body.contrast .dog::before { display: none; }
+body.contrast .dogsvg { filter: none; }
+
+/* ── 동네 화면 ────────────────────────────────── */
+.hood-card { padding-top: 0 !important; overflow: hidden; }
+.hood-pic {
+  width: calc(100% + 40px); margin: -22px -20px 0;
+  height: calc(150px * var(--fs));
+  background-size: cover; background-position: center 62%;
+}
+.step-ic { flex: 0 0 auto; width: calc(26px * var(--fs)); height: calc(26px * var(--fs)); line-height: 0; }
+.step-ic.done { color: var(--secondary); }
+.step-ic.here { color: var(--primary-c); }
+.step-ic.todo { color: var(--outline-var); }
+.list-item .grow.dim { color: var(--on-variant); }
+.list-item.faded { opacity: .55; }
+.hue-dot {
+  flex: 0 0 auto; width: calc(18px * var(--fs)); height: calc(18px * var(--fs));
+  border-radius: 50%; box-shadow: inset 0 -2px 4px rgba(0,0,0,.12);
+}
+
+/* ── 빛깔 여섯 벌 더 ──────────────────────────── */
+body.t-mint {
+  --surface: #f4faf8; --surface-low: #e7f4f0; --surface-c: #d7ebe5; --surface-high: #c1ded6;
+  --white: #ffffff;
+  --primary: #1f6a5c; --primary-c: #45a08e; --primary-c-dark: #2f8271;
+  --on-primary-c: #052720; --primary-fixed: #d2eee7;
+  --board-tint: #e7f6f1; --cur-halo: rgba(69,160,142,.20);
+}
+body.dark.t-mint {
+  --surface: #0f1614; --surface-low: #16201d; --surface-c: #1e2b27; --surface-high: #283a35;
+  --white: #16201d;
+  --primary: #86d5c3; --primary-c: #59ae9b; --primary-c-dark: #3b8574;
+  --on-primary-c: #03201a; --primary-fixed: #1f332d;
+  --board-tint: #141f1c; --cur-halo: rgba(89,174,155,.30);
+}
+body.t-apricot {
+  --surface: #fef8f2; --surface-low: #faeee1; --surface-c: #f3e0cb; --surface-high: #e8ccae;
+  --white: #ffffff;
+  --primary: #96551b; --primary-c: #e0975a; --primary-c-dark: #b97640;
+  --on-primary-c: #3a1c00; --primary-fixed: #fbe3cb;
+  --board-tint: #fdf1e4; --cur-halo: rgba(224,151,90,.20);
+}
+body.dark.t-apricot {
+  --surface: #17120c; --surface-low: #201a12; --surface-c: #2b231a; --surface-high: #392f23;
+  --white: #201a12;
+  --primary: #f0bd8b; --primary-c: #b58455; --primary-c-dark: #8b6440;
+  --on-primary-c: #221200; --primary-fixed: #3d3022;
+  --board-tint: #201a12; --cur-halo: rgba(181,132,85,.30);
+}
+body.t-plum {
+  --surface: #fbf5f8; --surface-low: #f5e9ef; --surface-c: #ecd9e3; --surface-high: #dcbfcf;
+  --white: #ffffff;
+  --primary: #7b3357; --primary-c: #b3688b; --primary-c-dark: #8f4d6d;
+  --on-primary-c: #2e0a1c; --primary-fixed: #f6dce8;
+  --board-tint: #fbeaf2; --cur-halo: rgba(179,104,139,.20);
+}
+body.dark.t-plum {
+  --surface: #170f13; --surface-low: #20161b; --surface-c: #2c1e25; --surface-high: #3a2833;
+  --white: #20161b;
+  --primary: #e6a6c3; --primary-c: #b96f97; --primary-c-dark: #8f5474;
+  --on-primary-c: #240a17; --primary-fixed: #3a2530;
+  --board-tint: #20161b; --cur-halo: rgba(185,111,151,.30);
+}
+body.t-olive {
+  --surface: #f9faf3; --surface-low: #f0f2e3; --surface-c: #e3e7cf; --surface-high: #ced4b2;
+  --white: #ffffff;
+  --primary: #56652a; --primary-c: #8d9c52; --primary-c-dark: #6e7d3a;
+  --on-primary-c: #1c2405; --primary-fixed: #e6ecc9;
+  --board-tint: #f2f5e2; --cur-halo: rgba(141,156,82,.20);
+}
+body.dark.t-olive {
+  --surface: #14160e; --surface-low: #1c1f14; --surface-c: #262a1c; --surface-high: #333827;
+  --white: #1c1f14;
+  --primary: #ccd894; --primary-c: #9aab5f; --primary-c-dark: #74833f;
+  --on-primary-c: #131a04; --primary-fixed: #2e3320;
+  --board-tint: #1c1f14; --cur-halo: rgba(154,171,95,.30);
+}
+body.t-sky {
+  --surface: #f5f8fd; --surface-low: #e9f0fa; --surface-c: #d9e5f4; --surface-high: #bed1e9;
+  --white: #ffffff;
+  --primary: #2b5288; --primary-c: #6089c2; --primary-c-dark: #446ca3;
+  --on-primary-c: #071c36; --primary-fixed: #dbe7f8;
+  --board-tint: #eaf1fb; --cur-halo: rgba(96,137,194,.20);
+}
+body.dark.t-sky {
+  --surface: #0f131a; --surface-low: #161c26; --surface-c: #1f2733; --surface-high: #2b3442;
+  --white: #161c26;
+  --primary: #a9c6ea; --primary-c: #6e97cd; --primary-c-dark: #4d70a1;
+  --on-primary-c: #04121f; --primary-fixed: #24303f;
+  --board-tint: #161c26; --cur-halo: rgba(110,151,205,.30);
+}
+body.t-cocoa {
+  --surface: #faf6f4; --surface-low: #f1e9e5; --surface-c: #e4d7d0; --surface-high: #cdb9ae;
+  --white: #ffffff;
+  --primary: #6a4034; --primary-c: #a67464; --primary-c-dark: #85584a;
+  --on-primary-c: #2a1009; --primary-fixed: #eddcd4;
+  --board-tint: #f7ece7; --cur-halo: rgba(166,116,100,.20);
+}
+body.dark.t-cocoa {
+  --surface: #16110f; --surface-low: #1f1815; --surface-c: #2a211d; --surface-high: #382c26;
+  --white: #1f1815;
+  --primary: #dcb3a3; --primary-c: #b0806f; --primary-c-dark: #855f4f;
+  --on-primary-c: #200c05; --primary-fixed: #362822;
+  --board-tint: #1f1815; --cur-halo: rgba(176,128,111,.30);
+}
+
+/* ── 글상자에 아주 옅은 투명도 ────────────────────
+   완전히 불투명하면 배경 풍경과 따로 놉니다.
+   조금 비치게 두면 화면이 한 겹으로 이어져 보입니다.
+   ※ 낱말판과 낱말 칸은 글자가 걸려 있으므로 그대로 둡니다. */
+#view > .card, .list-item, .toggle, .hue, .preview-box {
+  background-color: color-mix(in srgb, var(--white) 84%, transparent);
+  backdrop-filter: saturate(120%) blur(10px);
+  -webkit-backdrop-filter: saturate(120%) blur(10px);
+}
+body.contrast #view > .card, body.contrast .list-item, body.contrast .toggle {
+  background-color: var(--white); backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+
+/* ── 단추 느낌 ────────────────────────────────
+   눌렀을 때 쑥 들어갔다 탄력 있게 돌아옵니다. */
+.btn {
+  transition: transform 220ms cubic-bezier(.34,1.56,.64,1),
+              box-shadow 200ms ease, filter 160ms ease;
+}
+.btn:active { transform: scale(.955); }
+.btn.primary:active { filter: brightness(.94); }
+.tool-btn:active { transform: scale(.93); }
+.hue:active { transform: scale(.93); }
+
+/* ══════════════════════════════════════════════════════
+   낱말판을 비쳐 보이게
+
+   하얀 판이 배경 풍경을 완전히 가리고 있었습니다.
+   살짝 비치게 두면 테마 빛깔과 풍경이 아래로 흐르며
+   화면이 한 겹으로 이어져 보입니다.
+   ※ 글자가 들어가는 낱말 칸은 그대로 두어 대비를 지킵니다.
+   ══════════════════════════════════════════════════════ */
+.xwrap {
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--board-tint) 0%, transparent 72%),
+    color-mix(in srgb, var(--white) 58%, transparent) !important;
+  backdrop-filter: saturate(135%) blur(16px);
+  -webkit-backdrop-filter: saturate(135%) blur(16px);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--white) 70%, transparent),
+    0 1px 2px rgba(45,21,13,.05),
+    0 18px 44px -16px rgba(45,21,13,.20) !important;
+}
+body.dark .xwrap {
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--board-tint) 0%, transparent 72%),
+    color-mix(in srgb, var(--white) 62%, transparent) !important;
+}
+/* 「또렷하게 보기」에서는 비침을 끕니다 */
+body.contrast .xwrap {
+  background: var(--white) !important;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+/* 낱말 칸은 비치지 않게 — 글자가 걸려 있습니다 */
+.xcell:not(.gap) { backdrop-filter: none; }
+
+/* ══════════════════════════════════════════════════════
+   단추 — 빛이 테마를 따라가게
+
+   주단추 아래 빛무리가 감빛(rgba(194,108,5,…))으로 박혀 있었습니다.
+   바다·라벤더 테마에서는 엉뚱한 주황빛이 깔려 어색했습니다.
+   이제 그 테마의 주색에서 빛을 뽑아 씁니다.
+   ══════════════════════════════════════════════════════ */
+.btn.primary {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--primary-c) 92%, #fff) 0%,
+    var(--primary-c) 55%,
+    color-mix(in srgb, var(--primary-c) 88%, var(--primary-c-dark)) 100%) !important;
+  color: var(--on-primary-c);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 45%, transparent),
+    0 1px 2px rgba(45,21,13,.10),
+    0 10px 22px -10px color-mix(in srgb, var(--primary-c-dark) 70%, transparent) !important;
+}
+.btn.primary:active {
+  box-shadow:
+    inset 0 2px 5px color-mix(in srgb, var(--primary-c-dark) 55%, transparent),
+    0 1px 2px rgba(45,21,13,.10) !important;
+  filter: brightness(.97);
+}
+
+/* 보조 단추 — 테두리 대신 옅은 면과 안쪽 선으로 */
+.btn:not(.primary):not(.quiet) {
+  background: color-mix(in srgb, var(--white) 78%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--outline-var) 70%, transparent),
+    0 1px 2px rgba(45,21,13,.05) !important;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.btn:not(.primary):not(.quiet):active {
+  background: color-mix(in srgb, var(--primary-fixed) 70%, transparent);
+  box-shadow: inset 0 0 0 1px var(--primary-c) !important;
+}
+
+/* 큰 단추는 조금 더 둥글게 — 요즘 앱의 결 */
+.btn.big, .btn.wide { border-radius: 999px; }
+
+/* 물결이 테마 빛깔을 따르게 */
+.ripple { background: color-mix(in srgb, var(--primary-c) 34%, transparent) !important; }
+
+/* ══════════════════════════════════════════════════════
+   더 비치게
+
+   풍경을 애써 그려 놓고 상자들이 다 가리면 소용이 없습니다.
+   글자가 걸린 곳은 읽히는 선을 지키면서, 나머지는 더 열어 둡니다.
+   ══════════════════════════════════════════════════════ */
+
+/* 낱말판 — 58% → 42% */
+.xwrap {
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--board-tint) 0%, transparent 74%),
+    color-mix(in srgb, var(--white) 42%, transparent) !important;
+  backdrop-filter: saturate(140%) blur(18px);
+  -webkit-backdrop-filter: saturate(140%) blur(18px);
+}
+body.dark .xwrap {
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--board-tint) 0%, transparent 74%),
+    color-mix(in srgb, var(--white) 50%, transparent) !important;
+}
+
+/* 낱말 칸 — 글자가 걸려 있어 조금만 엽니다 */
+.xcell:not(.gap) {
+  background: color-mix(in srgb, var(--cell-bg) 84%, transparent);
+}
+.xcell.fixed { background: color-mix(in srgb, var(--tertiary-c) 88%, transparent); }
+.xcell.cur { background: color-mix(in srgb, var(--primary-fixed) 90%, transparent); }
+/* 맞힌 칸은 그대로 둡니다 — 다 맞혔다는 표시가 흐려지면 안 됩니다 */
+
+/* 글자 쟁반 카드 */
+.tile {
+  background: color-mix(in srgb, var(--white) 78%, transparent);
+  backdrop-filter: saturate(130%) blur(10px);
+  -webkit-backdrop-filter: saturate(130%) blur(10px);
+}
+
+/* 글상자·목록·토글 — 84% → 70% */
+#view > .card, .list-item, .toggle, .hue, .preview-box {
+  background-color: color-mix(in srgb, var(--white) 70%, transparent);
+  backdrop-filter: saturate(130%) blur(14px);
+  -webkit-backdrop-filter: saturate(130%) blur(14px);
+}
+
+/* 보조 단추 — 78% → 62% */
+.btn:not(.primary):not(.quiet) {
+  background: color-mix(in srgb, var(--white) 62%, transparent);
+  backdrop-filter: saturate(130%) blur(12px);
+  -webkit-backdrop-filter: saturate(130%) blur(12px);
+}
+
+/* 도구 단추 */
+.tool-btn {
+  background: color-mix(in srgb, var(--white) 68%, transparent) !important;
+  backdrop-filter: saturate(130%) blur(12px);
+  -webkit-backdrop-filter: saturate(130%) blur(12px);
+}
+
+/* 주단추는 조금만 — 글자가 걸려 있고 가장 중요한 자리입니다 */
+.btn.primary {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--primary-c) 88%, #fff) 0%,
+    color-mix(in srgb, var(--primary-c) 93%, transparent) 55%,
+    color-mix(in srgb, var(--primary-c) 90%, var(--primary-c-dark)) 100%) !important;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+
+/* 아래·위 띠도 조금 더 */
+.tabbar { background: color-mix(in srgb, var(--white) 66%, transparent); }
+.topbar { background: color-mix(in srgb, var(--surface) 62%, transparent); }
+
+/* 「또렷하게 보기」에서는 비침을 모두 끕니다 */
+body.contrast .xwrap, body.contrast .xcell, body.contrast .tile,
+body.contrast #view > .card, body.contrast .list-item, body.contrast .toggle,
+body.contrast .btn, body.contrast .tool-btn, body.contrast .tabbar, body.contrast .topbar {
+  backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+}
+body.contrast .xwrap { background: var(--white) !important; }
+body.contrast .xcell:not(.gap) { background: var(--cell-bg) !important; }
+body.contrast .tile, body.contrast #view > .card,
+body.contrast .list-item, body.contrast .toggle { background: var(--white) !important; }
+
+/* ── 마침 화면의 낱말 줄 ────────────────────────
+   낱말 하나에 76px 짜리 큰 상자를 쓰니 열다섯 개가
+   화면을 한참 잡아먹었습니다. 여기서는 낮게 둡니다.
+   (누르는 자리는 하트 단추와 낱말 이름이 따로 있어
+    작아져도 누르기 어렵지 않습니다) */
+.list-item.wordrow {
+  min-height: calc(54px * var(--fs));
+  padding: 6px 14px;
+  margin-bottom: 6px;
+  gap: 10px;
+  font-size: var(--t-caption);
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.list-item.wordrow .grow { min-width: 0; font-size: var(--t-body); font-weight: 700; }
+.list-item.wordrow .badge { font-size: calc(15px * var(--fs)); padding: 3px 10px; }
+.list-item.wordrow .fav-btn {
+  width: calc(38px * var(--fs)); height: calc(38px * var(--fs));
+  font-size: calc(19px * var(--fs));
+}
+
+/* 위 띠 오른쪽 묶음 — 화면마다 다른 것 + 늘 붙는 소리 단추 */
+.topbar .topright { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; flex-wrap: nowrap; }
+.topbar .soundbtn { padding: 8px 8px; }
+.topbar .soundbtn.off { color: var(--on-variant); opacity: .75; }
+@media (max-width: 430px) {
+  .topbar .soundbtn { padding: 8px 5px; }
+}
+
+/* 마침 화면 낱말 줄 안의 단추들.
+   .fav-btn 과 .linkish 는 어디서나 64px 터치 자리를 차지하는데,
+   그 때문에 줄 높이가 줄어들지 않았습니다. 여기서만 낮춥니다.
+   (46px 은 국제 기준의 가장 높은 등급 44px 보다 여전히 큽니다) */
+.list-item.wordrow .fav-btn {
+  min-width: calc(46px * var(--fs)); min-height: calc(46px * var(--fs));
+  width: calc(46px * var(--fs)); height: calc(46px * var(--fs));
+  border-width: 2px; font-size: calc(21px * var(--fs));
+}
+.list-item.wordrow .linkish {
+  min-height: calc(42px * var(--fs));
+  font-size: var(--t-body);
+}
+
+/* 단추 안에 이름과 설명을 두 줄로 */
+.btn-stack { display: flex; flex-direction: column; align-items: center; gap: 2px; line-height: 1.3; }
+.btn-stack b { font-weight: 800; }
+.btn-stack .sub { font-size: var(--t-caption); font-weight: 600; opacity: .8; }
+
+/* ── 더 비치게 (산책·마침 화면) ───────────────── */
+#view > .card, .list-item, .toggle, .hue, .preview-box {
+  background-color: color-mix(in srgb, var(--white) 58%, transparent);
+}
+.btn:not(.primary):not(.quiet) { background: color-mix(in srgb, var(--white) 52%, transparent); }
+.tool-btn { background: color-mix(in srgb, var(--white) 58%, transparent) !important; }
+.tile { background: color-mix(in srgb, var(--white) 70%, transparent); }
+.btn.primary {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--primary-c) 84%, #fff) 0%,
+    color-mix(in srgb, var(--primary-c) 86%, transparent) 55%,
+    color-mix(in srgb, var(--primary-c) 86%, var(--primary-c-dark)) 100%) !important;
+}
+/* 축하 화면의 큰 글자는 배경이 비쳐도 읽히도록 그림자를 아주 옅게 */
+.celebrate .big { text-shadow: 0 1px 2px color-mix(in srgb, var(--white) 70%, transparent); }
+
+body.contrast #view > .card, body.contrast .list-item, body.contrast .toggle,
+body.contrast .btn, body.contrast .tool-btn, body.contrast .tile {
+  background: var(--white) !important;
+}
+body.contrast .btn.primary { background: var(--primary-c) !important; }
+
+/* ══════════════════════════════════════════════════════
+   강아지 자리 — 보름달 창
+
+   처음에는 삼각 지붕을 얹은 개집을 그렸는데,
+   납작한 삼각형이 모자처럼 보여 어색했습니다.
+   옛 한옥과 정원에 흔한 '둥근 창(월문)' 을 빌려 왔습니다.
+   테두리 한 겹뿐이라 군더더기가 없고,
+   창 안으로 오늘의 풍경이 그대로 비칩니다.
+   ══════════════════════════════════════════════════════ */
+.pet-card { padding-top: 26px !important; }
+.moonwin {
+  position: relative;
+  width: min(240px, 74%); aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 12%;
+  background: radial-gradient(circle at 50% 34%,
+    color-mix(in srgb, var(--white) 42%, transparent) 0%,
+    color-mix(in srgb, var(--white) 18%, transparent) 62%,
+    transparent 100%);
+  backdrop-filter: saturate(150%) blur(6px);
+  -webkit-backdrop-filter: saturate(150%) blur(6px);
+  box-shadow:
+    inset 0 0 0 3px color-mix(in srgb, var(--primary-c) 42%, transparent),
+    inset 0 0 44px -14px rgba(45,21,13,.24),
+    0 10px 30px -14px rgba(45,21,13,.30);
+}
+/* 창 아래 걸친 마루 — 강아지가 떠 있지 않게 */
+.moonwin::after {
+  content: ''; position: absolute; left: 8%; right: 8%; bottom: 9%;
+  height: 7px; border-radius: 999px;
+  background: color-mix(in srgb, var(--primary-c-dark) 34%, transparent);
+}
+.moonwin .dog { position: relative; z-index: 1; margin-bottom: -2px; }
+body.contrast .moonwin {
+  background: var(--white); backdrop-filter: none; -webkit-backdrop-filter: none;
 }
 
 /* ── 기록 세 칸 ────────────────────────────────
