@@ -1584,3 +1584,32 @@ body.contrast .xwrap { background: var(--white) !important; }
 body.contrast .xcell:not(.gap) { background: var(--cell-bg) !important; }
 body.contrast .tile, body.contrast #view > .card,
 body.contrast .list-item, body.contrast .toggle { background: var(--white) !important; }
+
+/* ── 마침 화면의 낱말 줄 ────────────────────────
+   낱말 하나에 76px 짜리 큰 상자를 쓰니 열다섯 개가
+   화면을 한참 잡아먹었습니다. 여기서는 낮게 둡니다.
+   (누르는 자리는 하트 단추와 낱말 이름이 따로 있어
+    작아져도 누르기 어렵지 않습니다) */
+.list-item.wordrow {
+  min-height: calc(54px * var(--fs));
+  padding: 6px 14px;
+  margin-bottom: 6px;
+  gap: 10px;
+  font-size: var(--t-caption);
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.list-item.wordrow .grow { min-width: 0; font-size: var(--t-body); font-weight: 700; }
+.list-item.wordrow .badge { font-size: calc(15px * var(--fs)); padding: 3px 10px; }
+.list-item.wordrow .fav-btn {
+  width: calc(38px * var(--fs)); height: calc(38px * var(--fs));
+  font-size: calc(19px * var(--fs));
+}
+
+/* 위 띠 오른쪽 묶음 — 화면마다 다른 것 + 늘 붙는 소리 단추 */
+.topbar .topright { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; flex-wrap: nowrap; }
+.topbar .soundbtn { padding: 8px 8px; }
+.topbar .soundbtn.off { color: var(--on-variant); opacity: .75; }
+@media (max-width: 430px) {
+  .topbar .soundbtn { padding: 8px 5px; }
+}

@@ -396,11 +396,47 @@
       if (el) el.textContent = '🐾 ' + Store.data.footprints;
     },
 
+    /**
+     * 소리 켜기·끄기 단추.
+     * 어느 화면에서든 곧바로 끌 수 있어야 합니다.
+     * (조용해야 하는 자리에서 놀이 화면까지 들어가 끄게 하면 안 됩니다)
+     */
+    soundBtn() {
+      const paint = (btn) => {
+        const s = Store.data.settings;
+        const on = s.sfx || s.bgm;
+        btn.innerHTML = '<i class="chip-ic">' + (on ? ICON.sound : ICON.mute) + '</i>';
+        btn.setAttribute('aria-label', on ? '소리 끄기' : '소리 켜기');
+        btn.classList.toggle('off', !on);
+      };
+      const btn = h('button', {
+        class: 'iconbtn soundbtn', id: 'soundbtn',
+        onclick: () => {
+          const s = Store.data.settings;
+          const on = s.sfx || s.bgm;
+          s.sfx = !on;
+          if (!on) { if (s.bgmWasOn) s.bgm = true; }
+          else { s.bgmWasOn = s.bgm; s.bgm = false; }
+          Store.save(); global.Audio2.sync(); paint(btn);
+        }
+      });
+      paint(btn);
+      return btn;
+    },
+
+    /**
+     * 위 띠.
+     * 오른쪽 자리에는 화면마다 다른 것이 오는데,
+     * 소리 단추만은 늘 함께 붙입니다.
+     */
     top(title, left, right) {
       const t = $('topbar'); t.innerHTML = '';
       t.appendChild(left || h('div', { class: 'spacer' }));
       t.appendChild(h('h1', null, title));
-      t.appendChild(right || h('div', { class: 'spacer' }));
+      const box = h('div', { class: 'row topright' });
+      if (right) box.appendChild(right);
+      box.appendChild(this.soundBtn());
+      t.appendChild(box);
     },
 
     /* ── 산책 (홈) ── */

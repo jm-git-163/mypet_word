@@ -84,37 +84,16 @@
       this.wordSt = {}; this.selfSolved = 0;
 
       $('tabbar').classList.add('hidden');
-      // 오른쪽 위에 소리 켜기/끄기 — 소리가 나면 안 될 때 바로 끌 수 있게
-      const soundBtn = h('button', {
-        class: 'iconbtn', id: 'soundbtn',
-        'aria-label': '소리 켜기 끄기',
-        onclick: () => {
-          const s = Store.data.settings;
-          const on = s.sfx || s.bgm;
-          s.sfx = !on;
-          if (!on) { if (s.bgmWasOn) s.bgm = true; } else { s.bgmWasOn = s.bgm; s.bgm = false; }
-          Store.save(); global.Audio2.sync();
-          paintSound();
-        }
-      });
-      const paintSound = () => {
-        const on = Store.data.settings.sfx || Store.data.settings.bgm;
-        soundBtn.innerHTML = '<i class="chip-ic">' +
-          (on ? global.UI.ICON.sound : global.UI.ICON.mute) + '</i>';
-      };
-      paintSound();
 
       App.top(this.reviewOnly ? this.stage.modeName : this.stage.level + '번째 산책',
         h('button', { class: 'iconbtn back', 'aria-label': '나가기', onclick: () => this.leave() },
           h('span', { class: 'ic' }, '←'), h('span', { class: 'tx' }, '나가기')),
-        h('div', { class: 'row', style: 'gap:2px;flex-wrap:nowrap' },
-          (() => {
-            const chip = h('span', { class: 'footchip', id: 'footchip' });
-            chip.innerHTML = '<i class="chip-ic">' + global.UI.ICON.paw + '</i>' +
-              '<b>' + Store.data.footprints + '</b>';
-            return chip;
-          })(),
-          soundBtn));
+        (() => {
+          const chip = h('span', { class: 'footchip', id: 'footchip' });
+          chip.innerHTML = '<i class="chip-ic">' + global.UI.ICON.paw + '</i>' +
+            '<b>' + Store.data.footprints + '</b>';
+          return chip;
+        })());
 
       const v = $('view'); v.innerHTML = ''; v.scrollTop = 0;
 
@@ -804,7 +783,7 @@
 
         list.forEach(e => {
           const on = Store.data.fav.includes(e.id);
-          v.appendChild(h('div', { class: 'list-item' },
+          v.appendChild(h('div', { class: 'list-item wordrow' },
             h('button', {
               class: 'fav-btn' + (on ? ' on' : ''),
               'aria-label': '간직하기',
