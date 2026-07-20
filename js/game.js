@@ -94,16 +94,26 @@
           s.sfx = !on;
           if (!on) { if (s.bgmWasOn) s.bgm = true; } else { s.bgmWasOn = s.bgm; s.bgm = false; }
           Store.save(); global.Audio2.sync();
-          const b = $('soundbtn');
-          if (b) b.textContent = (!on) ? '🔊 소리' : '🔇 소리끔';
+          paintSound();
         }
-      }, (Store.data.settings.sfx || Store.data.settings.bgm) ? '🔊 소리' : '🔇 소리끔');
+      });
+      const paintSound = () => {
+        const on = Store.data.settings.sfx || Store.data.settings.bgm;
+        soundBtn.innerHTML = '<i class="chip-ic">' +
+          (on ? global.UI.ICON.sound : global.UI.ICON.mute) + '</i>';
+      };
+      paintSound();
 
       App.top(this.reviewOnly ? this.stage.modeName : this.stage.level + '번째 산책',
         h('button', { class: 'iconbtn back', 'aria-label': '나가기', onclick: () => this.leave() },
           h('span', { class: 'ic' }, '←'), h('span', { class: 'tx' }, '나가기')),
         h('div', { class: 'row', style: 'gap:2px;flex-wrap:nowrap' },
-          h('span', { class: 'footchip', id: 'footchip' }, '🐾 ' + Store.data.footprints),
+          (() => {
+            const chip = h('span', { class: 'footchip', id: 'footchip' });
+            chip.innerHTML = '<i class="chip-ic">' + global.UI.ICON.paw + '</i>' +
+              '<b>' + Store.data.footprints + '</b>';
+            return chip;
+          })(),
           soundBtn));
 
       const v = $('view'); v.innerHTML = ''; v.scrollTop = 0;
@@ -258,9 +268,12 @@
           class: 'tool-btn' + (canPay ? '' : ' poor'),
           onclick: () => this.useTool(t)
         },
-          h('span', { class: 'tool-ic' }, t.icon),
+          (() => { const i = h('span', { class: 'tool-ic' });
+            i.innerHTML = global.UI.ICON[t.id] || ''; return i; })(),
           h('span', { class: 'tool-nm' }, t.name),
-          h('span', { class: 'tool-cost' }, '🐾 ' + t.cost)));
+          (() => { const c = h('span', { class: 'tool-cost' });
+            c.innerHTML = '<i class="chip-ic">' + global.UI.ICON.paw + '</i><b>' + t.cost + '</b>';
+            return c; })()));
       });
 
     },

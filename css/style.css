@@ -1044,3 +1044,17 @@ body.contrast .xwrap::after { display: none; }
   width: min(calc(26px * var(--fs)), 6.4vw);
   height: min(calc(26px * var(--fs)), 6.4vw);
 }
+
+/* ── 그려 넣은 아이콘 ──────────────────────────
+   이모지를 대신합니다. currentColor 를 따라가므로
+   어둡게 보기에서도 저절로 맞습니다. */
+.chip-ic {
+  display: inline-block; width: 1.05em; height: 1.05em;
+  vertical-align: -0.16em; line-height: 0;
+}
+.footchip .chip-ic { margin-right: 5px; }
+.footchip b, .tool-cost b { font-weight: 800; font-variant-numeric: tabular-nums; }
+.tool-cost .chip-ic { margin-right: 4px; }
+.topbar .iconbtn .chip-ic { width: 1.5em; height: 1.5em; vertical-align: -0.35em; }
+.tool-ic { display: block; width: calc(28px * var(--fs)); height: calc(28px * var(--fs)); line-height: 0; }
+.tools .tool-btn .tool-ic { margin: 0 auto 4px; }
