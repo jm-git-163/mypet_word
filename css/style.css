@@ -2380,3 +2380,51 @@ body.contrast .doghouse .niche {
 /* 제목이 집으로 가는 단추임을 살짝 알립니다 */
 .topbar h1.homelink { cursor: pointer; }
 .topbar h1.homelink:active { opacity: .7; }
+
+/* ══════════════════════════════════════════════════════
+   상자의 테두리를 걷고, 조금 더 비치게
+
+   테두리 선이 있으면 아무리 투명해도 '창틀'이 남아
+   화면이 답답해 보입니다. 선을 없애고 아주 옅은
+   그림자만으로 층을 나눕니다.
+   ══════════════════════════════════════════════════════ */
+#view > .card, .list-item, .toggle, .hue, .preview-box, .fact, .btn, .tool-btn, .tile {
+  border-color: transparent !important;
+}
+#view > .card {
+  background-color: color-mix(in srgb, var(--white) 48%, transparent);
+  box-shadow: 0 1px 2px rgba(45,21,13,.04), 0 12px 30px -18px rgba(45,21,13,.20);
+}
+.list-item, .toggle, .hue, .preview-box, .fact {
+  background-color: color-mix(in srgb, var(--white) 52%, transparent);
+  box-shadow: 0 1px 2px rgba(45,21,13,.04) !important;
+}
+.btn:not(.primary):not(.quiet) {
+  background: color-mix(in srgb, var(--white) 46%, transparent);
+  box-shadow: 0 1px 2px rgba(45,21,13,.05) !important;
+}
+.tool-btn { background: color-mix(in srgb, var(--white) 52%, transparent) !important; box-shadow: 0 1px 2px rgba(45,21,13,.05) !important; }
+.tile { box-shadow: 0 1px 2px rgba(45,21,13,.05), 0 6px 14px -8px rgba(45,21,13,.18); }
+.xwrap {
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--board-tint) 0%, transparent 76%),
+    color-mix(in srgb, var(--white) 34%, transparent) !important;
+  box-shadow: 0 1px 2px rgba(45,21,13,.04), 0 18px 44px -20px rgba(45,21,13,.18) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   위 띠와 본문 사이 숨 고르기
+
+   제목 띠가 유리처럼 비쳐서 바로 아래 상자와 겹쳐 보였습니다.
+   띠 아래에 여백을 두고, 옅은 경계선 하나로 층을 나눕니다.
+   ══════════════════════════════════════════════════════ */
+.topbar {
+  padding-bottom: 12px;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--outline-var) 45%, transparent);
+}
+#view { padding-top: 16px; }
+#view > .scene-caption:first-child { margin-top: 2px; }
+#view > *:first-child { margin-top: 0; }
+
+/* 화면 아래도 탭바에 붙지 않게 */
+#view { padding-bottom: 22px; }

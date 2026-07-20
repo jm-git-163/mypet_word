@@ -767,6 +767,62 @@
         }
       }
 
+      /* ── 때와 날씨가 만드는 것 ────────────────────
+         같은 장소라도 아침·밤·안개에 따라 달리 보여야
+         스무 판을 걸어도 새롭습니다. */
+      if (time.name === '밤') {
+        // 별을 흩뿌리고, 몇 개는 크게
+        for (let i = 0; i < 26; i++) {
+          const x = rng() * W, y = rng() * 150, r = .8 + rng() * 1.5;
+          g += `<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${r.toFixed(1)}" fill="#fff" opacity="${(.3 + rng() * .5).toFixed(2)}"/>`;
+        }
+        if (rng() < .45) {   // 별똥별
+          const sx = W * (.2 + rng() * .6), sy = 30 + rng() * 50;
+          g += `<path d="M${sx.toFixed(0)} ${sy.toFixed(0)} l26 14" stroke="#fff" stroke-width="1.6"
+                 stroke-linecap="round" fill="none" opacity=".55"/>`;
+        }
+      } else if (time.name === '해질녘') {
+        // 노을이 하늘을 가로로 물들입니다
+        for (let i = 0; i < 4; i++) {
+          const y = 84 + i * 22;
+          g += `<rect y="${y}" width="${W}" height="${(9 + rng() * 8).toFixed(0)}" rx="5"
+                 fill="${hsl(hSky - 16, Math.min(70, sat + 26), 88 - i * 2)}" opacity="${(.3 - i * .05).toFixed(2)}"/>`;
+        }
+      } else if (time.name === '새벽') {
+        // 아직 남은 달과 옅은 기운
+        g += `<circle cx="${(W * (.14 + rng() * .2)).toFixed(0)}" cy="${(46 + rng() * 26).toFixed(0)}" r="13"
+               fill="${hsl(hSky, 18, 98)}" opacity=".5"/>`;
+      } else if (time.name === '아침') {
+        // 아침 햇살이 비스듬히 내려옵니다
+        for (let i = 0; i < 5; i++) {
+          const x = W * (.55 + i * .12);
+          g += `<path d="M${x.toFixed(0)} 0 L${(x - 60).toFixed(0)} 210"
+                 stroke="${hsl(hSky - 8, 40, 98)}" stroke-width="${(10 + rng() * 12).toFixed(0)}"
+                 fill="none" opacity="${(.10 + rng() * .06).toFixed(2)}"/>`;
+        }
+      }
+
+      if (weather.name === '안개 낀') {
+        for (let i = 0; i < 5; i++) {
+          const y = 130 + i * 26;
+          g += `<rect y="${y}" width="${W}" height="${(16 + rng() * 14).toFixed(0)}"
+                 fill="${hsl(hSky, 12, 98)}" opacity="${(.24 + rng() * .12).toFixed(2)}"/>`;
+        }
+      } else if (weather.name === '바람 부는') {
+        // 바람결이 비스듬히 지나갑니다
+        for (let i = 0; i < 6; i++) {
+          const y = 60 + rng() * 140, x = rng() * W * .7;
+          g += `<path d="M${x.toFixed(0)} ${y.toFixed(0)} q22 -5 44 0 q10 2 18 -2"
+                 stroke="${hsl(hSky, 20, 98)}" stroke-width="1.6" fill="none" opacity="${(.22 + rng() * .18).toFixed(2)}"/>`;
+        }
+      } else if (weather.name === '이슬 맺힌') {
+        for (let i = 0; i < 14; i++) {
+          const x = rng() * W, y = 250 + rng() * 46;
+          g += `<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(1.4 + rng() * 1.6).toFixed(1)}"
+                 fill="#fff" opacity="${(.4 + rng() * .3).toFixed(2)}"/>`;
+        }
+      }
+
       // 옅은 안개 한 겹 — 멀고 가까움이 살아납니다
       g += `<rect y="188" width="${W}" height="52" fill="${hsl(hSky, 20, 96)}" opacity=".22"/>`;
 

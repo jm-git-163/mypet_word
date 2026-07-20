@@ -751,57 +751,9 @@
         class: 'btn primary big wide', style: 'margin-bottom:8px', onclick: () => this.start()
       }, d.level + '번째 산책 가기'));
 
-      if (this.metEntries.length) {
-        const list = [...new Set(this.metEntries)];
-        v.appendChild(h('div', { class: 'section-title' }, '오늘 만난 낱말'));
-
-        // 마음에 드는 낱말을 이 자리에서 바로 간직할 수 있습니다.
-        // (예전에는 낱말 카드를 하나씩 열어야만 간직할 수 있었습니다)
-        v.appendChild(h('div', { class: 'row', style: 'margin-bottom:12px' },
-          h('button', {
-            class: 'btn tool wide',
-            onclick: (ev) => {
-              // 누를 때마다 '모두 간직' ↔ '모두 해제' 로 오갑니다.
-              const d = Store.data;
-              const allSaved = list.every(e => d.fav.includes(e.id));
-              if (allSaved) {
-                const ids = new Set(list.map(e => e.id));
-                d.fav = d.fav.filter(x => !ids.has(x));
-                Store.save(); Sound.tap();
-                ev.currentTarget.textContent = '♡ 오늘 낱말 모두 간직하기';
-                v.querySelectorAll('.fav-btn').forEach(b => { b.textContent = '♡'; b.classList.remove('on'); });
-              } else {
-                list.forEach(e => { if (!d.fav.includes(e.id)) d.fav.push(e.id); });
-                Store.save(); Sound.right();
-                ev.currentTarget.textContent = `♥ ${list.length}개를 간직했어요 (다시 누르면 풀려요)`;
-                v.querySelectorAll('.fav-btn').forEach(b => { b.textContent = '♥'; b.classList.add('on'); });
-              }
-            }
-          }, list.every(e => Store.data.fav.includes(e.id))
-            ? '♥ 모두 간직했어요 (다시 누르면 풀려요)'
-            : '♡ 오늘 낱말 모두 간직하기')));
-
-        list.forEach(e => {
-          const on = Store.data.fav.includes(e.id);
-          v.appendChild(h('div', { class: 'list-item wordrow' },
-            h('button', {
-              class: 'fav-btn' + (on ? ' on' : ''),
-              'aria-label': '간직하기',
-              onclick: (ev) => {
-                const d = Store.data;
-                const has = d.fav.includes(e.id);
-                if (has) d.fav = d.fav.filter(x => x !== e.id); else d.fav.push(e.id);
-                Store.save(); Sound.tap();
-                ev.currentTarget.textContent = d.fav.includes(e.id) ? '♥' : '♡';
-                ev.currentTarget.classList.toggle('on', d.fav.includes(e.id));
-              }
-            }, on ? '♥' : '♡'),
-            h('button', {
-              class: 'grow linkish', onclick: () => this.card(e, null)
-            }, e.surface),
-            h('span', { class: 'badge' }, '뜻 보기')));
-        });
-      }
+      /* 판이 끝난 뒤 낱말을 죽 늘어놓던 것을 없앴습니다.
+         열다섯 줄이 화면을 한참 차지하는데, 정작 하시려는 일은
+         다음 판으로 넘어가는 것입니다. */
 
       v.appendChild(h('div', { style: 'height:12px' }));
       v.appendChild(h('button', { class: 'btn tool wide', onclick: () => this.leave() }, '오늘은 여기까지 할게요'));
