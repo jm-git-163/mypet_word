@@ -559,7 +559,9 @@
               Sound.right();
               this.toast(v, `${d.pet.name}가 꼬리를 흔들어요!`);
             }
-          }, '🤗 쓰다듬기'),
+          }, h('span', { class: 'btn-stack' },
+            h('b', null, '쓰다듬기'),
+            h('span', { class: 'sub' }, '언제든 괜찮아요'))),
           h('button', {
             class: 'btn', onclick: () => {
               if (d.footprints < 8) return say('발자국이 조금 모자라요. 산책을 다녀오면 채워져요.', '🐾');
@@ -575,7 +577,14 @@
               App.topFootprints();
               this.toast(v, `${d.pet.name}가 폴짝폴짝 뛰며 먹었어요!`);
             }
-          }, '🦴 간식 주기 ', h('span', { class: 'nobr' }, '🐾8')))
+          }, (() => {
+            // '🐾8' 만 있으면 무슨 뜻인지 알기 어렵습니다.
+            // 무엇을 얼마나 쓰는지 글로 밝혀 둡니다.
+            const w = h('span', { class: 'btn-stack' },
+              h('b', null, '간식 주기'),
+              h('span', { class: 'sub' }, '발자국 8개를 써요'));
+            return w;
+          })()))
       ));
       v.appendChild(h('div', { class: 'card' },
         h('h2', null, '함께한 기록'),
@@ -668,7 +677,7 @@
       v.appendChild(h('div', { class: 'card' },
         h('h2', null, '빛깔'),
         h('p', { class: 'muted small', style: 'margin:-6px 0 14px' },
-          '「동네 따라」로 두시면 백 걸음마다 분위기가 바뀝니다.'),
+          '「동네 따라」로 두시면 한 판 걸을 때마다 빛깔이 바뀝니다.'),
         (() => {
           const box = h('div', { class: 'hues' });
           const mk = (id, label, dot) => {

@@ -270,33 +270,65 @@
           }
         }
 
-        /* 모래톱에 놓인 조개와 불가사리 */
-        for (let i = 0; i < 5; i++) {
-          const sx = 24 + rng() * (W - 48), sy = 286 + rng() * 16;
-          const c = hsl(hSky - 14, 30, 88), op = (.42 + rng() * .28).toFixed(2);
-          if (rng() < .55) {
-            // 부채 모양 조개
-            g += `<g opacity="${op}" fill="${c}" stroke="${ink(2, -14)}" stroke-width=".7">` +
-              `<path d="M${sx.toFixed(0)} ${sy.toFixed(0)} a9 9 0 0 1 16 0 Z"/>` +
-              `<path d="M${(sx + 4).toFixed(0)} ${sy.toFixed(0)} l2 -6M${(sx + 8).toFixed(0)} ${sy.toFixed(0)} v-7M${(sx + 12).toFixed(0)} ${sy.toFixed(0)} l-2 -6"
-                 stroke="${ink(2, -14)}" stroke-width=".7" fill="none"/></g>`;
-          } else {
+        /* ── 모래톱 ──
+           화면에는 그림의 아래쪽이 주로 보입니다.
+           그러니 여기가 가장 볼거리여야 합니다. */
+        const sand = hsl(base - 18, 34, 90);
+        g += `<path d="M0 272 q60 -12 130 -6 q80 7 150 -4 q70 -10 120 4 L${W} 300 L0 300 Z" fill="${sand}" opacity=".85"/>`;
+        // 물결이 모래에 닿는 자리
+        g += `<path d="M0 272 q60 -12 130 -6 q80 7 150 -4 q70 -10 120 4"
+               stroke="${hsl(hSky, 26, 98)}" stroke-width="2.4" fill="none" opacity=".55"/>`;
+
+        /* 조개 · 불가사리 · 소라 — 큼직하게 */
+        for (let i = 0; i < 7; i++) {
+          const sx = 22 + rng() * (W - 44), sy = 280 + rng() * 16;
+          const sc = 1.4 + rng() * .8;
+          const op = (.55 + rng() * .3).toFixed(2);
+          const pick = rng();
+          if (pick < .38) {
+            // 부채 조개 (결이 보이게)
+            const c = hsl(base - 26, 40, 86);
+            g += `<g opacity="${op}" transform="translate(${sx.toFixed(0)} ${sy.toFixed(0)}) scale(${sc.toFixed(2)})">` +
+              `<path d="M0 0 a10 10 0 0 1 18 0 Z" fill="${c}" stroke="${ink(2, -18)}" stroke-width=".8"/>` +
+              `<path d="M4 0 l1.5 -7M9 0 v-8M14 0 l-1.5 -7" stroke="${ink(2, -18)}" stroke-width=".8" fill="none"/></g>`;
+          } else if (pick < .68) {
             // 불가사리
             let d2 = '';
             for (let k = 0; k < 5; k++) {
               const a1 = (k * 72 - 90) * Math.PI / 180, a2 = ((k + .5) * 72 - 90) * Math.PI / 180;
-              d2 += (k ? 'L' : 'M') + (sx + Math.cos(a1) * 7).toFixed(1) + ' ' + (sy + Math.sin(a1) * 7).toFixed(1) +
-                'L' + (sx + Math.cos(a2) * 3).toFixed(1) + ' ' + (sy + Math.sin(a2) * 3).toFixed(1);
+              d2 += (k ? 'L' : 'M') + (Math.cos(a1) * 9).toFixed(1) + ' ' + (Math.sin(a1) * 9).toFixed(1) +
+                'L' + (Math.cos(a2) * 3.6).toFixed(1) + ' ' + (Math.sin(a2) * 3.6).toFixed(1);
             }
-            g += `<path d="${d2} Z" fill="${hsl(hSky - 24, 38, 84)}" opacity="${op}"/>`;
+            g += `<g opacity="${op}" transform="translate(${sx.toFixed(0)} ${sy.toFixed(0)}) scale(${sc.toFixed(2)})">` +
+              `<path d="${d2} Z" fill="${hsl(base - 34, 46, 80)}"/></g>`;
+          } else if (pick < .86) {
+            // 소라 (돌돌 말린 껍데기)
+            g += `<g opacity="${op}" transform="translate(${sx.toFixed(0)} ${sy.toFixed(0)}) scale(${sc.toFixed(2)})">` +
+              `<path d="M0 0 q-2 -9 6 -11 q9 -2 9 6 q0 6 -6 6 q-5 0 -5 -4 q0 -3 3 -3"
+                 fill="${hsl(base - 20, 42, 88)}" stroke="${ink(2, -18)}" stroke-width=".9"/></g>`;
+          } else {
+            // 작은 게
+            g += `<g opacity="${op}" transform="translate(${sx.toFixed(0)} ${sy.toFixed(0)}) scale(${sc.toFixed(2)})">` +
+              `<ellipse rx="7" ry="5" fill="${hsl(base - 40, 44, 76)}"/>` +
+              `<path d="M-7 -1 l-4 -4M7 -1 l4 -4M-5 4 l-4 4M5 4 l4 4"
+                 stroke="${hsl(base - 40, 44, 70)}" stroke-width="1.4" fill="none"/>` +
+              `<circle cx="-2.6" cy="-2" r="1.1" fill="#fff"/><circle cx="2.6" cy="-2" r="1.1" fill="#fff"/></g>`;
           }
         }
 
-        /* 물가에 떠 있는 미역 줄기 */
+        /* 물속에서 헤엄치는 물고기 떼 */
         for (let i = 0; i < 4; i++) {
-          const wx = rng() * W, wy = 262 + rng() * 24;
-          g += `<path d="M${wx.toFixed(0)} ${wy.toFixed(0)} q7 -6 3 -13 q-5 -7 4 -12"
-                 stroke="${ink(1, -16)}" stroke-width="2" fill="none" opacity="${(.24 + rng() * .18).toFixed(2)}"/>`;
+          const fx = 20 + rng() * (W - 60), fy = 248 + rng() * 20, sc = 1 + rng() * .7;
+          g += `<g opacity="${(.3 + rng() * .22).toFixed(2)}" fill="${ink(2, -16)}" ` +
+            `transform="translate(${fx.toFixed(0)} ${fy.toFixed(0)}) scale(${sc.toFixed(2)})">` +
+            `<path d="M0 0 q8 -6 16 0 q-8 6 -16 0 Z"/><path d="M16 0 l6 -4 v8 Z"/></g>`;
+        }
+
+        /* 미역 줄기 */
+        for (let i = 0; i < 5; i++) {
+          const wx = rng() * W, wy = 268 + rng() * 20;
+          g += `<path d="M${wx.toFixed(0)} ${wy.toFixed(0)} q8 -8 3 -16 q-6 -8 5 -15"
+                 stroke="${ink(1, -18)}" stroke-width="2.4" fill="none" opacity="${(.3 + rng() * .2).toFixed(2)}"/>`;
         }
         // 갈매기 둘
         for (let i = 0; i < 2; i++) {
@@ -400,21 +432,131 @@
         }
       }
 
-      /* 앞쪽 잔풀과 돌 — 어느 풍경이든 아래쪽이 휑하지 않게.
-         바다는 물이라 넣지 않습니다. */
+      /* ── 맨 앞줄 ────────────────────────────────
+         화면에는 그림의 아래쪽이 주로 보입니다.
+         땅마다 다른 것을 크게 놓아 여기가 볼거리가 되게 합니다.
+         (바다는 위에서 모래톱으로 따로 그렸습니다) */
+      const near = (x, y, sc, body, op) =>
+        `<g opacity="${op}" transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) scale(${sc.toFixed(2)})">${body}</g>`;
+
       if (land !== '바다') {
-        for (let i = 0; i < 12; i++) {
-          const x = rng() * W, y = 276 + rng() * 26;
-          if (rng() < .45) {
-            g += `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${(3 + rng() * 5).toFixed(1)}" ry="${(2 + rng() * 2.4).toFixed(1)}"
-                   fill="${ink(2, -8)}" opacity="${(.22 + rng() * .2).toFixed(2)}"/>`;
-          } else {
-            for (let k = 0; k < 3; k++) {
-              g += `<path d="M${(x + k * 2.6).toFixed(1)} ${y.toFixed(0)} q2 -${(5 + rng() * 6).toFixed(0)} ${(3 + rng() * 3).toFixed(0)} -${(8 + rng() * 7).toFixed(0)}"
-                     stroke="${ink(2, -4)}" stroke-width="1.3" fill="none" opacity="${(.24 + rng() * .2).toFixed(2)}"/>`;
+        const FG = {
+          '산': () => {            // 바위와 들풀
+            let o = '';
+            for (let i = 0; i < 5; i++) {
+              const x = rng() * W, y = 278 + rng() * 18, sc = 1 + rng() * 1.2;
+              o += near(x, y, sc, `<path d="M0 0 q3 -11 12 -9 q9 -4 12 9 Z" fill="${ink(2, -12)}"/>`, (.4 + rng() * .24).toFixed(2));
             }
+            return o;
+          },
+          '언덕': () => {          // 흔들리는 들꽃
+            let o = '';
+            for (let i = 0; i < 9; i++) {
+              const x = rng() * W, y = 282 + rng() * 16, sc = 1 + rng();
+              o += near(x, y, sc, `<path d="M0 0 v-11" stroke="${ink(2, -6)}" stroke-width="1.4" fill="none"/>` +
+                `<circle cy="-13" r="3.4" fill="${hsl(base - 12, 48, 80)}"/>`, (.45 + rng() * .3).toFixed(2));
+            }
+            return o;
+          },
+          '숲': () => {            // 고사리와 버섯
+            let o = '';
+            for (let i = 0; i < 7; i++) {
+              const x = rng() * W, y = 284 + rng() * 14, sc = 1 + rng() * .9;
+              o += rng() < .5
+                ? near(x, y, sc, `<path d="M0 0 q1 -12 8 -16 M0 -5 l-6 -4 M0 -10 l-5 -5" stroke="${ink(2, -12)}" stroke-width="1.5" fill="none"/>`, (.4 + rng() * .25).toFixed(2))
+                : near(x, y, sc, `<path d="M-6 0 q0 -8 6 -8 q6 0 6 8 Z" fill="${hsl(base - 26, 40, 82)}"/><rect x="-1.4" y="0" width="2.8" height="5" fill="${ink(2, -6)}"/>`, (.45 + rng() * .25).toFixed(2));
+            }
+            return o;
+          },
+          '꽃밭': () => {          // 활짝 핀 꽃 다섯 잎
+            let o = '';
+            for (let i = 0; i < 10; i++) {
+              const x = rng() * W, y = 280 + rng() * 18, sc = .9 + rng() * .9;
+              let pet = '';
+              for (let k = 0; k < 5; k++) {
+                const a1 = k * 72 * Math.PI / 180;
+                pet += `<ellipse cx="${(Math.cos(a1) * 4.6).toFixed(1)}" cy="${(Math.sin(a1) * 4.6).toFixed(1)}" rx="3.4" ry="2.4" fill="${hsl(base + (rng() - .5) * 40, 52, 80)}"/>`;
+              }
+              o += near(x, y, sc, `<path d="M0 0 v10" stroke="${ink(2, -6)}" stroke-width="1.3" fill="none"/>` + pet +
+                `<circle r="2" fill="${hsl(48, 60, 76)}"/>`, (.5 + rng() * .3).toFixed(2));
+            }
+            return o;
+          },
+          '억새': () => {          // 이삭이 크게
+            let o = '';
+            for (let i = 0; i < 11; i++) {
+              const x = rng() * W, y = 286 + rng() * 14, sc = 1 + rng() * 1.1;
+              o += near(x, y, sc, `<path d="M0 0 q5 -14 14 -22" stroke="${ink(2, -4)}" stroke-width="1.6" fill="none"/>` +
+                `<ellipse cx="15" cy="-24" rx="5" ry="2.4" fill="${hsl(base - 8, 26, 92)}" transform="rotate(-32 15 -24)"/>`, (.42 + rng() * .3).toFixed(2));
+            }
+            return o;
+          },
+          '과수원': () => {        // 떨어진 열매와 바구니
+            let o = '';
+            for (let i = 0; i < 8; i++) {
+              const x = rng() * W, y = 286 + rng() * 12, sc = 1 + rng() * .7;
+              o += near(x, y, sc, `<circle r="4.4" fill="${hsl(base - 10, 52, 76)}"/>` +
+                `<path d="M0 -4 q2 -4 5 -4" stroke="${ink(2, -10)}" stroke-width="1.2" fill="none"/>`, (.5 + rng() * .28).toFixed(2));
+            }
+            return o;
+          },
+          '논': () => {            // 볏단과 허수아비
+            let o = '';
+            for (let i = 0; i < 6; i++) {
+              const x = rng() * W, y = 288 + rng() * 10, sc = 1 + rng() * .8;
+              o += near(x, y, sc, `<path d="M0 0 l-6 -14 M0 0 l0 -16 M0 0 l6 -14" stroke="${hsl(base - 6, 34, 78)}" stroke-width="2" fill="none"/>`, (.42 + rng() * .26).toFixed(2));
+            }
+            const sx = W * (.2 + rng() * .6);
+            o += near(sx, 292, 1.5, `<path d="M0 0 v-22 M-9 -15 h18" stroke="${ink(2, -14)}" stroke-width="2" fill="none"/>` +
+              `<circle cy="-25" r="4.6" fill="${hsl(base - 10, 30, 86)}"/>`, '.5');
+            return o;
+          },
+          '기와': () => {          // 담장과 항아리
+            let o = '';
+            o += `<rect y="286" width="${W}" height="14" fill="${ink(2, -8)}" opacity=".35"/>`;
+            for (let i = 0; i < 5; i++) {
+              const x = rng() * W, y = 288 + rng() * 8, sc = 1 + rng() * .8;
+              o += near(x, y, sc, `<path d="M-6 0 q-3 -9 0 -12 q6 -3 12 0 q3 3 0 12 Z" fill="${hsl(base - 30, 30, 72)}"/>`, (.45 + rng() * .25).toFixed(2));
+            }
+            return o;
+          },
+          '마을': () => {          // 장독과 나무 울타리
+            let o = '';
+            for (let i = 0; i < 6; i++) {
+              const x = i * (W / 5.4) + rng() * 10, y = 292;
+              o += near(x, y, 1.2, `<path d="M0 0 v-14 M-7 -10 h14" stroke="${ink(2, -10)}" stroke-width="2" fill="none"/>`, '.4');
+            }
+            for (let i = 0; i < 3; i++) {
+              const x = rng() * W;
+              o += near(x, 292, 1.4, `<path d="M-6 0 q-3 -8 0 -11 q6 -3 12 0 q3 3 0 11 Z" fill="${hsl(base - 32, 28, 70)}"/>`, '.45');
+            }
+            return o;
+          },
+          '개울': () => {          // 징검다리와 물풀
+            let o = '';
+            for (let i = 0; i < 5; i++) {
+              const x = 30 + i * (W / 5.5) + (rng() - .5) * 14;
+              o += near(x, 284 + (rng() - .5) * 8, 1.3 + rng() * .5,
+                `<ellipse rx="9" ry="5" fill="${ink(2, -14)}"/>`, (.42 + rng() * .2).toFixed(2));
+            }
+            for (let i = 0; i < 6; i++) {
+              const x = rng() * W;
+              o += near(x, 294, 1 + rng() * .8,
+                `<path d="M0 0 q3 -9 -1 -14 M0 0 q-4 -8 -1 -13" stroke="${ink(1, -18)}" stroke-width="1.5" fill="none"/>`, '.4');
+            }
+            return o;
+          },
+          '설산': () => {          // 눈 쌓인 바위와 침엽수
+            let o = '';
+            for (let i = 0; i < 6; i++) {
+              const x = rng() * W, y = 284 + rng() * 12, sc = 1 + rng();
+              o += near(x, y, sc, `<path d="M0 0 q3 -10 11 -8 q8 -3 11 8 Z" fill="${ink(2, -10)}"/>` +
+                `<path d="M1 -6 q5 -4 12 -2" stroke="#fff" stroke-width="2.4" fill="none" opacity=".8"/>`, (.44 + rng() * .24).toFixed(2));
+            }
+            return o;
           }
-        }
+        };
+        g += (FG[land] || FG['산'])();
       }
 
       /* ── 하늘 쪽 채우기 ────────────────────────────

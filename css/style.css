@@ -1627,3 +1627,30 @@ body.contrast .list-item, body.contrast .toggle { background: var(--white) !impo
   min-height: calc(42px * var(--fs));
   font-size: var(--t-body);
 }
+
+/* 단추 안에 이름과 설명을 두 줄로 */
+.btn-stack { display: flex; flex-direction: column; align-items: center; gap: 2px; line-height: 1.3; }
+.btn-stack b { font-weight: 800; }
+.btn-stack .sub { font-size: var(--t-caption); font-weight: 600; opacity: .8; }
+
+/* ── 더 비치게 (산책·마침 화면) ───────────────── */
+#view > .card, .list-item, .toggle, .hue, .preview-box {
+  background-color: color-mix(in srgb, var(--white) 58%, transparent);
+}
+.btn:not(.primary):not(.quiet) { background: color-mix(in srgb, var(--white) 52%, transparent); }
+.tool-btn { background: color-mix(in srgb, var(--white) 58%, transparent) !important; }
+.tile { background: color-mix(in srgb, var(--white) 70%, transparent); }
+.btn.primary {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--primary-c) 84%, #fff) 0%,
+    color-mix(in srgb, var(--primary-c) 86%, transparent) 55%,
+    color-mix(in srgb, var(--primary-c) 86%, var(--primary-c-dark)) 100%) !important;
+}
+/* 축하 화면의 큰 글자는 배경이 비쳐도 읽히도록 그림자를 아주 옅게 */
+.celebrate .big { text-shadow: 0 1px 2px color-mix(in srgb, var(--white) 70%, transparent); }
+
+body.contrast #view > .card, body.contrast .list-item, body.contrast .toggle,
+body.contrast .btn, body.contrast .tool-btn, body.contrast .tile {
+  background: var(--white) !important;
+}
+body.contrast .btn.primary { background: var(--primary-c) !important; }
