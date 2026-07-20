@@ -184,15 +184,16 @@
     forLevel(level) {
       /* 빛깔은 테마가, 풍경은 동네가 정합니다.
          빛깔을 하나로 고정해 두셔도 백 걸음마다 풍경은 바뀝니다. */
+      const dark = document.body.classList.contains('dark');
       const tk = this.themeKey();
       const hoods = (global.Engine && global.Engine.NEIGHBORHOODS) || [];
       const hood = hoods.length
         ? hoods[Math.floor((level - 1) / 100) % hoods.length] : null;
       const land = (hood && hood.land) || (global.Scene.LAND_BY_THEME || {})[tk];
 
-      const key = level + '|' + tk + '|' + land;
+      const key = level + '|' + tk + '|' + land + (dark ? '|d' : '');
       if (!this.cache[key]) {
-        this.cache[key] = global.Scene.make(level, this.HUE_DEG[tk], land);
+        this.cache[key] = global.Scene.make(level, this.HUE_DEG[tk], land, dark);
         // 오래된 것은 버립니다 (메모리 아끼기)
         const keys = Object.keys(this.cache);
         if (keys.length > 40) delete this.cache[keys[0]];

@@ -26,7 +26,7 @@
   --white: #ffffff;          /* 카드 바탕 (어둡게 보기에서는 짙은 색이 됩니다) */
   /* 글자 */
   --on-surface: #29211b;
-  --on-variant: #5b4e44;
+  --on-variant: #4a3f37;
   --outline: #7a6b5e;
   --outline-var: #ddd1c4;
   /* 주색 — 감빛 */
@@ -115,7 +115,7 @@ body.dark {
   --white: #201a15;          /* 카드 바탕 */
   /* 글자 */
   --on-surface: #f4e9e0;
-  --on-variant: #c9b8a8;
+  --on-variant: #d6c7ba;
   --outline: #9c8977;
   --outline-var: #3d322a;
   /* 주색 — 글자로 쓸 땐 밝게, 넓게 칠할 땐 가라앉게 */
@@ -2428,3 +2428,18 @@ body.contrast .doghouse .niche {
 
 /* 화면 아래도 탭바에 붙지 않게 */
 #view { padding-bottom: 22px; }
+
+/* 어두운 화면에 남아 있던 안쪽 테두리선 정리 —
+   밝은 선이 어두운 상자 위에서 도드라져 '창틀'처럼 보였습니다. */
+body.dark #view > .card,
+body.dark .list-item, body.dark .toggle, body.dark .hue,
+body.dark .preview-box, body.dark .fact, body.dark .tool-btn,
+body.dark .btn:not(.primary) {
+  box-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+}
+body.dark .xwrap {
+  box-shadow: 0 2px 6px rgba(0,0,0,.4), 0 18px 44px -20px rgba(0,0,0,.5) !important;
+}
+body.dark .topbar {
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--outline-var) 60%, transparent);
+}

@@ -83,7 +83,15 @@
     ['눈 덮인 언덕', ['겨울']], ['서리 내린 들', ['겨울']]
   ];
 
-  const hsl = (h, s, l) => `hsl(${Math.round(h)} ${Math.round(s)}% ${Math.round(l)}%)`;
+  /* 어두운 화면에서는 밝기를 통째로 낮춰 그립니다.
+     밝은 그림을 그대로 두고 투명도만 낮추면
+     어두운 화면에 환한 풍경이 떠 있게 됩니다. */
+  let DIM = false;
+  const hsl = (h, s, l) => {
+    const L = DIM ? 6 + l * 0.26 : l;          // 96% → 31%, 60% → 22%
+    const S = DIM ? s * 0.72 : s;
+    return `hsl(${Math.round(h)} ${Math.round(S)}% ${Math.round(L)}%)`;
+  };
 
   /** 능선 하나를 그립니다 (씨앗에 따라 모양이 달라집니다) */
   function ridge(rng, baseY, amp, W) {
@@ -116,7 +124,8 @@
      *              (테마를 바꿔도 배경이 분홍으로 남으면 화면이 따로 놉니다)
      * @param landKind 땅의 생김새. 빛깔마다 다른 것을 씁니다.
      */
-    make(level, hue, landKind) {
+    make(level, hue, landKind, dark) {
+      DIM = !!dark;
       const rng = rngFrom('scene|' + level);
       const W = 400, H = 300;
 
@@ -236,7 +245,7 @@
           const d = peaks(by, hh, 2 + i, 0);
           g += `<path d="${d}" fill="${ink(i)}"/>`;
           // 눈 — 봉우리 위쪽만 하얗게 덮습니다
-          g += `<path d="${d}" fill="#ffffff" opacity="${(.72 - i * .2).toFixed(2)}"
+          g += `<path d="${d}" fill="${DIM ? '#c9d6de' : '#ffffff'}" opacity="${(.72 - i * .2).toFixed(2)}"
                  clip-path="inset(0 0 ${(320 - by + hh * .45).toFixed(0)}px 0)"/>`;
         }
 
@@ -641,7 +650,7 @@
             for (let i = 0; i < 6; i++) {
               const x = rng() * W, y = 284 + rng() * 12, sc = 1 + rng();
               o += near(x, y, sc, `<path d="M0 0 q3 -10 11 -8 q8 -3 11 8 Z" fill="${ink(2, -10)}"/>` +
-                `<path d="M1 -6 q5 -4 12 -2" stroke="#fff" stroke-width="2.4" fill="none" opacity=".8"/>`, (.44 + rng() * .24).toFixed(2));
+                `<path d="M1 -6 q5 -4 12 -2" stroke="${DIM ? '#c9d6de' : '#fff'}" stroke-width="2.4" fill="none" opacity=".8"/>`, (.44 + rng() * .24).toFixed(2));
             }
             return o;
           }
@@ -756,7 +765,7 @@
         for (let i = 0; i < 16; i++) {
           const x = rng() * W, y = 40 + rng() * 150;
           g += `<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(1 + rng() * 1.6).toFixed(1)}"
-                 fill="#fff" opacity="${(.35 + rng() * .35).toFixed(2)}"/>`;
+                 fill="${DIM ? '#dfe8ee' : '#fff'}" opacity="${(.35 + rng() * .35).toFixed(2)}"/>`;
         }
       } else if (land === '개울') {
         // 물안개가 피어오릅니다
@@ -819,7 +828,7 @@
         for (let i = 0; i < 14; i++) {
           const x = rng() * W, y = 250 + rng() * 46;
           g += `<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(1.4 + rng() * 1.6).toFixed(1)}"
-                 fill="#fff" opacity="${(.4 + rng() * .3).toFixed(2)}"/>`;
+                 fill="${DIM ? '#dfe8ee' : '#fff'}" opacity="${(.4 + rng() * .3).toFixed(2)}"/>`;
         }
       }
 
