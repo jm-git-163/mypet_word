@@ -793,8 +793,8 @@
         if (step === 0) {
           v.appendChild(h('div', { class: 'center', style: 'padding-top:24px' },
             dogEl('반가움', 150, 'introdog'),
-            h('h2', { style: 'font-size:calc(30px * var(--fs));line-height:1.4;word-break:keep-all' }, '안녕하세요!\n저는 산책 친구예요.'),
-            h('p', { class: 'muted', style: 'word-break:keep-all' }, '함께 낱말을 찾으며 천천히 걸어요.'),
+            h('h2', { style: 'font-size:calc(30px * var(--fs));line-height:1.4;word-break:keep-all' }, '안녕하세요!\n오늘부터 함께 걸어요.'),
+            h('p', { class: 'muted', style: 'word-break:keep-all' }, '이름을 지어 주시면 제가 인사드릴게요.'),
             h('button', { class: 'btn primary big wide', style: 'margin-top:20px', onclick: () => { step = 1; render(); } }, '다음')));
           
         } else if (step === 1) {
@@ -832,8 +832,8 @@
         } else {
           v.appendChild(h('div', { class: 'center' },
             dogEl('신남', 130, 'introdog3'),
-            h('h2', { style: 'word-break:keep-all;line-height:1.4' }, `${d.pet.name}와 함께\n첫 산책을 나가 볼까요?`),
-            h('p', { class: 'muted', style: 'word-break:keep-all' }, '어렵지 않아요. 천천히 하시면 돼요.'),
+            h('h2', { style: 'word-break:keep-all;line-height:1.4' }, `안녕하세요!\n저는 ${d.pet.name}${H.particle(d.pet.name, '이에요', '예요')}.`),
+            h('p', { class: 'muted', style: 'word-break:keep-all' }, '함께 낱말을 찾으며 천천히 걸어요. 어렵지 않아요.'),
             h('button', { class: 'btn primary big wide', style: 'margin-top:20px', onclick: finish }, '산책 나가기')));
         }
       };
