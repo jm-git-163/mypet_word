@@ -1611,10 +1611,12 @@ body.contrast .list-item, body.contrast .toggle { background: var(--white) !impo
 
 /* 위 띠 오른쪽 묶음 — 화면마다 다른 것 + 늘 붙는 소리 단추 */
 .topbar .topright { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; flex-wrap: nowrap; }
-.topbar .soundbtn { padding: 8px 8px; }
+/* 누르는 자리는 가로도 44px 이상이어야 합니다(WCAG 2.2 기준).
+   아이콘만 있어 폭이 37px 이었습니다. */
+.topbar .soundbtn { padding: 8px; min-width: 48px; }
 .topbar .soundbtn.off { color: var(--on-variant); opacity: .75; }
 @media (max-width: 430px) {
-  .topbar .soundbtn { padding: 8px 5px; }
+  .topbar .soundbtn { padding: 8px 4px; min-width: 46px; }
 }
 
 /* 마침 화면 낱말 줄 안의 단추들.
@@ -2247,10 +2249,12 @@ body.contrast .list-item, body.contrast .toggle { background: var(--white) !impo
 
 /* 위 띠 오른쪽 묶음 — 화면마다 다른 것 + 늘 붙는 소리 단추 */
 .topbar .topright { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; flex-wrap: nowrap; }
-.topbar .soundbtn { padding: 8px 8px; }
+/* 누르는 자리는 가로도 44px 이상이어야 합니다(WCAG 2.2 기준).
+   아이콘만 있어 폭이 37px 이었습니다. */
+.topbar .soundbtn { padding: 8px; min-width: 48px; }
 .topbar .soundbtn.off { color: var(--on-variant); opacity: .75; }
 @media (max-width: 430px) {
-  .topbar .soundbtn { padding: 8px 5px; }
+  .topbar .soundbtn { padding: 8px 4px; min-width: 46px; }
 }
 
 /* 마침 화면 낱말 줄 안의 단추들.
