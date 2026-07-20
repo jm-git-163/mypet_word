@@ -62,6 +62,21 @@ def squircle(size, radius_ratio=0.235):
     return m.resize((size, size), Image.LANCZOS)
 
 
+def radial(size, inner, outer, cx=0.40, cy=0.28, r=0.78):
+    """앱의 SVG 와 같은 방사형 그러데이션.
+    납작한 단색으로 칠하면 인형처럼 밋밋해 보입니다."""
+    img = Image.new("RGB", (size, size), outer)
+    px = img.load()
+    for y in range(size):
+        for x in range(size):
+            dx = (x / size - cx) / r
+            dy = (y / size - cy) / r
+            t = min(1.0, (dx * dx + dy * dy) ** 0.5)
+            t = t ** 1.35
+            px[x, y] = tuple(int(inner[i] + (outer[i] - inner[i]) * t) for i in range(3))
+    return img
+
+
 def dog_face(size, pad=0.16):
     """
     강아지 얼굴 — 앱의 SVG 와 같은 비율.
@@ -81,32 +96,56 @@ def dog_face(size, pad=0.16):
         d.ellipse([X(cx) - R(rx), X(cy) - R(ry), X(cx) + R(rx), X(cy) + R(ry)],
                   fill=fill, outline=outline, width=max(1, int(R(w))))
 
-    # 앱 안의 강아지(js/dog.js)와 같은 자리·같은 비율로 그립니다.
-    # 아이콘만 다르게 생기면 '같은 앱'으로 보이지 않습니다.
-    # 귀 (늘어진)
-    ell(54, 110, 20, 33, CREAM, CREAM_EDGE)
-    ell(146, 110, 20, 33, CREAM, CREAM_EDGE)
-    # 머리
-    ell(100, 100, 58, 58, CREAM, CREAM_EDGE)
-    # 이마 털
-    ell(100, 52, 24, 11, (255, 255, 255, 225))
-    # 눈웃음 (반가운 표정)
+    # ── 앱 안의 강아지(js/dog.js)와 같은 자리·같은 비율 ──
+    # 털은 단색이 아니라 방사형 그러데이션입니다.
+    # 표정은 '반가움' — 동그란 눈이 눈웃음보다 훨씬 귀엽습니다.
+    fur = radial(W, (255, 255, 255), (239, 224, 209))
+    mask = Image.new("L", (W, W), 0)
+    md = ImageDraw.Draw(mask)
+
+    def mell(cx, cy, rx, ry):
+        md.ellipse([X(cx) - R(rx), X(cy) - R(ry), X(cx) + R(rx), X(cy) + R(ry)], fill=255)
+
+    # 귀 → 머리 차례로 털 모양을 오려 냅니다
+    mell(54, 110, 20, 33)
+    mell(146, 110, 20, 33)
+    mell(100, 100, 58, 58)
+    img.paste(fur, (0, 0), mask)
+
+    # 테두리는 아주 옅게 (진하면 스티커처럼 보입니다)
+    ell(54, 110, 20, 33, None, CREAM_EDGE, 2.0)
+    ell(146, 110, 20, 33, None, CREAM_EDGE, 2.0)
+    ell(100, 100, 58, 58, None, CREAM_EDGE, 2.0)
+
+    # 이마 털 뭉치
+    d.polygon([p for xy in [(78, 58), (89, 50), (100, 55), (111, 50), (122, 58),
+                            (111, 62), (100, 59), (89, 62)]
+               for p in (X(xy[0]), X(xy[1]))], fill=(255, 255, 255, 210))
+
+    # 눈썹 — 아주 여리게
+    for bx0, bx1 in ((69, 91), (109, 131)):
+        d.arc([X(bx0), X(72), X(bx1), X(92)], start=208, end=332,
+              fill=(226, 208, 188), width=max(1, int(R(2.6))))
+
+    # 동그란 눈 + 반사점 둘
     for ex in (80, 120):
-        d.arc([X(ex - 12), X(94 - 12), X(ex + 12), X(94 + 12)],
-              start=200, end=340, fill=DARK, width=max(2, int(R(4.4))))
-    # 눈썹
-    for bx0, bx1 in ((70, 90), (110, 130)):
-        d.arc([X(bx0), X(74), X(bx1), X(90)], start=205, end=335,
-              fill=CREAM_EDGE, width=max(1, int(R(2.4))))
-    # 코
-    ell(100, 112, 9, 7, DARK)
-    ell(96.5, 109.5, 2.6, 1.8, (255, 255, 255, 170))
-    # 벌린 입
-    ell(100, 129, 11, 9, (194, 86, 106))
-    ell(100, 134, 6.5, 4.5, (240, 140, 160))
-    # 볼
-    ell(63, 115, 10, 7, CHEEK + (175,))
-    ell(137, 115, 10, 7, CHEEK + (175,))
+        ell(ex, 98, 11, 12, (58, 40, 28))
+        ell(ex + 3.6, 93, 3.8, 3.8, (255, 255, 255))
+        ell(ex - 3.6, 103, 1.9, 1.9, (255, 255, 255, 190))
+
+    # 코 — 위가 둥근 세모꼴
+    d.polygon([p for xy in [(92, 108), (108, 108), (100, 118)]
+               for p in (X(xy[0]), X(xy[1]))], fill=DARK)
+    ell(100, 109, 8, 5, DARK)
+    ell(96.5, 106.5, 2.6, 1.8, (255, 255, 255, 180))
+
+    # 입 — 방긋 (ㅅ 자 두 줄)
+    d.arc([X(90), X(114), X(100), X(128)], start=0, end=170, fill=DARK, width=max(2, int(R(3.0))))
+    d.arc([X(100), X(114), X(110), X(128)], start=10, end=180, fill=DARK, width=max(2, int(R(3.0))))
+
+    # 발그레한 볼
+    ell(62, 116, 11, 7.5, CHEEK + (165,))
+    ell(138, 116, 11, 7.5, CHEEK + (165,))
 
     return img.resize((size, size), Image.LANCZOS)
 

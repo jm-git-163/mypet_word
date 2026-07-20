@@ -88,7 +88,7 @@
         add({ type: 'WORD', surface, hanja: '', meaning, example: '', category, grade }));
       [].concat(R.IDIOMS, R.IDIOMS2 || []).forEach(([surface, hanja, meaning, example, grade]) =>
         add({ type: 'IDIOM', surface, hanja, meaning, example, category: '말의 뿌리', grade }));
-      R.PROVERBS.forEach(([front, back, meaning, grade]) =>
+      [].concat(R.PROVERBS, R.PROVERBS2 || []).forEach(([front, back, meaning, grade]) =>
         add({ type: 'PROVERB', surface: front + ' ' + back, front, back, hanja: '', meaning, example: '', category: '말의 뿌리', grade }));
 
       this.categories = Object.keys(this.byCategory).sort();

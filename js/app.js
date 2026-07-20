@@ -213,7 +213,7 @@
 
   /* 아이콘을 그리는 틀 — 아래 여러 곳에서 씁니다.
      const 는 선언보다 먼저 쓸 수 없으므로 반드시 맨 위에 둡니다. */
-  const TAB_NAME = { walk: '산책', hood: '동네', pet: '강아지', learn: '배움', set: '설정' };
+  const TAB_NAME = { walk: '산책', hood: '동네', pet: '강아지', learn: '속담', set: '설정' };
   const SVG = (inner) =>
     `<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none"
        stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -290,9 +290,11 @@
       '<circle cx="9.8" cy="13" r="1" fill="currentColor" stroke="none"/>' +
       '<circle cx="14.2" cy="13" r="1" fill="currentColor" stroke="none"/>' +
       '<path d="M12 15.2v1.1"/>'),
-    // 펼친 책 — 배움
-    learn: SVG('<path d="M12 7.2C10.4 6 8.4 5.5 5 5.6v11.6c3.4-.1 5.4.4 7 1.6"/>' +
-      '<path d="M12 7.2c1.6-1.2 3.6-1.7 7-1.6v11.6c-3.4-.1-5.4.4-7 1.6"/><path d="M12 7.2v11.6"/>'),
+    // 두루마리 — 속담
+    learn: SVG('<path d="M7 4h10a2.4 2.4 0 0 1 2.4 2.4v11.2A2.4 2.4 0 0 1 17 20H7"/>' +
+      '<path d="M7 4a2.4 2.4 0 0 0-2.4 2.4c0 1.3 1 2.4 2.4 2.4h2.2"/>' +
+      '<path d="M7 20a2.4 2.4 0 0 0 2.4-2.4c0-1.3-1-2.4-2.4-2.4"/>' +
+      '<path d="M12 9.6h4M12 13.2h4"/>'),
     // 톱니 — 설정
     set: SVG('<circle cx="12" cy="12" r="3.1"/>' +
       '<path d="M12 3.6v2.2M12 18.2v2.2M20.4 12h-2.2M5.8 12H3.6' +
@@ -615,32 +617,35 @@
     },
 
     /* ── 배움 ── */
+    /* ── 속담 ──
+       배움 탭을 속담 하나로 좁혔습니다.
+       낱말 공부는 이미 판에서 실컷 하시므로,
+       여기서는 속담을 묻고 답하는 것만 남깁니다. */
     scrLearn(v) {
       const d = Store.data;
-      this.top('배움');
-      const due = Generator.dueEntries(d, Date.now());
-      const known = Object.keys(d.memory);
+      this.top('속담');
+      const all = DB.byType.PROVERB || [];
+      const met = all.filter(e => d.memory[e.id]).length;
 
-      /* 「오늘 되새길 낱말」 상자를 없앴습니다.
-         되새김은 판 안에 저절로 섞여 나오므로 따로 찾아 들어갈 일이 없고,
-         '오늘은 없어요' 라고만 적힌 빈 상자가 자주 떴습니다.
-         「최근 만난 낱말」도 뺐습니다 — 간직한 낱말과 하는 일이 겹칩니다. */
       v.appendChild(h('div', { class: 'card center' },
-        h('div', { class: 'muted small' }, '지금까지 만난 낱말'),
-        h('div', { class: 'bignum' }, known.length + '개'),
-        h('div', { class: 'muted small' }, `꾸러미에 담긴 낱말 ${DB.entries.length}개 가운데`)));
+        h('p', { class: 'muted', style: 'margin:0 0 4px' }, '옛말 잇기'),
+        h('h2', { class: 'center', style: 'margin:0 0 6px' }, '앞을 보고 뒤를 맞혀 보세요'),
+        h('p', { class: 'muted small', style: 'margin:0 0 18px' },
+          `속담 ${all.length}개 가운데 ${met}개를 만나셨어요`),
+        h('button', {
+          class: 'btn primary big wide', onclick: () => global.Game.startProverbs()
+        }, '속담 맞히러 가기')));
 
-      const nav = [
-        ['속담 마당', '옛말을 이어 맞춰 보세요', () => global.Game.startProverbs()],
-        ['간직한 낱말', `♡ 로 담아 두신 ${d.fav.length}개`, () => this.listWords(d.fav.map(id => DB.byId[id]).filter(Boolean), '간직한 낱말')],
-        ['나의 기록', '함께 걸어온 자취', () => this.stats()]
-      ];
-      nav.forEach(([name, sub, fn]) => v.appendChild(
-        h('button', { class: 'list-item', onclick: fn },
-          h('span', { class: 'grow' }, h('b', null, name),
-            h('span', { class: 'sub' }, sub)),
-          h('span', { class: 'badge' }, '보기'))));
+      v.appendChild(h('div', { class: 'card' },
+        h('h2', null, '간직한 속담과 낱말'),
+        h('p', { class: 'muted small', style: 'margin:-6px 0 14px' },
+          d.fav.length ? `♡ 로 담아 두신 ${d.fav.length}개예요.` : '마음에 드는 것을 ♡ 로 담아 두실 수 있어요.'),
+        h('button', {
+          class: 'btn tool wide',
+          onclick: () => this.listWords(d.fav.map(id => DB.byId[id]).filter(Boolean), '간직한 낱말')
+        }, '간직한 것 보기')));
     },
+
 
     listWords(list, title) {
       sheet((box, close) => {

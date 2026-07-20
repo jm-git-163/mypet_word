@@ -65,6 +65,26 @@
   /** 모래알 */
   const grain = (fill) => svgd(`<circle cx="12" cy="12" r="4" fill="${fill}"/>`);
 
+  /** 해파리 — 갓 아래로 촉수가 흔들립니다 */
+  const jelly = (fill) => svgd(
+    `<path d="M4.5 12a7.5 6.5 0 0 1 15 0Z" fill="${fill}"/>
+     <path d="M4.5 12q2.2 2 4.6 0M9.1 12q2.4 2 4.8 0M13.9 12q2.4 2 4.8 0" fill="${fill}" opacity=".75"/>
+     <g stroke="${fill}" stroke-width="1.4" stroke-linecap="round" fill="none" opacity=".85">
+       <path d="M8 13.6q1.6 3 0 5.4"/><path d="M11.2 13.8q-1.4 3.4 .4 6.2"/>
+       <path d="M14.2 13.8q1.6 3 .2 5.8"/><path d="M17 13.4q-1.4 2.6 .2 4.8"/>
+     </g>`);
+
+  /** 조개껍데기 — 부챗살 무늬 */
+  const shell = (fill) => svgd(
+    `<path d="M12 20a9 9 0 0 1-9-9 9 9 0 0 1 18 0 9 9 0 0 1-9 9Z" fill="${fill}" opacity=".9"/>
+     <g stroke="#fff" stroke-width="1" opacity=".55" fill="none">
+       <path d="M12 20V11M12 20l-5-7.6M12 20l5-7.6"/></g>`);
+
+  /** 물방울 */
+  const drop = (fill) => svgd(
+    `<path d="M12 3c4 5.4 6 8.4 6 11a6 6 0 0 1-12 0c0-2.6 2-5.6 6-11Z" fill="${fill}"/>
+     <ellipse cx="9.6" cy="14" rx="1.6" ry="2.4" fill="#fff" opacity=".5"/>`);
+
   /** 안개 알갱이 */
   const mote = (fill) => svgd(
     `<circle cx="12" cy="12" r="7" fill="${fill}" opacity=".55"/><circle cx="12" cy="12" r="3.4" fill="${fill}"/>`);
@@ -84,7 +104,7 @@
 
   /* 땅에 어울리는 것이 우선입니다. 바다에 벚꽃이 날리면 어색합니다. */
   const DUST_BY_LAND = {
-    '바다': [spray('#dbeef6'), grain('#efe0c8'), spray('#eaf4f8')],
+    '바다': [jelly('#cfe6f2'), shell('#f0dcc4'), drop('#d8eef7'), spray('#eaf4f8')],
     '설산': [flake('#e8f2f8'), flake('#ffffff'), sleet('#dcecf5')],
     '숲': [leaf('#7fae6c'), seed('#cfe0c2'), ginkgo('#c9d8a0')],
     '꽃밭': [blossom('#f6b9c4'), blossom('#e2c4f0'), petal('#ffd9b0')],
@@ -93,7 +113,7 @@
     '논': [seed('#eee6cf'), grain('#dfe8cd'), leaf('#b9c98c')],
     '기와': [maple('#d8a05e'), leaf('#c9b48a'), grain('#e8dcc8')],
     '마을': [maple('#e0a868'), leaf('#c8b892'), petal('#f0d8c0')],
-    '개울': [spray('#dceef2'), leaf('#a8cf95'), grain('#e0e8dc')],
+    '개울': [drop('#dceef2'), leaf('#a8cf95'), spray('#e6f2f4')],
     '산': [maple('#d68a4a'), leaf('#9cb87e'), seed('#dcd4c0')],
     '언덕': [petal('#f4c6cf'), seed('#e4dcc8'), leaf('#b6c795')]
   };

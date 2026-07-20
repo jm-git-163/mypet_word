@@ -7,7 +7,7 @@ const root = path.join(__dirname, '..');
 const sandbox = { window: {}, console, Date, Math, JSON, localStorage: null, setTimeout, document: undefined };
 sandbox.window = sandbox;
 vm.createContext(sandbox);
-['js/hangul.js', 'js/data.js', 'js/data2.js', 'js/data3.js', 'js/data4.js', 'js/data5.js', 'js/data6.js', 'js/data7.js', 'js/crossword.js', 'js/engine.js'].forEach(f =>
+['js/hangul.js', 'js/data.js', 'js/data2.js', 'js/data3.js', 'js/data4.js', 'js/data5.js', 'js/data6.js', 'js/data7.js', 'js/proverbs2.js', 'js/crossword.js', 'js/engine.js'].forEach(f =>
   vm.runInContext(fs.readFileSync(path.join(root, f), 'utf8'), sandbox, { filename: f }));
 
 const H = sandbox.Hangul, E = sandbox.Engine, DB = E.DB.build();
