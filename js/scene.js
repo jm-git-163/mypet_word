@@ -180,51 +180,196 @@
       const land = landKind || LAND_BY_THEME.coral;
       const ink = (i, extra) => hsl(hRidge, sat * (.5 + i * .16), time.ridgeL[i] + (extra || 0));
 
-      if (land === '들') {
-        // 나지막한 밭이랑 — 지평선이 낮고 넓습니다
+      /* ══════════════════════════════════════════════
+         땅의 생김새 열두 가지
+
+         ★ 앞줄 소품만 바꾸면 실루엣이 다 비슷해 보입니다.
+           산·언덕·설산이 모두 능선이고 마을·기와가 모두 지붕이면
+           몇 판 지나 "다 똑같네" 가 됩니다.
+           그래서 '땅의 뼈대' 자체를 열둘 다르게 짭니다.
+         ══════════════════════════════════════════════ */
+
+      /** 뾰족한 봉우리 능선 (산·설산용) */
+      const peaks = (baseY, h1, count, seedShift) => {
+        let d = `M0 ${baseY}`;
+        for (let i = 0; i < count; i++) {
+          const x0 = (W / count) * i, x1 = (W / count) * (i + 1);
+          const px = x0 + (W / count) * (.3 + rng() * .4);
+          const py = baseY - h1 * (.55 + rng() * .75) - seedShift;
+          d += ` L${px.toFixed(0)} ${py.toFixed(0)} L${x1.toFixed(0)} ${(baseY - rng() * 8).toFixed(0)}`;
+        }
+        return d + ` L${W} 320 L0 320 Z`;
+      };
+
+      /** 나지막이 굽이치는 언덕 */
+      const rolls = (baseY, amp) => {
+        let d = `M0 ${baseY}`;
+        const n2 = 3;
+        for (let i = 1; i <= n2; i++) {
+          const x = (W / n2) * i;
+          d += ` Q${(x - W / n2 / 2).toFixed(0)} ${(baseY - amp * (.8 + rng() * .5)).toFixed(0)} ${x.toFixed(0)} ${(baseY + (rng() - .5) * 6).toFixed(0)}`;
+        }
+        return d + ` L${W} 320 L0 320 Z`;
+      };
+
+      if (land === '산') {
+        /* 산 — 뾰족한 봉우리가 세 겹. 가장 높고 날카롭습니다. */
+        g += `<path d="${peaks(196, 74, 3, 0)}" fill="${ink(0)}"/>`;
+        g += `<path d="${peaks(222, 54, 4, 0)}" fill="${ink(1)}"/>`;
+        g += `<path d="${peaks(250, 34, 6, 0)}" fill="${ink(2)}"/>`;
+
+      } else if (land === '설산') {
+        /* 설산 — 더 날카롭고, 봉우리 꼭대기에 눈이 얹힙니다. */
         for (let i = 0; i < 3; i++) {
-          g += `<path d="${ridge(rng, 214 + i * 20, 5 + i * 3, W)}" fill="${ink(i)}"/>`;
+          const by = 186 + i * 30, hh = 84 - i * 22;
+          const d = peaks(by, hh, 2 + i, 0);
+          g += `<path d="${d}" fill="${ink(i)}"/>`;
+          // 눈 — 봉우리 위쪽만 하얗게 덮습니다
+          g += `<path d="${d}" fill="#ffffff" opacity="${(.72 - i * .2).toFixed(2)}"
+                 clip-path="inset(0 0 ${(320 - by + hh * .45).toFixed(0)}px 0)"/>`;
         }
-        for (let i = 0; i < 7; i++) {
-          const y = 250 + i * 7;
-          g += `<path d="M0 ${y} Q${(W / 2).toFixed(0)} ${(y - 6).toFixed(0)} ${W} ${y}" stroke="${ink(2, -4)}" stroke-width="1.4" fill="none" opacity=".35"/>`;
-        }
-      } else if (land === '물가') {
-        // 멀리 낮은 산, 앞쪽은 잔물결이 이는 물
-        for (let i = 0; i < 2; i++) {
-          g += `<path d="${ridge(rng, 176 + i * 16, 12 + i * 6, W)}" fill="${ink(i)}"/>`;
-        }
-        g += `<rect y="216" width="${W}" height="${H - 216}" fill="${hsl(hSky + 6, sat * .9, time.skyL[1] - 6)}" opacity=".85"/>`;
-        for (let i = 0; i < 9; i++) {
-          const y = 226 + i * 8, x = rng() * W * .6;
-          g += `<path d="M${x.toFixed(0)} ${y} q10 -3 20 0 q10 3 20 0" stroke="${hsl(hSky, 30, 98)}" stroke-width="1.5" fill="none" opacity="${(.28 + rng() * .22).toFixed(2)}"/>`;
-        }
-      } else if (land === '숲') {
-        // 나무가 빽빽한 숲 — 뒤로 갈수록 옅어집니다
-        g += `<path d="${ridge(rng, 186, 14, W)}" fill="${ink(0)}"/>`;
-        for (let layer = 0; layer < 3; layer++) {
-          const yb = 214 + layer * 26, op = .34 + layer * .2, c = ink(layer + 0, -layer * 3);
-          for (let i = 0; i < 14; i++) {
-            const x = (i * (W / 13)) + (rng() - .5) * 16, th = 26 + rng() * 22 + layer * 8;
-            g += `<path d="M${(x - th * .34).toFixed(0)} ${yb} L${x.toFixed(0)} ${(yb - th).toFixed(0)} L${(x + th * .34).toFixed(0)} ${yb} Z" fill="${c}" opacity="${op.toFixed(2)}"/>`;
-          }
-        }
-      } else if (land === '마을') {
-        // 기와지붕이 층층이 — 장터 거리·기와 골목에 어울립니다
-        g += `<path d="${ridge(rng, 172, 14, W)}" fill="${ink(0)}"/>`;
-        g += `<path d="${ridge(rng, 206, 8, W)}" fill="${ink(1)}"/>`;
-        for (let row = 0; row < 2; row++) {
-          const yb = 244 + row * 24;
-          for (let i = 0; i < 6; i++) {
-            const x = i * (W / 5.4) + (rng() - .5) * 18, w2 = 30 + rng() * 22;
-            g += `<path d="M${(x - w2 / 2).toFixed(0)} ${yb} q${(w2 / 2).toFixed(0)} -${(11 + rng() * 6).toFixed(0)} ${w2.toFixed(0)} 0 Z" fill="${ink(2 - row, -2)}" opacity="${(.5 + row * .2).toFixed(2)}"/>`;
-          }
-        }
+
       } else if (land === '언덕') {
-        // 완만한 언덕 둘 — 들꽃 언덕처럼 부드러운 곳
-        for (let i = 0; i < 2; i++) {
-          g += `<path d="${ridge(rng, 196 + i * 30, 22 + i * 8, W)}" fill="${ink(i + 1)}"/>`;
+        /* 언덕 — 부드럽게 굽이치는 곡선. 뾰족한 데가 없습니다. */
+        g += `<path d="${rolls(212, 34)}" fill="${ink(0)}"/>`;
+        g += `<path d="${rolls(244, 26)}" fill="${ink(1)}"/>`;
+        g += `<path d="${rolls(272, 16)}" fill="${ink(2)}"/>`;
+
+      } else if (land === '숲') {
+        /* 숲 — 나무 지붕이 화면을 가득 메웁니다. 능선이 거의 안 보입니다. */
+        g += `<path d="${rolls(206, 16)}" fill="${ink(0)}"/>`;
+        for (let layer = 0; layer < 3; layer++) {
+          const yb = 224 + layer * 28, c = ink(layer, -layer * 4);
+          for (let i = 0; i < 16 - layer * 2; i++) {
+            const x = (i * (W / (15 - layer * 2))) + (rng() - .5) * 18;
+            const th = 34 + rng() * 26 + layer * 10;
+            g += `<path d="M${(x - th * .36).toFixed(0)} ${yb} L${x.toFixed(0)} ${(yb - th).toFixed(0)} L${(x + th * .36).toFixed(0)} ${yb} Z"
+                   fill="${c}" opacity="${(.45 + layer * .2).toFixed(2)}"/>`;
+          }
         }
+
+      } else if (land === '개울') {
+        /* 개울 — 물줄기가 S 자로 굽이쳐 내려옵니다. 다른 어떤 곳과도 다릅니다. */
+        g += `<path d="${rolls(198, 26)}" fill="${ink(0)}"/>`;
+        g += `<path d="${rolls(230, 18)}" fill="${ink(1)}"/>`;
+        const water = hsl(hSky + 6, sat * 1.1, time.skyL[1] - 4);
+        // 위에서 아래로 넓어지며 굽이치는 물줄기
+        g += `<path d="M${(W * .42).toFixed(0)} 228
+                 C${(W * .30).toFixed(0)} 252 ${(W * .66).toFixed(0)} 262 ${(W * .48).toFixed(0)} 288
+                 L${(W * .74).toFixed(0)} 300 L${(W * .16).toFixed(0)} 300
+                 C${(W * .40).toFixed(0)} 274 ${(W * .18).toFixed(0)} 250 ${(W * .36).toFixed(0)} 228 Z"
+               fill="${water}" opacity=".9"/>`;
+        // 물살
+        for (let i = 0; i < 5; i++) {
+          const y = 244 + i * 12;
+          g += `<path d="M${(W * (.30 + rng() * .1)).toFixed(0)} ${y} q14 -4 26 2"
+                 stroke="${hsl(hSky, 24, 98)}" stroke-width="1.6" fill="none" opacity="${(.35 + rng() * .25).toFixed(2)}"/>`;
+        }
+
+      } else if (land === '논') {
+        /* 논 — 물을 댄 계단이 층층이. 가로줄이 뚜렷합니다. */
+        for (let i = 0; i < 6; i++) {
+          const y = 208 + i * 16;
+          g += `<path d="M0 ${y} Q${(W / 2).toFixed(0)} ${(y - 12).toFixed(0)} ${W} ${y} L${W} ${(y + 17)} L0 ${(y + 17)} Z"
+                 fill="${ink(Math.min(2, Math.floor(i / 2)), -i * 3)}" opacity="${(.9 - i * .06).toFixed(2)}"/>`;
+          // 물빛이 비치는 논둑
+          g += `<path d="M0 ${y} Q${(W / 2).toFixed(0)} ${(y - 12).toFixed(0)} ${W} ${y}"
+                 stroke="${hsl(hSky, 26, 97)}" stroke-width="1.6" fill="none" opacity=".45"/>`;
+        }
+
+      } else if (land === '꽃밭') {
+        /* 꽃밭 — 평평한 들에 꽃이 빽빽합니다. 색점이 많은 것이 특징. */
+        g += `<path d="${rolls(226, 18)}" fill="${ink(1)}"/>`;
+        g += `<path d="${rolls(256, 10)}" fill="${ink(2)}"/>`;
+        for (let i = 0; i < 90; i++) {
+          const x = rng() * W, y = 240 + rng() * 60;
+          const r = 1.6 + rng() * 3.4;
+          g += `<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${r.toFixed(1)}"
+                 fill="${hsl(base + (rng() - .5) * 56, 54, 76)}" opacity="${(.45 + rng() * .4).toFixed(2)}"/>`;
+        }
+
+      } else if (land === '억새') {
+        /* 억새 — 키 큰 풀이 화면 아래를 가득 채우고 한쪽으로 눕습니다. */
+        g += `<path d="${rolls(222, 20)}" fill="${ink(1)}"/>`;
+        for (let i = 0; i < 90; i++) {
+          const x = rng() * W, y = 250 + rng() * 52, hgt = 22 + rng() * 34;
+          const bend = 8 + rng() * 12;
+          g += `<path d="M${x.toFixed(0)} ${y.toFixed(0)} q${(bend * .4).toFixed(0)} -${(hgt * .6).toFixed(0)} ${bend.toFixed(0)} -${hgt.toFixed(0)}"
+                 stroke="${ink(2, 6)}" stroke-width="1.5" fill="none" opacity="${(.3 + rng() * .32).toFixed(2)}"/>`;
+          if (rng() < .5) {
+            g += `<ellipse cx="${(x + bend).toFixed(0)}" cy="${(y - hgt).toFixed(0)}" rx="4.4" ry="2"
+                   fill="${hsl(base - 6, 24, 93)}" opacity="${(.4 + rng() * .3).toFixed(2)}"
+                   transform="rotate(-34 ${(x + bend).toFixed(0)} ${(y - hgt).toFixed(0)})"/>`;
+          }
+        }
+
+      } else if (land === '과수원') {
+        /* 과수원 — 동그란 나무가 줄지어 서고, 앞줄일수록 큽니다. */
+        g += `<path d="${rolls(202, 14)}" fill="${ink(0)}"/>`;
+        for (let row = 0; row < 3; row++) {
+          const yb = 236 + row * 24, sc = .6 + row * .32;
+          for (let i = 0; i < 7 - row; i++) {
+            const x = i * (W / (6.4 - row)) + (row % 2 ? 22 : 0) + (rng() - .5) * 10;
+            g += `<rect x="${(x - 1.8 * sc).toFixed(1)}" y="${(yb - 13 * sc).toFixed(0)}"
+                   width="${(3.6 * sc).toFixed(1)}" height="${(14 * sc).toFixed(0)}" fill="${ink(2, -12)}" opacity=".75"/>`;
+            g += `<circle cx="${x.toFixed(0)}" cy="${(yb - 22 * sc).toFixed(0)}" r="${(13 * sc).toFixed(0)}"
+                   fill="${ink(2 - Math.min(2, row), -4)}" opacity="${(.62 + row * .12).toFixed(2)}"/>`;
+            for (let k = 0; k < 3; k++) {
+              g += `<circle cx="${(x + (k - 1) * 6 * sc).toFixed(0)}" cy="${(yb - 22 * sc + (k % 2 ? 4 : -3) * sc).toFixed(0)}"
+                     r="${(2.4 * sc).toFixed(1)}" fill="${hsl(base - 12, 58, 68)}" opacity=".85"/>`;
+            }
+          }
+        }
+
+      } else if (land === '마을') {
+        /* 마을 — 네모난 집에 창이 달리고 지붕이 얹힙니다. 지붕만 있는 기와와 다릅니다. */
+        g += `<path d="${rolls(190, 20)}" fill="${ink(0)}"/>`;
+        for (let row = 0; row < 2; row++) {
+          const yb = 250 + row * 28, sc = .8 + row * .4;
+          for (let i = 0; i < 5 - row; i++) {
+            const x = i * (W / (4.6 - row)) + (row % 2 ? 26 : 6) + (rng() - .5) * 10;
+            const bw = 34 * sc, bh = 26 * sc;
+            g += `<rect x="${(x - bw / 2).toFixed(0)}" y="${(yb - bh).toFixed(0)}" width="${bw.toFixed(0)}" height="${bh.toFixed(0)}"
+                   fill="${ink(2 - row, -3)}" opacity="${(.6 + row * .16).toFixed(2)}"/>`;
+            g += `<path d="M${(x - bw / 2 - 4).toFixed(0)} ${(yb - bh).toFixed(0)} L${x.toFixed(0)} ${(yb - bh - 15 * sc).toFixed(0)} L${(x + bw / 2 + 4).toFixed(0)} ${(yb - bh).toFixed(0)} Z"
+                   fill="${ink(2 - row, -12)}" opacity="${(.7 + row * .14).toFixed(2)}"/>`;
+            // 불 켜진 창
+            g += `<rect x="${(x - 5 * sc).toFixed(0)}" y="${(yb - bh * .62).toFixed(0)}" width="${(10 * sc).toFixed(0)}" height="${(8 * sc).toFixed(0)}"
+                   rx="1.5" fill="${hsl(46, 62, 82)}" opacity="${(.5 + rng() * .3).toFixed(2)}"/>`;
+          }
+        }
+
+      } else if (land === '기와') {
+        /* 기와 — 처마가 길게 휘어 오른 한옥 지붕. 집채는 거의 안 보입니다. */
+        g += `<path d="${rolls(184, 16)}" fill="${ink(0)}"/>`;
+        for (let row = 0; row < 3; row++) {
+          const yb = 232 + row * 26, sc = .8 + row * .28;
+          for (let i = 0; i < 4; i++) {
+            const x = i * (W / 3.5) + (row % 2 ? 30 : 0) + (rng() - .5) * 12;
+            const w2 = 74 * sc;
+            // 처마 끝이 위로 들린 곡선
+            g += `<path d="M${(x - w2 / 2).toFixed(0)} ${yb}
+                     q${(w2 * .10).toFixed(0)} -${(9 * sc).toFixed(0)} ${(w2 * .22).toFixed(0)} -${(11 * sc).toFixed(0)}
+                     q${(w2 * .18).toFixed(0)} -${(9 * sc).toFixed(0)} ${(w2 * .28).toFixed(0)} 0
+                     q${(w2 * .18).toFixed(0)} ${(2 * sc).toFixed(0)} ${(w2 * .22).toFixed(0)} ${(11 * sc).toFixed(0)} Z"
+                   fill="${ink(2 - Math.min(2, row), -6)}" opacity="${(.6 + row * .14).toFixed(2)}"/>`;
+            // 지붕 아래 기둥
+            g += `<rect x="${(x - w2 * .28).toFixed(0)}" y="${yb}" width="${(3 * sc).toFixed(1)}" height="${(12 * sc).toFixed(0)}"
+                   fill="${ink(2, -14)}" opacity=".5"/>`;
+            g += `<rect x="${(x + w2 * .25).toFixed(0)}" y="${yb}" width="${(3 * sc).toFixed(1)}" height="${(12 * sc).toFixed(0)}"
+                   fill="${ink(2, -14)}" opacity=".5"/>`;
+          }
+        }
+
+      } else if (land === '들') {
+        /* 들 — 밭이랑이 사선으로 뻗습니다. */
+        g += `<path d="${rolls(216, 12)}" fill="${ink(0)}"/>`;
+        for (let i = 0; i < 9; i++) {
+          const y = 240 + i * 7;
+          g += `<path d="M0 ${y} Q${(W / 2).toFixed(0)} ${(y - 8).toFixed(0)} ${W} ${(y + 4)}"
+                 stroke="${ink(2, -6)}" stroke-width="2" fill="none" opacity="${(.28 + i * .03).toFixed(2)}"/>`;
+        }
+
       } else if (land === '바다') {
         /* 바다 — 선 하나만 있으면 너무 밋밋합니다.
            먼 섬 둘, 물빛 두 겹, 햇빛이 부서지는 길, 물결,
@@ -335,72 +480,6 @@
           const gx = 60 + rng() * (W - 120), gy = 96 + rng() * 46;
           g += `<path d="M${gx.toFixed(0)} ${gy.toFixed(0)} q5 -5 10 0 q5 -5 10 0"
                  stroke="${hsl(hRidge, 18, 52)}" stroke-width="1.5" fill="none" opacity=".4"/>`;
-        }
-      } else if (land === '설산') {
-        // 눈 덮인 산 — 봉우리 위쪽만 하얗게
-        const bases = [166, 196, 230];
-        for (let i = 0; i < 3; i++) {
-          const d = ridge(rng, bases[i], 20 + i * 8, W);
-          g += `<path d="${d}" fill="${ink(i)}"/>`;
-          if (i < 2) g += `<path d="${d}" fill="${hsl(hSky, 12, 97)}" opacity="${(.5 - i * .18).toFixed(2)}"
-                            transform="translate(0 ${(6 + i * 4)})"/>`;
-        }
-      } else if (land === '과수원') {
-        // 줄지어 선 과일나무 — 열매가 조금씩 달려 있습니다
-        g += `<path d="${ridge(rng, 192, 10, W)}" fill="${ink(0)}"/>`;
-        for (let row = 0; row < 2; row++) {
-          const yb = 244 + row * 26, sc = 1 + row * .35;
-          for (let i = 0; i < 6; i++) {
-            const x = i * (W / 5.4) + (row ? 18 : 0) + (rng() - .5) * 10;
-            g += `<rect x="${(x - 1.6 * sc).toFixed(1)}" y="${(yb - 12 * sc).toFixed(0)}" width="${(3.2 * sc).toFixed(1)}" height="${(12 * sc).toFixed(0)}" fill="${ink(2, -6)}" opacity=".7"/>`;
-            g += `<ellipse cx="${x.toFixed(0)}" cy="${(yb - 20 * sc).toFixed(0)}" rx="${(12 * sc).toFixed(0)}" ry="${(11 * sc).toFixed(0)}" fill="${ink(2 - row, -3)}" opacity=".75"/>`;
-            for (let k = 0; k < 2; k++) {
-              g += `<circle cx="${(x + (k ? 5 : -5) * sc).toFixed(0)}" cy="${(yb - 20 * sc + (k ? 3 : -2)).toFixed(0)}" r="${(2.2 * sc).toFixed(1)}" fill="${hsl(base - 8, 55, 68)}" opacity=".8"/>`;
-            }
-          }
-        }
-      } else if (land === '꽃밭') {
-        // 들꽃이 흐드러진 밭 — 낮은 언덕에 점점이
-        for (let i = 0; i < 2; i++) g += `<path d="${ridge(rng, 200 + i * 26, 16, W)}" fill="${ink(i + 1)}"/>`;
-        for (let i = 0; i < 46; i++) {
-          const x = rng() * W, y = 232 + rng() * 62, r = 2 + rng() * 3;
-          g += `<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${r.toFixed(1)}" fill="${hsl(base + (rng() - .5) * 40, 52, 72)}" opacity="${(.5 + rng() * .35).toFixed(2)}"/>`;
-        }
-      } else if (land === '논') {
-        // 계단식 논 — 물을 댄 논이 층층이
-        for (let i = 0; i < 5; i++) {
-          const y = 214 + i * 18;
-          g += `<path d="M0 ${y} Q${(W / 2).toFixed(0)} ${(y - 10).toFixed(0)} ${W} ${y} L${W} ${(y + 18)} L0 ${(y + 18)} Z"
-                 fill="${ink(Math.min(2, Math.floor(i / 2)), -i * 2)}" opacity="${(.88 - i * .07).toFixed(2)}"/>`;
-          g += `<path d="M0 ${y} Q${(W / 2).toFixed(0)} ${(y - 10).toFixed(0)} ${W} ${y}"
-                 stroke="${hsl(hSky, 24, 96)}" stroke-width="1.2" fill="none" opacity=".38"/>`;
-        }
-      } else if (land === '기와') {
-        // 기와지붕이 겹겹이 — 처마 끝이 살짝 들립니다
-        g += `<path d="${ridge(rng, 178, 12, W)}" fill="${ink(0)}"/>`;
-        for (let row = 0; row < 3; row++) {
-          const yb = 226 + row * 26;
-          for (let i = 0; i < 5; i++) {
-            const x = i * (W / 4.4) + (row % 2 ? 22 : 0) + (rng() - .5) * 12;
-            const w2 = 44 + rng() * 20;
-            g += `<path d="M${(x - w2 / 2 - 6).toFixed(0)} ${yb} q6 -4 10 -6 q${(w2 / 2 - 10).toFixed(0)} -12 ${(w2 - 20).toFixed(0)} 0 q4 2 10 6 Z"
-                   fill="${ink(2 - Math.min(2, row), -2)}" opacity="${(.55 + row * .15).toFixed(2)}"/>`;
-          }
-        }
-      } else if (land === '억새') {
-        // 억새밭 — 바람에 한쪽으로 누운 이삭
-        for (let i = 0; i < 2; i++) g += `<path d="${ridge(rng, 198 + i * 24, 14, W)}" fill="${ink(i + 1)}"/>`;
-        for (let i = 0; i < 44; i++) {
-          const x = rng() * W, y = 238 + rng() * 58, hgt = 16 + rng() * 22;
-          g += `<path d="M${x.toFixed(0)} ${y.toFixed(0)} q4 -${(hgt * .6).toFixed(0)} ${(9 + rng() * 5).toFixed(0)} -${hgt.toFixed(0)}"
-                 stroke="${ink(2, 8)}" stroke-width="1.5" fill="none" opacity="${(.34 + rng() * .3).toFixed(2)}"/>`;
-          g += `<ellipse cx="${(x + 10).toFixed(0)}" cy="${(y - hgt).toFixed(0)}" rx="3.4" ry="1.8" fill="${hsl(hSky, 18, 94)}" opacity="${(.4 + rng() * .3).toFixed(2)}" transform="rotate(-28 ${(x + 10).toFixed(0)} ${(y - hgt).toFixed(0)})"/>`;
-        }
-      } else {
-        // 산 — 능선 세 겹 (멀수록 옅게)
-        const bases = [168, 198, 232];
-        for (let i = 0; i < 3; i++) {
-          g += `<path d="${ridge(rng, bases[i], 16 + i * 9, W)}" fill="${ink(i)}"/>`;
         }
       }
 
