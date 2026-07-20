@@ -1,8 +1,8 @@
 /* 낱말 산책 — 오프라인 우선 (TECH_SPEC §4.3)
    인터넷이 없어도 앱의 모든 기능이 그대로 동작합니다. */
-const CACHE = 'nanmal-v17';
+const CACHE = 'nanmal-v18';
 const FILES = [
-  './', './index.html', './manifest.json', './css/style.css',
+  './', './play.html', './manifest.json', './css/style.css',
   './js/hangul.js', './js/data.js', './js/data2.js', './js/data3.js', './js/data4.js', './js/data5.js', './js/data6.js', './js/data7.js', './js/crossword.js', './js/bgm.js', './js/scene.js', './js/theme.js', './js/dog.js',
    './js/engine.js', './js/app.js', './js/game.js'
 ];
@@ -28,7 +28,7 @@ self.addEventListener('fetch', e => {
         const net = fetch(e.request).then(res => {
           if (res && res.ok) cache.put(e.request, res.clone());
           return res;
-        }).catch(() => hit || cache.match('./index.html'));
+        }).catch(() => hit || cache.match('./play.html'));
         return hit || net;
       })
     )

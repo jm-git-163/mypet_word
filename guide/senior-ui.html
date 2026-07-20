@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#faf7f4">
+<title>어르신용 화면을 만들며 실제로 재어 본 것들 — 낱말 산책</title>
+<meta name="description" content="시니어용 앱을 만들며 직접 측정한 값들을 공개합니다. 명암비 2.84 대 1의 함정, 다크모드가 촌스러워지는 진짜 이유, 오터치가 나는 순간, 한글이 낱말 중간에서 끊기는 문제와 그 해결법.">
+<link rel="canonical" href="https://nanmal.vercel.app/guide/senior-ui.html">
+<link rel="stylesheet" href="../css/site.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+<meta property="og:type" content="article">
+<meta property="og:title" content="어르신용 화면을 만들며 실제로 재어 본 것들">
+<meta property="og:description" content="명암비 2.84 대 1의 함정, 오터치가 나는 진짜 이유, 한글이 중간에서 끊기는 문제">
+<meta property="og:image" content="https://nanmal.vercel.app/images/og.png">
+<meta property="og:url" content="https://nanmal.vercel.app/guide/senior-ui.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "어르신용 화면을 만들며 실제로 재어 본 것들",
+  "inLanguage": "ko-KR",
+  "datePublished": "2026-07-21",
+  "dateModified": "2026-07-21",
+  "mainEntityOfPage": "https://nanmal.vercel.app/guide/senior-ui.html",
+  "author": { "@type": "Person", "name": "낱말 산책 만든이" },
+  "publisher": { "@type": "Person", "name": "낱말 산책" }
+}
+</script>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="../">🐕 낱말 산책</a>
+    <nav>
+      <a href="../play.html">놀러 가기</a>
+      <a href="./" aria-current="page">읽을거리</a>
+      <a href="../about.html">소개</a>
+      <a href="../contact.html">연락</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>어르신용 화면을 만들며 실제로 재어 본 것들</h1>
+  <p class="meta">2026년 7월 21일 · 낱말 산책을 만들며 겪은 일</p>
+
+  <p class="lead">
+    어머니가 쓰실 낱말 퍼즐을 만들면서, 「보기 좋다」는 느낌만으로 정하지 않고
+    가능한 것은 숫자로 재어 보았습니다.
+    재어 보니 <strong>눈으로는 멀쩡해 보이던 것이 실제로는 기준에 한참 못 미치는</strong> 경우가 여러 번 있었습니다.
+    그때 나온 값들을 그대로 적어 둡니다.
+  </p>
+
+  <h2>1. 다크모드가 촌스러워 보인 진짜 이유</h2>
+  <p>
+    어둡게 보기를 넣었더니 「그냥 어둡게만 한 것 같다」는 말을 들었습니다.
+    처음에는 색 감각 문제라고 생각했는데, 재어 보니 그게 아니었습니다.
+    <strong>글자가 실제로 안 읽히는 상태</strong>였습니다.
+  </p>
+  <p>
+    밝은 화면에서 쓰던 감빛 글자 <code>#8d4f00</code> 을 어두운 바탕
+    <code>#1a1310</code> 위에 그대로 올려 두었더니 명암비가 <strong>2.84 대 1</strong> 이었습니다.
+    국제 기준(WCAG AA)은 본문 글자에 <strong>4.5 대 1</strong> 이상을 요구합니다.
+    도움말 제목, 이름 딱지, 발자국 숫자가 전부 이 색이었습니다.
+  </p>
+
+  <blockquote>
+    어두운 화면에서는 규칙이 뒤집힙니다.<br>
+    <strong>글자로 쓰는 색은 더 밝고 옅게</strong>, <strong>넓게 칠하는 색은 더 어둡고 차분하게.</strong>
+  </blockquote>
+
+  <p>
+    밝은 화면에서 감빛이 어울린다고 어두운 화면에도 같은 감빛을 쓰면 안 됩니다.
+    글자로 쓸 색은 살구빛(<code>#ffb974</code>)으로 밝게 올리고,
+    단추처럼 넓게 칠하는 색은 오히려 가라앉혀야(<code>#d47c1c</code>) 눈이 부시지 않습니다.
+    바꾼 뒤 다시 재었습니다.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>항목</th><th>고치기 전</th><th>고친 뒤</th><th>기준</th></tr>
+      <tr><td>감빛 글자 (어두운 화면)</td><td>2.84 : 1</td><td><strong>10.95 : 1</strong></td><td>4.5 이상</td></tr>
+      <tr><td>하트 표시 (어두운 화면)</td><td>3.02 : 1</td><td><strong>5.74 : 1</strong></td><td>4.5 이상</td></tr>
+      <tr><td>본문 글자</td><td>15.5 : 1</td><td>15.5 : 1</td><td>4.5 이상</td></tr>
+    </table>
+  </div>
+
+  <p>
+    한 가지 더 있었습니다. 처음에는 어두운 화면에서 <strong>색 다섯 개만</strong> 바꾸고
+    나머지는 밝은 화면 값을 그대로 쓰고 있었습니다.
+    다크모드는 「바탕을 어둡게 하는 기능」이 아니라 <strong>별도의 색표를 처음부터 다시 짜는 일</strong>입니다.
+    빠뜨린 색이 하나라도 있으면 그 자리가 정확히 촌스러워 보입니다.
+  </p>
+
+  <h3>덧붙여, 색이 너무 많았습니다</h3>
+  <p>
+    처음 색표에는 주황·연두·하늘·분홍·노랑·갈색 <strong>여섯 갈래</strong>가 들어 있었습니다.
+    저마다 다른 곳에서 쓰이니 화면이 정리되어 보이지 않았습니다.
+    특히 켜짐 표시에 쓰던 연두(<code>#b9f474</code>)는 따뜻한 주황 옆에서 겉돌았는데,
+    돌이켜 보니 <strong>이 앱에서 초록이 뜻하는 바가 아무것도 없었습니다.</strong>
+    그냥 「켜짐은 초록」이라는 습관이었습니다.
+  </p>
+  <p>
+    색은 뜻이 있을 때만 쓰기로 하고 이렇게 줄였습니다.
+  </p>
+  <ul>
+    <li><strong>감빛</strong> — 지금 만질 것. 화면에서 색을 내는 건 거의 이것뿐입니다.</li>
+    <li><strong>쪽빛</strong> — 이미 놓여 있어 만지지 않는 것.</li>
+    <li><strong>분홍·노랑</strong> — 꽃잎이나 하트 같은 장식에만. 단추에는 쓰지 않습니다.</li>
+  </ul>
+  <p>
+    바탕도 살구빛에서 거의 무채색(<code>#faf7f4</code>)으로 낮췄습니다.
+    바탕이 차분해야 정작 주인공인 감빛이 살아납니다.
+  </p>
+
+  <h2>2. 오터치는 손이 떨려서만 나는 게 아니었습니다</h2>
+  <p>
+    어르신이 자꾸 엉뚱한 단추를 누르신다고 해서 처음엔 누르는 자리를 키웠습니다.
+    64픽셀로 잡았습니다. 국제 기준의 가장 높은 등급(AAA)이 44픽셀이니 넉넉한 값입니다.
+    그런데도 「누르지도 않았는데 넘어간다」는 말이 계속 나왔습니다.
+  </p>
+  <p>
+    원인은 손떨림이 아니라 <strong>화면이 바뀌는 순간</strong>이었습니다.
+  </p>
+  <blockquote>
+    손가락이 화면에 닿아 있는 상태에서 화면이 새로 그려지면,
+    <strong>그 자리에 새로 나타난 단추가 저절로 눌립니다.</strong>
+  </blockquote>
+  <p>
+    젊은 사람은 손가락을 빨리 떼기 때문에 잘 겪지 않습니다.
+    손을 조금 오래 대고 계시는 분에게는 거의 매번 일어납니다.
+    그래서 두 가지를 넣었습니다.
+  </p>
+  <ul>
+    <li>화면이 새로 그려진 뒤 <strong>0.32초 동안은 손길을 받지 않습니다.</strong></li>
+    <li>같은 자리를 <strong>0.22초 안에</strong> 다시 누르면 두 번째는 무시합니다.
+      (손떨림으로 두 번 눌리는 것을 막습니다.)</li>
+  </ul>
+  <p>이 두 가지를 넣은 뒤로 「저절로 넘어간다」는 말이 없어졌습니다.</p>
+
+  <h2>3. 한글은 낱말 중간에서 끊기면 다른 말이 됩니다</h2>
+  <p>
+    영어는 줄 끝에서 단어가 잘리면 하이픈이 붙어 이어지는 걸 알 수 있습니다.
+    한글은 그렇지 않습니다. <strong>「가마솥」이 「가마 / 솥」으로 갈라지면
+    읽는 분에게는 그냥 다른 낱말입니다.</strong>
+  </p>
+  <p>
+    화면을 320픽셀 폭에 글씨를 1.3배로 키운 상태로 앱 전체를 훑어보니
+    낱말 중간에서 끊기는 곳이 <strong>스무 군데</strong> 나왔습니다.
+    글씨를 키우실수록 더 많이 생기는데, 정작 글씨를 키우시는 분이
+    가장 그걸 겪으면 안 되는 분입니다.
+  </p>
+  <p>해결은 두 겹이었습니다.</p>
+  <ul>
+    <li>
+      화면 전체에 <code>word-break: keep-all</code> 을 겁니다.
+      한글을 어절 단위로만 끊으라는 뜻입니다.
+    </li>
+    <li>
+      그런데 이것만으로는 부족합니다. <strong>칸이 낱말 하나보다 좁으면
+      규칙과 상관없이 잘립니다.</strong>
+      실제로 값 딱지(🐾 3)가 옆에 붙으면서 글자 칸이 좁아져
+      「채워드려 / 요.」 처럼 갈라졌습니다.
+      칸이 좁아지면 딱지를 아랫줄로 내려보내 글자 자리를 먼저 확보하도록 고쳤습니다.
+    </li>
+  </ul>
+  <p>
+    고친 뒤에는 화면 폭과 글씨 크기를 조합해 가며 다시 훑어
+    낱말 중간 줄바꿈이 <strong>0건</strong> 인 것을 확인했습니다.
+  </p>
+
+  <h2>4. 틀렸을 때 아무 일도 일어나지 않게 했습니다</h2>
+  <p>
+    많은 퍼즐 앱이 틀리면 붉은 색을 칠하고 「땡」 소리를 냅니다.
+    어머니는 그걸 몹시 언짢아하셨습니다.
+    「내가 틀렸다고 혼내는 것 같다」고 하셨습니다.
+  </p>
+  <p>
+    그래서 <strong>오답에는 소리를 내지 않고, 붉은 색도 쓰지 않습니다.</strong>
+    맞았을 때만 소리가 납니다.
+    건너뛰기도 손해 없이 됩니다. 발자국이 깎이지도, 기록이 나빠지지도 않습니다.
+  </p>
+  <p>
+    효과음도 다시 만들었습니다. 나이가 들면 높은 소리부터 잘 안 들리기 때문에
+    <strong>4kHz 위의 소리는 쓰지 않고</strong>, 대신 배음을 겹치고 잔향을 더해
+    낮은 음역에서도 또렷하게 들리도록 했습니다.
+  </p>
+
+  <h2>정리하면</h2>
+  <ol>
+    <li>어두운 화면은 색표를 <strong>처음부터 다시</strong> 짭니다. 하나라도 빠뜨리면 그 자리가 티가 납니다.</li>
+    <li>색은 <strong>뜻이 있을 때만</strong> 씁니다. 습관으로 쓴 초록이 화면을 어수선하게 했습니다.</li>
+    <li>오터치는 크기 문제가 아니라 <strong>화면이 바뀌는 순간</strong>의 문제일 수 있습니다.</li>
+    <li>한글은 <code>keep-all</code> 만으로 부족합니다. <strong>칸 너비</strong>를 함께 봐야 합니다.</li>
+    <li>틀렸을 때 아무 일도 일어나지 않는 것이, 어르신께는 가장 큰 배려였습니다.</li>
+  </ol>
+
+  <p>
+    여기 적은 값들은 모두 <a href="../play.html">낱말 산책</a> 에 그대로 들어가 있습니다.
+    직접 열어 보시고 이상한 곳이 있으면 <a href="../contact.html">알려 주십시오</a>.
+  </p>
+
+  <p><a class="btn-play" href="../play.html">🐾 낱말 산책 놀러 가기</a></p>
+</main>
+
+<footer class="site-foot">
+  <div class="inner">
+    <nav>
+      <a href="../">홈</a>
+      <a href="../play.html">놀러 가기</a>
+      <a href="./">읽을거리</a>
+      <a href="../about.html">소개</a>
+      <a href="../privacy.html">개인정보처리방침</a>
+      <a href="../contact.html">연락처</a>
+    </nav>
+    <p>낱말 산책</p>
+  </div>
+</footer>
+
+</body>
+</html>

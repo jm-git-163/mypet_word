@@ -631,7 +631,7 @@
         box.appendChild(h('div', { class: 'card' },
           h('h2', null, '약속'),
           h('p', { class: 'small muted', style: 'word-break:keep-all;margin:0' },
-            '이 앱은 광고를 보여드리지 않습니다. 개인정보를 모으지 않습니다. ' +
+            '놀이 화면에는 광고를 넣지 않습니다. 개인정보를 모으지 않습니다. ' +
             '모든 기록은 이 기기 안에만 저장되며, 인터넷이 없어도 그대로 사용하실 수 있습니다.')));
         box.appendChild(h('button', { class: 'btn primary wide', onclick: close }, '닫기'));
       });

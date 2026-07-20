@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#faf7f4">
+<title>소개 — 낱말 산책은 왜, 누가 만들었나</title>
+<meta name="description" content="낱말 산책을 만들게 된 까닭과 만든 사람, 그리고 낱말과 뜻풀이를 어떻게 마련했는지 밝힙니다.">
+<link rel="canonical" href="https://nanmal.vercel.app/about.html">
+<link rel="stylesheet" href="css/site.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+<meta property="og:title" content="소개 — 낱말 산책">
+<meta property="og:description" content="낱말 산책을 만들게 된 까닭과 만든 사람">
+<meta property="og:image" content="https://nanmal.vercel.app/images/og.png">
+<meta property="og:url" content="https://nanmal.vercel.app/about.html">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="inner">
+    <a class="brand" href="./">🐕 낱말 산책</a>
+    <nav>
+      <a href="play.html">놀러 가기</a>
+      <a href="guide/">읽을거리</a>
+      <a href="about.html" aria-current="page">소개</a>
+      <a href="contact.html">연락</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>소개</h1>
+  <p class="meta">이 사이트가 무엇이고, 누가 왜 만들었는지 적어 둡니다.</p>
+
+  <h2>왜 만들게 되었나</h2>
+  <p>
+    어머니께서 낱말 퍼즐 앱을 즐겨 하십니다. 하루에 두세 시간씩,
+    몇 달 만에 천 단계까지 가셨습니다.
+    그런데 옆에서 지켜보니 걸리는 것이 몇 가지 있었습니다.
+  </p>
+  <ul>
+    <li>글자가 작아 자꾸 화면을 키웠다 줄였다 하십니다.</li>
+    <li>손이 조금 떨리셔서 옆 칸이 눌리는 일이 잦습니다.</li>
+    <li>광고가 놀이 화면 가까이 붙어 있어 잘못 눌리면 당황하십니다.</li>
+    <li>틀리면 붉은 색과 소리로 알려 주는데, 그걸 언짢아하십니다.</li>
+  </ul>
+  <p>
+    이런 것들을 하나씩 고쳐 보려고 직접 만들기 시작했습니다.
+    그래서 이 놀이는 <strong>어르신 한 분을 실제로 옆에서 보면서</strong> 다듬어졌습니다.
+    화면의 값 하나하나에 그렇게 정한 까닭이 있습니다.
+  </p>
+
+  <h2>무엇을 다르게 했나</h2>
+  <ul>
+    <li><strong>틀려도 아무 일이 일어나지 않습니다.</strong> 붉은 색도, 소리도, 벌점도 없습니다.
+      「오늘은 넘어가기」로 건너뛰셔도 손해가 없습니다.</li>
+    <li><strong>손떨림을 감안했습니다.</strong> 누르는 자리를 64픽셀로 크게 잡고,
+      화면이 새로 그려진 직후 0.3초 동안은 손길을 받지 않습니다.
+      화면이 바뀌는 순간 손가락이 놓여 있어 엉뚱한 단추가 눌리는 일을 막기 위해서입니다.</li>
+    <li><strong>글씨를 다섯 단계로 키울 수 있습니다.</strong> 가장 큰 단계는 기본의 1.75배입니다.</li>
+    <li><strong>놀이 화면에는 광고를 넣지 않습니다.</strong>
+      까닭은 <a href="#ads">아래</a>에 적었습니다.</li>
+    <li><strong>계정이 없습니다.</strong> 기록은 쓰시는 기기 안에만 남고 어디로도 보내지 않습니다.</li>
+  </ul>
+
+  <h2>낱말과 뜻풀이는 어디서 왔나</h2>
+  <p>
+    담긴 낱말은 모두 3,889개입니다. 그중 1,515개에는 뜻풀이를 붙였고,
+    나머지는 낱말판을 짜는 데 쓰입니다.
+  </p>
+  <ul>
+    <li><strong>뜻풀이와 예문</strong>은 어르신이 편히 읽으실 수 있도록
+      이곳에서 새로 썼습니다. 사전 뜻풀이를 그대로 옮기지 않았습니다.
+      사전 말투는 짧고 정확하지만, 소리 내어 읽었을 때 딱딱합니다.</li>
+    <li><strong>낱말을 고르고 어려운 정도를 매길 때</strong>는
+      국립국어원의 「한국어 학습용 어휘 목록」 같은 공공 자료를 참고했습니다.</li>
+    <li><strong>사자성어와 속담</strong>은 널리 알려진 것 위주로 골랐고,
+      한자 표기를 함께 실었습니다.</li>
+  </ul>
+
+  <h2 id="ads">광고에 대한 생각</h2>
+  <p>
+    이 사이트의 글 페이지에는 광고가 실릴 수 있습니다.
+    다만 <strong>놀이 화면에는 넣지 않습니다.</strong> 두 가지 까닭입니다.
+  </p>
+  <ol>
+    <li>낱말판은 화면을 꽉 채우고 손가락이 쉴 새 없이 오갑니다.
+      그 곁에 광고를 두면 잘못 눌릴 수밖에 없습니다.
+      어르신께는 광고 화면으로 튕겨 나가는 일 자체가 당황스러운 일입니다.</li>
+    <li>구글도 게임 화면과 광고 사이를 넉넉히 떼라고 권고합니다.
+      잘못 눌린 광고는 광고주에게도 손해이고, 사이트에도 위험합니다.</li>
+  </ol>
+
+  <h2>만든 사람</h2>
+  <p>
+    어머니를 위해 이 놀이를 만들기 시작한 개인입니다.
+    회사나 단체가 아니고, 이 사이트로 무엇을 팔지 않습니다.
+    고쳐야 할 곳이나 넣었으면 하는 낱말이 있으면
+    <a href="contact.html">연락처</a>로 알려 주시면 반영하겠습니다.
+  </p>
+
+  <p><a class="btn-play" href="play.html">🐾 낱말 산책 놀러 가기</a></p>
+</main>
+
+<footer class="site-foot">
+  <div class="inner">
+    <nav>
+      <a href="./">홈</a>
+      <a href="play.html">놀러 가기</a>
+      <a href="guide/">읽을거리</a>
+      <a href="about.html">소개</a>
+      <a href="privacy.html">개인정보처리방침</a>
+      <a href="contact.html">연락처</a>
+    </nav>
+    <p>낱말 산책</p>
+  </div>
+</footer>
+
+</body>
+</html>

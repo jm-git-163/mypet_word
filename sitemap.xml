@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://nanmal.vercel.app/</loc><lastmod>2026-07-21</lastmod><priority>1.0</priority></url>
+  <url><loc>https://nanmal.vercel.app/play.html</loc><lastmod>2026-07-21</lastmod><priority>0.9</priority></url>
+  <url><loc>https://nanmal.vercel.app/guide/</loc><lastmod>2026-07-21</lastmod><priority>0.8</priority></url>
+  <url><loc>https://nanmal.vercel.app/guide/senior-ui.html</loc><lastmod>2026-07-21</lastmod><priority>0.8</priority></url>
+  <url><loc>https://nanmal.vercel.app/guide/difficulty.html</loc><lastmod>2026-07-21</lastmod><priority>0.8</priority></url>
+  <url><loc>https://nanmal.vercel.app/guide/idioms-daily.html</loc><lastmod>2026-07-21</lastmod><priority>0.8</priority></url>
+  <url><loc>https://nanmal.vercel.app/about.html</loc><lastmod>2026-07-21</lastmod><priority>0.6</priority></url>
+  <url><loc>https://nanmal.vercel.app/privacy.html</loc><lastmod>2026-07-21</lastmod><priority>0.4</priority></url>
+  <url><loc>https://nanmal.vercel.app/contact.html</loc><lastmod>2026-07-21</lastmod><priority>0.4</priority></url>
+</urlset>

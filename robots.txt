@@ -1,0 +1,5 @@
+# 낱말 산책 — 검색 로봇 안내
+User-agent: *
+Allow: /
+
+Sitemap: https://nanmal.vercel.app/sitemap.xml

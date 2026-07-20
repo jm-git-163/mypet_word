@@ -4,7 +4,7 @@
   "description": "시니어를 위한 한국어 낱말 퍼즐 — 매일 함께 걷는 산책 친구",
   "lang": "ko-KR",
   "dir": "ltr",
-  "start_url": "./index.html",
+  "start_url": "./play.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
