@@ -257,6 +257,47 @@
         // 앞쪽 갯바위
         const bx = rng() < .5 ? 26 : W - 86;
         g += `<path d="M${bx} 300 q10 -30 30 -26 q16 -14 30 6 q10 8 8 20 Z" fill="${ink(2, -10)}" opacity=".62"/>`;
+
+        /* 물 밖으로 뛰어오르는 물고기 */
+        if (rng() < .7) {
+          const fx = 70 + rng() * (W - 150), fy = 236 + rng() * 36;
+          g += `<g opacity=".5" fill="${ink(2, -12)}">` +
+            `<path d="M${fx} ${fy} q9 -7 18 0 q-9 7 -18 0 Z"/>` +
+            `<path d="M${(fx + 18).toFixed(0)} ${fy} l7 -5 v10 Z"/></g>`;
+          for (let k = 0; k < 3; k++) {
+            g += `<circle cx="${(fx - 6 - k * 5).toFixed(0)}" cy="${(fy + 6 + k * 3).toFixed(0)}" r="${(1.6 - k * .3).toFixed(1)}"
+                   fill="${hsl(hSky, 26, 97)}" opacity="${(.5 - k * .12).toFixed(2)}"/>`;
+          }
+        }
+
+        /* 모래톱에 놓인 조개와 불가사리 */
+        for (let i = 0; i < 5; i++) {
+          const sx = 24 + rng() * (W - 48), sy = 286 + rng() * 16;
+          const c = hsl(hSky - 14, 30, 88), op = (.42 + rng() * .28).toFixed(2);
+          if (rng() < .55) {
+            // 부채 모양 조개
+            g += `<g opacity="${op}" fill="${c}" stroke="${ink(2, -14)}" stroke-width=".7">` +
+              `<path d="M${sx.toFixed(0)} ${sy.toFixed(0)} a9 9 0 0 1 16 0 Z"/>` +
+              `<path d="M${(sx + 4).toFixed(0)} ${sy.toFixed(0)} l2 -6M${(sx + 8).toFixed(0)} ${sy.toFixed(0)} v-7M${(sx + 12).toFixed(0)} ${sy.toFixed(0)} l-2 -6"
+                 stroke="${ink(2, -14)}" stroke-width=".7" fill="none"/></g>`;
+          } else {
+            // 불가사리
+            let d2 = '';
+            for (let k = 0; k < 5; k++) {
+              const a1 = (k * 72 - 90) * Math.PI / 180, a2 = ((k + .5) * 72 - 90) * Math.PI / 180;
+              d2 += (k ? 'L' : 'M') + (sx + Math.cos(a1) * 7).toFixed(1) + ' ' + (sy + Math.sin(a1) * 7).toFixed(1) +
+                'L' + (sx + Math.cos(a2) * 3).toFixed(1) + ' ' + (sy + Math.sin(a2) * 3).toFixed(1);
+            }
+            g += `<path d="${d2} Z" fill="${hsl(hSky - 24, 38, 84)}" opacity="${op}"/>`;
+          }
+        }
+
+        /* 물가에 떠 있는 미역 줄기 */
+        for (let i = 0; i < 4; i++) {
+          const wx = rng() * W, wy = 262 + rng() * 24;
+          g += `<path d="M${wx.toFixed(0)} ${wy.toFixed(0)} q7 -6 3 -13 q-5 -7 4 -12"
+                 stroke="${ink(1, -16)}" stroke-width="2" fill="none" opacity="${(.24 + rng() * .18).toFixed(2)}"/>`;
+        }
         // 갈매기 둘
         for (let i = 0; i < 2; i++) {
           const gx = 60 + rng() * (W - 120), gy = 96 + rng() * 46;
@@ -376,6 +417,58 @@
         }
       }
 
+      /* ── 하늘 쪽 채우기 ────────────────────────────
+         그림이 아래에만 몰려 있으면 위가 휑합니다.
+         땅 종류에 어울리는 것을 하늘에도 얹습니다. */
+      const hi = (x, y, body, op) =>
+        `<g opacity="${op}" transform="translate(${x.toFixed(0)} ${y.toFixed(0)})">${body}</g>`;
+
+      if (land === '바다') {
+        // 갈매기 떼가 줄지어 납니다
+        for (let i = 0; i < 5; i++) {
+          const x = 40 + rng() * (W - 80), y = 58 + rng() * 74, sc = .7 + rng() * .7;
+          g += hi(x, y, `<path d="M0 0 q${(5 * sc).toFixed(1)} -${(5 * sc).toFixed(1)} ${(10 * sc).toFixed(1)} 0 q${(5 * sc).toFixed(1)} -${(5 * sc).toFixed(1)} ${(10 * sc).toFixed(1)} 0"
+            stroke="${hsl(hRidge, 16, 48)}" stroke-width="1.4" fill="none"/>`, (.26 + rng() * .22).toFixed(2));
+        }
+      } else if (land === '숲' || land === '언덕' || land === '억새') {
+        // 산새 한 마리와 흩날리는 씨앗
+        for (let i = 0; i < 9; i++) {
+          const x = rng() * W, y = 46 + rng() * 110;
+          g += `<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(1 + rng() * 1.8).toFixed(1)}"
+                 fill="${hsl(hSky - 10, 26, 92)}" opacity="${(.3 + rng() * .3).toFixed(2)}"/>`;
+        }
+      } else if (land === '마을' || land === '기와') {
+        // 굴뚝 연기와 처마에 걸린 등
+        for (let i = 0; i < 3; i++) {
+          const x = 50 + rng() * (W - 100), y = 120 + rng() * 40;
+          g += `<path d="M${x.toFixed(0)} ${y.toFixed(0)} q-8 -16 2 -26 q9 -10 1 -24"
+                 stroke="${hsl(hSky, 14, 97)}" stroke-width="6" stroke-linecap="round" fill="none"
+                 opacity="${(.2 + rng() * .16).toFixed(2)}"/>`;
+        }
+      } else if (land === '논' || land === '과수원' || land === '꽃밭') {
+        // 잠자리와 나비가 낮게 납니다
+        for (let i = 0; i < 7; i++) {
+          const x = rng() * W, y = 120 + rng() * 76;
+          g += hi(x, y, `<ellipse rx="4" ry="1.6" fill="${hsl(base - 16, 44, 74)}"/>` +
+            `<ellipse cx="0" cy="-2" rx="2.6" ry="1.2" fill="${hsl(base + 12, 40, 86)}"/>`,
+            (.34 + rng() * .28).toFixed(2));
+        }
+      } else if (land === '설산') {
+        // 흩날리는 눈발이 하늘에도
+        for (let i = 0; i < 16; i++) {
+          const x = rng() * W, y = 40 + rng() * 150;
+          g += `<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(1 + rng() * 1.6).toFixed(1)}"
+                 fill="#fff" opacity="${(.35 + rng() * .35).toFixed(2)}"/>`;
+        }
+      } else if (land === '개울') {
+        // 물안개가 피어오릅니다
+        for (let i = 0; i < 4; i++) {
+          const x = rng() * W, y = 150 + rng() * 40;
+          g += `<ellipse cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" rx="${(24 + rng() * 26).toFixed(0)}" ry="${(6 + rng() * 5).toFixed(0)}"
+                 fill="${hsl(hSky, 18, 98)}" opacity="${(.18 + rng() * .14).toFixed(2)}"/>`;
+        }
+      }
+
       // 옅은 안개 한 겹 — 멀고 가까움이 살아납니다
       g += `<rect y="188" width="${W}" height="52" fill="${hsl(hSky, 20, 96)}" opacity=".22"/>`;
 
@@ -403,7 +496,7 @@
         level,
         name: `${seasonName} ${time.name} · ${weather.name} ${place}`,
         short: `${weather.name} ${place}`,
-        season: season.name, time: time.name,
+        season: season.name, time: time.name, weather: weather.name,
         land,
         skyTop, skyBot, glow: glowC,
         svg,

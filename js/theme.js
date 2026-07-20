@@ -42,6 +42,25 @@
     '새벽': dot('#e6dcd2')
   };
 
+  /* 땅에 어울리는 것이 우선입니다.
+     바다에 벚꽃이 날리면 어색합니다. */
+  const DUST_BY_LAND = {
+    '바다': [dot('#eaf4f8'), dot('#d6e9f0'), petal('#f3e4d2')],   // 물보라와 모래
+    '설산': [flake('#e8f2f8'), flake('#ffffff'), dot('#dcecf5')],
+    '숲': [leaf('#7fae6c'), leaf('#95c082'), dot('#cfe0c2')],
+    '꽃밭': [petal('#f6b9c4'), petal('#e2c4f0'), petal('#ffd9b0')],
+    '과수원': [petal('#f9d0d8'), leaf('#a8cf95'), dot('#f2dcc4')],
+    '억새': [dot('#efe6d4'), leaf('#dcc79a'), dot('#e8dcc0')],
+    '논': [dot('#eee6cf'), leaf('#b9c98c'), dot('#dfe8cd')]
+  };
+
+  /* 날씨가 가장 셉니다 — 눈이 오는데 벚꽃이 날리면 안 됩니다 */
+  const DUST_BY_WEATHER = {
+    '안개 낀': [dot('#f0f0f0'), dot('#e8e8e8'), dot('#f6f6f6')],
+    '별 총총한': [dot('#ffe6a8'), dot('#fff3cf'), dot('#ffd98a')],
+    '달빛 어린': [dot('#fff0c8'), dot('#f6ecd6'), dot('#ffe6a8')]
+  };
+
   function darken(css, amt) {
     // hsl(h s% l%) 문자열의 밝기만 낮춥니다
     const m = css.match(/hsl\((\d+) (\d+)% (\d+)%\)/);
@@ -168,14 +187,23 @@
         box.setAttribute('aria-hidden', 'true');   // 화면 낭독기는 읽지 않습니다
         document.body.insertBefore(box, document.body.firstChild);
       }
-      const key = sc ? sc.season + '|' + sc.time : '';
+      const key = sc ? [sc.season, sc.time, sc.weather, sc.land].join('|') : '';
       if (box.dataset.key === key) return;         // 같은 것이면 다시 만들지 않습니다
       box.dataset.key = key;
       box.innerHTML = '';
       if (!sc || document.body.classList.contains('reduce-motion')) return;
 
-      const pool = DUST[sc.season] || ['🍃'];
-      const extra = EXTRA[sc.time];
+      /* 무엇이 떨어질지 고르는 순서
+           ① 겨울이면 무조건 눈  ② 날씨가 특별하면 그것
+           ③ 땅에 어울리는 것    ④ 그래도 없으면 계절 것
+         「눈 내린 마을에 벚꽃」 같은 어긋남을 이 순서가 막아 줍니다. */
+      const pool =
+        (sc.season === '겨울' ? DUST['겨울'] : null) ||
+        DUST_BY_WEATHER[sc.weather] ||
+        DUST_BY_LAND[sc.land] ||
+        DUST[sc.season] || DUST['봄'];
+      // 계절과 어긋나는 곁들이는 넣지 않습니다
+      const extra = (sc.season === '겨울' || DUST_BY_WEATHER[sc.weather]) ? null : EXTRA[sc.time];
       const anims = ['driftA', 'driftB', 'driftC'];
       const COUNT = 12;
 

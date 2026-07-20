@@ -81,26 +81,32 @@ def dog_face(size, pad=0.16):
         d.ellipse([X(cx) - R(rx), X(cy) - R(ry), X(cx) + R(rx), X(cy) + R(ry)],
                   fill=fill, outline=outline, width=max(1, int(R(w))))
 
+    # 앱 안의 강아지(js/dog.js)와 같은 자리·같은 비율로 그립니다.
+    # 아이콘만 다르게 생기면 '같은 앱'으로 보이지 않습니다.
     # 귀 (늘어진)
-    ell(52, 112, 21, 34, CREAM, CREAM_EDGE)
-    ell(148, 112, 21, 34, CREAM, CREAM_EDGE)
+    ell(54, 110, 20, 33, CREAM, CREAM_EDGE)
+    ell(146, 110, 20, 33, CREAM, CREAM_EDGE)
     # 머리
-    ell(100, 100, 62, 60, CREAM, CREAM_EDGE)
+    ell(100, 100, 58, 58, CREAM, CREAM_EDGE)
     # 이마 털
-    ell(100, 48, 26, 12, (255, 255, 255, 220))
-    # 눈웃음
-    for ex in (78, 122):
-        d.arc([X(ex - 13), X(92 - 12), X(ex + 13), X(92 + 12)],
-              start=200, end=340, fill=DARK, width=max(2, int(R(4.6))))
+    ell(100, 52, 24, 11, (255, 255, 255, 225))
+    # 눈웃음 (반가운 표정)
+    for ex in (80, 120):
+        d.arc([X(ex - 12), X(94 - 12), X(ex + 12), X(94 + 12)],
+              start=200, end=340, fill=DARK, width=max(2, int(R(4.4))))
+    # 눈썹
+    for bx0, bx1 in ((70, 90), (110, 130)):
+        d.arc([X(bx0), X(74), X(bx1), X(90)], start=205, end=335,
+              fill=CREAM_EDGE, width=max(1, int(R(2.4))))
     # 코
-    ell(100, 112, 10, 8, DARK)
-    ell(96, 109, 3, 2, (255, 255, 255, 160))
-    # 입
-    ell(100, 130, 12, 10, (194, 86, 106))
-    ell(100, 135, 7, 5, (240, 140, 160))
+    ell(100, 112, 9, 7, DARK)
+    ell(96.5, 109.5, 2.6, 1.8, (255, 255, 255, 170))
+    # 벌린 입
+    ell(100, 129, 11, 9, (194, 86, 106))
+    ell(100, 134, 6.5, 4.5, (240, 140, 160))
     # 볼
-    ell(62, 116, 11, 7.5, CHEEK + (170,))
-    ell(138, 116, 11, 7.5, CHEEK + (170,))
+    ell(63, 115, 10, 7, CHEEK + (175,))
+    ell(137, 115, 10, 7, CHEEK + (175,))
 
     return img.resize((size, size), Image.LANCZOS)
 
