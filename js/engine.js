@@ -334,12 +334,21 @@
      백 단계를 걸어 동네가 바뀌면 화면 빛깔도 함께 바뀝니다.
      수천 단계를 걸으시는 분께 같은 빛깔만 보여 드리면 지루합니다. */
   const NEIGHBORHOODS = [
-    { name: '봄 골목', hue: 'sunset' }, { name: '개울 마을', hue: 'mint' },
-    { name: '단풍 언덕', hue: 'coral' }, { name: '눈 내린 마을', hue: 'sky' },
-    { name: '들꽃 언덕', hue: 'lavender' }, { name: '솔밭 길', hue: 'forest' },
-    { name: '바닷가 마을', hue: 'ocean' }, { name: '장터 거리', hue: 'apricot' },
-    { name: '기와 골목', hue: 'clay' }, { name: '별 뜨는 언덕', hue: 'plum' },
-    { name: '감나무 집', hue: 'olive' }, { name: '아랫목 마을', hue: 'cocoa' }
+    /* land 는 그 동네의 풍경, hue 는 그 동네의 빛깔입니다.
+       둘을 나눠 두어야 설정에서 빛깔 하나를 고정해도
+       동네가 바뀔 때 풍경은 계속 달라집니다. */
+    { name: '봄 골목', hue: 'sunset', land: '꽃밭' },
+    { name: '개울 마을', hue: 'mint', land: '개울' },
+    { name: '단풍 언덕', hue: 'coral', land: '언덕' },
+    { name: '눈 내린 마을', hue: 'sky', land: '설산' },
+    { name: '들꽃 언덕', hue: 'lavender', land: '억새' },
+    { name: '솔밭 길', hue: 'forest', land: '숲' },
+    { name: '바닷가 마을', hue: 'ocean', land: '바다' },
+    { name: '장터 거리', hue: 'apricot', land: '마을' },
+    { name: '기와 골목', hue: 'clay', land: '기와' },
+    { name: '별 뜨는 언덕', hue: 'plum', land: '산' },
+    { name: '감나무 집', hue: 'olive', land: '과수원' },
+    { name: '아랫목 마을', hue: 'cocoa', land: '논' }
   ];
 
   const Generator = {

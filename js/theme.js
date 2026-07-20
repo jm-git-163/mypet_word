@@ -99,11 +99,17 @@
 
     /** 그 단계의 풍경 정보 (그림은 한 번 그리면 재활용합니다) */
     forLevel(level) {
+      /* 빛깔은 테마가, 풍경은 동네가 정합니다.
+         빛깔을 하나로 고정해 두셔도 백 걸음마다 풍경은 바뀝니다. */
       const tk = this.themeKey();
-      const key = level + '|' + tk;
+      const hoods = (global.Engine && global.Engine.NEIGHBORHOODS) || [];
+      const hood = hoods.length
+        ? hoods[Math.floor((level - 1) / 100) % hoods.length] : null;
+      const land = (hood && hood.land) || (global.Scene.LAND_BY_THEME || {})[tk];
+
+      const key = level + '|' + tk + '|' + land;
       if (!this.cache[key]) {
-        this.cache[key] = global.Scene.make(level, this.HUE_DEG[tk],
-          (global.Scene.LAND_BY_THEME || {})[tk]);
+        this.cache[key] = global.Scene.make(level, this.HUE_DEG[tk], land);
         // 오래된 것은 버립니다 (메모리 아끼기)
         const keys = Object.keys(this.cache);
         if (keys.length > 40) delete this.cache[keys[0]];
