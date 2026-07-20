@@ -722,6 +722,13 @@
         h('div', { class: 'bignum' }, '🐾 ' + (this.reviewOnly ? this.PAY.corner : (chapterDone ? this.PAY.chapter : this.PAY.board))),
         h('div', { class: 'muted small' }, '모두 ' + d.footprints + '개')));
 
+      // 다음 산책 단추는 낱말 목록보다 위에 둡니다.
+      // 아래에 두면 낱말 열댓 개를 다 지나쳐 내려가야 이어서 걸을 수 있습니다.
+      // 대부분은 바로 이어서 하시므로, 가장 하고 싶은 일을 손 닿는 곳에 둡니다.
+      if (!this.reviewOnly) v.appendChild(h('button', {
+        class: 'btn primary big wide', style: 'margin-bottom:8px', onclick: () => this.start()
+      }, d.level + '번째 산책 가기'));
+
       if (this.metEntries.length) {
         const list = [...new Set(this.metEntries)];
         v.appendChild(h('div', { class: 'section-title' }, '오늘 만난 낱말'));
@@ -775,9 +782,6 @@
       }
 
       v.appendChild(h('div', { style: 'height:12px' }));
-      if (!this.reviewOnly) v.appendChild(h('button', {
-        class: 'btn primary big wide', style: 'margin-bottom:12px', onclick: () => this.start()
-      }, d.level + '번째 산책 가기'));
       v.appendChild(h('button', { class: 'btn tool wide', onclick: () => this.leave() }, '오늘은 여기까지 할게요'));
 
       // 오래 하셨으면 쉬기를 권합니다 (강요하지 않습니다)
