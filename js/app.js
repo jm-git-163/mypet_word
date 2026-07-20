@@ -205,6 +205,14 @@
     });
   }
 
+  /* 아이콘을 그리는 틀 — 아래 여러 곳에서 씁니다.
+     const 는 선언보다 먼저 쓸 수 없으므로 반드시 맨 위에 둡니다. */
+  const TAB_NAME = { walk: '산책', hood: '동네', pet: '강아지', learn: '배움', set: '설정' };
+  const SVG = (inner) =>
+    `<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none"
+       stroke="currentColor" stroke-width="2" stroke-linecap="round"
+       stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+
   /* 마당의 상태 — 지남 / 지금 여기 / 아직
      ⬜ 같은 이모지는 그냥 네모로 보여 무슨 뜻인지 알 수 없습니다. */
   const STEP_ICON = {
@@ -241,11 +249,6 @@
      그것이 화면이 어수선해 보이는 가장 큰 까닭이었습니다.
      여기서는 굵기 2, 크기 24 로 통일해 한 손에서 그린 것처럼 만듭니다.
      ══════════════════════════════════════════════ */
-  const TAB_NAME = { walk: '산책', hood: '동네', pet: '강아지', learn: '배움', set: '설정' };
-  const SVG = (inner) =>
-    `<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none"
-       stroke="currentColor" stroke-width="2" stroke-linecap="round"
-       stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
   /* 놀이 화면에서도 쓰는 아이콘 */
   const ICON = {
     paw: SVG('<ellipse cx="12" cy="16" rx="4.2" ry="3.4" fill="currentColor" stroke="none"/>' +
