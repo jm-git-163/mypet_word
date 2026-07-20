@@ -1664,12 +1664,14 @@ body.contrast .btn.primary { background: var(--primary-c) !important; }
    ══════════════════════════════════════════════════════ */
 .pet-card { padding-top: 26px !important; }
 .doghouse { position: relative; width: min(280px, 84%); margin: 0 auto; }
-/* 지붕 — 가운데가 솟은 맞배지붕 */
+/* 지붕 — 아치 위에 얹힙니다. 아치보다 살짝만 넓게. */
 .doghouse .roof {
-  height: 30px; margin: 0 -10px -2px;
-  background: var(--primary-c);
+  height: 26px; margin: 0 auto -6px; width: 108%;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--primary-c) 90%, #fff),
+    var(--primary-c));
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  opacity: .9;
+  opacity: .92;
 }
 /* 아치 — 강아지가 앉는 자리. 뒤로 풍경이 비칩니다. */
 .doghouse .niche {
@@ -1700,7 +1702,9 @@ body.contrast .doghouse .niche {
    좁으면 두 칸, 넓으면 세 칸으로 저절로 접힙니다. */
 .factgrid {
   display: grid; gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  /* 좁으면 두 칸, 넓으면 세 칸. 96px 로 두었더니 390px 화면에서
+     세 칸이 되어 '함께한 / 날' 처럼 이름이 잘렸습니다. */
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
 }
 .fact {
   display: flex; flex-direction: column; gap: 2px;
@@ -1708,7 +1712,7 @@ body.contrast .doghouse .niche {
   background: color-mix(in srgb, var(--surface-low) 70%, transparent);
   box-shadow: inset 0 0 0 1px var(--line);
 }
-.fact .k { font-size: var(--t-caption); color: var(--on-variant); font-weight: 600; }
+.fact .k { font-size: var(--t-caption); color: var(--on-variant); font-weight: 600; white-space: nowrap; }
 .fact b { font-size: min(calc(26px * var(--fs)), 7vw); font-weight: 800; letter-spacing: -.02em; }
 
 /* 목록 줄 안의 곁설명 */
@@ -1716,3 +1720,6 @@ body.contrast .doghouse .niche {
   display: block; margin-top: 2px;
   font-size: var(--t-caption); font-weight: 500; color: var(--on-variant);
 }
+/* 쓰다듬기·간식 주기는 나란히 */
+.petacts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.petacts .btn { width: 100%; padding: 12px 8px; }

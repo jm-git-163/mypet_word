@@ -557,7 +557,7 @@
         house,
         h('h2', { class: 'center', style: 'margin-top:14px' }, d.pet.name),
         h('p', { class: 'muted center' }, `함께한 지 ${d.days.length}일 · 유대 ${d.pet.bond}단계`),
-        h('div', { class: 'row', style: 'justify-content:center;margin-top:8px' },
+        h('div', { class: 'petacts' },
           h('button', {
             class: 'btn go', onclick: () => {
               dogMood('petdog', '신남', 150);
