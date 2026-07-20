@@ -83,15 +83,15 @@
 
     /** 지금 테마의 색상각 — 풍경도 이 빛깔을 따릅니다 */
     hueDeg() {
-      const cls = [...document.body.classList].find(c => c.startsWith('t-'));
-      return ({
-        't-coral': 28, 't-forest': 138, 't-ocean': 197,
-        't-lavender': 262, 't-sunset': 344, 't-clay': 36
-      })[cls] !== undefined ? ({
-        't-coral': 28, 't-forest': 138, 't-ocean': 197,
-        't-lavender': 262, 't-sunset': 344, 't-clay': 36
-      })[cls] : 28;
+      const M = {
+        't-coral': 28, 't-apricot': 30, 't-sunset': 344, 't-plum': 330,
+        't-lavender': 262, 't-sky': 216, 't-ocean': 197, 't-mint': 168,
+        't-forest': 138, 't-olive': 74, 't-clay': 36, 't-cocoa': 18
+      };
+      const cls = [...document.body.classList].find(c => M[c] !== undefined);
+      return cls ? M[cls] : 28;
     },
+
 
     /** 그 단계의 풍경 정보 (그림은 한 번 그리면 재활용합니다) */
     forLevel(level) {

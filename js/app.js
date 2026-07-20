@@ -205,14 +205,34 @@
     });
   }
 
+  /* 마당의 상태 — 지남 / 지금 여기 / 아직
+     ⬜ 같은 이모지는 그냥 네모로 보여 무슨 뜻인지 알 수 없습니다. */
+  const STEP_ICON = {
+    done: SVG('<circle cx="12" cy="12" r="9" fill="currentColor" stroke="none"/>' +
+      '<path d="M8 12.3l2.6 2.6L16 9.6" stroke="var(--white)" stroke-width="2.2"/>'),
+    here: SVG('<circle cx="12" cy="12" r="9" fill="currentColor" stroke="none"/>' +
+      '<ellipse cx="12" cy="14.4" rx="3.1" ry="2.5" fill="var(--white)" stroke="none"/>' +
+      '<ellipse cx="8.1" cy="11" rx="1.4" ry="1.8" fill="var(--white)" stroke="none"/>' +
+      '<ellipse cx="10.7" cy="8.9" rx="1.4" ry="1.8" fill="var(--white)" stroke="none"/>' +
+      '<ellipse cx="13.3" cy="8.9" rx="1.4" ry="1.8" fill="var(--white)" stroke="none"/>' +
+      '<ellipse cx="15.9" cy="11" rx="1.4" ry="1.8" fill="var(--white)" stroke="none"/>'),
+    todo: SVG('<circle cx="12" cy="12" r="8.4" stroke-dasharray="3 3.4" opacity=".75"/>')
+  };
+
   /* 고를 수 있는 빛깔 — [이름표, 보이는 이름, 동그라미 색] */
   const HUES = [
     ['coral', '감빛', '#ef8f22'],
-    ['forest', '숲', '#57a86c'],
-    ['ocean', '바다', '#4595b0'],
-    ['lavender', '라벤더', '#8c78bd'],
+    ['apricot', '살구', '#e0975a'],
     ['sunset', '노을', '#dd6a7e'],
-    ['clay', '흙', '#a98953']
+    ['plum', '자두', '#b3688b'],
+    ['lavender', '라벤더', '#8c78bd'],
+    ['sky', '하늘', '#6089c2'],
+    ['ocean', '바다', '#4595b0'],
+    ['mint', '민트', '#45a08e'],
+    ['forest', '숲', '#57a86c'],
+    ['olive', '올리브', '#8d9c52'],
+    ['clay', '흙', '#a98953'],
+    ['cocoa', '코코아', '#a67464']
   ];
 
   /* ══════════ 아래 띠 아이콘 ══════════════════════
@@ -431,10 +451,14 @@
       this.top('우리 동네');
       const hoodIdx = Math.floor((d.level - 1) / 100) % NEIGHBORHOODS.length;
       const hood = NEIGHBORHOODS[hoodIdx];
-      v.appendChild(h('div', { class: 'card center' },
-        h('div', { style: 'font-size:calc(64px * var(--fs))' }, hood.emoji),
-        h('h2', { class: 'center' }, hood.name),
-        h('p', { class: 'muted center', style: 'margin:0' }, `${d.level}번째 산책 중이에요`)));
+      // 동네 그림 — 지금 걷고 있는 풍경을 그대로 보여 드립니다
+      const card = h('div', { class: 'card center hood-card' });
+      const pic = h('div', { class: 'hood-pic' });
+      pic.style.backgroundImage = `url("${global.Theme.forLevel(d.level).url}")`;
+      card.appendChild(pic);
+      card.appendChild(h('h2', { class: 'center', style: 'margin:14px 0 2px' }, hood.name));
+      card.appendChild(h('p', { class: 'muted center', style: 'margin:0' }, `${d.level}번째 산책 중이에요`));
+      v.appendChild(card);
 
       v.appendChild(h('div', { class: 'section-title' }, '이 동네의 마당'));
       const base = Math.floor((d.level - 1) / 100) * 100;
@@ -448,15 +472,27 @@
             Store.data.level = startLv; Store.save(); global.Game.start();
           }
         },
-          h('span', { class: 'lead' }, done ? '✅' : here ? '🐾' : '⬜'),
-          h('span', { class: 'grow' }, `마당 ${Math.floor(startLv / 10) + 1} · ${startLv}~${startLv + 9}번째 산책`),
+          (() => {
+            const i = h('span', { class: 'step-ic ' + (done ? 'done' : here ? 'here' : 'todo') });
+            i.innerHTML = done ? STEP_ICON.done : here ? STEP_ICON.here : STEP_ICON.todo;
+            return i;
+          })(),
+          h('span', { class: 'grow' + (done || here ? '' : ' dim') },
+            `마당 ${Math.floor(startLv / 10) + 1} · ${startLv}~${startLv + 9}번째 산책`),
           h('span', { class: 'badge' + (done ? ' green' : here ? ' warm' : '') }, done ? '마침' : here ? '여기' : '다음')));
       }
 
       v.appendChild(h('div', { class: 'section-title' }, '지나갈 동네'));
-      NEIGHBORHOODS.forEach((n, i) => v.appendChild(h('div', { class: 'list-item', style: i === hoodIdx ? '' : 'opacity:.6' },
-        h('span', { class: 'lead' }, n.emoji), h('span', { class: 'grow' }, n.name),
-        i === hoodIdx ? h('span', { class: 'badge warm' }, '지금 여기') : null)));
+      NEIGHBORHOODS.forEach((n, i) => {
+        const row = h('div', { class: 'list-item' + (i === hoodIdx ? '' : ' faded') });
+        const dot = h('span', { class: 'hue-dot' });
+        const found = HUES.find(x => x[0] === n.hue);
+        dot.style.background = found ? found[2] : '#ef8f22';
+        row.appendChild(dot);
+        row.appendChild(h('span', { class: 'grow' }, n.name));
+        if (i === hoodIdx) row.appendChild(h('span', { class: 'badge warm' }, '지금 여기'));
+        v.appendChild(row);
+      });
     },
 
     /* ── 강아지 ── */
@@ -808,7 +844,7 @@
     }
   };
 
-  global.UI = { h, $, sheet, say, dogBlock, dogEl, dogMood, paw, sceneCaption, applySettings, guardTaps, DOG_FACES, ICON };
+  global.UI = { h, $, sheet, say, dogBlock, dogEl, dogMood, paw, sceneCaption, applySettings, guardTaps, DOG_FACES, ICON, HUES };
   global.Store = Store; global.Sound = Sound; global.App = App;
   window.addEventListener('DOMContentLoaded', () => App.mount());
 })(window);

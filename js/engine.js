@@ -334,12 +334,12 @@
      백 단계를 걸어 동네가 바뀌면 화면 빛깔도 함께 바뀝니다.
      수천 단계를 걸으시는 분께 같은 빛깔만 보여 드리면 지루합니다. */
   const NEIGHBORHOODS = [
-    { name: '봄 골목', hue: 'sunset' }, { name: '개울 마을', hue: 'ocean' },
-    { name: '단풍 언덕', hue: 'coral' }, { name: '눈 내린 마을', hue: 'ocean' },
+    { name: '봄 골목', hue: 'sunset' }, { name: '개울 마을', hue: 'mint' },
+    { name: '단풍 언덕', hue: 'coral' }, { name: '눈 내린 마을', hue: 'sky' },
     { name: '들꽃 언덕', hue: 'lavender' }, { name: '솔밭 길', hue: 'forest' },
-    { name: '바닷가 마을', hue: 'ocean' }, { name: '장터 거리', hue: 'coral' },
-    { name: '기와 골목', hue: 'clay' }, { name: '별 뜨는 언덕', hue: 'lavender' },
-    { name: '감나무 집', hue: 'coral' }, { name: '아랫목 마을', hue: 'clay' }
+    { name: '바닷가 마을', hue: 'ocean' }, { name: '장터 거리', hue: 'apricot' },
+    { name: '기와 골목', hue: 'clay' }, { name: '별 뜨는 언덕', hue: 'plum' },
+    { name: '감나무 집', hue: 'olive' }, { name: '아랫목 마을', hue: 'cocoa' }
   ];
 
   const Generator = {
