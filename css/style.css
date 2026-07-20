@@ -405,7 +405,7 @@ body.reduce-motion .dogsvg * { animation: none !important; }
    화면이 좁아지면 말풍선이 강아지 아래로 내려갑니다. */
 .dog-area {
   display: flex; align-items: center; justify-content: center;
-  gap: 12px; padding: 6px 0 10px; flex-wrap: wrap;
+  gap: 10px; padding: 2px 0 6px; flex-wrap: wrap;
 }
 .dog { line-height: 0; flex: 0 0 auto; display: flex; justify-content: center; }
 .dog-area .speech { flex: 1 1 200px; max-width: 100%; }
@@ -424,9 +424,9 @@ body.reduce-motion .dogsvg * { animation: none !important; }
   background: var(--surface-low);
   border: 1px solid var(--line);
   border-radius: var(--r-md) var(--r-md) var(--r-md) 6px;
-  padding: 12px 18px;
-  font-size: var(--t-body); font-weight: 600;
-  max-width: 100%; word-break: keep-all; line-height: 1.55;
+  padding: 9px 14px;
+  font-size: var(--t-caption); font-weight: 600;
+  max-width: 100%; word-break: keep-all; line-height: 1.5;
   box-shadow: none;
 }
 /* 강아지 쪽을 가리키는 꼬리 */
@@ -439,13 +439,11 @@ body.reduce-motion .dogsvg * { animation: none !important; }
 }
 /* 화면이 좁아 말풍선이 강아지 아래로 내려가면 꼬리는 위를 가리킵니다 */
 @media (max-width: 430px) {
-  .dog-area { flex-direction: column; }
-  .speech { border-radius: 6px var(--r-md) var(--r-md) var(--r-md); }
-  .speech::before {
-    left: 50%; top: -8px; bottom: auto; margin-left: -7px;
-    border-left: 1px solid var(--line); border-bottom: none;
-    border-top: 1px solid var(--line); border-right: none;
-  }
+  /* 예전에는 좁으면 강아지 아래로 말풍선을 내렸는데,
+     그러면 인사말 한 줄이 화면 위쪽을 통째로 차지했습니다.
+     좁아도 나란히 두고, 대신 강아지를 조금 줄입니다. */
+  .dog-area .dog svg { width: 68px; height: 68px; }
+  .speech { padding: 8px 12px; }
 }
 
 /* ── 진행 발자국 ──────────────────────────────
@@ -707,11 +705,13 @@ body.contrast .xwrap::after { display: none; }
    ─ 글씨를 키워도 화면 폭(25vw)과 110px 을 넘지 않습니다
    두 조건을 함께 걸지 않으면, 글씨를 키웠을 때 쟁반이 화면 밖으로 나갑니다. */
 .tile {
-  width: clamp(64px, min(calc(70px * var(--fs)), 25vw), 110px);
-  height: clamp(64px, min(calc(70px * var(--fs)), 25vw), 110px);
+  /* 조금 줄였습니다(70 → 62px). 국제 기준의 가장 높은 등급(AAA)이 44px 이라
+     58px 아래로는 내려가지 않게 막아 두었습니다. */
+  width: clamp(58px, min(calc(62px * var(--fs)), 22vw), 96px);
+  height: clamp(58px, min(calc(62px * var(--fs)), 22vw), 96px);
   border-radius: var(--r); border: none; cursor: pointer;
   background: var(--white); color: var(--on-surface);
-  font-family: inherit; font-size: min(calc(34px * var(--fs)), 11vw, 52px); font-weight: 800; line-height: 1;
+  font-family: inherit; font-size: min(calc(31px * var(--fs)), 10vw, 46px); font-weight: 800; line-height: 1;
   box-shadow: 0 4px 0 var(--outline-var), var(--shadow-flat);
   transition: transform var(--t-press), box-shadow var(--t-press);
 }

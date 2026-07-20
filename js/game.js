@@ -201,15 +201,6 @@
         if (px > 0) grid.style.setProperty('--cellfs', Math.round(px * 0.62) + 'px');
       }
 
-      // 지금 채우는 낱말이 어디인지, 몇 개나 채웠는지만 알려 줍니다.
-      // 뜻풀이는 여기에 띄우지 않습니다 — 판을 들여다보는 중에 글이 불쑥 나타나면
-      // 흐름이 끊깁니다. 낱말의 뜻은 맞히고 난 뒤 낱말 카드에서 보여 드립니다.
-      if (cur) {
-        box.appendChild(h('div', { class: 'clue', id: 'clue' },
-          h('div', { class: 'clue-head' },
-            `${cur.dir === 'H' ? '가로' : '세로'} · ${cur.len}글자`,
-            h('span', { class: 'clue-count' }, `${this.solvedWords.length} / ${g.words.length}`))));
-      }
 
       // 글자 쟁반
       const tray = h('div', { class: 'tray', id: 'tray' });

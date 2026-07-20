@@ -228,8 +228,10 @@
 
   /** 강아지 + 말풍선 한 줄 */
   function dogBlock(mood, line) {
+    // 강아지를 116 → 88 로 줄였습니다.
+    // 인사말 한 줄에 화면 위쪽을 통째로 내주고 있었습니다.
     return h('div', { class: 'dog-area' },
-      dogEl(mood, 116),
+      dogEl(mood, 88),
       line ? h('div', { class: 'speech' }, line) : null);
   }
 
