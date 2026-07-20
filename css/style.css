@@ -1613,3 +1613,17 @@ body.contrast .list-item, body.contrast .toggle { background: var(--white) !impo
 @media (max-width: 430px) {
   .topbar .soundbtn { padding: 8px 5px; }
 }
+
+/* 마침 화면 낱말 줄 안의 단추들.
+   .fav-btn 과 .linkish 는 어디서나 64px 터치 자리를 차지하는데,
+   그 때문에 줄 높이가 줄어들지 않았습니다. 여기서만 낮춥니다.
+   (46px 은 국제 기준의 가장 높은 등급 44px 보다 여전히 큽니다) */
+.list-item.wordrow .fav-btn {
+  min-width: calc(46px * var(--fs)); min-height: calc(46px * var(--fs));
+  width: calc(46px * var(--fs)); height: calc(46px * var(--fs));
+  border-width: 2px; font-size: calc(21px * var(--fs));
+}
+.list-item.wordrow .linkish {
+  min-height: calc(42px * var(--fs));
+  font-size: var(--t-body);
+}
