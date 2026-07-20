@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#fff8f6">
+<meta name="description" content="시니어를 위한 한국어 낱말 퍼즐 — 매일 함께 걷는 산책 친구">
+<title>낱말 산책</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="낱말 산책">
+</head>
+<body>
+<noscript><p style="padding:24px;font-size:22px">이 앱을 쓰시려면 브라우저에서 자바스크립트를 켜 주세요.</p></noscript>
+
+<script src="js/hangul.js"></script>
+<script src="js/data.js"></script>
+<script src="js/data2.js"></script>
+<script src="js/data3.js"></script>
+<script src="js/data4.js"></script>
+<script src="js/data5.js"></script>
+<script src="js/data6.js"></script>
+<script src="js/data7.js"></script>
+<script src="js/crossword.js"></script>
+<script src="js/bgm.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/dog.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/app.js"></script>
+<script src="js/game.js"></script>
+<script>
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  }
+</script>
+</body>
+</html>

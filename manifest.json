@@ -1,0 +1,21 @@
+{
+  "name": "낱말 산책",
+  "short_name": "낱말 산책",
+  "description": "시니어를 위한 한국어 낱말 퍼즐 — 매일 함께 걷는 산책 친구",
+  "lang": "ko-KR",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff8f6",
+  "theme_color": "#fff8f6",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%23fff8f6'/%3E%3Ctext x='256' y='360' font-size='300' text-anchor='middle'%3E%F0%9F%90%95%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

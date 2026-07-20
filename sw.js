@@ -1,0 +1,36 @@
+/* 낱말 산책 — 오프라인 우선 (TECH_SPEC §4.3)
+   인터넷이 없어도 앱의 모든 기능이 그대로 동작합니다. */
+const CACHE = 'nanmal-v15';
+const FILES = [
+  './', './index.html', './manifest.json', './css/style.css',
+  './js/hangul.js', './js/data.js', './js/data2.js', './js/data3.js', './js/data4.js', './js/data5.js', './js/data6.js', './js/data7.js', './js/crossword.js', './js/bgm.js', './js/scene.js', './js/theme.js', './js/dog.js',
+   './js/engine.js', './js/app.js', './js/game.js'
+];
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
+});
+self.addEventListener('activate', e => {
+  e.waitUntil(caches.keys().then(keys =>
+    Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+  ).then(() => self.clients.claim()));
+});
+/* 캐시 우선 + 뒤에서 갱신(stale-while-revalidate)
+   - 인터넷이 없어도 즉시 화면이 뜹니다(캐시에서 바로 응답).
+   - 동시에 뒤에서 최신 파일을 받아 캐시를 갱신하므로,
+     다음에 앱을 열 때 새 판이 반영됩니다.
+     (캐시 우선만 쓰면 사용자가 영영 갱신을 받지 못합니다.) */
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  if (new URL(e.request.url).origin !== self.location.origin) return;
+  e.respondWith(
+    caches.open(CACHE).then(cache =>
+      cache.match(e.request).then(hit => {
+        const net = fetch(e.request).then(res => {
+          if (res && res.ok) cache.put(e.request, res.clone());
+          return res;
+        }).catch(() => hit || cache.match('./index.html'));
+        return hit || net;
+      })
+    )
+  );
+});

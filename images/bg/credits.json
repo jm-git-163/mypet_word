@@ -1,0 +1,245 @@
+{
+ "source": "Pixabay",
+ "items": [
+  {
+   "file": "spring-dawn-1.jpg",
+   "slot": "spring-dawn",
+   "author": "SasReu",
+   "page": "https://pixabay.com/photos/canada-goose-mist-wet-meadow-forest-10314734/"
+  },
+  {
+   "file": "spring-dawn-2.jpg",
+   "slot": "spring-dawn",
+   "author": "Kanenori",
+   "page": "https://pixabay.com/photos/lake-biwa-cherry-blossoms-dawn-7899206/"
+  },
+  {
+   "file": "spring-morning-1.jpg",
+   "slot": "spring-morning",
+   "author": "neelam279",
+   "page": "https://pixabay.com/photos/flower-tulip-spring-garden-8656199/"
+  },
+  {
+   "file": "spring-morning-2.jpg",
+   "slot": "spring-morning",
+   "author": "J_Blueberry",
+   "page": "https://pixabay.com/photos/snowdrop-flower-frost-spring-7762618/"
+  },
+  {
+   "file": "spring-noon-1.jpg",
+   "slot": "spring-noon",
+   "author": "Couleur",
+   "page": "https://pixabay.com/photos/yellow-tulips-flowers-nature-spring-10241202/"
+  },
+  {
+   "file": "spring-noon-2.jpg",
+   "slot": "spring-noon",
+   "author": "Gruendercoach",
+   "page": "https://pixabay.com/photos/flower-pink-flower-petals-9523594/"
+  },
+  {
+   "file": "spring-dusk-1.jpg",
+   "slot": "spring-dusk",
+   "author": "NanduVasudevan",
+   "page": "https://pixabay.com/photos/mountains-sunrise-sunset-6818253/"
+  },
+  {
+   "file": "spring-dusk-2.jpg",
+   "slot": "spring-dusk",
+   "author": "smykcur",
+   "page": "https://pixabay.com/photos/sunset-sea-ocean-iceland-7491863/"
+  },
+  {
+   "file": "spring-night-1.jpg",
+   "slot": "spring-night",
+   "author": "DeltaWorks",
+   "page": "https://pixabay.com/photos/mackerel-sky-moonlit-night-clouds-449475/"
+  },
+  {
+   "file": "spring-night-2.jpg",
+   "slot": "spring-night",
+   "author": "fill",
+   "page": "https://pixabay.com/photos/night-stars-moon-human-universe-913046/"
+  },
+  {
+   "file": "summer-dawn-1.jpg",
+   "slot": "summer-dawn",
+   "author": "SasReu",
+   "page": "https://pixabay.com/photos/canada-goose-mist-wet-meadow-forest-10314734/"
+  },
+  {
+   "file": "summer-dawn-2.jpg",
+   "slot": "summer-dawn",
+   "author": "Phghvvcftyyufj",
+   "page": "https://pixabay.com/photos/mountain-nature-trees-forest-4242391/"
+  },
+  {
+   "file": "summer-morning-1.jpg",
+   "slot": "summer-morning",
+   "author": "stafichukanatoly",
+   "page": "https://pixabay.com/photos/summer-morning-nature-landscape-2158317/"
+  },
+  {
+   "file": "summer-morning-2.jpg",
+   "slot": "summer-morning",
+   "author": "dimitrisvetsikas1969",
+   "page": "https://pixabay.com/photos/trees-forest-woods-nature-morning-5055320/"
+  },
+  {
+   "file": "summer-noon-1.jpg",
+   "slot": "summer-noon",
+   "author": "Ariel_Hernandez",
+   "page": "https://pixabay.com/photos/butterfly-flower-macro-photography-10303163/"
+  },
+  {
+   "file": "summer-noon-2.jpg",
+   "slot": "summer-noon",
+   "author": "sashamatic",
+   "page": "https://pixabay.com/photos/squirrel-animals-animal-photography-9834881/"
+  },
+  {
+   "file": "summer-dusk-1.jpg",
+   "slot": "summer-dusk",
+   "author": "NanduVasudevan",
+   "page": "https://pixabay.com/photos/mountains-sunrise-sunset-6818253/"
+  },
+  {
+   "file": "summer-dusk-2.jpg",
+   "slot": "summer-dusk",
+   "author": "chathuraanuradha",
+   "page": "https://pixabay.com/photos/beach-golden-hour-sunset-dusk-sand-7782195/"
+  },
+  {
+   "file": "summer-night-1.jpg",
+   "slot": "summer-night",
+   "author": "RyanK14",
+   "page": "https://pixabay.com/photos/landscape-nature-forest-blue-7721281/"
+  },
+  {
+   "file": "summer-night-2.jpg",
+   "slot": "summer-night",
+   "author": "DeltaWorks",
+   "page": "https://pixabay.com/photos/mackerel-sky-moonlit-night-clouds-449475/"
+  },
+  {
+   "file": "autumn-dawn-1.jpg",
+   "slot": "autumn-dawn",
+   "author": "Samueles",
+   "page": "https://pixabay.com/photos/maple-autumn-leaves-foliage-2999706/"
+  },
+  {
+   "file": "autumn-dawn-2.jpg",
+   "slot": "autumn-dawn",
+   "author": "MariaM31",
+   "page": "https://pixabay.com/photos/autumn-leaves-foliage-autumn-leaves-5291453/"
+  },
+  {
+   "file": "autumn-morning-1.jpg",
+   "slot": "autumn-morning",
+   "author": "shogun",
+   "page": "https://pixabay.com/photos/road-forest-sunbeams-nature-6790127/"
+  },
+  {
+   "file": "autumn-morning-2.jpg",
+   "slot": "autumn-morning",
+   "author": "jplenio",
+   "page": "https://pixabay.com/photos/path-alley-trees-leaves-foliage-8331199/"
+  },
+  {
+   "file": "autumn-noon-1.jpg",
+   "slot": "autumn-noon",
+   "author": "Hans",
+   "page": "https://pixabay.com/photos/autumn-leaves-foliage-autumn-leaves-10771/"
+  },
+  {
+   "file": "autumn-noon-2.jpg",
+   "slot": "autumn-noon",
+   "author": "Samueles",
+   "page": "https://pixabay.com/photos/maple-autumn-leaves-foliage-2999706/"
+  },
+  {
+   "file": "autumn-dusk-1.jpg",
+   "slot": "autumn-dusk",
+   "author": "MariaM31",
+   "page": "https://pixabay.com/photos/autumn-leaves-foliage-autumn-leaves-5291453/"
+  },
+  {
+   "file": "autumn-dusk-2.jpg",
+   "slot": "autumn-dusk",
+   "author": "Hans",
+   "page": "https://pixabay.com/photos/autumn-leaves-foliage-autumn-leaves-10771/"
+  },
+  {
+   "file": "autumn-night-1.jpg",
+   "slot": "autumn-night",
+   "author": "DeltaWorks",
+   "page": "https://pixabay.com/photos/mackerel-sky-moonlit-night-clouds-449475/"
+  },
+  {
+   "file": "autumn-night-2.jpg",
+   "slot": "autumn-night",
+   "author": "EvgeniT",
+   "page": "https://pixabay.com/photos/milky-way-galaxy-fields-estuary-5673357/"
+  },
+  {
+   "file": "winter-dawn-1.jpg",
+   "slot": "winter-dawn",
+   "author": "yoshitaka2",
+   "page": "https://pixabay.com/photos/mountain-sunrise-snow-landscape-7866362/"
+  },
+  {
+   "file": "winter-dawn-2.jpg",
+   "slot": "winter-dawn",
+   "author": "RyanK14",
+   "page": "https://pixabay.com/photos/mountains-snow-sunset-sunrise-ice-6118187/"
+  },
+  {
+   "file": "winter-morning-1.jpg",
+   "slot": "winter-morning",
+   "author": "bones64",
+   "page": "https://pixabay.com/photos/sunrise-landscape-snow-winter-3821593/"
+  },
+  {
+   "file": "winter-morning-2.jpg",
+   "slot": "winter-morning",
+   "author": "bones64",
+   "page": "https://pixabay.com/photos/ice-trees-nature-landscape-season-3133814/"
+  },
+  {
+   "file": "winter-noon-1.jpg",
+   "slot": "winter-noon",
+   "author": "8618939",
+   "page": "https://pixabay.com/photos/mountain-lake-snow-field-nature-6764359/"
+  },
+  {
+   "file": "winter-noon-2.jpg",
+   "slot": "winter-noon",
+   "author": "Photowrld",
+   "page": "https://pixabay.com/photos/snow-winter-plant-nature-landscape-7670491/"
+  },
+  {
+   "file": "winter-dusk-1.jpg",
+   "slot": "winter-dusk",
+   "author": "NanduVasudevan",
+   "page": "https://pixabay.com/photos/mountains-sunrise-sunset-6818253/"
+  },
+  {
+   "file": "winter-dusk-2.jpg",
+   "slot": "winter-dusk",
+   "author": "susnpics",
+   "page": "https://pixabay.com/photos/hills-winter-sunset-snow-trees-5942468/"
+  },
+  {
+   "file": "winter-night-1.jpg",
+   "slot": "winter-night",
+   "author": "LindenP",
+   "page": "https://pixabay.com/photos/winter-snow-moon-horizon-cold-sky-2338577/"
+  },
+  {
+   "file": "winter-night-2.jpg",
+   "slot": "winter-night",
+   "author": "AveCalvar",
+   "page": "https://pixabay.com/photos/sky-house-travel-moon-snow-water-5366582/"
+  }
+ ]
+}

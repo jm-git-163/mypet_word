@@ -1,0 +1,85 @@
+{
+ "per": 2,
+ "slots": {
+  "spring-dawn": [
+   "spring-dawn-1.jpg",
+   "spring-dawn-2.jpg"
+  ],
+  "spring-morning": [
+   "spring-morning-1.jpg",
+   "spring-morning-2.jpg"
+  ],
+  "spring-noon": [
+   "spring-noon-1.jpg",
+   "spring-noon-2.jpg"
+  ],
+  "spring-dusk": [
+   "spring-dusk-1.jpg",
+   "spring-dusk-2.jpg"
+  ],
+  "spring-night": [
+   "spring-night-1.jpg",
+   "spring-night-2.jpg"
+  ],
+  "summer-dawn": [
+   "summer-dawn-1.jpg",
+   "summer-dawn-2.jpg"
+  ],
+  "summer-morning": [
+   "summer-morning-1.jpg",
+   "summer-morning-2.jpg"
+  ],
+  "summer-noon": [
+   "summer-noon-1.jpg",
+   "summer-noon-2.jpg"
+  ],
+  "summer-dusk": [
+   "summer-dusk-1.jpg",
+   "summer-dusk-2.jpg"
+  ],
+  "summer-night": [
+   "summer-night-1.jpg",
+   "summer-night-2.jpg"
+  ],
+  "autumn-dawn": [
+   "autumn-dawn-1.jpg",
+   "autumn-dawn-2.jpg"
+  ],
+  "autumn-morning": [
+   "autumn-morning-1.jpg",
+   "autumn-morning-2.jpg"
+  ],
+  "autumn-noon": [
+   "autumn-noon-1.jpg",
+   "autumn-noon-2.jpg"
+  ],
+  "autumn-dusk": [
+   "autumn-dusk-1.jpg",
+   "autumn-dusk-2.jpg"
+  ],
+  "autumn-night": [
+   "autumn-night-1.jpg",
+   "autumn-night-2.jpg"
+  ],
+  "winter-dawn": [
+   "winter-dawn-1.jpg",
+   "winter-dawn-2.jpg"
+  ],
+  "winter-morning": [
+   "winter-morning-1.jpg",
+   "winter-morning-2.jpg"
+  ],
+  "winter-noon": [
+   "winter-noon-1.jpg",
+   "winter-noon-2.jpg"
+  ],
+  "winter-dusk": [
+   "winter-dusk-1.jpg",
+   "winter-dusk-2.jpg"
+  ],
+  "winter-night": [
+   "winter-night-1.jpg",
+   "winter-night-2.jpg"
+  ]
+ }
+}

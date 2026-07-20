@@ -1,0 +1,1014 @@
+/* ============================================================
+   낱말 산책 — DESIGN.md 토큰 구현
+   ============================================================ */
+
+/* ══════════════════════════════════════════════════════
+   빛깔 고르기
+
+   ▸ 색은 '한 갈래'로 씁니다.
+     예전에는 주황·연두·하늘·분홍·노랑·갈색 여섯 갈래가 한 화면에서
+     저마다 소리를 내어 어수선했습니다(특히 연두 #b9f474 는 따뜻한
+     주황 곁에서 겉돌았습니다). 이제 이렇게 나눕니다.
+       · 감빛(주황) — 지금 만질 것. 화면에서 색을 내는 건 거의 이것뿐입니다.
+       · 쪽빛(청록) — '이미 놓인 글자'처럼 만지지 않는 것에만.
+       · 나머지(분홍·노랑) — 꽃잎·하트 같은 장식에만. 단추에는 쓰지 않습니다.
+
+   ▸ 바탕은 '거의 무채색'에 가깝게 두었습니다.
+     예전에는 바탕까지 살구빛이라 주황이 묻혀 버렸습니다.
+     바탕이 차분해야 감빛이 살아납니다.
+   ══════════════════════════════════════════════════════ */
+:root {
+  /* 바탕 — 아주 옅은 따뜻한 잿빛 */
+  --surface: #faf7f4;
+  --surface-low: #f3eee8;
+  --surface-c: #eae2d9;
+  --surface-high: #ded2c6;
+  --white: #ffffff;          /* 카드 바탕 (어둡게 보기에서는 짙은 색이 됩니다) */
+  /* 글자 */
+  --on-surface: #29211b;
+  --on-variant: #5b4e44;
+  --outline: #7a6b5e;
+  --outline-var: #ddd1c4;
+  /* 주색 — 감빛 */
+  --primary: #9a5200;
+  --primary-c: #ef8f22;
+  --primary-c-dark: #c26c05;
+  --on-primary-c: #3d1f00;
+  --primary-fixed: #ffe0c2;
+  /* 보조 — 켜짐·마침 (감빛과 싸우지 않는 차분한 쑥빛) */
+  --secondary: #4c6b3a;
+  --secondary-c: #dbe8cd;
+  --secondary-c-dark: #a8bd94;
+  --on-secondary-c: #2b3d20;
+  /* 도구 — 이미 놓인 글자 (쪽빛) */
+  --tertiary: #3f6b7a;
+  --tertiary-c: #d9e9ee;
+  --on-tertiary-c: #1d3a44;
+  /* 장식 전용 (단추에는 쓰지 않습니다) */
+  --blossom: #f6b9c4;
+  --on-blossom: #4a1520;
+  --sunshine: #f7d68a;
+  --on-sunshine: #4a3600;
+  /* 되짚기 (오답 — 빨강 아님) */
+  --retry: #a4795a;
+  --retry-c: #f0e4d9;
+  --on-retry-c: #452c17;
+  /* 위험 (자료 삭제 전용) */
+  --error: #9c1414;
+
+  /* ── 그림자 (세 단계로만) ───────────────────
+     아마추어 화면의 가장 흔한 표시는 '모든 상자가 똑같이 떠 있는 것'입니다.
+     떠 있는 정도로 무엇이 중요한지 말해야 합니다.
+       ① hairline : 떠 있지 않음. 테두리만 (부수 정보)
+       ② lift     : 살짝 떠 있음 (읽을거리)
+       ③ hero     : 확실히 떠 있음 (지금 만질 것 — 낱말판) */
+  --line: rgba(45, 21, 13, .10);
+  --shadow-hairline: 0 0 0 1px var(--line);
+  --shadow-lift: 0 1px 2px rgba(45,21,13,.05), 0 4px 12px rgba(45,21,13,.06);
+  --shadow-hero: 0 2px 4px rgba(45,21,13,.06), 0 12px 32px rgba(45,21,13,.11);
+  /* 예전 이름도 남겨 둡니다 (쓰던 곳이 많습니다) */
+  --shadow-soft: var(--shadow-lift);
+  --shadow-flat: var(--shadow-hairline);
+  --inset: inset 0 2px 6px rgba(45, 21, 13, .08);
+
+  /* ── 글자 크기 사다리 ────────────────────────
+     크기를 그때그때 정하면 화면이 어수선해집니다.
+     여섯 단계만 쓰고, 그 사이 값은 쓰지 않습니다. */
+  --t-display: calc(34px * var(--fs));   /* 축하 문구 */
+  --t-title: calc(24px * var(--fs));   /* 화면 제목 */
+  --t-head: calc(21px * var(--fs));   /* 구역 제목 */
+  --t-body: calc(20px * var(--fs));   /* 본문 */
+  --t-label: calc(19px * var(--fs));   /* 단추 글자 */
+  --t-caption: calc(17px * var(--fs));   /* 곁들이는 설명 */
+
+  --r-sm: 12px; --r: 20px; --r-md: 28px; --r-lg: 36px; --r-xl: 48px;
+  --touch: 64px; --gap: 16px; --gap-lg: 24px; --edge: 20px;
+
+  --fs: 1;                       /* 글씨 크기 배율 (5단계) */
+  --t-press: 90ms; --t-pop: 220ms; --t-move: 280ms;
+}
+
+/* ══════════════════════════════════════════════════════
+   어둡게 보기
+
+   ★ '밝은 빛깔을 그냥 어둡게' 하면 안 됩니다.
+     예전에는 바탕만 어둡게 하고 색은 그대로 두어서
+       · 감빛 글자(#8d4f00)가 어두운 바탕에서 2.84:1 — 읽을 수 없었고
+       · 단추의 쨍한 주황은 어둠 속에서 눈이 부셨습니다.
+
+     어두운 화면에서는 규칙이 뒤집힙니다.
+       · 글자로 쓰는 색은 '더 밝고 더 옅게' (감빛 → 살구빛)
+       · 넓게 칠하는 색은 '더 어둡고 더 차분하게' (쨍한 주황 → 가라앉은 주황)
+     그래서 모든 빛깔을 다시 정합니다. 하나도 빠뜨리지 않습니다.
+   ══════════════════════════════════════════════════════ */
+body.dark {
+  /* 바탕 — 새까망이 아니라 따뜻한 먹빛 (눈이 덜 피로합니다) */
+  --surface: #17130f;
+  --surface-low: #201a15;
+  --surface-c: #2b231c;
+  --surface-high: #3a2f26;
+  --white: #201a15;          /* 카드 바탕 */
+  /* 글자 */
+  --on-surface: #f4e9e0;
+  --on-variant: #c9b8a8;
+  --outline: #9c8977;
+  --outline-var: #3d322a;
+  /* 주색 — 글자로 쓸 땐 밝게, 넓게 칠할 땐 가라앉게 */
+  --primary: #ffb974;
+  --primary-c: #d47c1c;
+  --primary-c-dark: #a65f0c;
+  --on-primary-c: #241200;
+  --primary-fixed: #4a3221;
+  /* 보조 */
+  --secondary: #9dc182;
+  --secondary-c: #33402a;
+  --secondary-c-dark: #4e6440;
+  --on-secondary-c: #d9e8cb;
+  /* 도구 */
+  --tertiary: #8fb9c6;
+  --tertiary-c: #22343a;
+  --on-tertiary-c: #cfe4ea;
+  /* 장식 */
+  --blossom: #8a4551;      /* 어두운 화면에서는 하트도 가라앉혀야 글자가 읽힙니다 */
+  --on-blossom: #ffe4e9;
+  --sunshine: #b99a52;
+  --on-sunshine: #2a1f00;
+  /* 되짚기 */
+  --retry: #b08a6a;
+  --retry-c: #35291f;
+  --on-retry-c: #ecd8c4;
+  --error: #ff8a80;
+
+  /* 어두운 화면에서는 그림자가 보이지 않습니다.
+     대신 '조금 밝은 테두리'로 층을 나눕니다 — 어두운 화면의 정석입니다. */
+  --line: rgba(255, 232, 214, .12);
+  --shadow-lift: 0 1px 2px rgba(0,0,0,.5), 0 4px 14px rgba(0,0,0,.45);
+  --shadow-hero: 0 2px 6px rgba(0,0,0,.55), 0 14px 36px rgba(0,0,0,.5);
+  --shadow-soft: var(--shadow-lift);
+  --inset: inset 0 2px 6px rgba(0, 0, 0, .35);
+}
+
+/* 또렷하게 보기 (고대비) */
+body.contrast {
+  --surface: #ffffff; --surface-low: #ffffff; --surface-c: #f2f2f2; --white: #ffffff;
+  --on-surface: #000000; --on-variant: #1a1a1a; --outline: #000000; --outline-var: #000000;
+  --primary-c: #d96a00; --on-primary-c: #000000;
+  --secondary-c: #9ee04a; --on-secondary-c: #000000;
+}
+body.contrast .card, body.contrast .btn, body.contrast .tile, body.contrast .opt {
+  border: 2px solid var(--outline) !important;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; padding: 0; height: 100%; overscroll-behavior: none; }
+
+/* ── 줄바꿈 규칙 (앱 전체) ─────────────────────
+   한글은 낱말 한가운데서 끊기면 읽기가 크게 불편합니다.
+   ‘가마솥’이 ‘가마’ + ‘솥’ 으로 갈라지면 어르신께는 다른 낱말로 보입니다.
+   그래서 어디서든 낱말 단위(어절)로만 줄을 바꿉니다.
+   ─ keep-all       : 낱말 중간에서 자르지 않음
+   ─ overflow-wrap  : 한 낱말이 화면보다 길 때만 어쩔 수 없이 자름
+   ─ hyphens: none  : 하이픈을 넣지 않음
+   ══════════════════════════════════════════════ */
+*, *::before, *::after {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+/* 판의 낱말 칸과 쟁반 글자는 한 글자씩이라 줄바꿈 자체가 없어야 합니다 */
+.xcell, .tile, .footchip, .badge, .tool-cost, .clue-count, .steps {
+  white-space: nowrap;
+}
+
+body {
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family: 'Pretendard', 'Pretendard Variable', -apple-system, 'Apple SD Gothic Neo',
+    'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif;
+  font-size: calc(20px * var(--fs));
+  line-height: 1.7;                      /* 한글 가독성 하한 */
+  font-weight: 500;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+/* 움직임 줄이기 */
+body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after {
+  animation-duration: 180ms !important; transition-duration: 180ms !important;
+}
+
+#app { display: flex; flex-direction: column; height: 100dvh; max-width: 620px; margin: 0 auto; position: relative; }
+
+/* ── 위 띠 ─────────────────────────────────── */
+.topbar {
+  display: flex; align-items: center; gap: 8px;
+  padding: max(8px, env(safe-area-inset-top)) var(--edge) 8px;
+  min-height: calc(56px * var(--fs));
+  background: transparent; flex: 0 0 auto;
+  border-bottom: 1px solid transparent;
+}
+.topbar h1 {
+  flex: 1 1 auto; min-width: 0; margin: 0; text-align: center;
+  /* 제목은 화면 폭에 맞춰 줄어듭니다. 그러지 않으면
+     ‘나가기 + 제목 + 발자국 + 소리’ 가 좁은 화면에서 밖으로 밀려납니다. */
+  font-size: min(calc(24px * var(--fs)), 7vw);
+  font-weight: 700; line-height: 1.35;
+  /* 제목은 한 줄로 둡니다. 두 줄이 되면 ‘60번’ + ‘째 산책’ 처럼
+     낱말 한가운데서 갈라져 읽기가 어색해집니다. */
+  white-space: nowrap; overflow: hidden; text-overflow: clip;
+}
+.topbar .spacer { width: var(--touch); flex: 0 0 auto; }
+/* 위 띠 안의 단추와 표시도 화면 폭을 넘지 않게 */
+.topbar .iconbtn {
+  flex: 0 0 auto; min-width: 0; padding: 8px 6px;
+  font-size: min(calc(19px * var(--fs)), 4.6vw);
+}
+.topbar .footchip {
+  flex: 0 0 auto;
+  font-size: min(calc(18px * var(--fs)), 4.4vw);
+  padding: 5px 10px;
+}
+.topbar .row { flex: 0 0 auto; min-width: 0; }
+
+/* ── 본문 ─────────────────────────────────── */
+.scroll { flex: 1 1 auto; overflow-y: auto; overflow-x: hidden; padding: 0 var(--edge) 24px; -webkit-overflow-scrolling: touch; }
+
+/* ── 아래 탭 ───────────────────────────────── */
+.tabbar {
+  display: flex; flex: 0 0 auto;
+  background: var(--white); border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -1px 0 var(--line);
+}
+.tabbar button {
+  flex: 1; min-height: calc(84px * var(--fs));
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  background: none; border: none; cursor: pointer; padding: 8px 2px;
+  color: var(--on-variant); font-family: inherit;
+  font-size: calc(18px * var(--fs)); font-weight: 700; line-height: 1.3;
+  border-bottom: 5px solid transparent;
+}
+.tabbar button .ic { font-size: calc(28px * var(--fs)); line-height: 1; }
+.tabbar button.on { color: var(--primary); border-bottom-color: var(--primary-c); background: var(--surface-low); }
+.tabbar button.mid .ic { font-size: calc(34px * var(--fs)); }
+
+/* ── 버튼 ─────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: var(--touch); padding: 14px 24px;
+  border: none; border-radius: var(--r-md); cursor: pointer;
+  font-family: inherit; font-size: var(--t-label); font-weight: 700; line-height: 1.4;
+  letter-spacing: -.005em;
+  background: var(--white); color: var(--on-surface);
+  box-shadow: 0 4px 0 var(--outline-var), var(--shadow-flat);
+  transition: transform var(--t-press), box-shadow var(--t-press);
+  text-align: center; white-space: normal; word-break: keep-all;
+}
+/* 누르는 맛
+   ─ 눌리면 실제로 가라앉고, 손을 떼면 살짝 튀어 오릅니다.
+   ─ 두 단계로 나누면 '물건을 눌렀다 놓은' 느낌이 납니다. */
+.btn { transition: transform 120ms cubic-bezier(.34,1.56,.64,1), box-shadow 120ms ease, filter 120ms ease; }
+.btn:active { transform: translateY(4px) scale(.985); box-shadow: 0 1px 0 var(--outline-var); filter: brightness(.97); }
+.btn:focus-visible { outline: 4px solid var(--tertiary); outline-offset: 3px; }
+
+/* 눌린 자리에서 번지는 물결 */
+.btn, .tile, .opt, .tool-btn, .list-item, .xcell { position: relative; overflow: hidden; }
+.ripple {
+  position: absolute; border-radius: 50%; pointer-events: none;
+  background: currentColor; opacity: .22; transform: scale(0);
+  animation: rip 520ms ease-out forwards;
+}
+@keyframes rip { to { transform: scale(2.6); opacity: 0; } }
+body.reduce-motion .ripple { display: none; }
+.btn.primary { background: var(--primary-c); color: var(--on-primary-c); box-shadow: 0 5px 0 var(--primary-c-dark), var(--shadow-flat); }
+.btn.primary:active { box-shadow: 0 1px 0 var(--primary-c-dark); }
+.btn.go { background: var(--secondary-c); color: var(--on-secondary-c); box-shadow: 0 5px 0 var(--secondary-c-dark), var(--shadow-flat); }
+.btn.go:active { box-shadow: 0 1px 0 var(--secondary-c-dark); }
+.btn.tool { background: var(--white); border: 2px solid var(--outline-var); }
+.btn.quiet { background: none; box-shadow: none; text-decoration: underline; color: var(--on-variant); }
+.btn.quiet:active { transform: translateY(2px); box-shadow: none; }
+.btn.wide { width: 100%; }
+.btn.big { min-height: calc(84px * var(--fs)); font-size: calc(24px * var(--fs)); border-radius: var(--r-lg); }
+.iconbtn {
+  min-width: var(--touch); min-height: var(--touch);
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  background: none; border: none; cursor: pointer; border-radius: var(--r);
+  font-family: inherit; font-size: calc(19px * var(--fs)); font-weight: 700; color: var(--on-variant);
+  padding: 8px 10px;
+}
+.iconbtn:active { background: var(--surface-c); }
+
+/* ── 카드 ─────────────────────────────────── */
+/* 카드 — 읽을거리를 담는 그릇.
+   테두리 한 줄과 아주 옅은 들림만 씁니다.
+   진한 그림자를 두르면 화면이 무겁고 촌스러워집니다. */
+.card {
+  background: var(--white); border-radius: var(--r-md); padding: var(--gap-lg);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lift); margin-bottom: var(--gap);
+}
+.card h2 {
+  margin: 0 0 10px; font-size: var(--t-head); font-weight: 700; line-height: 1.4;
+  letter-spacing: -.01em;
+}
+.muted { color: var(--on-variant); }
+.nobr { white-space: nowrap; }
+
+/* 마침 화면에서 낱말을 바로 간직하는 단추 */
+.fav-btn {
+  flex: 0 0 auto; min-width: var(--touch); min-height: var(--touch);
+  border-radius: 50%; border: 3px solid var(--outline-var);
+  background: var(--white); color: var(--on-variant); cursor: pointer;
+  font-family: inherit; font-size: calc(26px * var(--fs)); line-height: 1;
+}
+.fav-btn.on { background: var(--blossom); color: var(--on-blossom); border-color: var(--blossom); }
+.fav-btn:active { transform: scale(.92); }
+.linkish {
+  background: none; border: none; text-align: left; cursor: pointer;
+  font-family: inherit; font-size: calc(21px * var(--fs)); font-weight: 700;
+  color: var(--on-surface); padding: 0; min-height: var(--touch);
+}
+.small { font-size: var(--t-caption); }
+.center { text-align: center; }
+.section-title {
+  margin: 30px 0 12px; font-size: var(--t-head); font-weight: 700;
+  letter-spacing: -.01em; color: var(--on-surface);
+}
+/* 통계 화면의 큰 숫자 — 글씨를 크게 키워도 화면을 넘지 않게 */
+.bignum { font-size: min(calc(38px * var(--fs)), 13vw); font-weight: 800; line-height: 1.25; white-space: nowrap; }
+.row { display: flex; align-items: center; gap: var(--gap); flex-wrap: wrap; }
+/* 나란히 놓인 단추가 지나치게 좁아지면 글자가 낱말 중간에서 끊깁니다.
+   최소 너비를 주어, 자리가 모자라면 아랫줄로 내려가게 합니다. */
+.row > .btn { min-width: 44%; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+
+/* ── 움직이는 강아지 (SVG) ─────────────────
+   그림 파일 대신 그려서 움직입니다.
+   숨쉬기·꼬리 흔들기·눈 깜빡임·귀 움직임이 따로 돌아갑니다. */
+.dogsvg { display: block; overflow: visible; }
+.dogsvg .d-line {
+  fill: none; stroke: #3a2418; stroke-width: 3.2; stroke-linecap: round;
+}
+
+/* 몸 전체 */
+.dogsvg[data-body="breathe"] .d-body { animation: dBreathe 3.4s ease-in-out infinite; transform-origin: 100px 180px; }
+.dogsvg[data-body="bounce"]  .d-body { animation: dBounce  .62s ease-in-out infinite; transform-origin: 100px 180px; }
+.dogsvg[data-body="tilt"]    .d-head { animation: dTilt    2.6s ease-in-out infinite; transform-origin: 100px 130px; }
+@keyframes dBreathe { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(1.025) translateY(-2px)} }
+@keyframes dBounce  { 0%,100%{transform:translateY(0) scaleY(1)} 40%{transform:translateY(-11px) scaleY(1.04)} 70%{transform:translateY(2px) scaleY(.97)} }
+@keyframes dTilt    { 0%,100%{transform:rotate(0)} 45%{transform:rotate(-13deg)} 80%{transform:rotate(-11deg)} }
+
+/* 꼬리 */
+.dogsvg .d-tail { transform-origin: 150px 152px; }
+.dogsvg[data-tail="wag"]  .d-tail { animation: dWag  .55s ease-in-out infinite; }
+.dogsvg[data-tail="fast"] .d-tail { animation: dWag  .26s ease-in-out infinite; }
+.dogsvg[data-tail="slow"] .d-tail { animation: dWag  2.2s ease-in-out infinite; }
+@keyframes dWag { 0%,100%{transform:rotate(-16deg)} 50%{transform:rotate(20deg)} }
+
+/* 귀 */
+.dogsvg .d-ear-l { transform-origin: 58px 82px; }
+.dogsvg .d-ear-r { transform-origin: 142px 82px; }
+.dogsvg[data-ear="flop"] .d-ear-l { animation: dEarL 2.8s ease-in-out infinite; }
+.dogsvg[data-ear="flop"] .d-ear-r { animation: dEarR 2.8s ease-in-out infinite; }
+.dogsvg[data-ear="flap"] .d-ear-l { animation: dEarL .62s ease-in-out infinite; }
+.dogsvg[data-ear="flap"] .d-ear-r { animation: dEarR .62s ease-in-out infinite; }
+.dogsvg[data-ear="droop"] .d-ear-l { transform: rotate(11deg); }
+.dogsvg[data-ear="droop"] .d-ear-r { transform: rotate(-11deg); }
+@keyframes dEarL { 0%,100%{transform:rotate(0)} 50%{transform:rotate(9deg)} }
+@keyframes dEarR { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-9deg)} }
+
+/* 눈 깜빡임 — 가끔씩만 */
+.dogsvg .d-blink { animation: dBlink 5.2s infinite; transform-origin: 100px 97px; }
+@keyframes dBlink { 0%,94%,100%{transform:scaleY(1)} 96%,98%{transform:scaleY(.08)} }
+
+/* 간식을 받고 방방 뛸 때 */
+.dogsvg.jump { animation: dJump .78s cubic-bezier(.28,.84,.42,1) 3; transform-origin: 100px 186px; }
+@keyframes dJump {
+  0%   { transform: translateY(0) scaleY(1); }
+  18%  { transform: translateY(4px) scaleY(.9) scaleX(1.08); }
+  46%  { transform: translateY(-38px) scaleY(1.08) scaleX(.94); }
+  70%  { transform: translateY(0) scaleY(.94) scaleX(1.05); }
+  100% { transform: translateY(0) scaleY(1); }
+}
+.dogsvg.jump .d-tail { animation-duration: .18s !important; }
+
+/* 손으로 쓰다듬었을 때 */
+.dogsvg.pat .d-body { animation: dPat .7s ease-out; }
+@keyframes dPat { 0%{transform:scale(1)} 30%{transform:scale(1.09) rotate(-4deg)} 60%{transform:scale(.97) rotate(3deg)} 100%{transform:scale(1)} }
+
+body.reduce-motion .dogsvg * { animation: none !important; }
+
+/* ── 강아지 자리 ───────────────────────────
+   강아지와 말풍선은 한 덩어리로 보이도록 가운데에 나란히 둡니다.
+   화면이 좁아지면 말풍선이 강아지 아래로 내려갑니다. */
+.dog-area {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; padding: 6px 0 10px; flex-wrap: wrap;
+}
+.dog { line-height: 0; flex: 0 0 auto; display: flex; justify-content: center; }
+.dog-area .speech { flex: 1 1 200px; max-width: 100%; }
+/* 강아지 화면의 큰 강아지는 늘 한가운데 */
+#petdog { width: 100%; justify-content: center; margin-bottom: 4px; }
+.dog.wag { animation: wag .6s ease-in-out 2; }
+.dog.tilt { animation: tilt .5s ease-in-out; }
+@keyframes wag { 0%,100%{transform:rotate(0) translateY(0)} 25%{transform:rotate(-8deg) translateY(-6px)} 75%{transform:rotate(8deg) translateY(-6px)} }
+@keyframes tilt { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-16deg)} }
+/* ── 말풍선 ───────────────────────────────────
+   강아지가 하는 말임이 한눈에 보이도록
+   ① 꼬리를 달고 ② 흰색이 아닌 옅은 크림빛을 씁니다.
+   흰 상자로 두면 다른 카드와 구별되지 않습니다. */
+.speech {
+  position: relative;
+  background: var(--surface-low);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md) var(--r-md) var(--r-md) 6px;
+  padding: 12px 18px;
+  font-size: var(--t-body); font-weight: 600;
+  max-width: 100%; word-break: keep-all; line-height: 1.55;
+  box-shadow: none;
+}
+/* 강아지 쪽을 가리키는 꼬리 */
+.speech::before {
+  content: ''; position: absolute; left: -8px; bottom: 12px;
+  width: 14px; height: 14px; transform: rotate(45deg);
+  background: var(--surface-low);
+  border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  border-bottom-left-radius: 3px;
+}
+/* 화면이 좁아 말풍선이 강아지 아래로 내려가면 꼬리는 위를 가리킵니다 */
+@media (max-width: 430px) {
+  .dog-area { flex-direction: column; }
+  .speech { border-radius: 6px var(--r-md) var(--r-md) var(--r-md); }
+  .speech::before {
+    left: 50%; top: -8px; bottom: auto; margin-left: -7px;
+    border-left: 1px solid var(--line); border-bottom: none;
+    border-top: 1px solid var(--line); border-right: none;
+  }
+}
+
+/* ── 진행 발자국 ──────────────────────────────
+   이모지 🐾 는 작게 쓰면 무엇인지 알아볼 수 없습니다.
+   실제 발바닥 모양을 그려 넣고, 지나온 자리는 색을 채웁니다. */
+.steps {
+  display: flex; justify-content: center; align-items: center;
+  gap: 10px; flex-wrap: wrap; margin: 10px 0 6px;
+}
+.steps .paw {
+  width: calc(26px * var(--fs)); height: calc(26px * var(--fs));
+  flex: 0 0 auto; color: var(--outline-var);
+  transition: color 260ms ease, transform 260ms cubic-bezier(.34,1.56,.64,1);
+}
+.steps .paw.on { color: var(--primary-c); transform: scale(1.12) rotate(-8deg); }
+.steps .paw.now { color: var(--primary); animation: pawPulse 1.8s ease-in-out infinite; }
+@keyframes pawPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.18)} }
+body.reduce-motion .steps .paw { animation: none; }
+
+/* ── 퍼즐 ─────────────────────────────────── */
+.slots { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 8px 0 4px; }
+.wordrow { display: flex; gap: 8px; justify-content: center; }
+.cell {
+  width: calc(62px * var(--fs)); height: calc(62px * var(--fs));
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--r-sm); background: var(--surface-low);
+  border: 3px dashed var(--outline-var); box-shadow: var(--inset);
+  font-size: calc(32px * var(--fs)); font-weight: 800; color: transparent;
+}
+.cell.done { background: var(--secondary-c); border: 3px solid var(--secondary-c-dark); color: var(--on-secondary-c); box-shadow: none; animation: pop var(--t-pop) ease-out; }
+@keyframes pop { 0%{transform:scale(.7)} 60%{transform:scale(1.12)} 100%{transform:scale(1)} }
+
+.typed {
+  min-height: calc(56px * var(--fs)); display: flex; align-items: center; justify-content: center;
+  font-size: calc(34px * var(--fs)); font-weight: 800; letter-spacing: 2px;
+  color: var(--primary); margin: 6px 0;
+}
+.typed.shake { animation: shake .22s; color: var(--retry); }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-9px)} 75%{transform:translateX(9px)} }
+
+/* ── 단계마다 바뀌는 배경 풍경 ──────────────── */
+:root { --scene-a: #fff8f6; --scene-b: #ffe9e3; --scene-glow: #ffb875; }
+
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(120% 70% at 50% -10%, var(--scene-glow) 0%, transparent 62%),
+    linear-gradient(180deg, var(--scene-a) 0%, var(--scene-b) 100%);
+  opacity: .85;
+  transition: background 900ms ease;
+}
+/* 아래쪽에 부드러운 땅빛을 깔아 화면이 휑해 보이지 않게 합니다 */
+body::after {
+  content: ''; position: fixed; left: 0; right: 0; bottom: 0; height: 42vh; z-index: -2;
+  pointer-events: none;
+  background: radial-gradient(120% 100% at 50% 120%, var(--scene-glow) 0%, transparent 70%);
+  opacity: .3;
+}
+body.contrast::before, body.contrast::after { background: #fff; opacity: 1; }
+
+/* ── 흩날리는 것 (꽃잎·단풍·눈·잎) ──────────────
+   어느 풍경에나 무언가 천천히 흩날립니다.
+   가만히 멈춰 있는 화면보다 훨씬 살아 있게 느껴집니다.
+   글자를 가리지 않도록 옅게, 그리고 느리게 움직입니다. */
+.dustbox { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.dustbox span {
+  position: absolute; top: -10%; line-height: 1;
+  will-change: transform;
+  animation-timing-function: linear; animation-iteration-count: infinite;
+}
+/* 세 가지 흩날림 — 오른쪽으로, 왼쪽으로, 좌우로 흔들리며 */
+@keyframes driftA {
+  0%   { transform: translate3d(0, -12vh, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: var(--dust-o, .34); }
+  90%  { opacity: var(--dust-o, .34); }
+  100% { transform: translate3d(42px, 112vh, 0) rotate(220deg); opacity: 0; }
+}
+@keyframes driftB {
+  0%   { transform: translate3d(0, -12vh, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: var(--dust-o, .34); }
+  90%  { opacity: var(--dust-o, .34); }
+  100% { transform: translate3d(-38px, 112vh, 0) rotate(-190deg); opacity: 0; }
+}
+@keyframes driftC {   /* 나뭇잎처럼 좌우로 나풀나풀 */
+  0%   { transform: translate3d(0, -12vh, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: var(--dust-o, .34); }
+  25%  { transform: translate3d(26px, 18vh, 0) rotate(70deg); }
+  50%  { transform: translate3d(-22px, 46vh, 0) rotate(150deg); }
+  75%  { transform: translate3d(24px, 74vh, 0) rotate(240deg); }
+  90%  { opacity: var(--dust-o, .34); }
+  100% { transform: translate3d(-10px, 112vh, 0) rotate(330deg); opacity: 0; }
+}
+body.reduce-motion .dustbox { display: none; }
+
+/* 화면 뼈대는 배경이 비치도록 투명하게 두고, 글상자만 불투명하게 둡니다 */
+body { background: transparent; }
+#app { background: transparent; }
+.topbar { background: transparent; }
+.tabbar { background: var(--white); }
+
+/* ── 가로세로 낱말 판 ───────────────────────
+   판 안쪽 빈 자리에 그날의 풍경을 은은하게 깔아 둡니다.
+   글자는 언제나 불투명한 칸 안에만 있으므로 읽기에 지장이 없습니다. */
+.xwrap {
+  position: relative; isolation: isolate;
+  display: flex; justify-content: center;
+  padding: 22px 12px;
+  background: transparent;          /* 불투명 배경을 두면 아래 그림을 덮습니다 */
+  border: 3px solid var(--outline-var); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-hero); overflow: hidden;
+  min-height: calc(200px * var(--fs));
+}
+/* 판 안쪽 풍경 — 세 겹으로 겹칩니다 (위에서부터)
+   ① 반투명 막   : 낱말 칸이 또렷하게 보이도록
+   ② 그린 풍경   : 단계마다 새로 그려 절대 겹치지 않음
+   ③ 사진        : 같은 계절·때의 사진을 아주 옅게 깔아 결을 더함
+   사진만 쓰면 스무 장마다 반복되고, 그림만 쓰면 결이 밋밋합니다.
+   둘을 겹치면 반복 없이 사진의 질감을 얻습니다. */
+.xwrap::before {
+  content: ''; position: absolute; inset: 0; z-index: -2;
+  background-color: var(--white);
+  background-image:
+    linear-gradient(var(--scene-veil, rgba(255,255,255,.7)), var(--scene-veil, rgba(255,255,255,.7))),
+    var(--scene-img, none),
+    var(--scene-photo, none);
+  background-size: cover, cover, cover;
+  background-position: center, center, center;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-blend-mode: normal, soft-light, normal;
+  transition: background-image 600ms ease;
+}
+body.contrast .xwrap::before { background-image: none; }
+/* 가장자리를 부드럽게 밝혀 그림이 뚝 끊겨 보이지 않게 */
+.xwrap::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(120% 95% at 50% 50%, transparent 55%, var(--white) 100%);
+  opacity: .38;
+}
+body.contrast .xwrap::after { display: none; }
+/* ── 풍경 이름 ────────────────────────────────
+   이것은 '읽을거리'가 아니라 지금 어디인지 알려 주는 곁말입니다.
+   그래서 상자를 두르지 않습니다. 말풍선과 똑같이 생기면
+   무엇이 중요한지 알 수 없게 됩니다. 양옆에 가느다란 줄만 둡니다. */
+.scene-caption {
+  display: flex; align-items: center; gap: 12px;
+  margin: 2px auto 14px; max-width: 100%;
+  font-size: var(--t-caption); font-weight: 600;
+  letter-spacing: .02em; color: var(--on-variant);
+  opacity: .85;
+}
+.scene-caption::before, .scene-caption::after {
+  content: ''; flex: 1 1 auto; height: 1px; min-width: 12px;
+  background: linear-gradient(to right, transparent, var(--line), transparent);
+}
+.scene-caption > span { flex: 0 1 auto; word-break: keep-all; text-align: center; }
+.xgrid { display: grid; gap: 5px; min-width: 0; }
+.xcell {
+  aspect-ratio: 1 / 1; border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-family: inherit; font-weight: 800; line-height: 1;
+  /* 글자 크기는 칸 크기에 맞춰 자바스크립트가 재어 넣습니다.
+     여기에 %를 쓰면 '칸 크기'가 아니라 '부모 글자 크기' 기준이 되어
+     글자가 아주 작아집니다. */
+  font-size: var(--cellfs, 30px);
+  background: var(--surface-low); color: var(--on-surface);
+  border: 3px solid var(--outline-var); box-shadow: var(--inset);
+  cursor: pointer; padding: 0; transition: transform var(--t-press);
+}
+/* 판에서 글자가 들어가지 않는 자리. 이름을 .empty 로 두면
+   빈 화면용 .empty(안쪽 여백 40px)와 부딪혀 칸이 부풀어 오릅니다. */
+.xcell.gap { background: transparent; border: none; box-shadow: none; cursor: default; }
+.xcell.cur { border-color: var(--primary-c); border-width: 4px; background: var(--primary-fixed); }
+.xcell.fixed { background: var(--tertiary-c); color: var(--on-tertiary-c); border-color: var(--tertiary); }
+.xcell.done {
+  background: var(--secondary-c); color: var(--on-secondary-c);
+  border-color: var(--secondary-c-dark); box-shadow: none; cursor: default;
+  animation: pop var(--t-pop) ease-out;
+}
+.xcell:active:not(.gap):not(.done) { transform: scale(.94); }
+
+/* 단서 — 낱말판에 딸린 정보이므로 판보다 낮게 둡니다 */
+.clue {
+  background: var(--white); border-radius: 0 0 var(--r-md) var(--r-md);
+  padding: 14px 18px 16px; margin: -14px auto 0; width: calc(100% - 24px);
+  border: 1px solid var(--line); border-top: none;
+  box-shadow: var(--shadow-lift);
+}
+.clue-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  font-size: var(--t-caption); font-weight: 700; color: var(--on-variant);
+  letter-spacing: .02em; margin-bottom: 6px;
+}
+.clue-count { background: var(--surface-c); border-radius: 999px; padding: 3px 12px; font-variant-numeric: tabular-nums; }
+.clue-body {
+  font-size: var(--t-body); font-weight: 600; line-height: 1.6; word-break: keep-all;
+  color: var(--on-surface);
+}
+.clue-quiet {
+  font-size: var(--t-caption); font-weight: 500; color: var(--on-variant);
+  line-height: 1.6; word-break: keep-all; opacity: .9;
+}
+/* 아직 뜻을 열지 않았을 때 */
+.clue-locked {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; min-height: var(--touch); padding: 12px 18px;
+  border-radius: var(--r-md); border: 3px dashed var(--outline-var);
+  background: var(--surface-low); color: var(--on-variant);
+  font-family: inherit; font-size: calc(19px * var(--fs)); font-weight: 700;
+  cursor: pointer; line-height: 1.4; word-break: keep-all; text-align: center;
+}
+.clue-locked.ready {
+  border-style: solid; border-color: var(--tertiary);
+  background: var(--tertiary-c); color: var(--on-tertiary-c);
+}
+.clue-locked:active { transform: scale(.97); }
+.self-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--secondary-c); color: var(--on-secondary-c);
+  border-radius: 999px; padding: 4px 14px;
+  font-size: calc(17px * var(--fs)); font-weight: 700;
+}
+
+/* ── 위 띠의 발자국 ────────────────────────── */
+.footchip {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--sunshine); color: var(--on-sunshine);
+  border-radius: 999px; padding: 6px 14px; white-space: nowrap;
+  font-size: calc(18px * var(--fs)); font-weight: 800;
+  box-shadow: var(--shadow-flat);
+}
+
+/* ── 도구 칸 ──────────────────────────────── */
+.tools {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  gap: 10px; margin-top: 18px;
+}
+.tool-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  min-height: calc(84px * var(--fs)); padding: 10px 6px;
+  border-radius: var(--r-md); border: 1px solid var(--line);
+  background: var(--white); color: var(--on-surface); cursor: pointer;
+  font-family: inherit; box-shadow: var(--shadow-lift);
+  transition: transform var(--t-press), border-color var(--t-press);
+}
+.tool-btn:active { transform: scale(.95); }
+.tool-btn.on { background: var(--secondary-c); border-color: var(--secondary-c-dark); color: var(--on-secondary-c); }
+.tool-btn.poor { opacity: .5; }
+.tool-ic { font-size: calc(30px * var(--fs)); line-height: 1; }
+.tool-nm { font-size: var(--t-caption); font-weight: 700; line-height: 1.3; word-break: keep-all; text-align: center; }
+.tool-cost {
+  font-size: calc(15px * var(--fs)); font-weight: 700;
+  background: var(--surface-c); border-radius: 999px; padding: 2px 10px; white-space: nowrap;
+}
+.tool-btn.on .tool-cost { background: var(--white); }
+
+.tray { display: flex; flex-wrap: wrap; gap: var(--gap-lg); justify-content: center; padding: 18px; background: var(--surface-c); border-radius: var(--r-xl); margin-top: 10px; }
+/* 쟁반 글자 크기
+   ─ 아무리 좁아도 64px 아래로는 내려가지 않습니다 (손가락 크기)
+   ─ 글씨를 키워도 화면 폭(25vw)과 110px 을 넘지 않습니다
+   두 조건을 함께 걸지 않으면, 글씨를 키웠을 때 쟁반이 화면 밖으로 나갑니다. */
+.tile {
+  width: clamp(64px, min(calc(70px * var(--fs)), 25vw), 110px);
+  height: clamp(64px, min(calc(70px * var(--fs)), 25vw), 110px);
+  border-radius: var(--r); border: none; cursor: pointer;
+  background: var(--white); color: var(--on-surface);
+  font-family: inherit; font-size: min(calc(34px * var(--fs)), 11vw, 52px); font-weight: 800; line-height: 1;
+  box-shadow: 0 4px 0 var(--outline-var), var(--shadow-flat);
+  transition: transform var(--t-press), box-shadow var(--t-press);
+}
+.tile:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--outline-var); }
+.tile.used { opacity: .3; }
+
+/* ── 보기 고르기 ──────────────────────────── */
+.opts { display: flex; flex-direction: column; gap: var(--gap); margin-top: 8px; }
+.opt {
+  min-height: calc(72px * var(--fs)); width: 100%;
+  display: flex; align-items: center; gap: 14px; text-align: left;
+  padding: 16px 20px; border-radius: var(--r-md); cursor: pointer;
+  background: var(--white); color: var(--on-surface); border: 3px solid var(--outline-var);
+  font-family: inherit; font-size: calc(21px * var(--fs)); font-weight: 600; line-height: 1.6;
+  box-shadow: var(--shadow-flat); word-break: keep-all; white-space: normal;
+  transition: transform var(--t-press);
+}
+.opt:active { transform: scale(.97); }
+.opt .mark { flex: 0 0 auto; width: calc(38px * var(--fs)); height: calc(38px * var(--fs)); border-radius: 50%; background: var(--surface-c); display: flex; align-items: center; justify-content: center; font-size: calc(20px * var(--fs)); font-weight: 800; }
+.opt.right { background: var(--secondary-c); border-color: var(--secondary-c-dark); color: var(--on-secondary-c); animation: pop var(--t-pop); }
+.opt.right .mark { background: var(--secondary-c-dark); }
+.opt.wrong { background: var(--retry-c); border-color: var(--retry); color: var(--on-retry-c); animation: shake .22s; }
+.opt.wrong .mark { background: var(--retry); color: #fff; }
+.opt:disabled { cursor: default; opacity: .55; }
+.opt.right:disabled, .opt.wrong:disabled { opacity: 1; }
+
+.qbox { background: var(--surface-low); border-radius: var(--r-md); padding: 22px var(--gap-lg); text-align: center; margin-bottom: 4px; }
+.qbig { font-size: calc(40px * var(--fs)); font-weight: 800; line-height: 1.35; letter-spacing: 4px; word-break: keep-all; }
+.qmid { font-size: calc(26px * var(--fs)); font-weight: 700; line-height: 1.5; word-break: keep-all; }
+.qsub { font-size: calc(20px * var(--fs)); color: var(--on-variant); margin-top: 10px; line-height: 1.7; word-break: keep-all; }
+
+/* ── 낱말 카드 (배운 뒤) ──────────────────── */
+.sheet-back {
+  position: fixed; inset: 0; background: rgba(45,21,13,.45);
+  display: flex; align-items: flex-end; justify-content: center; z-index: 50;
+  animation: fade var(--t-move);
+}
+@keyframes fade { from{opacity:0} to{opacity:1} }
+.sheet {
+  background: var(--surface); width: 100%; max-width: 620px;
+  border-radius: var(--r-lg) var(--r-lg) 0 0; padding: 20px var(--edge) calc(20px + env(safe-area-inset-bottom));
+  max-height: 92dvh; overflow-y: auto; animation: rise var(--t-move) ease-out;
+}
+@keyframes rise { from{transform:translateY(40px)} to{transform:translateY(0)} }
+.grip { width: 64px; height: 6px; background: var(--outline-var); border-radius: 999px; margin: 0 auto 14px; }
+.word-title { font-size: calc(40px * var(--fs)); font-weight: 800; text-align: center; line-height: 1.35; word-break: keep-all; }
+.word-hanja { font-size: calc(24px * var(--fs)); color: var(--on-variant); text-align: center; margin-top: 2px; }
+.fold { border-top: 2px solid var(--outline-var); }
+.fold summary {
+  list-style: none; cursor: pointer; min-height: var(--touch);
+  display: flex; align-items: center; gap: 10px;
+  font-size: calc(20px * var(--fs)); font-weight: 700; padding: 12px 4px;
+}
+.fold summary::-webkit-details-marker { display: none; }
+.fold summary::before { content: '▸'; color: var(--primary); font-size: calc(22px * var(--fs)); }
+.fold[open] summary::before { content: '▾'; }
+.fold .body { padding: 0 4px 16px; font-size: calc(20px * var(--fs)); line-height: 1.75; color: var(--on-variant); word-break: keep-all; }
+
+/* ── 목록 ─────────────────────────────────── */
+.list-item {
+  display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+  min-height: calc(76px * var(--fs)); padding: 14px 18px; margin-bottom: 10px;
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--r-md);
+  box-shadow: var(--shadow-lift); cursor: pointer; font-family: inherit;
+  font-size: calc(20px * var(--fs)); font-weight: 600; color: var(--on-surface); line-height: 1.5;
+}
+.list-item:active { transform: scale(.98); }
+.list-item .lead { font-size: calc(30px * var(--fs)); flex: 0 0 auto; }
+/* 글자 칸이 뱃지에 눌리면 낱말 한가운데서 줄이 바뀝니다.
+   글자에 최소 너비를 주어, 자리가 모자라면 뱃지가 아랫줄로 내려가게 합니다.
+   (DESIGN §4.2-6 — 자리가 좁아지면 가로 배치를 세로로) */
+.list-item { flex-wrap: wrap; }
+.list-item .grow { flex: 1 1 auto; min-width: 62%; }
+.list-item .badge { margin-left: auto; }
+.badge { flex: 0 0 auto; background: var(--surface-c); border-radius: 999px; padding: 6px 14px; font-size: calc(18px * var(--fs)); font-weight: 700; }
+.badge.warm { background: var(--sunshine); color: var(--on-sunshine); }
+.badge.green { background: var(--secondary-c); color: var(--on-secondary-c); }
+
+/* ── 설정 ─────────────────────────────────── */
+.toggle {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--gap);
+  flex-wrap: wrap;
+  width: 100%; min-height: calc(78px * var(--fs)); padding: 14px 20px; margin-bottom: 12px;
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--r-md);
+  cursor: pointer; font-family: inherit; font-size: var(--t-body); font-weight: 700;
+  color: var(--on-surface); text-align: left; line-height: 1.5; box-shadow: var(--shadow-flat);
+}
+.toggle .knob { flex: 0 0 auto; width: calc(64px * var(--fs)); height: calc(38px * var(--fs)); border-radius: 999px; background: var(--surface-high); position: relative; transition: background var(--t-move); }
+.toggle .knob::after { content: ''; position: absolute; top: 4px; left: 4px; width: calc(30px * var(--fs)); height: calc(30px * var(--fs)); border-radius: 50%; background: var(--white); box-shadow: var(--shadow-flat); transition: transform var(--t-move); }
+/* 켜짐은 앱의 주색으로 칠합니다.
+   연두는 따뜻한 감빛 곁에서 겉돌았고, 이 앱에서 초록이 뜻하는 바도 따로 없었습니다. */
+.toggle.on { background: var(--primary-fixed); border-color: var(--primary-c); color: var(--on-surface); }
+.toggle.on .knob { background: var(--primary-c); }
+.toggle.on .knob::after { transform: translateX(calc(26px * var(--fs))); }
+
+.sizebar { display: flex; gap: 10px; }
+.sizebar button {
+  flex: 1; min-height: var(--touch); border-radius: var(--r); cursor: pointer;
+  border: 3px solid var(--outline-var); background: var(--white); color: var(--on-surface);
+  font-family: inherit; font-weight: 800;
+}
+.sizebar button.on { background: var(--primary-c); border-color: var(--primary-c-dark); color: var(--on-primary-c); }
+
+.preview-box { background: var(--surface-low); border-radius: var(--r-md); padding: 18px; margin-top: 12px; border: 2px solid var(--outline-var); }
+
+/* ── 축하 ─────────────────────────────────── */
+.celebrate { text-align: center; padding: 20px 0; }
+.celebrate .big { font-size: calc(36px * var(--fs)); font-weight: 800; line-height: 1.4; }
+.burst { font-size: calc(64px * var(--fs)); animation: burst .9s ease-out; }
+@keyframes burst { 0%{transform:scale(.4);opacity:0} 50%{transform:scale(1.25);opacity:1} 100%{transform:scale(1)} }
+
+/* ── 진행 막대 (꾸러미 받기 등) ────────────── */
+.bar { height: 18px; background: var(--surface-high); border-radius: 999px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--primary-c); border-radius: 999px; transition: width var(--t-move); }
+
+.empty { text-align: center; padding: 40px 12px; }
+.empty .face { font-size: calc(72px * var(--fs)); }
+
+.hidden { display: none !important; }
+.pad-top { padding-top: 16px; }
+
+/* ══════════════════════════════════════════════
+   화면 크기에 맞추기 (반응형)
+   아주 작은 휴대폰부터 태블릿·컴퓨터까지 한 벌로 대응합니다.
+   ══════════════════════════════════════════════ */
+
+/* 아주 좁은 휴대폰 (320~359px) */
+@media (max-width: 359px) {
+  :root { --edge: 10px; --gap: 12px; --gap-lg: 16px; --card-pad: 16px; }
+  .tray { gap: 10px; padding: 10px; }
+  .card { padding: 16px; }
+  .topbar h1 { font-size: calc(21px * var(--fs)); }
+  .tools { grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 8px; }
+}
+
+/* 보통 휴대폰 (360~429px) */
+@media (min-width: 360px) and (max-width: 429px) {
+  :root { --edge: 14px; }
+  .tray { gap: 16px; padding: 14px; }
+}
+
+/* 큰 휴대폰 (430px~) — 기본값 그대로 */
+
+/* 태블릿·컴퓨터 (700px~)
+   화면이 넓어도 글줄이 길어지면 오히려 읽기 어렵습니다.
+   본문 너비는 그대로 두고 여백만 넉넉히 둡니다. */
+@media (min-width: 700px) {
+  :root { --edge: 28px; }
+  #app { max-width: 680px; box-shadow: 0 0 60px rgba(45, 21, 13, .10); }
+}
+
+/* 가로로 눕혔을 때 — 세로 공간이 좁으므로 위아래 여백을 줄입니다 */
+@media (orientation: landscape) and (max-height: 500px) {
+  .dog { font-size: calc(52px * var(--fs)); }
+  .dog-area { padding: 4px 0; }
+  .tabbar button { min-height: calc(64px * var(--fs)); }
+  .section-gap, .section-title { margin-top: 16px; }
+}
+
+/* ── 이름 지어 주기 창 ─────────────────────────── */
+.namefield {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 64px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: var(--t-head);
+  font-weight: 800;
+  text-align: center;
+  color: var(--on-surface);
+  background: var(--surface-low);
+  border: 2.5px solid var(--outline-var);
+  border-radius: 18px;
+  box-shadow: var(--shadow-hairline);
+}
+.namefield:focus {
+  outline: none;
+  border-color: var(--primary-c);
+  background: var(--white, #fff);
+  box-shadow: 0 0 0 4px var(--primary-fixed);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 14px;
+}
+.chips .chip {
+  min-height: 48px;
+  padding: 8px 18px;
+  font-family: inherit;
+  font-size: var(--t-label);
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-fixed);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: var(--shadow-hairline);
+  transition: transform .12s ease;
+}
+.chips .chip:active { transform: scale(.94); }
+
+/* ── 사용법 창 ─────────────────────────────────
+   묶음마다 제목을 얹고, 값은 오른쪽에 세로로 맞춰
+   표를 읽듯 훑을 수 있게 합니다. */
+.help-group {
+  margin-top: 18px;
+  background: var(--surface-low);
+  border-radius: 20px;
+  padding: 6px 4px 8px;
+  box-shadow: var(--shadow-hairline);
+}
+.help-head {
+  font-size: var(--t-label);
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.01em;
+  padding: 10px 16px 8px;
+}
+.help-row {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;              /* 좁으면 값이 아랫줄로 내려갑니다 */
+  gap: 6px 12px;
+  padding: 9px 16px;
+}
+.help-ic {
+  flex: 0 0 32px;
+  font-size: calc(23px * var(--fs));
+  line-height: 1.35;
+  text-align: center;
+}
+.help-txt {
+  flex: 1 1 58%;
+  /* 글자가 들어갈 자리를 먼저 확보합니다.
+     값 딱지에 밀려 칸이 좁아지면 낱말 중간에서 줄이 바뀝니다. */
+  min-width: 58%;
+  font-size: var(--t-body);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+/* 값(🐾 3 · 공짜)은 오른쪽에 세로로 맞춰 값표처럼 */
+.help-price {
+  flex: 0 0 auto;
+  margin-left: auto;
+  align-self: center;
+  font-size: var(--t-caption);
+  font-weight: 800;
+  color: var(--primary);
+  background: var(--primary-fixed);
+  border-radius: 999px;
+  padding: 4px 12px;
+  white-space: nowrap;
+}
+/* 덧붙이는 말은 설명 아래에 작게 */
+.help-note {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--t-caption);
+  color: var(--on-variant);
+  word-break: keep-all;
+}
+
+/* ── 도움말 단추 ───────────────────────────────
+   왼쪽 빈자리와 똑같은 너비를 차지해야 제목이 한가운데 옵니다. */
+.topbar .helpbtn {
+  flex: 0 0 var(--touch);
+  width: var(--touch);
+  height: calc(44px * var(--fs));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: calc(21px * var(--fs));
+  font-weight: 800;
+  color: var(--primary);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.topbar .helpbtn::before {
+  content: '？';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(40px * var(--fs));
+  height: calc(40px * var(--fs));
+  border-radius: 50%;
+  background: var(--primary-fixed);
+  box-shadow: var(--shadow-hairline);
+  transition: transform .12s ease;
+}
+/* 글자는 읽어 주기용으로만 두고 눈에는 동그라미만 보입니다 */
+.topbar .helpbtn { font-size: 0; }
+.topbar .helpbtn::before { font-size: calc(21px * var(--fs)); }
+.topbar .helpbtn:active::before { transform: scale(.9); }
