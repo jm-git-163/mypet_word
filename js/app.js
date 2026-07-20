@@ -368,7 +368,7 @@
       v.appendChild(sceneCaption(scene.name));
       v.appendChild(dogBlock('반가움', this.greet()));
       v.appendChild(h('div', { class: 'card center' },
-        h('div', { class: 'muted', style: 'font-size:calc(20px * var(--fs))' }, hood.emoji + ' ' + hood.name),
+        h('div', { class: 'hood-tag' }, hood.name),
         h('div', { style: 'font-size:calc(34px * var(--fs));font-weight:800;line-height:1.4;margin:6px 0 10px' },
           d.level + '번째 산책'),
         h('div', { class: 'steps' }, Array.from({ length: 10 }, (_, i) =>

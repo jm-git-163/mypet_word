@@ -509,21 +509,30 @@ body.reduce-motion .steps .paw { animation: none; }
 /* ── 단계마다 바뀌는 배경 풍경 ──────────────── */
 :root { --scene-a: #fff8f6; --scene-b: #ffe9e3; --scene-glow: #ffb875; }
 
+/* 하늘빛 — 단계마다 계절과 때에 맞춰 바뀝니다 */
 body::before {
-  content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  content: ''; position: fixed; inset: 0; z-index: -3; pointer-events: none;
   background:
     radial-gradient(120% 70% at 50% -10%, var(--scene-glow) 0%, transparent 62%),
     linear-gradient(180deg, var(--scene-a) 0%, var(--scene-b) 100%);
-  opacity: .85;
+  opacity: .9;
   transition: background 900ms ease;
 }
-/* 아래쪽에 부드러운 땅빛을 깔아 화면이 휑해 보이지 않게 합니다 */
+/* 아래쪽 풍경 — 단계마다 새로 그려지는 그림입니다.
+   글 위에 얹히지 않도록 화면 아래에 두고, 위로 갈수록 사라지게 합니다.
+   (예전에는 이 그림을 만들어 놓고 어디에도 쓰지 않았습니다) */
 body::after {
-  content: ''; position: fixed; left: 0; right: 0; bottom: 0; height: 42vh; z-index: -2;
-  pointer-events: none;
-  background: radial-gradient(120% 100% at 50% 120%, var(--scene-glow) 0%, transparent 70%);
-  opacity: .3;
+  content: ''; position: fixed; left: 0; right: 0; bottom: 0; z-index: -2;
+  height: min(46vh, 420px); pointer-events: none;
+  background-image: var(--scene-img, none);
+  background-size: cover; background-position: center bottom;
+  background-repeat: no-repeat;
+  opacity: .55;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 42%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 42%, #000 100%);
+  transition: background-image 900ms ease;
 }
+body.dark::after { opacity: .34; }
 body.contrast::before, body.contrast::after { background: #fff; opacity: 1; }
 
 /* ── 흩날리는 것 (꽃잎·단풍·눈·잎) ──────────────
@@ -1087,3 +1096,11 @@ h1, h2, .bignum, .big, .word-title, .qbig {
   box-shadow: 0 1px 2px rgba(45,21,13,.04), 0 10px 26px -14px rgba(45,21,13,.18);
 }
 .list-item { border: none; box-shadow: inset 0 0 0 1px var(--line); }
+
+/* 지금 지나는 동네 — 이모지 대신 작은 알약으로 */
+.hood-tag {
+  display: inline-block; margin: 0 auto 2px;
+  padding: 4px 14px; border-radius: 999px;
+  background: var(--primary-fixed); color: var(--primary);
+  font-size: var(--t-caption); font-weight: 700; letter-spacing: .01em;
+}

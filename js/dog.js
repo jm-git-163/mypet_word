@@ -32,12 +32,14 @@
     const dy = kind === 'sad' ? 3 : 0;
     return `
       <g class="d-blink">
-        <ellipse cx="83" cy="${97 + dy}" rx="9.5" ry="10.5" fill="#3a2418"/>
-        <ellipse cx="117" cy="${97 + dy}" rx="9.5" ry="10.5" fill="#3a2418"/>
-        <circle cx="86" cy="${93 + dy}" r="3.2" fill="#fff"/>
-        <circle cx="120" cy="${93 + dy}" r="3.2" fill="#fff"/>
-        <circle cx="80" cy="${101 + dy}" r="1.6" fill="#fff" opacity=".75"/>
-        <circle cx="114" cy="${101 + dy}" r="1.6" fill="#fff" opacity=".75"/>
+        <ellipse cx="83" cy="${97 + dy}" rx="10" ry="11" fill="url(#deye)"/>
+        <ellipse cx="117" cy="${97 + dy}" rx="10" ry="11" fill="url(#deye)"/>
+        <circle cx="86.5" cy="${92.5 + dy}" r="3.4" fill="#fff"/>
+        <circle cx="120.5" cy="${92.5 + dy}" r="3.4" fill="#fff"/>
+        <circle cx="79.5" cy="${101.5 + dy}" r="1.7" fill="#fff" opacity=".7"/>
+        <circle cx="113.5" cy="${101.5 + dy}" r="1.7" fill="#fff" opacity=".7"/>
+        <path d="M74 ${90 + dy} q9 -5 18 -1" stroke="#e6d2be" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M108 ${89 + dy} q9 -4 18 1" stroke="#e6d2be" stroke-width="2" fill="none" stroke-linecap="round"/>
       </g>`;
   }
 
@@ -66,9 +68,23 @@
 <svg class="dogsvg" viewBox="0 0 200 200" width="${s}" height="${s}"
      data-tail="${m.tail}" data-body="${m.body}" data-ear="${m.ear}" aria-hidden="true">
   <defs>
-    <radialGradient id="dfur" cx="42%" cy="34%">
+    <radialGradient id="dfur" cx="40%" cy="28%" r="78%">
       <stop offset="0" stop-color="#ffffff"/>
-      <stop offset="1" stop-color="#f3e6da"/>
+      <stop offset=".62" stop-color="#fdf7f1"/>
+      <stop offset="1" stop-color="#efe0d1"/>
+    </radialGradient>
+    <radialGradient id="dfur2" cx="42%" cy="26%" r="80%">
+      <stop offset="0" stop-color="#fffdfb"/>
+      <stop offset="1" stop-color="#f2e5d8"/>
+    </radialGradient>
+    <!-- 몸과 머리가 만나는 자리를 살짝 어둡게 해 앞뒤가 생깁니다 -->
+    <radialGradient id="dneck" cx="50%" cy="0%" r="70%">
+      <stop offset="0" stop-color="#dcc7b2" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#dcc7b2" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="deye" cx="34%" cy="28%">
+      <stop offset="0" stop-color="#5d4030"/>
+      <stop offset="1" stop-color="#312014"/>
     </radialGradient>
   </defs>
 
@@ -81,8 +97,15 @@
       <path d="M148 150 q22 -6 20 -30 q-2 -14 -14 -12 q-10 2 -8 14 q1 10 8 12"
             fill="url(#dfur)" stroke="#e2cdb8" stroke-width="2.5" stroke-linejoin="round"/>
     </g>
-    <!-- 몸통 -->
-    <ellipse cx="100" cy="150" rx="46" ry="34" fill="url(#dfur)" stroke="#e2cdb8" stroke-width="2.5"/>
+    <!-- 몸통 — 가장자리를 물결지게 해 털처럼 보이게 합니다 -->
+    <path d="M100 116
+             c 16 0 24 4 31 9 c 8 -3 15 1 14 8 c 6 4 9 10 9 17
+             c 2 7 -1 13 -6 17 c -3 8 -11 12 -19 12
+             c -8 4 -19 5 -29 5 c -10 0 -21 -1 -29 -5
+             c -8 0 -16 -4 -19 -12 c -5 -4 -8 -10 -6 -17
+             c 0 -7 3 -13 9 -17 c -1 -7 6 -11 14 -8 c 7 -5 15 -9 31 -9 Z"
+          fill="url(#dfur)" stroke="#e6d2be" stroke-width="2.2" stroke-linejoin="round"/>
+    <ellipse cx="100" cy="126" rx="34" ry="16" fill="url(#dneck)"/>
     <!-- 앞발 -->
     <ellipse cx="80" cy="176" rx="13" ry="9" fill="url(#dfur)" stroke="#e2cdb8" stroke-width="2.5"/>
     <ellipse cx="120" cy="176" rx="13" ry="9" fill="url(#dfur)" stroke="#e2cdb8" stroke-width="2.5"/>
@@ -90,15 +113,26 @@
     <g class="d-head">
       <!-- 귀 -->
       <g class="d-ear d-ear-l">
-        <ellipse cx="55" cy="104" rx="17" ry="30" fill="url(#dfur)" stroke="#e2cdb8" stroke-width="2.5"/>
+        <path d="M62 76 c -14 -2 -24 8 -25 24 c -1 15 5 29 14 33 c 9 4 16 -3 18 -14
+                 c 2 -12 3 -28 -1 -37 c -1 -4 -3 -6 -6 -6 Z"
+              fill="url(#dfur)" stroke="#e0cab4" stroke-width="2.2" stroke-linejoin="round"/>
       </g>
       <g class="d-ear d-ear-r">
-        <ellipse cx="145" cy="104" rx="17" ry="30" fill="url(#dfur)" stroke="#e2cdb8" stroke-width="2.5"/>
+        <path d="M138 76 c 14 -2 24 8 25 24 c 1 15 -5 29 -14 33 c -9 4 -16 -3 -18 -14
+                 c -2 -12 -3 -28 1 -37 c 1 -4 3 -6 6 -6 Z"
+              fill="url(#dfur)" stroke="#e0cab4" stroke-width="2.2" stroke-linejoin="round"/>
       </g>
-      <!-- 머리 -->
-      <circle cx="100" cy="98" r="52" fill="url(#dfur)" stroke="#e2cdb8" stroke-width="2.5"/>
-      <!-- 이마 털 -->
-      <path d="M78 56 q10 -12 22 -6 q12 -6 22 6 q-11 8 -22 6 q-11 2 -22 -6" fill="#fff" opacity=".9"/>
+      <!-- 머리 — 둘레를 잔물결로 둘러 복슬복슬하게 -->
+      <path d="M100 46
+               c 13 0 20 3 26 8 c 9 -2 16 3 15 11 c 8 4 12 11 11 19
+               c 5 6 5 14 0 20 c 1 8 -5 15 -13 16 c -5 7 -14 10 -22 9
+               c -6 5 -16 5 -22 0 c -8 1 -17 -2 -22 -9 c -8 -1 -14 -8 -13 -16
+               c -5 -6 -5 -14 0 -20 c -1 -8 3 -15 11 -19 c -1 -8 6 -13 15 -11
+               c 6 -5 13 -8 26 -8 Z"
+            fill="url(#dfur2)" stroke="#e6d2be" stroke-width="2.2" stroke-linejoin="round"/>
+      <!-- 이마 털 뭉치 -->
+      <path d="M100 48 c -9 0 -16 4 -19 10 c 5 -3 12 -5 19 -5 c 7 0 14 2 19 5 c -3 -6 -10 -10 -19 -10 Z"
+            fill="#fff" opacity=".85"/>
       <!-- 눈썹 -->
       <g transform="translate(0 ${m.brow})">
         <path d="M72 80 q11 -5 21 -1" class="d-line" opacity=".55"/>
@@ -106,8 +140,9 @@
       </g>
       ${eyes(m.eye)}
       <!-- 코 -->
-      <ellipse cx="100" cy="110" rx="8" ry="6" fill="#3a2418"/>
-      <ellipse cx="97" cy="108" rx="2.5" ry="1.8" fill="#fff" opacity=".55"/>
+      <path d="M92 107 c 0 -4 4 -6 8 -6 c 4 0 8 2 8 6 c 0 4 -4 8 -8 8 c -4 0 -8 -4 -8 -8 Z"
+            fill="#3a2418"/>
+      <ellipse cx="96.5" cy="106" rx="2.4" ry="1.6" fill="#fff" opacity=".6"/>
       ${mouth(m.mouth)}
       <!-- 볼 -->
       <ellipse cx="64" cy="112" rx="9" ry="6" fill="#ffb7c5" opacity=".55"/>
