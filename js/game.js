@@ -741,7 +741,12 @@
 
       v.appendChild(h('div', { class: 'card center' },
         h('div', { class: 'muted small' }, '오늘 받은 발자국'),
-        h('div', { class: 'bignum' }, '🐾 ' + (this.reviewOnly ? this.PAY.corner : (chapterDone ? this.PAY.chapter : this.PAY.board))),
+        (() => {
+          const n = this.reviewOnly ? this.PAY.corner : (chapterDone ? this.PAY.chapter : this.PAY.board);
+          const el = h('div', { class: 'bignum' });
+          el.innerHTML = '<i class="chip-ic">' + global.UI.ICON.paw + '</i> ' + n;
+          return el;
+        })(),
         h('div', { class: 'muted small' }, '모두 ' + d.footprints + '개')));
 
       // 다음 산책 단추는 낱말 목록보다 위에 둡니다.
