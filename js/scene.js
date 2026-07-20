@@ -331,9 +331,12 @@
         }
       }
 
-      // 앞쪽 나무나 억새
+      /* 앞쪽 나무나 억새.
+         땅 종류를 가리지 않고 그리면 바다 위에 소나무가 떠 있게 됩니다.
+         나무가 어울리지 않는 곳에는 넣지 않습니다. */
+      const NO_TREE = ['바다', '논', '기와', '과수원', '숲'];
       const kind = rng();
-      const n = 3 + Math.floor(rng() * 5);
+      const n = NO_TREE.indexOf(land) >= 0 ? 0 : 3 + Math.floor(rng() * 5);
       for (let i = 0; i < n; i++) {
         const x = rng() * W, y = 246 + rng() * 44;
         const c = hsl(season.leaf + jitter * .5, sat * .8, time.ridgeL[2] - 6);
