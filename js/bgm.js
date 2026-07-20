@@ -17,10 +17,20 @@
 (function (global) {
   'use strict';
 
+  /** 목록 섞기 (곡 순서를 매번 다르게) */
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
   const Audio2 = {
     ctx: null, master: null, bgmGain: null, sfxGain: null, wet: null,
     timer: null, playing: false, fileEl: null, useFile: false,
-    step: 0, placeRun: 0, placeAt: 0,
+    step: 0, placeRun: 0, placeAt: 0, list: null, at: 0,
 
     ensure() {
       if (this.ctx) return this.ctx;
@@ -393,11 +403,23 @@
         if (!this.playing) return;
         if (files && files.length) {
           // 받아 둔 음악 파일 재생
+          // 받아 둔 곡을 차례로 틀어 줍니다.
+          // 한 곡만 되풀이하면 몇 시간을 하시는 분께는 금세 물립니다.
+          // 순서를 섞어 두고, 한 곡이 끝나면 다음 곡으로 넘어갑니다.
           this.useFile = true;
-          if (!this.fileEl) { this.fileEl = new Audio(); this.fileEl.loop = true; }
-          this.fileEl.src = 'audio/bgm/' + files[Math.floor(Math.random() * files.length)];
-          this.fileEl.volume = 0.18;                     // 아주 작게 (말소리를 덮지 않게)
-          this.fileEl.play().catch(() => { this.useFile = false; this.weave(); });
+          if (!this.fileEl) {
+            this.fileEl = new Audio();
+            this.fileEl.preload = 'none';                // 켜야 받습니다 (미리 받지 않습니다)
+            this.fileEl.addEventListener('ended', () => this.nextTrack());
+            // 파일을 못 받으면 조용히 합성음으로 물러납니다
+            this.fileEl.addEventListener('error', () => {
+              if (this.playing) { this.useFile = false; this.weave(); }
+            });
+          }
+          this.list = shuffle(files);
+          this.at = 0;
+          this.fileEl.volume = 0.16;                     // 아주 작게 (말소리를 덮지 않게)
+          this.playTrack();
         } else {
           // 앱이 직접 만들어 냅니다
           this.useFile = false;
@@ -408,6 +430,21 @@
           this.weave();
         }
       });
+    },
+
+    /** 지금 순서의 곡을 틉니다 */
+    playTrack() {
+      if (!this.playing || !this.list || !this.list.length) return;
+      this.fileEl.src = 'audio/bgm/' + this.list[this.at % this.list.length];
+      this.fileEl.play().catch(() => { this.useFile = false; this.weave(); });
+    },
+
+    /** 다음 곡으로 (마지막이면 다시 섞어 처음부터) */
+    nextTrack() {
+      if (!this.playing) return;
+      this.at++;
+      if (this.at >= this.list.length) { this.list = shuffle(this.list); this.at = 0; }
+      this.playTrack();
     },
 
     stop() {
