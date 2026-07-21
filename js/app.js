@@ -793,6 +793,53 @@
             });
           }
         }, h('span', { class: 'lead' }, '🧹'), h('span', { class: 'grow' }, '처음부터 다시 시작하기'))));
+
+      // 앱 끝내기 — 소리를 모두 멈추고 창을 닫습니다.
+      v.appendChild(h('div', { class: 'card' },
+        h('h2', null, '앱 끝내기'),
+        h('p', { class: 'muted small', style: 'margin:-6px 0 14px' },
+          '소리를 모두 멈추고 앱을 닫아요. 걸어오신 기록은 그대로 저장돼 있어요.'),
+        h('button', {
+          class: 'btn primary wide', onclick: () => this.quit()
+        }, '소리 끄고 앱 끝내기')));
+    },
+
+    /**
+     * 앱 끝내기.
+     *
+     * 브라우저는 「스스로 창을 닫는 것」을 대개 막습니다. 다만 바탕화면
+     * 아이콘으로 설치해 여신 경우(standalone)에는 닫을 수 있습니다.
+     * 그래서 이렇게 합니다.
+     *   ① 소리부터 확실히 멈춥니다 — 이게 어르신께 가장 급한 일입니다.
+     *      (닫히지 않더라도 최소한 조용해집니다)
+     *   ② 창을 닫아 봅니다.
+     *   ③ 안 닫히면 「이제 홈 단추를 누르셔도 돼요」라고 알려 드립니다.
+     *      닫히지도 않고 아무 말도 없으면 고장 난 것처럼 보입니다.
+     */
+    quit() {
+      const s = Store.data.settings;
+      s.bgmWasOn = s.bgm;
+      s.sfx = false; s.bgm = false;
+      Store.save();
+      try { global.Audio2.sync(); global.Audio2.stop(); } catch (e) { /* 소리가 없어도 그만 */ }
+      if (global.Game && global.Game.stopHere) global.Game.stopHere();
+
+      let closed = false;
+      try { window.close(); closed = window.closed; } catch (e) { /* 막혀 있음 */ }
+      if (closed) return;
+
+      setTimeout(() => {
+        sheet((box, close) => {
+          box.appendChild(h('div', { class: 'center' },
+            dogEl('졸림', 108),
+            h('h2', { style: 'margin:10px 0 6px' }, '소리를 껐어요'),
+            h('p', { class: 'muted', style: 'word-break:keep-all;margin:0 0 18px' },
+              '브라우저에서는 앱이 스스로 닫히지 않아요. ' +
+              '이제 홈 단추를 누르시거나 창을 닫으셔도 돼요. ' +
+              '걸어오신 기록은 그대로 저장돼 있어요.'),
+            h('button', { class: 'btn primary wide', onclick: close }, '알겠어요')));
+        });
+      }, 60);
     },
 
     /**

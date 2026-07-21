@@ -32,6 +32,24 @@
     return null;
   }
 
+  /**
+   * 저장해 둔 기록을 읽습니다.
+   *
+   * 앱(app.js)이 Store 를 세우기 전에 인트로가 먼저 뜨므로,
+   * 저장소를 직접 읽습니다. 없거나 깨져 있으면 첫 방문으로 봅니다.
+   */
+  function saved() {
+    try {
+      const d = JSON.parse(localStorage.getItem('nanmal.v1') || '{}');
+      return {
+        name: (d.pet && d.pet.name) || '복실이',
+        bond: (d.pet && d.pet.bond) || 1,
+        days: (d.days && d.days.length) || 0,
+        done: d.totalDone || 0
+      };
+    } catch (e) { return { name: '복실이', bond: 1, days: 0, done: 0 }; }
+  }
+
   function reduced() {
     try {
       const raw = localStorage.getItem('nanmal.v1');
@@ -60,9 +78,12 @@
     shell.className = 'intro-shell';
     ball.appendChild(shell);
 
+    const me = saved();
     const dog = document.createElement('div');
     dog.className = 'intro-dog';
-    dog.innerHTML = global.Dog ? global.Dog.make('신남', 132) : '';
+    // 오래 함께 걸으셨을수록 더 신이 나 있습니다
+    dog.innerHTML = global.Dog
+      ? global.Dog.make(me.bond >= 8 ? '신남' : me.done > 0 ? '반가움' : '갸웃', 132) : '';
     ball.appendChild(dog);
 
     inner.appendChild(ball);
@@ -80,14 +101,21 @@
 
     const sub = document.createElement('div');
     sub.className = 'intro-sub';
-    sub.textContent = '매일 함께 걷는 낱말 퍼즐';
+    sub.textContent = me.done > 0
+      ? `${me.name}와 함께 걸은 지 ${me.days}일`
+      : '매일 함께 걷는 낱말 퍼즐';
     inner.appendChild(sub);
 
-    // 발자국 넷이 차례로 톡톡
+    /* 발자국으로 친화도를 보여 드립니다.
+       다섯 칸 가운데 자란 만큼만 색이 찹니다. 늘 같은 그림이면
+       두 번째부터는 볼 까닭이 없어 건너뛰게 됩니다.
+       (유대는 함께한 날로 자랍니다 — 1~50단계) */
     const paws = document.createElement('div');
     paws.className = 'intro-paws';
-    for (let i = 0; i < 4; i++) {
+    const lit = me.done > 0 ? Math.max(1, Math.min(5, Math.ceil(me.bond / 10))) : 0;
+    for (let i = 0; i < 5; i++) {
       const p = document.createElement('span');
+      if (i < lit) p.className = 'on';
       p.style.animationDelay = (1.60 + i * 0.10).toFixed(2) + 's';
       p.innerHTML =
         '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor">' +
