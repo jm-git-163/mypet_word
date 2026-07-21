@@ -152,27 +152,59 @@
       g.gain.exponentialRampToValueAtTime(0.0001, when + dur);
       g.connect(f); f.connect(out);
 
-      // 배음 짜임 — 소리의 성격을 정합니다
+      /* 배음 짜임 — 소리의 성격을 정합니다.
+         마림바·실로폰은 4배·10배음이 두드러집니다. 이 두 배음이
+         있어야 「나무를 두드린 소리」로 들립니다.
+         2배·3배음만 쌓으면 배음이 촘촘한 순수음이 되어
+         병원 기계음처럼 들립니다 — 이게 음산함의 정체였습니다. */
       const parts = kind === 'wood'
-        ? [[1, 1], [3.9, 0.16]]                        // 또랑또랑한 톡 (통 울리는 배음을 뺐습니다)
+        ? [[1, 1], [4, 0.30], [10, 0.08]]              // 마림바
         : kind === 'tick'
-          ? [[1, 1], [2, 0.07]]                        // 거의 순한 음 하나 — 튀지 않게
+          ? [[1, 1], [4, 0.22], [10, 0.05]]            // 작은 나무 조각
           : kind === 'soft'
-          ? [[1, 1], [2, 0.28], [3, 0.10]]             // 포근한 패드
-          : [[1, 1], [2, 0.42], [3, 0.16], [4.2, 0.07]]; // 오르골
+            ? [[1, 1], [2, 0.28], [3, 0.10]]           // 포근한 패드 (여기는 그대로)
+            : [[1, 1], [4, 0.34], [10, 0.10], [2, 0.10]]; // 오르골·종
 
       parts.forEach(([mul, amp], i) => {
         const o = c.createOscillator(), og = c.createGain();
         o.type = (kind === 'soft' && i === 0) ? 'triangle' : 'sine';
         o.frequency.value = freq * mul;
-        if (i > 0) o.detune.value = (i % 2 ? 4 : -4);   // 아주 살짝 어긋내 두툼하게
+        /* 어긋내기(detune)를 뺐습니다. 두툼해지라고 넣었는데
+           짧은 소리에서는 두 음이 서로 밀고 당겨 웅웅거립니다.
+           그 흔들림이 귀에는 음산하게 들립니다. */
         og.gain.value = amp;
-        // 배음은 먼저 사그라듭니다 (진짜 악기가 그렇습니다)
+        // 높은 배음일수록 먼저 사그라듭니다 (진짜 악기가 그렇습니다)
         og.gain.setValueAtTime(amp, when);
-        if (i > 0) og.gain.exponentialRampToValueAtTime(0.0001, when + dur * 0.45);
+        if (i > 0) {
+          og.gain.exponentialRampToValueAtTime(0.0001, when + dur * (mul >= 10 ? 0.18 : 0.38));
+        }
         o.connect(og); og.connect(g);
         o.start(when); o.stop(when + dur + 0.06);
       });
+    },
+
+    /**
+     * 두드리는 순간의 「탁」.
+     *
+     * 진짜 소리에는 음(音)이 나기 전에 부딪히는 소리가 먼저 있습니다.
+     * 이게 없으면 아무리 배음을 잘 쌓아도 「전자음」으로 들립니다.
+     * 아주 짧은(15ms) 잡음을 좁게 걸러 얹습니다.
+     */
+    knock(when, freq, vol) {
+      const c = this.ctx; if (!c) return;
+      const n = Math.floor(c.sampleRate * 0.015);
+      const buf = c.createBuffer(1, n, c.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < n; i++) {
+        // 뒤로 갈수록 빠르게 사그라들어야 '탁' 이 됩니다
+        d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 3.2);
+      }
+      const src = c.createBufferSource(); src.buffer = buf;
+      const bp = c.createBiquadFilter();
+      bp.type = 'bandpass'; bp.frequency.value = freq * 1.6; bp.Q.value = 1.1;
+      const g = c.createGain(); g.gain.value = vol;
+      src.connect(bp); bp.connect(g); g.connect(this.sfxGain);
+      src.start(when); src.stop(when + 0.02);
     },
 
     /** 효과음 하나 (설정이 꺼져 있으면 나지 않습니다) */
@@ -194,15 +226,17 @@
      * 다섯 음 사이를 오가되 바로 앞 음은 피해 자연스럽게 들리게 합니다.
      */
     tap() {
-      // 예전에는 다섯 음 사이를 건너뛰었는데, 누를 때마다 음이 껑충
-      // 달라지니 소리가 튀고 어색했습니다. 또 1000Hz 언저리가 섞여
-      // 날카롭게 들렸습니다.
-      //
-      // 이제 한 음(레)만 쓰되 아주 조금(±35센트)만 흔듭니다.
-      // 사람 귀에는 '같은 소리인데 기계 같지 않다' 로 들립니다.
-      // 높이를 낮추고 배음을 거의 없애 부드럽게 눌러 두었습니다.
-      const cents = Math.random() * 70 - 35;
-      this.fx([[1046.50 * Math.pow(2, cents / 1200), 0, 0.045, 1]], 'tick', 0.20);
+      /* 「탁」 + 나무 음.
+         소리를 낼 때마다 ±35센트만 흔듭니다. 음을 크게 건너뛰면
+         누를 때마다 음높이가 달라져 거슬리고, 아주 똑같으면
+         기계처럼 들립니다. */
+      if (!global.Store || !global.Store.data.settings.sfx) return;
+      const c = this.ensure(); if (!c) return;
+      this.resume();
+      const f = 880 * Math.pow(2, (Math.random() * 70 - 35) / 1200);
+      const t0 = c.currentTime + 0.02;
+      this.knock(t0, f, 0.40);                  // 부딪히는 소리가 먼저
+      this.ping(f, t0, 0.06, 0.34, 'tick');     // 그 뒤에 나무 음
     },
 
     /**
@@ -214,10 +248,12 @@
       this.placeRun = (now - this.placeAt < 2600) ? Math.min(this.placeRun + 1, 5) : 0;
       this.placeAt = now;
       const up = [880.00, 987.77, 1046.50, 1174.66, 1318.51, 1396.91][this.placeRun];
-      this.fx([[up, 0, 0.07, 1]], 'tick', 0.30);
-      // 이어 놓을수록 위에 얹히는 배음이 하나 더 붙습니다.
-      // 잘 되어 간다는 느낌이 소리에서도 쌓입니다.
-      if (this.placeRun >= 2) this.fx([[up * 2, 0.012, 0.10, 0.34]], 'bell', 0.34);
+      if (!global.Store || !global.Store.data.settings.sfx) return;
+      const c = this.ensure(); if (!c) return;
+      this.resume();
+      const t0 = c.currentTime + 0.02;
+      this.knock(t0, up, 0.44);
+      this.ping(up, t0, 0.08, 0.40, 'tick');
     },
 
     /** 낱말을 하나 맞혔을 때 — 맑게 올라가는 세 음 */
@@ -235,12 +271,16 @@
       this.wordRun = (now - (this.wordAt || 0) < 9000) ? Math.min((this.wordRun || 0) + 1, 3) : 0;
       this.wordAt = now;
       const up = Math.pow(2, this.wordRun / 12);      // 반음씩
-      this.fx([
-        [523.25 * up, 0, 0.30, 0.9],
-        [659.25 * up, 0.06, 0.30, 0.95],
-        [783.99 * up, 0.12, 0.55, 1],
-        [1046.50 * up, 0.12, 0.55, 0.34]
-      ], 'bell', 0.30);
+      if (!global.Store || !global.Store.data.settings.sfx) return;
+      const c = this.ensure(); if (!c) return;
+      this.resume();
+      const t0 = c.currentTime + 0.02;
+      // 도–미–솔. 음마다 두드리는 소리를 함께 내야 실로폰처럼 들립니다.
+      [[523.25, 0, 0.9], [659.25, 0.06, 0.95], [783.99, 0.12, 1]]
+        .forEach(([f, at, amp]) => {
+          this.knock(t0 + at, f * up, 0.13 * amp);
+          this.ping(f * up, t0 + at, at < 0.1 ? 0.26 : 0.48, 0.26 * amp, 'bell');
+        });
     },
 
     /** 도움을 받았을 때 — 반짝 */
@@ -282,14 +322,19 @@
     clear() {
       this.placeRun = 0;
       // 가락
-      this.fx([
-        [523.25, 0.00, 0.55, 0.9],
-        [659.25, 0.13, 0.55, 0.9],
-        [783.99, 0.26, 0.55, 0.95],
-        [1046.50, 0.39, 1.5, 1.0],
-        [783.99, 0.39, 1.5, 0.45],
-        [659.25, 0.39, 1.5, 0.35]
-      ], 'bell', 0.30);
+      if (!global.Store || !global.Store.data.settings.sfx) return;
+      const c = this.ensure(); if (!c) return;
+      this.resume();
+      const t0 = c.currentTime + 0.02;
+      // 도–미–솔–높은도. 음마다 두드리는 소리를 함께
+      [[523.25, 0.00, 0.55, 0.9], [659.25, 0.13, 0.55, 0.9],
+       [783.99, 0.26, 0.55, 0.95], [1046.50, 0.39, 1.3, 1.0]]
+        .forEach(([f, at, dur, amp]) => {
+          this.knock(t0 + at, f, 0.13 * amp);
+          this.ping(f, t0 + at, dur, 0.26 * amp, 'bell');
+        });
+      // 마지막 음에 5도를 살짝 겹쳐 화음을 만듭니다
+      this.ping(783.99, t0 + 0.39, 1.2, 0.10, 'bell');
       // 받쳐 주는 음은 한 옥타브 올려 짧게. 예전에는 도1(130Hz)을
       // 1.6초나 끌어서 웅 하고 남아 무겁고 음침했습니다.
       this.fx([
