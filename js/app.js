@@ -20,14 +20,32 @@
         memory: {}, fav: [], recent: [],
         pet: { name: '복실이', bond: 1 },
         onboarded: false,
-        settings: { fs: 1, sfx: true, bgm: false, hue: 'auto', gentle: false, theme: 'light', contrast: false, motion: false }
+        settings: { fs: 1, sfx: true, bgm: true, hue: 'auto', gentle: false, theme: 'light', contrast: false, motion: false }
       };
     },
     load() {
       try {
         const raw = localStorage.getItem(KEY);
-        this.data = raw ? Object.assign(this.fresh(), JSON.parse(raw)) : this.fresh();
+        // 기본값을 먼저 따로 떠 둡니다.
+        // Object.assign(base, saved) 는 base 를 고쳐 버리므로,
+        // 나중에 base.settings 를 봐도 이미 저장된 값으로 바뀌어 있습니다.
+        const def = this.fresh();
+        this.data = raw ? Object.assign(this.fresh(), JSON.parse(raw)) : def;
+        // 저장된 settings·pet 은 통째로 갈아끼워집니다. 그대로 두면
+        // 나중에 더한 항목이 undefined 로 남아 화면에 그대로 찍힙니다
+        // (「유대 undefined단계」가 그 경우였습니다).
+        this.data.settings = Object.assign({}, def.settings, this.data.settings || {});
+        this.data.pet = Object.assign({}, def.pet, this.data.pet || {});
         if (!this.data.ability.GLOBAL) this.data.ability.GLOBAL = { theta: 1200, n: 0 };
+
+        // 배경음을 기본으로 켜 드립니다 (딱 한 번).
+        // 예전에는 꺼진 채로 시작해서, 있는 줄도 모르고 지나치셨습니다.
+        // 한 번 켜 드린 뒤 끄시면 그 뜻을 그대로 지킵니다.
+        if (!this.data.settings.bgmDefaultOn) {
+          this.data.settings.bgm = true;
+          this.data.settings.bgmDefaultOn = true;
+          this.save();
+        }
       } catch (e) { this.data = this.fresh(); }
       return this.data;
     },
