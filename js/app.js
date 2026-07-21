@@ -121,7 +121,7 @@
 
   /**
    * 지금 쓸 빛깔 이름.
-   * 「동네 따라」로 두시면 한 판 걸을 때마다 빛깔이 바뀝니다.
+   * 「산책마다」로 두시면 산책 한 판이 끝날 때마다 빛깔이 바뀝니다.
    * 백 걸음마다 바뀌게 두었더니 한참을 같은 색으로 걸어야 했습니다.
    * (풍경의 생김새는 동네가 정하므로, 색만 매 판 바뀌고 땅은 그대로입니다)
    */
@@ -326,11 +326,6 @@
     return el;
   }
 
-  /** 풍경 이름 — 상자 없이, 곁말로 */
-  function sceneCaption(name) {
-    return h('div', { class: 'scene-caption' }, h('span', null, name));
-  }
-
   /** 움직이는 강아지 하나 (그림 파일이 아니라 그려서 움직입니다) */
   function dogEl(mood, size, id) {
     const box = h('div', { class: 'dog', id: id || 'dog' });
@@ -463,7 +458,6 @@
       const step = ((d.level - 1) % 10) + 1;
 
       const scene = global.Theme.apply(d.level);
-      v.appendChild(sceneCaption(scene.name));
       v.appendChild(dogBlock('반가움', this.greet()));
       v.appendChild(h('div', { class: 'card center' },
         h('div', { class: 'hood-tag' }, hood.name),
@@ -694,7 +688,8 @@
       v.appendChild(h('div', { class: 'card' },
         h('h2', null, '빛깔'),
         h('p', { class: 'muted small', style: 'margin:-6px 0 14px' },
-          '「동네 따라」로 두시면 한 판 걸을 때마다 빛깔이 바뀝니다.'),
+          '「산책마다」로 두시면 산책을 한 판 마칠 때마다 빛깔이 저절로 바뀝니다. ' +
+          '한 가지로 두고 싶으시면 아래에서 골라 주세요.'),
         (() => {
           const box = h('div', { class: 'hues' });
           const mk = (id, label, dot) => {
@@ -707,7 +702,7 @@
             b.appendChild(d); b.appendChild(h('span', null, label));
             return b;
           };
-          box.appendChild(mk('auto', '동네 따라',
+          box.appendChild(mk('auto', '산책마다',
             'conic-gradient(#ef8f22,#57a86c,#4595b0,#8c78bd,#dd6a7e,#a98953,#ef8f22)'));
           HUES.forEach(([id, label, dot]) => box.appendChild(mk(id, label, dot)));
           return box;
@@ -915,7 +910,7 @@
     }
   };
 
-  global.UI = { h, $, sheet, say, dogBlock, dogEl, dogMood, paw, sceneCaption, applySettings, guardTaps, DOG_FACES, ICON, HUES };
+  global.UI = { h, $, sheet, say, dogBlock, dogEl, dogMood, paw, applySettings, guardTaps, DOG_FACES, ICON, HUES };
   global.Store = Store; global.Sound = Sound; global.App = App;
   window.addEventListener('DOMContentLoaded', () => App.mount());
 })(window);

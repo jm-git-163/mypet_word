@@ -6,7 +6,7 @@
   'use strict';
   const { DB, Ability, FSRS, Generator, GRADE_NAME } = global.Engine;
   const H = global.Hangul;
-  const { h, $, sheet, say, dogBlock, dogMood, paw, sceneCaption } = global.UI;
+  const { h, $, sheet, say, dogBlock, dogMood, paw } = global.UI;
   const Store = global.Store, Sound = global.Sound, App = global.App;
 
   const Game = {
@@ -111,7 +111,6 @@
       const scene = global.Theme.apply(this.stage.level);
       // 풍경 이름만 한 줄로. 모드 이름은 판을 보면 알 수 있어 빼고,
       // 좁은 화면에서 두 줄로 넘치던 것을 막습니다.
-      v.appendChild(sceneCaption(scene.name));
 
       const body = h('div', { id: 'play' });
       v.appendChild(body);

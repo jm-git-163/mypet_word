@@ -1,0 +1,168 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>로고 만들기</title>
+<!--
+  brand.html — 아이콘과 카톡 미리보기 그림 만들기
+
+  앱 안의 강아지(js/dog.js)를 그대로 가져다 씁니다.
+  파이썬으로 따로 그리면 실물과 달라져 못생겨집니다.
+  여기서는 진짜 마스코트를 그대로 크게 키워 담습니다.
+
+  쓰는 법 — 이 파일을 브라우저로 열면 그림이 만들어집니다.
+  tools/save-brand.js 가 결과를 images/ 에 저장합니다.
+-->
+<style>body{margin:0;background:#222;font:14px system-ui;color:#ddd}canvas{margin:8px;background:#fff}</style>
+<script src="../js/dog.js"></script>
+<script>
+/* 강아지 SVG 를 그림으로 바꿉니다.
+   화면 밖에서 쓰는 그림이라 CSS 를 못 읽으므로 선 색을 직접 적어 넣습니다. */
+function dogSVG(size) {
+  let s = Dog.make('반가움', size);
+  s = s.replace(/class="d-line"/g,
+    'fill="none" stroke="#3a2418" stroke-width="3.2" stroke-linecap="round"');
+  return s.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ');
+}
+
+function loadDog(size) {
+  return new Promise(res => {
+    const img = new Image();
+    img.onload = () => res(img);
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(dogSVG(size));
+  });
+}
+
+/* 모서리가 부드럽게 흐르는 사각형 (아이폰 아이콘 모양) */
+function squircle(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+/* 감빛 바탕 — 위에서 아래로 흐르고, 왼쪽 위에 은은한 빛무리 */
+function warmBg(ctx, W, H) {
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#ffe9cd');
+  g.addColorStop(.55, '#ffdcb4');
+  g.addColorStop(1, '#f7c58f');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+  const r = ctx.createRadialGradient(W * .30, H * .18, 0, W * .30, H * .18, W * .78);
+  r.addColorStop(0, 'rgba(255,255,255,.72)');
+  r.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = r; ctx.fillRect(0, 0, W, H);
+}
+
+/* 강아지 뒤 핀 조명 — 파스텔 바탕에 흰 강아지가 묻히지 않게 */
+function spotlight(ctx, cx, cy, rad) {
+  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
+  g.addColorStop(0, 'rgba(255,255,255,.92)');
+  g.addColorStop(.55, 'rgba(255,250,242,.55)');
+  g.addColorStop(1, 'rgba(255,247,236,0)');
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(cx, cy, rad, 0, 7); ctx.fill();
+}
+
+async function icon(size, maskable) {
+  const S = 2, W = size * S;
+  const c = document.createElement('canvas'); c.width = c.height = W;
+  const ctx = c.getContext('2d');
+
+  if (!maskable) { squircle(ctx, 0, 0, W, W, W * .235); ctx.clip(); }
+  warmBg(ctx, W, W);
+
+  // 마스커블은 가장자리(20%)가 잘려 나가므로 강아지를 더 작게 넣습니다
+  const f = maskable ? .62 : .96;
+  const d = W * f;
+  spotlight(ctx, W / 2, W * .48, d * .55);
+
+  const img = await loadDog(600);
+  // 200칸 그림에서 강아지는 세로 46~193 자리에 있습니다.
+  // 가운데(=120쯤)를 아이콘 한가운데로 맞춰야 위아래 여백이 같아집니다.
+  ctx.drawImage(img, (W - d) / 2, W * .50 - d * (120 / 200), d, d);
+
+  const out = document.createElement('canvas'); out.width = out.height = size;
+  out.getContext('2d').drawImage(c, 0, 0, size, size);
+  return out;
+}
+
+async function og() {
+  const W = 1200, H = 630, S = 1;
+  const c = document.createElement('canvas'); c.width = W * S; c.height = H * S;
+  const ctx = c.getContext('2d');
+
+  // 바탕 — 아이콘보다 훨씬 옅게. 글자가 주인공입니다.
+  const g = ctx.createLinearGradient(0, 0, W, H);
+  g.addColorStop(0, '#fff6ea');
+  g.addColorStop(.5, '#ffeed9');
+  g.addColorStop(1, '#ffe3c4');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+  // 멀리 보이는 언덕 — 「산책」 느낌
+  const hill = (y, h, col) => {
+    ctx.fillStyle = col; ctx.beginPath();
+    ctx.moveTo(-40, H);
+    ctx.quadraticCurveTo(W * .28, y, W * .62, y + h * .35);
+    ctx.quadraticCurveTo(W * .88, y + h, W + 40, y + h * .2);
+    ctx.lineTo(W + 40, H); ctx.closePath(); ctx.fill();
+  };
+  hill(430, 90, 'rgba(214,232,198,.55)');
+  hill(500, 80, 'rgba(186,218,168,.55)');
+
+  // 아이콘을 왼쪽에 — 앱 아이콘과 같은 모양이라야 같은 앱으로 보입니다
+  const ic = await icon(320, false);
+  ctx.save();
+  ctx.shadowColor = 'rgba(150,100,40,.22)';
+  ctx.shadowBlur = 34; ctx.shadowOffsetY = 12;
+  ctx.drawImage(ic, 122, (H - 320) / 2 - 14, 320, 320);
+  ctx.restore();
+
+  // 글자
+  const tx = 500;
+  ctx.fillStyle = '#3b2a1c';
+  ctx.font = '800 96px "Malgun Gothic", "맑은 고딕", sans-serif';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText('낱말 산책', tx, 285);
+
+  ctx.fillStyle = '#7a6450';
+  ctx.font = '500 38px "Malgun Gothic", "맑은 고딕", sans-serif';
+  ctx.fillText('강아지와 함께 걷는 한국어 낱말 퍼즐', tx, 348);
+
+  // 알약 표시
+  const tag = '무료 · 광고 없음 · 인터넷 없어도';
+  ctx.font = '700 30px "Malgun Gothic", "맑은 고딕", sans-serif';
+  const tw = ctx.measureText(tag).width;
+  const bx = tx, by = 396, bh = 62, bw = tw + 56;
+  ctx.fillStyle = '#ef8f22';
+  ctx.beginPath();
+  if (ctx.roundRect) ctx.roundRect(bx, by, bw, bh, bh / 2);
+  else { ctx.rect(bx, by, bw, bh); }
+  ctx.fill();
+  ctx.fillStyle = '#40200a';
+  ctx.fillText(tag, bx + 28, by + 42);
+
+  return c;
+}
+
+async function run() {
+  const out = {};
+  const jobs = [
+    ['icon-192.png', () => icon(192, false)],
+    ['icon-512.png', () => icon(512, false)],
+    ['icon-maskable.png', () => icon(512, true)],
+    ['apple-touch-icon.png', () => icon(180, false)],
+    ['og.png', og]
+  ];
+  for (const [name, fn] of jobs) {
+    const c = await fn();
+    document.body.appendChild(c);
+    out[name] = c.toDataURL('image/png');
+  }
+  window.__BRAND__ = out;
+  document.title = '완성';
+}
+run();
+</script>
