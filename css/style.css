@@ -2591,3 +2591,52 @@ body.playing .tool-btn { min-height: calc(58px * var(--fs)); padding: 6px 2px; g
 body.playing .tool-btn .tool-nm { font-size: calc(14px * var(--fs)); line-height: 1.2; word-break: keep-all; }
 body.playing .tool-btn .tool-ic { width: calc(20px * var(--fs)); height: calc(20px * var(--fs)); margin: 0 auto 1px; }
 body.playing .tool-btn .tool-cost { font-size: calc(13px * var(--fs)); }
+
+/* ══════════════════════════════════════════════════════
+   상자를 글자 길이에 맞추기
+
+   말풍선과 쉼 안내가 늘 화면 폭을 가득 채우고 있었습니다.
+   「오후에도 반가워요!」 한마디에 상자가 끝까지 늘어나면
+   빈자리만 넓어 보이고, 옆의 강아지와도 균형이 맞지 않습니다.
+   ══════════════════════════════════════════════════════ */
+.dog-area .speech {
+  flex: 0 1 auto;            /* 글자만큼만 벌어집니다 */
+  width: auto;
+}
+
+/* 쉼 안내 — 카드가 아니라 알약 한 줄로 */
+.restnote {
+  /* 한 줄로 쭉 늘어지면 좌우 여백이 사라져 답답합니다.
+     20자쯤에서 접어 두 줄로 가운데 놓이게 합니다. */
+  display: block; width: fit-content; max-width: min(100%, 20em);
+  margin: 18px auto 0; padding: 12px 20px;
+  background: var(--sunshine); color: var(--on-sunshine);
+  border-radius: 999px;
+  font-size: calc(17px * var(--fs)); font-weight: 700; line-height: 1.5;
+  text-align: center; word-break: keep-all;
+}
+/* 글이 길어 두 줄이 되면 알약 모양이 어색하므로 모서리를 눕힙니다 */
+@media (max-width: 380px) { .restnote { border-radius: 22px; } }
+
+/* ══════════════════════════════════════════════════════
+   하단 메뉴 — 낮추고, 놀이 중에도 보이게
+
+   놀이 중에는 하단 메뉴를 숨기고 있었습니다. 그래서 소리를 끄거나
+   그만두시려면 위쪽 작은 단추를 찾아야 했습니다.
+   늘 보이게 두면 언제든 「산책」이나 「설정」을 눌러 빠져나오실 수 있습니다.
+   대신 높이를 낮춰 낱말판 자리를 뺏지 않게 합니다.
+   ══════════════════════════════════════════════════════ */
+.tabbar button {
+  min-height: calc(62px * var(--fs));
+  padding: 6px 2px; gap: 1px;
+  font-size: calc(15px * var(--fs)); line-height: 1.2;
+  border-bottom-width: 3px;
+}
+.tabbar button .ic { width: calc(22px * var(--fs)); height: calc(22px * var(--fs)); }
+.tabbar button.mid .ic { width: calc(24px * var(--fs)); height: calc(24px * var(--fs)); }
+
+/* 놀이 중에는 한 치수 더 낮춥니다 — 판이 한 화면에 더 들어오도록 */
+body.playing .tabbar button {
+  min-height: calc(54px * var(--fs));
+  font-size: calc(14px * var(--fs));
+}

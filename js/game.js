@@ -83,8 +83,11 @@
       this.gridState = null; this.solvedWords = []; this.tileAt = {}; this.metThisGrid = [];
       this.wordSt = {}; this.selfSolved = 0;
 
-      $('tabbar').classList.add('hidden');
-      // 놀이 중에는 여백을 걷어 판이 한 화면에 들어오게 합니다
+      // 하단 메뉴는 놀이 중에도 그대로 둡니다.
+      // 숨겨 두면 소리를 끄거나 그만두시려 할 때 빠져나올 길이
+      // 위쪽 작은 단추뿐이라 어르신이 헤매십니다.
+      // 대신 CSS 에서 높이를 낮춰 판 자리를 뺏지 않게 했습니다.
+      // 놀이 중에는 여백도 걷어 판이 한 화면에 들어오게 합니다.
       document.body.classList.add('playing');
 
       App.top(this.reviewOnly ? this.stage.modeName : this.stage.level + '번째 산책',
@@ -704,10 +707,19 @@
     },
 
     leave() {
+      this.stopHere();
+      App.go('walk');
+    },
+
+    /**
+     * 판을 접습니다 (화면은 옮기지 않습니다).
+     * 아래 메뉴로 빠져나가실 때 App.go 가 대신 불러 줍니다 —
+     * 그러지 않으면 재촉 타이머가 남아 딴 화면에서 강아지가 말을 겁니다.
+     */
+    stopHere() {
       clearTimeout(this._nudge);
       $('tabbar').classList.remove('hidden');
       document.body.classList.remove('playing');
-      App.go('walk');
     },
 
     /* ── 맞혔을 때 ── */
@@ -851,8 +863,11 @@
 
       // 오래 하셨으면 쉬기를 권합니다 (강요하지 않습니다)
       if (d.totalDone > 0 && d.totalDone % 12 === 0) {
-        v.appendChild(h('div', { class: 'card', style: 'background:var(--sunshine);color:var(--on-sunshine);margin-top:16px' },
-          h('div', { style: 'font-weight:700;word-break:keep-all' }, '우리 잠깐 쉬었다 할까요? 물도 한 잔 드시고요.')));
+        // 글자 길이만큼만 벌어지고 가운데에 놓입니다.
+        // 카드로 두면 짧은 한마디에도 상자가 화면 폭을 다 차지해
+        // 위아래 단추들과 견주어 덩치만 커 보였습니다.
+        v.appendChild(h('div', { class: 'restnote' },
+          '우리 잠깐 쉬었다 할까요? 물도 한 잔 드시고요.'));
       }
     }
   };

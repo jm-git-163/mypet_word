@@ -337,6 +337,9 @@
   function dogBlock(mood, line) {
     // 강아지를 116 → 88 로 줄였습니다.
     // 인사말 한 줄에 화면 위쪽을 통째로 내주고 있었습니다.
+    // 말풍선은 글자 길이만큼만 벌어지게 합니다.
+    // 늘 폭을 가득 채우면 「오후에도 반가워요!」 한마디에도
+    // 상자가 화면 끝까지 늘어나 허전해 보입니다.
     return h('div', { class: 'dog-area' },
       dogEl(mood, 88),
       line ? h('div', { class: 'speech' }, line) : null);
@@ -384,6 +387,12 @@
     },
 
     go(tab) {
+      // 놀이 중에 아래 메뉴를 누르셨으면 판을 정리하고 나옵니다.
+      // 하단 메뉴를 늘 보이게 두었으므로 이 길로도 나가실 수 있습니다.
+      if (document.body.classList.contains('playing')) {
+        document.body.classList.remove('playing');
+        if (global.Game && global.Game.stopHere) global.Game.stopHere();
+      }
       this.tab = tab;
       this.renderTabs();
       const v = $('view'); v.innerHTML = ''; v.scrollTop = 0;
@@ -808,7 +817,6 @@
         ]);
 
         group('막히셨을 때', [
-          ['🕒', '기다리기', '공짜', '가만히 계시면 뜻풀이가 저절로 열려요'],
           ['🎯', '글자 하나', '🐾 3', '빈 칸 하나를 채워드려요'],
           ['✨', '낱말 하나', '🐾 10', '낱말을 통째로 채워드려요']
         ]);
