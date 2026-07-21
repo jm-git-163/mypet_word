@@ -5,8 +5,8 @@
    그 잠깐이 「덜 만든 것 같은」 첫인상을 만듭니다.
    그 자리를 복실이가 채웁니다.
 
-   흐름 (모두 2초 안)
-     ① 복실이가 아래에서 통 튀어 올라옵니다
+   흐름 (모두 2.7초)
+     ① 복실이가 담긴 유리 공이 왼쪽에서 굴러 들어와 통 튀고 멈춥니다
      ② 「낱말 산책」 글자가 한 자씩 올라옵니다
      ③ 발자국이 톡톡 찍히고 종소리 한 번
      ④ 스르르 사라지고 앱이 나옵니다
@@ -50,11 +50,22 @@
     const inner = document.createElement('div');
     inner.className = 'intro-in';
 
-    // 복실이 — 앱 안에서 쓰는 그 강아지를 그대로
+    /* 복실이가 유리 공에 담겨 굴러 들어옵니다.
+       공은 굴러야 공답습니다. 다만 강아지까지 같이 돌면 거꾸로
+       뒤집혀 우스워지므로, 공만 돌리고 강아지는 그대로 둡니다. */
+    const ball = document.createElement('div');
+    ball.className = 'intro-ball';
+
+    const shell = document.createElement('div');
+    shell.className = 'intro-shell';
+    ball.appendChild(shell);
+
     const dog = document.createElement('div');
     dog.className = 'intro-dog';
-    dog.innerHTML = global.Dog ? global.Dog.make('신남', 150) : '';
-    inner.appendChild(dog);
+    dog.innerHTML = global.Dog ? global.Dog.make('신남', 132) : '';
+    ball.appendChild(dog);
+
+    inner.appendChild(ball);
 
     // 글자 한 자씩. 띄어쓰기는 자리만 차지하게 둡니다.
     const word = document.createElement('div');
@@ -62,7 +73,7 @@
     [...WORD].forEach((ch, i) => {
       const s = document.createElement('span');
       if (ch === ' ') { s.className = 'sp'; s.innerHTML = '&nbsp;'; }
-      else { s.textContent = ch; s.style.animationDelay = (0.42 + i * 0.07).toFixed(2) + 's'; }
+      else { s.textContent = ch; s.style.animationDelay = (0.98 + i * 0.07).toFixed(2) + 's'; }
       word.appendChild(s);
     });
     inner.appendChild(word);
@@ -77,7 +88,7 @@
     paws.className = 'intro-paws';
     for (let i = 0; i < 4; i++) {
       const p = document.createElement('span');
-      p.style.animationDelay = (0.86 + i * 0.11).toFixed(2) + 's';
+      p.style.animationDelay = (1.60 + i * 0.10).toFixed(2) + 's';
       p.innerHTML =
         '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor">' +
         '<ellipse cx="12" cy="16.6" rx="6.1" ry="5.1"/>' +
@@ -130,8 +141,9 @@
     // 아무 데나 누르면 곧바로 넘어갑니다
     box.addEventListener('pointerdown', finish);
 
-    if (!slow) setTimeout(chime, 780);
-    setTimeout(finish, slow ? 900 : 2050);
+    // 종소리는 공이 바닥에 닿는 순간에
+    if (!slow) setTimeout(chime, 900);
+    setTimeout(finish, slow ? 900 : 2750);
   }
 
   if (document.readyState === 'loading') {

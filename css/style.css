@@ -2703,7 +2703,7 @@ body.dark .intro-word { color: #f4e6d6; }
   margin-top: 8px;
   font-size: clamp(15px, 4.2vw, 19px); font-weight: 600;
   color: #8a7460; letter-spacing: -0.01em;
-  animation: introSub 620ms ease-out .95s both;
+  animation: introSub 620ms ease-out 1.45s both;
 }
 body.dark .intro-sub { color: #b6a08a; }
 @keyframes introSub { from { opacity: 0; transform: translateY(8px) } to { opacity: 1 } }
@@ -2739,89 +2739,96 @@ body.introing { overflow: hidden; }
 .list-item.oneline .grow { min-width: 0; }
 .list-item.oneline .badge { white-space: nowrap; }
 
+
 /* ══════════════════════════════════════════════════════
-   강아지 자리 — 둥근 창에서 유리 구로
+   유리 구 — 확실히 보이게
 
-   선 한 겹으로 두른 원은 '왜 여기 원이 있나' 가 설명되지 않아
-   그냥 그려 넣은 테두리처럼 보였습니다.
-   유리 구로 만들면 형태에 이유가 생기고, 강아지가 그 안에 담긴
-   느낌이 납니다.
+   앞서 만든 것은 일부러 절제했더니 밝은 폰 화면에서는
+   있는지도 모를 만큼 옅었습니다. 절제가 지나쳤습니다.
+   테두리·빛·그늘을 모두 올려, 한눈에 「유리 공 안에 강아지가
+   들어 있다」로 읽히게 합니다.
 
-   지킨 것 둘
-     ① 흐림(blur)을 걸지 않습니다 — 뒤에 흩날리는 잎이 뭉개집니다.
-        대신 채도와 밝기만 아주 살짝 올려 '렌즈 너머' 느낌을 냅니다.
-     ② 하이라이트를 세게 넣지 않습니다 — 반짝이는 구슬은
-        예전 스타일이라 지금 화면과 따로 놉니다. 위쪽에 옅은 빛
-        한 줄, 아래쪽에 옅은 그늘 한 겹이면 둥글어 보입니다.
+   색은 rgba 로 적습니다. color-mix 는 조금 오래된 폰에서
+   통째로 무시되는데, 그러면 box-shadow 한 줄이 다 날아가
+   테두리가 아예 사라집니다.
    ══════════════════════════════════════════════════════ */
 .moonwin {
   isolation: isolate;
-  /* 위는 맑고 아래로 갈수록 살짝 어둡습니다 — 구가 도는 방향 */
   background:
-    radial-gradient(circle at 34% 26%,
-      color-mix(in srgb, #fff 34%, transparent) 0%,
-      color-mix(in srgb, #fff 12%, transparent) 34%,
-      transparent 62%),
-    radial-gradient(circle at 62% 108%,
-      color-mix(in srgb, var(--primary-c) 16%, transparent) 0%,
-      transparent 58%);
-  backdrop-filter: saturate(118%) brightness(1.03);
-  -webkit-backdrop-filter: saturate(118%) brightness(1.03);
+    /* 왼쪽 위에서 들어온 빛 */
+    radial-gradient(circle at 32% 24%,
+      rgba(255,255,255,.72) 0%,
+      rgba(255,255,255,.30) 26%,
+      rgba(255,255,255,.06) 52%,
+      transparent 68%),
+    /* 오른쪽 아래로 도는 그늘 — 이게 있어야 납작해 보이지 않습니다 */
+    radial-gradient(circle at 72% 104%,
+      rgba(120,80,30,.28) 0%,
+      rgba(120,80,30,.10) 40%,
+      transparent 66%);
+  backdrop-filter: saturate(126%) brightness(1.06);
+  -webkit-backdrop-filter: saturate(126%) brightness(1.06);
   box-shadow:
-    /* 유리 테두리 — 한 색으로 두르면 그린 선이 되고,
-       위아래 밝기를 달리해야 두께가 있는 유리로 보입니다 */
-    inset 0 1.5px 0 color-mix(in srgb, #fff 72%, transparent),
-    inset 0 -1.5px 0 color-mix(in srgb, var(--primary-c) 30%, transparent),
-    inset 0 0 0 1.5px color-mix(in srgb, #fff 34%, transparent),
-    /* 아래 안쪽 그늘 — 이것만으로 평면이 구가 됩니다 */
-    inset 0 -18px 30px -20px color-mix(in srgb, var(--primary-c) 60%, transparent),
-    /* 바깥 — 떠 있는 느낌 */
-    0 14px 30px -18px rgba(45,21,13,.30),
-    0 2px 6px -4px rgba(45,21,13,.16);
+    inset 0 3px 0 rgba(255,255,255,.92),          /* 유리 윗면 */
+    inset 0 -3px 0 rgba(150,100,40,.34),          /* 유리 밑면 */
+    inset 0 0 0 3px rgba(255,255,255,.55),        /* 두께 */
+    inset 0 -26px 40px -22px rgba(120,80,30,.55), /* 아래 안쪽 그늘 */
+    inset 0 18px 34px -26px rgba(255,255,255,.9), /* 위 안쪽 빛 */
+    0 0 0 1.5px rgba(150,100,40,.22),             /* 바깥 윤곽 — 배경과 안 섞이게 */
+    0 18px 34px -16px rgba(45,21,13,.34),
+    0 3px 8px -5px rgba(45,21,13,.2);
 }
 
-/* 위쪽 빛 한 줄 — 유리에 하늘이 비친 자리.
-   또렷한 흰 점을 찍으면 구슬처럼 보이므로 길게 눕혀 흐립니다. */
+/* 위쪽에 비친 하늘 — 또렷한 점이 아니라 눕힌 띠로 */
 .moonwin::before {
-  content: ''; position: absolute; z-index: 0;
-  left: 16%; top: 8%; width: 46%; height: 22%;
+  content: ''; position: absolute; z-index: 2;
+  left: 14%; top: 7%; width: 50%; height: 24%;
   border-radius: 50%;
-  background: linear-gradient(160deg,
-    rgba(255,255,255,.62) 0%, rgba(255,255,255,.16) 58%, transparent 100%);
-  filter: blur(6px);
+  background: linear-gradient(158deg,
+    rgba(255,255,255,.95) 0%, rgba(255,255,255,.42) 46%, transparent 100%);
+  filter: blur(5px);
   pointer-events: none;
 }
 
-/* 바닥에 닿은 그림자 — 구가 공중에 뜬 채로 끝나면 어색합니다 */
+/* 아래쪽에 되비친 빛 한 점 — 유리는 아래에서도 빛을 되받습니다 */
+.moonwin .dog::after {
+  content: ''; position: absolute; z-index: 2;
+  left: 50%; bottom: -4%; width: 34%; height: 7%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(255,255,255,.5);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+/* 바닥에 닿은 그림자 */
 .moonwin::after {
   content: ''; position: absolute; z-index: -1;
-  left: 18%; right: 18%; bottom: -3%; height: 9%;
+  left: 16%; right: 16%; bottom: -4%; height: 10%;
   border-radius: 50%;
   background: radial-gradient(ellipse at 50% 50%,
-    rgba(45,21,13,.22) 0%, transparent 72%);
+    rgba(45,21,13,.30) 0%, rgba(45,21,13,.10) 52%, transparent 74%);
   pointer-events: none;
 }
 
 body.dark .moonwin {
   background:
-    radial-gradient(circle at 34% 26%,
-      color-mix(in srgb, #fff 16%, transparent) 0%,
-      color-mix(in srgb, #fff 6%, transparent) 34%,
-      transparent 62%),
-    radial-gradient(circle at 62% 108%,
-      color-mix(in srgb, var(--primary-c) 22%, transparent) 0%,
-      transparent 58%);
+    radial-gradient(circle at 32% 24%,
+      rgba(255,255,255,.34) 0%, rgba(255,255,255,.12) 30%, transparent 64%),
+    radial-gradient(circle at 72% 104%, rgba(0,0,0,.5) 0%, transparent 66%);
   box-shadow:
-    inset 0 1.5px 0 color-mix(in srgb, #fff 34%, transparent),
-    inset 0 -1.5px 0 color-mix(in srgb, var(--primary-c) 40%, transparent),
-    inset 0 0 0 1.5px color-mix(in srgb, #fff 14%, transparent),
-    inset 0 -18px 30px -20px rgba(0,0,0,.5),
-    0 14px 30px -18px rgba(0,0,0,.55);
+    inset 0 3px 0 rgba(255,255,255,.5),
+    inset 0 -3px 0 rgba(0,0,0,.45),
+    inset 0 0 0 3px rgba(255,255,255,.2),
+    inset 0 -26px 40px -22px rgba(0,0,0,.62),
+    inset 0 18px 34px -26px rgba(255,255,255,.45),
+    0 0 0 1.5px rgba(255,255,255,.14),
+    0 18px 34px -16px rgba(0,0,0,.6);
 }
-body.dark .moonwin::before { background: linear-gradient(160deg,
-  rgba(255,255,255,.30) 0%, rgba(255,255,255,.07) 58%, transparent 100%); }
+body.dark .moonwin::before { background: linear-gradient(158deg,
+  rgba(255,255,255,.52) 0%, rgba(255,255,255,.16) 46%, transparent 100%); }
 body.dark .moonwin::after { background: radial-gradient(ellipse at 50% 50%,
-  rgba(0,0,0,.45) 0%, transparent 72%); }
+  rgba(0,0,0,.55) 0%, transparent 74%); }
 
 /* 「또렷하게 보기」에서는 유리 효과를 모두 끕니다 */
 body.contrast .moonwin {
@@ -2829,4 +2836,93 @@ body.contrast .moonwin {
   backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
   box-shadow: inset 0 0 0 3px var(--primary-c) !important;
 }
-body.contrast .moonwin::before, body.contrast .moonwin::after { display: none; }
+body.contrast .moonwin::before, body.contrast .moonwin::after,
+body.contrast .moonwin .dog::after { display: none; }
+
+/* ══════════════════════════════════════════════════════
+   인트로의 유리 공
+
+   복실이가 공에 담겨 왼쪽에서 굴러 들어와 통 튀고 멈춥니다.
+   공은 굴리되 강아지는 돌리지 않습니다 — 같이 돌면 거꾸로
+   뒤집혀 우스워집니다. 겉껍질만 따로 두고 그것만 돌립니다.
+   ══════════════════════════════════════════════════════ */
+.intro-ball {
+  position: relative;
+  width: min(210px, 56vw); aspect-ratio: 1/1;
+  margin: 0 auto;
+  display: flex; align-items: flex-end; justify-content: center;
+  animation: introRoll 1150ms cubic-bezier(.22,.9,.3,1) both;
+}
+/* 굴러 들어오며 튀어 오릅니다 */
+@keyframes introRoll {
+  0%   { opacity: 0; transform: translateX(-118%) translateY(0) }
+  22%  { opacity: 1 }
+  46%  { transform: translateX(-14%) translateY(-16%) }
+  66%  { transform: translateX(4%) translateY(0) }
+  80%  { transform: translateX(-2%) translateY(-7%) }
+  100% { transform: translateX(0) translateY(0) }
+}
+
+/* 겉껍질 — 유리. 이것만 한 바퀴 돕니다 */
+.intro-shell {
+  position: absolute; inset: 0; border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 24%,
+      rgba(255,255,255,.85) 0%, rgba(255,255,255,.32) 26%,
+      rgba(255,255,255,.06) 54%, transparent 68%),
+    radial-gradient(circle at 72% 104%,
+      rgba(150,96,30,.26) 0%, transparent 66%);
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.95),
+    inset 0 -3px 0 rgba(160,104,34,.38),
+    inset 0 0 0 3px rgba(255,255,255,.6),
+    inset 0 -28px 42px -22px rgba(140,88,26,.5),
+    0 0 0 1.5px rgba(160,104,34,.2),
+    0 20px 36px -18px rgba(45,21,13,.34);
+  animation: introSpin 1150ms cubic-bezier(.22,.9,.3,1) both;
+}
+@keyframes introSpin {
+  0%   { transform: rotate(-330deg) }
+  100% { transform: rotate(0deg) }
+}
+/* 유리에 비친 하늘 — 껍질과 같이 돕니다 */
+.intro-shell::before {
+  content: ''; position: absolute;
+  left: 14%; top: 8%; width: 48%; height: 22%;
+  border-radius: 50%;
+  background: linear-gradient(158deg,
+    rgba(255,255,255,.95) 0%, rgba(255,255,255,.4) 46%, transparent 100%);
+  filter: blur(5px);
+}
+
+.intro-ball .intro-dog {
+  position: relative; z-index: 1;
+  /* 공 한가운데보다 살짝 아래 — 안에 앉아 있는 것처럼 보입니다 */
+  margin-bottom: 17%;
+  animation: introDog 900ms cubic-bezier(.2,1.5,.45,1) 240ms both;
+}
+/* 공이 바닥에 닿은 그림자 */
+.intro-ball::after {
+  content: ''; position: absolute; z-index: -1;
+  left: 14%; right: 14%; bottom: -5%; height: 11%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(45,21,13,.28) 0%, transparent 74%);
+}
+
+body.dark .intro-shell {
+  background:
+    radial-gradient(circle at 32% 24%,
+      rgba(255,255,255,.36) 0%, rgba(255,255,255,.1) 30%, transparent 64%),
+    radial-gradient(circle at 72% 104%, rgba(0,0,0,.5) 0%, transparent 66%);
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.5),
+    inset 0 -3px 0 rgba(0,0,0,.5),
+    inset 0 0 0 3px rgba(255,255,255,.2),
+    inset 0 -28px 42px -22px rgba(0,0,0,.6),
+    0 20px 36px -18px rgba(0,0,0,.6);
+}
+
+/* 「움직임 줄이기」에서는 굴리지 않고 그대로 보여 드립니다 */
+.intro.still .intro-ball, .intro.still .intro-shell,
+.intro.still .intro-ball .intro-dog { animation: none !important; }

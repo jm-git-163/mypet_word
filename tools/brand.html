@@ -44,16 +44,66 @@ function squircle(ctx, x, y, w, h, r) {
 
 /* 감빛 바탕 — 위에서 아래로 흐르고, 왼쪽 위에 은은한 빛무리 */
 function warmBg(ctx, W, H) {
-  const g = ctx.createLinearGradient(0, 0, 0, H);
-  g.addColorStop(0, '#ffe9cd');
-  g.addColorStop(.55, '#ffdcb4');
-  g.addColorStop(1, '#f7c58f');
+  /* 예전에는 아주 옅은 크림빛이었는데, 강아지가 흰색이라
+     바탕과 색이 붙어 손톱만 한 아이콘에서 형체가 안 보였습니다.
+     진한 감빛으로 낮춰 흰 강아지가 확실히 떠 보이게 합니다. */
+  const g = ctx.createLinearGradient(0, 0, W * .35, H);
+  g.addColorStop(0, '#ffb454');
+  g.addColorStop(.52, '#f7962c');
+  g.addColorStop(1, '#e0751a');
   ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
-  const r = ctx.createRadialGradient(W * .30, H * .18, 0, W * .30, H * .18, W * .78);
-  r.addColorStop(0, 'rgba(255,255,255,.72)');
-  r.addColorStop(1, 'rgba(255,255,255,0)');
+  const r = ctx.createRadialGradient(W * .30, H * .16, 0, W * .30, H * .16, W * .82);
+  r.addColorStop(0, 'rgba(255,236,200,.62)');
+  r.addColorStop(1, 'rgba(255,236,200,0)');
   ctx.fillStyle = r; ctx.fillRect(0, 0, W, H);
+}
+
+/* 유리 공 — 앱 안 강아지 자리(.moonwin)와 같은 모양.
+   아이콘·카톡 썸네일·인트로가 모두 같은 것을 쓰면
+   「그 앱」이라는 인상이 한 번에 붙습니다. */
+function glassBall(ctx, cx, cy, r) {
+  // 공 안쪽 — 살짝 밝게
+  let g = ctx.createRadialGradient(cx - r * .32, cy - r * .38, r * .05, cx, cy, r);
+  g.addColorStop(0, 'rgba(255,255,255,.62)');
+  g.addColorStop(.42, 'rgba(255,255,255,.20)');
+  g.addColorStop(.78, 'rgba(255,255,255,.06)');
+  g.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.fill();
+}
+
+/* 공의 테두리와 빛 — 강아지를 얹은 뒤에 그려야 유리가 앞에 옵니다 */
+function glassRim(ctx, cx, cy, r) {
+  // 아래쪽 그늘 (안쪽)
+  let g = ctx.createRadialGradient(cx, cy + r * .52, r * .1, cx, cy + r * .3, r * 1.05);
+  g.addColorStop(0, 'rgba(120,66,10,.34)');
+  g.addColorStop(.55, 'rgba(120,66,10,.10)');
+  g.addColorStop(1, 'rgba(120,66,10,0)');
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.clip();
+  ctx.fillStyle = g; ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+  ctx.restore();
+
+  // 유리 두께 — 위는 밝고 아래는 어둡게 (한 색이면 그린 선이 됩니다)
+  g = ctx.createLinearGradient(cx, cy - r, cx, cy + r);
+  g.addColorStop(0, 'rgba(255,255,255,.95)');
+  g.addColorStop(.5, 'rgba(255,255,255,.42)');
+  g.addColorStop(1, 'rgba(160,96,20,.55)');
+  ctx.strokeStyle = g; ctx.lineWidth = r * .055;
+  ctx.beginPath(); ctx.arc(cx, cy, r - r * .027, 0, 7); ctx.stroke();
+
+  // 왼쪽 위에 비친 하늘 — 눕힌 띠
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.clip();
+  ctx.translate(cx - r * .34, cy - r * .56);
+  ctx.rotate(-0.42);
+  g = ctx.createLinearGradient(0, -r * .12, 0, r * .12);
+  g.addColorStop(0, 'rgba(255,255,255,.95)');
+  g.addColorStop(1, 'rgba(255,255,255,.05)');
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.ellipse(0, 0, r * .40, r * .13, 0, 0, 7); ctx.fill();
+  ctx.restore();
 }
 
 /* 강아지 뒤 핀 조명 — 파스텔 바탕에 흰 강아지가 묻히지 않게 */
@@ -74,41 +124,30 @@ async function icon(size, maskable) {
   if (!maskable) { squircle(ctx, 0, 0, W, W, W * .235); ctx.clip(); }
   warmBg(ctx, W, W);
 
-  /* 얼굴만 크게 담습니다.
-     예전에는 몸까지 통째로 넣었는데, 아이콘은 손톱만 하게 쓰이므로
-     몸이 들어가는 만큼 얼굴이 작아져 무슨 그림인지 알아보기 어려웠습니다.
-     눈·코·볼이 보여야 귀엽습니다.
+  /* 유리 공이 아이콘을 거의 꽉 채웁니다.
+     공을 작게 넣으면 강아지가 그만큼 더 작아져, 크게 보이게 하려던
+     뜻과 어긋납니다. 공의 테두리가 곧 「눈에 띄는 테두리」 노릇도 합니다. */
+  const pad = maskable ? 0.24 : 0.045;
+  const R = W * (0.5 - pad);
+  const cx = W / 2, cy = W / 2;
 
-     200칸 그림에서 얼굴은 x 38~162, y 46~160 자리에 있습니다.
-     그 네모가 아이콘을 꽉 채우도록 키워서 얹습니다. */
+  glassBall(ctx, cx, cy, R);
+
+  /* 얼굴만 크게. 200칸 그림에서 얼굴은 x 38~162, y 44~162 자리입니다.
+     공 안쪽(지름의 약 80%)에 그 네모가 들어가게 맞춥니다. */
   const FACE = { x: 38, y: 44, w: 124, h: 118 };
-  const pad = maskable ? 0.30 : 0.10;          // 마스커블은 가장자리가 잘립니다
-  const box = W * (1 - pad * 2);
-  const scale = box / Math.max(FACE.w, FACE.h);
-  const d = 200 * scale;                        // 그림 전체를 이만큼 키우면
-
-  spotlight(ctx, W / 2, W * .50, box * .62);
-
+  const scale = (R * 1.62) / Math.max(FACE.w, FACE.h);
   const img = await loadDog(700);
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, R * .985, 0, 7); ctx.clip();
   ctx.drawImage(img,
-    W / 2 - (FACE.x + FACE.w / 2) * scale,
-    W / 2 - (FACE.y + FACE.h / 2) * scale,
-    d, d);
+    cx - (FACE.x + FACE.w / 2) * scale,
+    cy - (FACE.y + FACE.h / 2) * scale + R * .04,
+    200 * scale, 200 * scale);
+  ctx.restore();
 
-  // 테두리 — 밝은 바탕에 흰 강아지가 묻히지 않게 안쪽으로 한 겹.
-  // 바깥에 두꺼운 선을 두르면 스티커처럼 보입니다.
-  if (!maskable) {
-    ctx.save();
-    squircle(ctx, W * .012, W * .012, W * .976, W * .976, W * .225);
-    ctx.strokeStyle = 'rgba(255,255,255,.72)';
-    ctx.lineWidth = W * .018;
-    ctx.stroke();
-    squircle(ctx, 0, 0, W, W, W * .235);
-    ctx.strokeStyle = 'rgba(150,95,25,.20)';
-    ctx.lineWidth = W * .012;
-    ctx.stroke();
-    ctx.restore();
-  }
+  // 유리는 강아지 앞에 옵니다
+  glassRim(ctx, cx, cy, R);
 
   const out = document.createElement('canvas'); out.width = out.height = size;
   out.getContext('2d').drawImage(c, 0, 0, size, size);
