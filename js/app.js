@@ -481,6 +481,11 @@
           h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'muted small' }, '만난 낱말'), h('div', { class: 'bignum' }, Object.keys(d.memory).length + '개')),
           h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'muted small' }, '발자국'), h('div', { class: 'bignum' }, d.footprints + '개'))
         )));
+
+      // 「바탕화면에 놓기」 안내가 들어올 자리.
+      // 이미 앱으로 여셨거나 안내를 닫으셨으면 아무것도 그리지 않습니다.
+      v.appendChild(h('div', { id: 'installhost' }));
+      if (global.Install) global.Install.render();
     },
 
     greet() {

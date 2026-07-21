@@ -2514,3 +2514,80 @@ body.dark.t-magnolia {
 
 /* 두 줄로 보여야 할 인사말 */
 .twoline { white-space: pre-line; }
+
+/* ══════════════════════════════════════════════════════
+   놀이 화면을 한 페이지에 담기
+
+   낱말판·쟁반·도구·단추가 차례로 쌓이면서 조금씩 밀려
+   판 아래가 잘리곤 했습니다. 글자 상자(쟁반 글자)는 손가락
+   크기라 그대로 두고, 사이 여백만 걷어 냅니다.
+   여백은 줄여도 읽는 데 지장이 없지만 잘린 판은 못 씁니다.
+   ══════════════════════════════════════════════════════ */
+body.playing #view { padding-top: 8px; padding-bottom: 10px; }
+body.playing .xwrap { padding: 10px 8px; min-height: 0; border-radius: 24px; }
+body.playing .tray { margin-top: 4px; gap: 10px; }
+body.playing .tools { margin-top: 10px; gap: 8px; }
+body.playing .tool-btn { min-height: calc(66px * var(--fs)); padding: 8px 6px; }
+body.playing .steps { margin-bottom: 6px; }
+/* 「오늘은 넘어가기」는 자주 쓰는 단추가 아닙니다. 자리를 적게 씁니다. */
+body.playing #skipbtn { min-height: calc(44px * var(--fs)); font-size: calc(17px * var(--fs)); }
+body.playing #hintbox:empty { display: none; }
+
+/* ══════════════════════════════════════════════════════
+   기뻐하는 강아지
+
+   낱말을 맞힐 때마다 통통 뜁니다.
+   한 판을 다 채웠을 때는 더 크게, 두 번 뜁니다.
+   ══════════════════════════════════════════════════════ */
+@keyframes dogHop {
+  0%   { transform: translateY(0) scale(1) }
+  22%  { transform: translateY(-16%) scale(1.06, .95) }
+  44%  { transform: translateY(0) scale(.96, 1.05) }
+  64%  { transform: translateY(-9%) scale(1.03, .98) }
+  100% { transform: translateY(0) scale(1) }
+}
+.dogsvg.hop { animation: dogHop 1s cubic-bezier(.34,1.4,.5,1); }
+
+@keyframes joyHop {
+  0%   { transform: scale(.4) translateY(0); opacity: 0 }
+  30%  { transform: scale(1.18) translateY(-14%); opacity: 1 }
+  46%  { transform: scale(1) translateY(0) }
+  60%  { transform: scale(1.06) translateY(-16%) }
+  74%  { transform: scale(1) translateY(0) }
+  86%  { transform: scale(1.03) translateY(-7%) }
+  100% { transform: scale(1) translateY(0) }
+}
+.burst.joy { animation: joyHop 1.5s cubic-bezier(.34,1.4,.5,1); }
+body.reduce-motion .dogsvg.hop, body.reduce-motion .burst.joy { animation: none; }
+
+/* ══════════════════════════════════════════════════════
+   바탕화면에 놓기 안내
+   ══════════════════════════════════════════════════════ */
+.install-bar { text-align: left; }
+.install-row { display: flex; align-items: center; gap: 14px; }
+.install-ico { border-radius: 16px; flex: none; box-shadow: 0 4px 12px -4px rgba(45,21,13,.3); }
+.install-txt { min-width: 0; }
+.install-txt b { display: block; font-size: calc(20px * var(--fs)); font-weight: 800; line-height: 1.4; }
+.install-txt span {
+  display: block; margin-top: 4px;
+  font-size: calc(16px * var(--fs)); line-height: 1.55;
+  color: var(--on-variant); word-break: keep-all;
+}
+.install-txt span b { display: inline; font-size: inherit; }
+
+/* 놀이 중에는 이미 쓴 쟁반 글자를 접어 둡니다.
+   잘못 놓은 글자는 이제 낱말판에서 그 칸을 눌러 빼내므로
+   쟁반에 남겨 둘 까닭이 없습니다. 쟁반이 줄어드는 만큼
+   낱말판이 한 화면에 더 들어옵니다. */
+body.playing .tile.used { display: none; }
+/* 발자국이 들지 않는 도구 단추 — 이름만 가운데에 */
+.tool-btn.free { justify-content: center; }
+body.playing .tools { grid-template-columns: repeat(4, 1fr); }
+
+/* 도구 단추 네 개가 한 줄에 들어가면 칸이 좁아집니다.
+   「글자 하나」가 두 줄로 접히며 단추가 세로로 길어지므로
+   놀이 중에는 글자와 그림을 한 치수 줄입니다. */
+body.playing .tool-btn { min-height: calc(58px * var(--fs)); padding: 6px 2px; gap: 1px; }
+body.playing .tool-btn .tool-nm { font-size: calc(14px * var(--fs)); line-height: 1.2; word-break: keep-all; }
+body.playing .tool-btn .tool-ic { width: calc(20px * var(--fs)); height: calc(20px * var(--fs)); margin: 0 auto 1px; }
+body.playing .tool-btn .tool-cost { font-size: calc(13px * var(--fs)); }

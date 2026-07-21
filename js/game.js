@@ -84,6 +84,8 @@
       this.wordSt = {}; this.selfSolved = 0;
 
       $('tabbar').classList.add('hidden');
+      // 놀이 중에는 여백을 걷어 판이 한 화면에 들어오게 합니다
+      document.body.classList.add('playing');
 
       App.top(this.reviewOnly ? this.stage.modeName : this.stage.level + '번째 산책',
         h('button', { class: 'iconbtn back', 'aria-label': '나가기', onclick: () => this.leave() },
@@ -122,6 +124,9 @@
       v.appendChild(h('div', { class: 'row', style: 'margin-top:14px;justify-content:center' },
         h('button', { class: 'btn quiet', id: 'skipbtn', onclick: () => this.skip() }, '오늘은 넘어가기')));
       v.appendChild(h('div', { id: 'hintbox', style: 'margin-top:12px' }));
+
+      // 낱말판을 한 화면에 담습니다 (칸을 다 그린 뒤라야 잴 수 있습니다)
+      requestAnimationFrame(() => this.fitBoard());
 
       global.UI.guardTaps();   // 화면이 바뀐 직후 오터치 방지
 
@@ -198,9 +203,8 @@
       }, ch)));
       box.appendChild(tray);
 
-      box.appendChild(h('div', { class: 'row', style: 'margin-top:14px;gap:12px' },
-        h('button', { class: 'btn tool', style: 'flex:1', onclick: () => this.eraseWord() }, '↩ 지우기'),
-        h('button', { class: 'btn tool', style: 'flex:1', onclick: () => this.nextWord() }, '⇄ 다른 낱말')));
+      // 「지우기」와 「다른 낱말」은 아래 도구 칸(drawTools)에 함께 놓습니다.
+      // 비슷한 단추가 세 줄로 쌓이면 자리만 차지하고 눈도 어지럽습니다.
     },
 
     /* ══════════════════════════════════════════════
@@ -254,6 +258,14 @@
             return c; })()));
       });
 
+      // 「지우기」와 「다른 낱말」도 같은 줄에. 발자국이 들지 않는 단추라
+      // 값 표시 자리는 비워 둡니다.
+      if (isGrid) {
+        const free = (label, fn) => h('button', { class: 'tool-btn free', onclick: fn },
+          h('span', { class: 'tool-nm' }, label));
+        box.appendChild(free('지우기', () => this.eraseWord()));
+        box.appendChild(free('다른 낱말', () => this.nextWord()));
+      }
     },
 
     useTool(t) {
@@ -320,7 +332,14 @@
       this.redrawGrid();
     },
 
-    /** 칸을 누르면 그 칸이 속한 낱말을 고릅니다 (칸이 작아도 헤매지 않게) */
+    /**
+     * 칸을 누르면 그 칸이 속한 낱말을 고릅니다 (칸이 작아도 헤매지 않게).
+     *
+     * 이미 고른 낱말의 칸을 한 번 더 누르면 거기 놓인 글자를 빼냅니다.
+     * 잘못 넣었을 때 쟁반에서 그 글자를 도로 찾아 누르거나
+     * 「지우기」를 누르지 않아도 되게 하려는 것입니다.
+     * 「한 번 누르면 고르고, 다시 누르면 지운다」 — 실수로 지워지지 않습니다.
+     */
     tapCell(r, c) {
       const g = this.item.grid;
       const hits = g.words.map((w, i) => i).filter(i => {
@@ -329,6 +348,14 @@
           : (c === w.c && r >= w.r && r < w.r + w.len);
       }).filter(i => !this.solvedWords.includes(i));
       if (!hits.length) return;
+
+      const k = global.Crossword.key(r, c);
+      const ti = this.tileAt && this.tileAt[k];
+      const mine = ti !== undefined
+        && !this.item.prefilled.includes(k)
+        && !this.isCellSolved(r, c);
+      if (mine && hits.includes(this.wordIdx)) return this.pullBack(ti);
+
       Sound.tap();
       this.wordIdx = hits.includes(this.wordIdx) && hits.length > 1
         ? hits[(hits.indexOf(this.wordIdx) + 1) % hits.length] : hits[0];
@@ -419,6 +446,7 @@
 
       if (newlySolved) {
         Sound.right();
+        this.cheer();
         const e = global.Engine.DB.byId[g.words[this.solvedWords[this.solvedWords.length - 1]].entryId];
         if (e) this.metThisGrid = (this.metThisGrid || []).concat([e]);
         this.selectFirstUnsolved();
@@ -445,10 +473,68 @@
       }
     },
 
+    /**
+     * 낱말 하나를 맞혔을 때 — 강아지가 통통 뜁니다.
+     * 판을 다 채워야만 좋아하면 도중에 잘 되어 가는 느낌이 없습니다.
+     * 「움직임 줄이기」를 켜신 분께는 뛰지 않습니다.
+     */
+    cheer() {
+      if (Store.data.settings.motion) return;
+      // 화면에 나와 있는 강아지를 찾습니다(막혔을 때 다가온 강아지 등).
+      const dog = document.querySelector('#view .dogsvg');
+      if (!dog) return;
+      dog.classList.remove('hop');
+      void dog.offsetWidth;              // 잇따라 맞혀도 매번 다시 뛰게 합니다
+      dog.classList.add('hop');
+      setTimeout(() => dog.classList.remove('hop'), 1000);
+    },
+
     redrawGrid() {
       const box = $('play'); if (!box) return;
       box.innerHTML = '';
       this.drawGrid(box);
+      requestAnimationFrame(() => this.fitBoard());
+    },
+
+    /**
+     * 낱말판을 한 화면에 담습니다.
+     *
+     * 칸을 1fr 로 나누면 좌우로는 넘치지 않지만, 세로줄이 많은 판에서는
+     * 아래가 잘려 스크롤을 해야 합니다. 판 전체가 한눈에 보이지 않으면
+     * 어디를 채워야 할지 놓치게 됩니다.
+     *
+     * 그래서 화면에 남은 높이를 재어 판이 그 안에 들어오도록 칸의 최대
+     * 크기를 낮춥니다. 쟁반 글자는 손가락 크기라 건드리지 않고 낱말판만
+     * 줄입니다. 34px 아래로는 내려가지 않습니다 — 그보다 작으면 읽을 수
+     * 없어서, 차라리 스크롤하시는 편이 낫습니다.
+     */
+    fitBoard() {
+      const grid = $('xgrid'); if (!grid) return;
+      const g = this.item && this.item.grid; if (!g) return;
+      const view = $('view'); if (!view) return;
+
+      // MIN 은 '한 화면에 담으려고 줄일 수 있는 한계'입니다.
+      // 이보다 더 줄여야 담기는 판이라면 아예 줄이지 않습니다 —
+      // 글자를 못 읽을 만큼 작아졌는데도 여전히 스크롤해야 한다면
+      // 아무것도 나아지지 않고 읽기만 어려워지기 때문입니다.
+      const GAP = 5, MIN = 46, MAX = 74;
+      const gridH = grid.getBoundingClientRect().height;
+      if (!gridH) return;
+
+      // 판을 뺀 나머지(위 발자국·쟁반·도구·단추)가 이미 차지한 높이
+      const rest = view.scrollHeight - gridH;
+      const room = view.clientHeight - rest - 4;
+      const per = (room - (g.h - 1) * GAP) / g.h;
+
+      const cell = Math.max(MIN, Math.min(MAX, Math.floor(per)));
+      grid.style.maxWidth = (cell * g.w + (g.w - 1) * GAP) + 'px';
+
+      // 칸이 줄었으면 글자도 따라 줄여야 칸을 뚫고 나오지 않습니다
+      const probe = grid.querySelector('.xcell');
+      if (probe) {
+        const px = probe.getBoundingClientRect().width;
+        if (px > 0) grid.style.setProperty('--cellfs', Math.round(px * 0.62) + 'px');
+      }
     },
 
     /** 판을 다 채웠을 때 */
@@ -474,7 +560,7 @@
     praise(text, next) {
       sheet((box, close) => {
         box.appendChild(h('div', { class: 'celebrate' },
-          h('div', { class: 'burst' }, global.UI.dogEl('신남', 104)),
+          h('div', { class: 'burst joy' }, global.UI.dogEl('신남', 112)),
           h('div', { class: 'big' }, text)));
         box.appendChild(h('button', {
           class: 'btn primary wide', style: 'margin-top:6px',
@@ -620,6 +706,7 @@
     leave() {
       clearTimeout(this._nudge);
       $('tabbar').classList.remove('hidden');
+      document.body.classList.remove('playing');
       App.go('walk');
     },
 

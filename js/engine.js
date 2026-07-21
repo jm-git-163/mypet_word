@@ -457,7 +457,7 @@
       for (const size of [260, 420, 700]) {
         const p = makePool(size);
         if (p.length < 20) continue;
-        const g = global.Crossword.buildBest(rng, p, { words: spec.words, maxW: 7, maxH: 18 });
+        const g = global.Crossword.buildBest(rng, p, { words: spec.words, maxW: 7, maxH: 15 });
         if (g && (!grid || g.words.length > grid.words.length)) grid = g;
         if (grid && grid.words.length >= MIN_WORDS) break;
       }
@@ -568,7 +568,7 @@
 
       if (pool) {
         const spec = gridSpec(targetP || 0.8, level);
-        const grid = global.Crossword.buildBest(rng, pool, { words: spec.words, maxW: 7, maxH: 18 });
+        const grid = global.Crossword.buildBest(rng, pool, { words: spec.words, maxW: 7, maxH: 15 });
         if (grid && grid.words.length >= 3) {
           // 미리 채울 칸 수는 판이 실제로 몇 칸인지 보고 정합니다
       const cellCount = Object.keys(grid.letters).length;
