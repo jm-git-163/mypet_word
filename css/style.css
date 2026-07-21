@@ -2790,16 +2790,8 @@ body.introing { overflow: hidden; }
   pointer-events: none;
 }
 
-/* 아래쪽에 되비친 빛 한 점 — 유리는 아래에서도 빛을 되받습니다 */
-.moonwin .dog::after {
-  content: ''; position: absolute; z-index: 2;
-  left: 50%; bottom: -4%; width: 34%; height: 7%;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: rgba(255,255,255,.5);
-  filter: blur(4px);
-  pointer-events: none;
-}
+/* 강아지 발밑에 되비친 빛을 한 줄 넣었었는데, 흐린 흰 띠가
+   유리 안에 잘못 그은 줄처럼 보였습니다. 뺐습니다. */
 
 /* 바닥에 닿은 그림자 */
 .moonwin::after {
@@ -2836,8 +2828,7 @@ body.contrast .moonwin {
   backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
   box-shadow: inset 0 0 0 3px var(--primary-c) !important;
 }
-body.contrast .moonwin::before, body.contrast .moonwin::after,
-body.contrast .moonwin .dog::after { display: none; }
+body.contrast .moonwin::before, body.contrast .moonwin::after { display: none; }
 
 /* ══════════════════════════════════════════════════════
    인트로의 유리 공
@@ -2926,3 +2917,45 @@ body.dark .intro-shell {
 /* 「움직임 줄이기」에서는 굴리지 않고 그대로 보여 드립니다 */
 .intro.still .intro-ball, .intro.still .intro-shell,
 .intro.still .intro-ball .intro-dog { animation: none !important; }
+
+/* ══════════════════════════════════════════════════════
+   투명도 한 단계 더
+
+   재어 보니 여유가 있었습니다. 카드를 30% 까지 낮춰도
+   가장 나쁜 자리(밝은 화면의 어두운 풍경 위 흐린 글씨)가 5.39:1,
+   어두운 화면에서도 5.97:1 로 기준(4.5:1)을 넘습니다.
+   그래서 한 단계씩 더 열어 뒤 풍경이 잘 비치게 합니다.
+
+   ※ 애드센스는 앱 UI 의 투명도를 보지 않습니다. 심사 대상은
+     소개·읽을거리 쪽 콘텐츠이고, 놀이 화면에는 광고를 넣지
+     않습니다. 정책이 막는 것은 「광고를 가리거나 콘텐츠와
+     헷갈리게 두는 것」이지 이런 배경 투명도가 아닙니다.
+   ══════════════════════════════════════════════════════ */
+#view > .card { background-color: color-mix(in srgb, var(--white) 38%, transparent); }
+.list-item, .toggle, .hue, .preview-box, .fact {
+  background-color: color-mix(in srgb, var(--white) 42%, transparent);
+}
+.btn:not(.primary):not(.quiet) { background: color-mix(in srgb, var(--white) 38%, transparent); }
+.tool-btn { background: color-mix(in srgb, var(--white) 42%, transparent) !important; }
+.tile { background: color-mix(in srgb, var(--white) 62%, transparent); }
+.xwrap {
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--board-tint) 0%, transparent 76%),
+    color-mix(in srgb, var(--white) 28%, transparent) !important;
+}
+.tabbar { background: color-mix(in srgb, var(--white) 58%, transparent); }
+.topbar { background: color-mix(in srgb, var(--surface) 56%, transparent); }
+
+/* 낱말 칸은 글자가 걸려 있어 조금만 엽니다 —
+   여기까지 열면 어느 칸이 비었는지 알아보기 어려워집니다. */
+.xcell:not(.gap) { background: color-mix(in srgb, var(--cell-bg) 82%, transparent); }
+
+/* 「또렷하게 보기」는 그대로 불투명하게 둡니다 */
+body.contrast #view > .card, body.contrast .list-item, body.contrast .toggle,
+body.contrast .hue, body.contrast .preview-box, body.contrast .fact,
+body.contrast .btn, body.contrast .tool-btn, body.contrast .tile,
+body.contrast .tabbar, body.contrast .topbar {
+  background: var(--white) !important;
+}
+body.contrast .xwrap { background: var(--white) !important; }
+body.contrast .xcell:not(.gap) { background: var(--cell-bg) !important; }
