@@ -548,7 +548,7 @@
 
       v.appendChild(h('div', { class: 'section-title' }, '지나갈 동네'));
       NEIGHBORHOODS.forEach((n, i) => {
-        const row = h('div', { class: 'list-item' + (i === hoodIdx ? '' : ' faded') });
+        const row = h('div', { class: 'list-item oneline' + (i === hoodIdx ? '' : ' faded') });
         const dot = h('span', { class: 'hue-dot' });
         const found = HUES.find(x => x[0] === n.hue);
         dot.style.background = found ? found[2] : '#ef8f22';
@@ -648,14 +648,8 @@
           class: 'btn primary big wide', onclick: () => global.Game.startProverbs()
         }, '속담 맞히러 가기')));
 
-      v.appendChild(h('div', { class: 'card' },
-        h('h2', null, '간직한 속담과 낱말'),
-        h('p', { class: 'muted small', style: 'margin:-6px 0 14px' },
-          d.fav.length ? `♡ 로 담아 두신 ${d.fav.length}개예요.` : '마음에 드는 것을 ♡ 로 담아 두실 수 있어요.'),
-        h('button', {
-          class: 'btn tool wide',
-          onclick: () => this.listWords(d.fav.map(id => DB.byId[id]).filter(Boolean), '간직한 낱말')
-        }, '간직한 것 보기')));
+      // 「간직한 속담과 낱말」은 지웠습니다.
+      // 간직하기(♡) 자체를 없앴으니 늘 비어 있는 칸이었습니다.
     },
 
 

@@ -2730,3 +2730,11 @@ body.dark .intro-paws span { color: #8a6238; }
 
 /* 인트로가 떠 있는 동안에는 뒤가 스크롤되지 않게 */
 body.introing { overflow: hidden; }
+
+/* 「지나갈 동네」처럼 글이 짧은 줄은 한 줄로 둡니다.
+   기본 목록은 글자 칸에 62% 를 보장해 두는데, 그러면 「지금 여기」
+   뱃지가 들어갈 자리가 모자라 아랫줄로 내려가고
+   칸 높이가 두 배가 되며 여백만 넓어집니다. */
+.list-item.oneline { flex-wrap: nowrap; }
+.list-item.oneline .grow { min-width: 0; }
+.list-item.oneline .badge { white-space: nowrap; }
