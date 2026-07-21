@@ -35,60 +35,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="낱말 산책">
 
-<!-- ══════════════════════════════════════════════════════
-     카카오톡 안에서 열렸을 때 바깥 브라우저로 내보내기
-
-     카톡에서 링크를 누르면 카톡이 품고 있는 작은 브라우저가 열립니다.
-     여기서 놀면 안 되는 까닭이 있습니다.
-       ① 저장한 자료가 따로 놉니다 — 몇 단계까지 걸었는지, 모은 낱말이
-          다음에 열 때 사라집니다. 어르신께는 가장 속상한 일입니다.
-       ② 「홈 화면에 추가」가 되지 않아 앱처럼 쓸 수 없습니다.
-       ③ 소리가 막히는 일이 있습니다.
-
-     그래서 카톡 안이면 곧바로 바깥 브라우저(크롬 등)로 넘깁니다.
-     혹시 넘어가지 않을 때를 대비해 큰 단추도 함께 보여 드립니다.
-     ══════════════════════════════════════════════════════ -->
-<script>
-(function () {
-  var ua = (navigator.userAgent || '').toLowerCase();
-  if (ua.indexOf('kakaotalk') === -1) return;      // 카톡 안이 아니면 아무 일도 하지 않습니다
-
-  var here = location.href.split('#')[0];
-  var jump = function () {
-    // 카카오가 공식으로 열어 둔 길입니다. 안드로이드·아이폰 모두 됩니다.
-    location.href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(here);
-  };
-  jump();
-
-  // 넘어가지 않았을 때를 위한 안내 — 글씨를 크게, 단추도 크게
-  var show = function () {
-    var d = document.createElement('div');
-    d.setAttribute('style', [
-      'position:fixed;inset:0;z-index:2147483647',
-      'background:#faf7f4;color:#29211b',
-      "font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif",
-      'display:flex;flex-direction:column;align-items:center;justify-content:center',
-      'gap:20px;padding:28px;text-align:center;word-break:keep-all'
-    ].join(';'));
-    d.innerHTML =
-      '<img src="images/og.png" alt="" style="width:min(320px,80vw);border-radius:20px">' +
-      '<p style="font-size:23px;font-weight:800;line-height:1.6;margin:0">' +
-      '크롬으로 열어야<br>기록이 지워지지 않아요' +
-      '</p>' +
-      '<p style="font-size:18px;color:#5b4e44;line-height:1.7;margin:0">' +
-      '아래 단추를 눌러 주세요.<br>' +
-      '단추가 안 되면 오른쪽 위 <b>⋯</b> 를 누르고<br><b>다른 브라우저로 열기</b> 를 골라 주세요.' +
-      '</p>' +
-      '<button id="kkjump" style="min-height:64px;padding:0 34px;font-size:21px;font-weight:800;' +
-      'font-family:inherit;color:#3d1f00;background:#ef8f22;border:0;border-radius:999px;' +
-      'box-shadow:0 5px 0 #c26c05;cursor:pointer">크롬으로 열기</button>';
-    document.body.appendChild(d);
-    document.getElementById('kkjump').addEventListener('click', jump);
-  };
-  if (document.body) show();
-  else document.addEventListener('DOMContentLoaded', show);
-})();
-</script>
+<!-- 카톡 안이면 바깥 브라우저로 내보냅니다 (js/open-outside.js) -->
+<script src="js/open-outside.js"></script>
 </head>
 <body>
 <noscript><p style="padding:24px;font-size:22px">이 앱을 쓰시려면 브라우저에서 자바스크립트를 켜 주세요.</p></noscript>

@@ -43,6 +43,11 @@
     location.replace('play.html');
   }
 </script>
+
+<!-- 카톡 안이면 바깥 브라우저로 내보냅니다.
+     카톡으로 받은 주소가 이 소개 화면일 때가 많은데, 카톡 브라우저에는
+     「홈 화면에 추가」가 없어 바탕화면 아이콘을 만들 수 없습니다. -->
+<script src="js/open-outside.js"></script>
 </head>
 <body>
 
@@ -129,6 +134,17 @@
   </div>
 
 </main>
+
+<!-- 서비스워커가 있어야 크롬이 「앱 설치」를 제안합니다.
+     이 등록이 없으면 설치 안내 단추가 아예 뜨지 않습니다. -->
+<script>
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
+</script>
+<script src="js/install.js"></script>
 
 <footer class="site-foot">
   <div class="inner">
