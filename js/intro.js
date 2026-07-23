@@ -81,9 +81,11 @@
     const me = saved();
     const dog = document.createElement('div');
     dog.className = 'intro-dog';
-    // 오래 함께 걸으셨을수록 더 신이 나 있습니다
+    // 오래 함께 걸으셨을수록 더 신이 나 있습니다.
+    // '갸웃'은 몸 전체가 -8도 기울어 인트로처럼 반듯해야 할 자리에서는
+    // '삐딱하게 나온 것'처럼 보입니다. 처음 여는 화면은 항상 반듯하게 둡니다.
     dog.innerHTML = global.Gull
-      ? global.Gull.make(me.bond >= 8 ? '신남' : me.done > 0 ? '반가움' : '갸웃', 132) : '';
+      ? global.Gull.make(me.bond >= 8 ? '신남' : '반가움', 132) : '';
     ball.appendChild(dog);
 
     inner.appendChild(ball);

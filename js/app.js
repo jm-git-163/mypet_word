@@ -553,6 +553,20 @@
         btn.appendChild(h('span', null, TAB_NAME[id]));
         bar.appendChild(btn);
       });
+      // 나가기 — 화면마다 「설정」까지 들어가지 않아도 바로 끝낼 수 있게
+      // 아래 메뉴줄에 늘 있게 둡니다. 다른 칸과 달리 화면을 바꾸지 않고
+      // 곧바로 끝내므로 '선택된 칸(on)' 표시는 하지 않습니다.
+      {
+        const btn = h('button', {
+          'aria-label': '나가기', onclick: () => { Sound.tap(); this.quit(); }
+        });
+        const ic = h('span', { class: 'ic' });
+        ic.innerHTML = SVG('<path d="M15 4H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8"/>' +
+          '<path d="M11 12h9m0 0-3.5-3.5M20 12l-3.5 3.5"/>');
+        btn.appendChild(ic);
+        btn.appendChild(h('span', null, '나가기'));
+        bar.appendChild(btn);
+      }
     },
 
     go(tab) {
@@ -747,7 +761,9 @@
         h('div', { class: 'petacts' },
           h('button', {
             class: 'btn go', onclick: () => {
-              dogMood('petdog', '신남', 150);
+              // 쓰다듬으면 크게 두 번 확 파닥이고, 이어서 신난 표정으로 자리잡습니다
+              dogMood('petdog', '신남', 150, { flapBurst: true });
+              setTimeout(() => dogMood('petdog', '신남', 150), 900);
               setTimeout(() => dogMood('petdog', '반가움', 150), 1600);
               Sound.chirp();
               this.toast(v, `${d.pet.name}가 좋아서 날개를 파닥여요!`);
@@ -1424,16 +1440,12 @@
           ['⏭', '어려우면 「오늘은 넘어가기」로 넘기셔도 돼요.', null, '아무 손해가 없어요.']
         ]);
 
-        group('막히셨을 때', [
-          ['🎯', '글자 하나', '👣 3', '빈 칸 하나를 채워드려요'],
-          ['✨', '낱말 하나', '👣 10', '낱말을 통째로 채워드려요']
+        group('막히면 이렇게', [
+          ['🎯', '「글자 하나」·「낱말 하나」 단추를 누르면 발자국을 써서 채워드려요.']
         ]);
 
-        group('발자국 모으기', [
-          ['👣', '혼자 힘으로 낱말을 맞히면', '👣 1'],
-          ['🎉', '판을 다 채우면', '👣 8'],
-          ['🏅', '열 판을 걸어 마당 하나를 마치면', '👣 20'],
-          ['🌅', '하루에 처음 오시면', '👣 10']
+        group('발자국은', [
+          ['👣', '낱말을 맞히거나 판을 채우면 저절로 쌓여요.']
         ]);
 
         group('해운대 정보', [
@@ -1528,6 +1540,24 @@
             h('button', { class: 'btn primary big wide', style: 'margin-top:20px', onclick: () => { step = 1; render(); } }, '다음')));
           
         } else if (step === 1) {
+          // 첫 화면에서 "이름을 지어 주시면"이라 약속했으니, 다음은 곧바로 이름 짓기입니다.
+          // (글씨 크기 조정이 먼저 나오면 약속과 순서가 어긋나 헷갈립니다)
+          v.appendChild(h('div', { class: 'center' }, dogEl('갸웃', 130, 'introdog2')));
+          v.appendChild(h('div', { class: 'card' },
+            h('h2', null, '갈매기 이름을 지어 주세요'),
+            h('p', { class: 'muted' }, '마음에 드는 이름을 골라 주세요.'),
+            (() => {
+              const box = h('div', { class: 'stack' });
+              ['누리', '해운이', '바다', '파도', '구름', '달이'].forEach(n => box.appendChild(
+                h('button', { class: 'btn tool wide', onclick: () => { d.pet.name = n; Store.save(); step = 2; render(); } }, n)));
+              return box;
+            })(),
+            h('button', {
+              class: 'btn quiet wide', style: 'margin-top:10px', onclick: () => {
+                askName(d.pet.name || '누리', n => { d.pet.name = n; Store.save(); step = 2; render(); });
+              }
+            }, '직접 지어 줄게요')));
+        } else if (step === 2) {
           v.appendChild(h('div', { class: 'card' },
             h('h2', null, '글씨가 잘 보이시나요?'),
             h('p', { class: 'muted' }, '아래 단추를 눌러 편한 크기로 맞춰 주세요.'),
@@ -1542,23 +1572,7 @@
             h('div', { class: 'preview-box' },
               h('div', { style: 'font-size:calc(34px * var(--fs));font-weight:800' }, '온고지신'),
               h('div', { style: 'margin-top:8px' }, '옛것을 익혀 새로운 것을 안다는 뜻입니다.'))));
-          v.appendChild(h('button', { class: 'btn primary big wide', onclick: () => { step = 2; render(); } }, '이 크기가 좋아요'));
-        } else if (step === 2) {
-          v.appendChild(h('div', { class: 'center' }, dogEl('갸웃', 130, 'introdog2')));
-          v.appendChild(h('div', { class: 'card' },
-            h('h2', null, '갈매기 이름을 지어 주세요'),
-            h('p', { class: 'muted' }, '마음에 드는 이름을 골라 주세요.'),
-            (() => {
-              const box = h('div', { class: 'stack' });
-              ['누리', '해운이', '바다', '파도', '구름', '달이'].forEach(n => box.appendChild(
-                h('button', { class: 'btn tool wide', onclick: () => { d.pet.name = n; Store.save(); step = 3; render(); } }, n)));
-              return box;
-            })(),
-            h('button', {
-              class: 'btn quiet wide', style: 'margin-top:10px', onclick: () => {
-                askName(d.pet.name || '누리', n => { d.pet.name = n; Store.save(); step = 3; render(); });
-              }
-            }, '직접 지어 줄게요')));
+          v.appendChild(h('button', { class: 'btn primary big wide', onclick: () => { step = 3; render(); } }, '이 크기가 좋아요'));
         } else {
           v.appendChild(h('div', { class: 'center' },
             dogEl('신남', 130, 'introdog3'),

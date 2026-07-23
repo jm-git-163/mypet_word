@@ -49,7 +49,10 @@ const strip = h => h.replace(/<script[\s\S]*?<\/script>/gi, '')
    상세 페이지의 <title> 은 대개 "공지사항의 상세보기 < 새소식 < 구청" 이라 쓸모가 없다.
    목록의 링크 글자가 진짜 제목이다. */
 function extractLinks(html, baseUrl, pattern) {
-  const re = new RegExp(`<a[^>]*href=["']([^"']*${pattern}[^"']*)["'][^>]*>([\\s\\S]*?)<\\/a>`, 'gi');
+  // href 안의 & 는 실제 HTML에 거의 항상 &amp; 로 이스케이프되어 있습니다.
+  // linkPattern에 '&wr_id=' 처럼 그냥 & 를 썼다가는 영원히 안 걸립니다.
+  const safePattern = pattern.replace(/&/g, '(?:&|&amp;)');
+  const re = new RegExp(`<a[^>]*href=["']([^"']*${safePattern}[^"']*)["'][^>]*>([\\s\\S]*?)<\\/a>`, 'gi');
   const seen = new Set(), out = [];
   let m;
   while ((m = re.exec(html))) {
@@ -154,9 +157,17 @@ async function checkSource(src, state, agent) {
   st.lastMod = res.headers.get('last-modified') || st.lastMod;
 
   const html = await res.text();
-  const links = src.idPattern
+  let links = src.idPattern
     ? extractByOnclick(html, src)
     : extractLinks(html, src.listUrl, src.linkPattern || 'view');
+
+  /* 부산 전체 17개 구·군을 한 게시판에서 같이 다루는 기관이 있습니다(자원봉사센터 등).
+     그대로 받으면 해운대 앱에 다른 구 소식이 섞여 들어갑니다.
+     제목에 이 낱말이 있는 글만 골라 받습니다. */
+  if (src.titleFilter) {
+    const re = new RegExp(src.titleFilter);
+    links = links.filter(l => re.test(l.text));
+  }
 
   /* 게시판 첫 쪽만 보면 열 몇 건에서 끊깁니다.
      동 소식지처럼 자주 올라오는 글은 이틀만 지나도 둘째 쪽으로 밀려나
@@ -175,8 +186,14 @@ async function checkSource(src, state, agent) {
         ? extractByOnclick(h2, src)
         : extractLinks(h2, u.href, src.linkPattern || 'view');
       const have = new Set(links.map(l => l.url));
-      const added = more.filter(l => !have.has(l.url));
+      let added = more.filter(l => !have.has(l.url));
       if (!added.length) break;                       // 같은 쪽이 되풀이되면 멈춥니다
+      // 필터는 여기서 적용합니다 — 이 쪽에 해운대 글이 마침 없다고
+      // 다음 쪽까지 안 보면 뒤쪽 쪽의 해운대 글을 놓칩니다.
+      if (src.titleFilter) {
+        const re = new RegExp(src.titleFilter);
+        added = added.filter(l => re.test(l.text));
+      }
       links.push(...added);
     } catch (e) { break; }
   }

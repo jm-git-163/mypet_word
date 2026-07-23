@@ -73,9 +73,15 @@
 
     const flapDur = FLAP[m.flap] || 0;
     /* 날개는 몸에 붙인 채 살짝 들썩이기만 합니다.
-       크게 펼쳐 회전시키면 갈매기가 아니라 박쥐처럼 보입니다. */
-    const wingAnim = (reduce || !flapDur) ? '' :
-      `<animateTransform attributeName="transform" type="rotate" values="0 128 126;-7 128 126;0 128 126" dur="${flapDur}s" repeatCount="indefinite" additive="sum"/>`;
+       크게 펼쳐 회전시키면 갈매기가 아니라 박쥐처럼 보입니다.
+       다만 쓰다듬었을 때는 '진짜 파닥인다'는 게 느껴져야 하므로,
+       그때만 훨씬 크게 두 번 퍼덕이고 멈춥니다(끝없이 반복하지 않음). */
+    const wingAnim = (opts && opts.flapBurst && !reduce)
+      ? `<animateTransform attributeName="transform" type="rotate" ` +
+        `values="0 128 126;-26 128 126;6 128 126;-26 128 126;6 128 126;0 128 126" ` +
+        `dur="0.85s" repeatCount="1" additive="sum"/>`
+      : (reduce || !flapDur) ? '' :
+        `<animateTransform attributeName="transform" type="rotate" values="0 128 126;-7 128 126;0 128 126" dur="${flapDur}s" repeatCount="indefinite" additive="sum"/>`;
 
     const bobDur = m.bob === 'hop' ? 0.7 : (m.bob === 'slow' ? 3.4 : 2.1);
     const bobVals = m.bob === 'hop' ? '0 0;0 -11;0 0' : '0 0;0 -4;0 0';

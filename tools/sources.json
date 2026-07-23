@@ -275,11 +275,12 @@
       "cadenceMin": 1440,
       "listUrl": "https://apis.data.go.kr/6260000/FestivalService/getFestivalKr",
       "needsKey": "BUSAN_SERVICE_KEY",
-      "enabled": true,
+      "enabled": false,
       "audience": [
         "senior",
         "resident"
-      ]
+      ],
+      "note": "공공데이터포털 API 키(BUSAN_SERVICE_KEY)가 발급되지 않아 실제로는 한 번도 동작한 적 없음. 발급 후 켤 것."
     },
     {
       "id": "dong-u1",
@@ -669,7 +670,7 @@
       "cadenceMin": 360,
       "pages": 3,
       "listUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice",
-      "linkPattern": "bo_table=notice&wr_id=d+",
+      "linkPattern": "bo_table=notice&wr_id=\\d+",
       "pageParam": "page",
       "enabled": true
     },
@@ -690,8 +691,30 @@
       "cadenceMin": 360,
       "pages": 2,
       "listUrl": "http://www.haeundaeswim.com/bbs/board.php?bo_table=notice",
-      "linkPattern": "bo_table=notice&wr_id=d+",
+      "linkPattern": "bo_table=notice&wr_id=\\d+",
       "pageParam": "page",
+      "enabled": true
+    },
+    {
+      "id": "busan1365-news",
+      "name": "부산자원봉사센터(해운대 필터)",
+      "type": "html-board",
+      "trust": "official",
+      "region": "해운대구",
+      "topics": [
+        "봉사",
+        "행사"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "cadenceMin": 360,
+      "pages": 5,
+      "listUrl": "https://www.busan1365.kr/bbs/board.php?bo_table=news",
+      "linkPattern": "bo_table=news&wr_id=\\d+",
+      "pageParam": "page",
+      "titleFilter": "해운대",
       "enabled": true
     }
   ]
