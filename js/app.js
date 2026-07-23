@@ -271,12 +271,12 @@
   const STEP_ICON = {
     done: SVG('<circle cx="12" cy="12" r="9" fill="currentColor" stroke="none"/>' +
       '<path d="M8 12.3l2.6 2.6L16 9.6" stroke="var(--white)" stroke-width="2.2"/>'),
+    // 갈매기 물갈퀴 발자국 — 강아지 발바닥(패드+발가락)이 아닙니다
     here: SVG('<circle cx="12" cy="12" r="9" fill="currentColor" stroke="none"/>' +
-      '<ellipse cx="12" cy="14.4" rx="3.1" ry="2.5" fill="var(--white)" stroke="none"/>' +
-      '<ellipse cx="8.1" cy="11" rx="1.4" ry="1.8" fill="var(--white)" stroke="none"/>' +
-      '<ellipse cx="10.7" cy="8.9" rx="1.4" ry="1.8" fill="var(--white)" stroke="none"/>' +
-      '<ellipse cx="13.3" cy="8.9" rx="1.4" ry="1.8" fill="var(--white)" stroke="none"/>' +
-      '<ellipse cx="15.9" cy="11" rx="1.4" ry="1.8" fill="var(--white)" stroke="none"/>'),
+      '<g transform="translate(12 12) scale(0.62) translate(-12 -12)" fill="var(--white)" stroke="none">' +
+      '<path d="M12 3.6 C10.4 8 7.8 9.8 4.4 10.9 C7.4 13.4 10 15.2 12 20 C14 15.2 16.6 13.4 19.6 10.9 C16.2 9.8 13.6 8 12 3.6 Z"/>' +
+      '<circle cx="12" cy="3.8" r="1.5"/><circle cx="4.5" cy="11" r="1.4"/><circle cx="19.5" cy="11" r="1.4"/>' +
+      '</g>'),
     todo: SVG('<circle cx="12" cy="12" r="8.4" stroke-dasharray="3 3.4" opacity=".75"/>')
   };
 

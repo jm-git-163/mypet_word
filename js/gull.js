@@ -83,6 +83,17 @@
       : (reduce || !flapDur) ? '' :
         `<animateTransform attributeName="transform" type="rotate" values="0 128 126;-7 128 126;0 128 126" dur="${flapDur}s" repeatCount="indefinite" additive="sum"/>`;
 
+    /* 반대쪽(뒤) 날개 — 앞 날개를 x=100 기준으로 뒤집은 것입니다.
+       몸통 타원 뒤에 먼저 그려 대부분 가려지고, 몸 밖으로 살짝 삐져나온
+       만큼만 보입니다. 각도 부호도 뒤집어야 앞 날개와 "같이" 퍼덕입니다
+       (그대로 두면 서로 반대로 움직여 어색합니다). */
+    const backWingAnim = (opts && opts.flapBurst && !reduce)
+      ? `<animateTransform attributeName="transform" type="rotate" ` +
+        `values="0 72 126;26 72 126;-6 72 126;26 72 126;-6 72 126;0 72 126" ` +
+        `dur="0.85s" repeatCount="1" additive="sum"/>`
+      : (reduce || !flapDur) ? '' :
+        `<animateTransform attributeName="transform" type="rotate" values="0 72 126;7 72 126;0 72 126" dur="${flapDur}s" repeatCount="indefinite" additive="sum"/>`;
+
     const bobDur = m.bob === 'hop' ? 0.7 : (m.bob === 'slow' ? 3.4 : 2.1);
     const bobVals = m.bob === 'hop' ? '0 0;0 -11;0 0' : '0 0;0 -4;0 0';
     const bobAnim = reduce ? '' :
@@ -147,6 +158,16 @@
     <path d="M88 164 v14 M82 178 h13 M112 164 v14 M106 178 h13" stroke="#f2a733" stroke-width="4.5" fill="none" stroke-linecap="round"/>
     <!-- 꼬리 — 왼쪽 뒤로 뻗습니다(새다운 실루엣) -->
     <path d="M54 142 q-26 3 -37 15 q25 10 45 3 Z" fill="#eef2f4" stroke="#d3dde2" stroke-width="1.2"/>
+    <!-- 반대쪽 날개 — 몸통에 대부분 가려지고, 삐져나온 만큼만 살짝 보여
+         "이쪽도 날개가 있고, 같이 퍼덕인다"는 게 느껴지게 합니다.
+         그늘진 쪽이라 앞 날개보다 살짝 어둡게 둡니다. -->
+    <g transform="rotate(20 72 126)">
+    <g>${backWingAnim}
+      <path d="M76 124 q-18 2 -20 22 q-2 16 12 24 q11 6 18 -3 q-8 -7 -9 -18 q-1 -14 6 -23 q-3 -3 -7 -2 Z"
+        fill="#d7dee1" stroke="#a9b7bd" stroke-width="1.3"/>
+      <path d="M82 168 q-8 4 -13 -2 q-2 7 8 9 q7 -1 5 -7 Z" fill="#8b969c"/>
+    </g>
+    </g>
     <!-- 몸통 — 낮고 넓은 타원. 동그란 공이면 눈사람이 됩니다 -->
     <ellipse cx="100" cy="142" rx="56" ry="33" fill="url(#gbody)" stroke="#e6dccf" stroke-width="2.4"/>
     <!-- 배 하이라이트 -->

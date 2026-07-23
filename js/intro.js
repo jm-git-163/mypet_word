@@ -59,11 +59,42 @@
       && global.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
+  /* 하늘 저편으로 지나가는 갈매기떼.
+     자세히 볼 그림이 아니라 스쳐가는 배경이므로, gull.js 의 정밀한
+     마스코트 대신 아주 간단한 브이(V)자 실루엣을 씁니다(가볍고, 멀리서 보면 이게 더 갈매기답습니다).
+     「움직임 줄이기」에서는 아예 넣지 않습니다. */
+  function flock() {
+    const box = document.createElement('div');
+    box.className = 'intro-flock';
+    const N = 4;
+    // 겹치지 않게 위쪽을 네 자리로 나눠 한 자리씩 맡깁니다 (뭉치면 벌레처럼 보입니다)
+    const lanes = [6, 20, 34, 48];
+    for (let i = 0; i < N; i++) {
+      const b = document.createElement('span');
+      b.className = 'flock-bird';
+      const top = lanes[i] + Math.random() * 8;
+      const dur = 5.2 + Math.random() * 2.4;          // 느긋하게 가로지릅니다
+      const delay = -Math.random() * dur;               // 처음부터 하늘에 떠 있던 것처럼
+      const scale = 0.9 + Math.random() * 0.5;
+      const flap = 0.62 + Math.random() * 0.22;         // 갈매기는 천천히, 여유롭게 젓습니다
+      b.style.cssText =
+        `top:${top}%;--fs:${scale.toFixed(2)};` +
+        `animation-duration:${dur.toFixed(2)}s;animation-delay:${delay.toFixed(2)}s`;
+      b.innerHTML = `<svg viewBox="0 0 40 16" style="animation-duration:${flap.toFixed(2)}s">` +
+        `<path d="M1 11 Q10 1 20 10 Q30 1 39 11" fill="none" stroke="currentColor" ` +
+        `stroke-width="3.2" stroke-linecap="round"/></svg>`;
+      box.appendChild(b);
+    }
+    return box;
+  }
+
   function build(slow) {
     const box = document.createElement('div');
     box.id = 'intro';
     box.className = 'intro' + (slow ? ' still' : '');
     box.setAttribute('role', 'presentation');
+
+    if (!slow) box.appendChild(flock());
 
     const inner = document.createElement('div');
     inner.className = 'intro-in';

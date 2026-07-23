@@ -2652,13 +2652,17 @@ body.playing .tabbar button {
 .intro {
   position: fixed; inset: 0; z-index: 2147483600;
   display: flex; align-items: center; justify-content: center;
+  /* 해 질 녘 해운대 하늘 — 위는 밝게, 아래로 갈수록 노을빛이 짙어집니다.
+     은은한 해무리(위쪽 흰 광채)를 얹어 한 겹으로 밋밋했던 것에 깊이를 냅니다. */
   background:
-    radial-gradient(120% 90% at 50% 18%, #fff6e9 0%, #ffeed8 46%, #ffe0bd 100%);
+    radial-gradient(52% 36% at 50% 10%, rgba(255,255,255,.65) 0%, rgba(255,255,255,0) 68%),
+    linear-gradient(172deg, #fff4e7 0%, #ffe6cb 30%, #fdc9a0 58%, #f0a488 80%, #dd8f82 100%);
   animation: introIn 240ms ease-out;
 }
 body.dark .intro {
   background:
-    radial-gradient(120% 90% at 50% 18%, #2a1f17 0%, #1e1712 52%, #150f0b 100%);
+    radial-gradient(52% 36% at 50% 10%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 70%),
+    linear-gradient(172deg, #241a26 0%, #241a20 28%, #2c1c16 56%, #22140e 80%, #150d0a 100%);
 }
 .intro.out { animation: introOut 320ms ease-in forwards; }
 @keyframes introIn { from { opacity: 0 } to { opacity: 1 } }
@@ -2666,7 +2670,26 @@ body.dark .intro {
 
 /* 한가운데보다 살짝 위에 둡니다.
    정확히 가운데 놓으면 아래가 허전해 보여 아래로 처져 보입니다. */
-.intro-in { text-align: center; padding: 24px; margin-bottom: 7vh; }
+.intro-in { position: relative; z-index: 1; text-align: center; padding: 24px; margin-bottom: 7vh; }
+
+/* 하늘 저편으로 지나가는 갈매기떼 — 글자·유리공보다 뒤에, 배경처럼
+   너무 작고 빠르게 파닥이면 벌레처럼 보이므로, 크고 느긋하게 둡니다. */
+.intro-flock { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.flock-bird {
+  position: absolute; left: 0; width: calc(46px * var(--fs, 1)); height: calc(18px * var(--fs, 1));
+  color: var(--on-variant); opacity: .32;
+  animation-name: flockFly; animation-timing-function: linear; animation-iteration-count: infinite;
+}
+.flock-bird svg { width: 100%; height: 100%; display: block; animation-name: wingflap; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+@keyframes flockFly {
+  from { transform: translate(-12vw, 0); }
+  to   { transform: translate(112vw, -6vh); }
+}
+@keyframes wingflap {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(.6); }
+}
+.intro.still .intro-flock { display: none; }
 
 /* 복실이 — 아래에서 통 튀어 올라옵니다 */
 .intro-dog {
