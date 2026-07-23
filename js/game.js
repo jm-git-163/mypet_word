@@ -116,7 +116,7 @@
       // 판을 보기 전에 먼저 눈에 띄게 안내합니다.)
       if (this.stage.guide) {
         v.appendChild(h('div', { class: 'play-guide' },
-          h('span', { class: 'ic' }, '👆'), h('span', {}, this.stage.guide)));
+          h('span', { class: 'ic' }, '👇'), h('span', {}, this.stage.guide)));
       }
 
       // 모드와 풍경을 한 줄로 합칩니다.
