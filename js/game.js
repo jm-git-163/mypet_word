@@ -111,6 +111,14 @@
             paw(i < this.idx ? 'on' : (i === this.idx ? 'now' : '')))));
       }
 
+      // 어떻게 노는지 위쪽에 한 줄로 크게 짚어 드립니다.
+      // (베타 테스트에서 "아래에 누르는 글자가 있는 줄 몰랐다"는 말이 많아
+      // 판을 보기 전에 먼저 눈에 띄게 안내합니다.)
+      if (this.stage.guide) {
+        v.appendChild(h('div', { class: 'play-guide' },
+          h('span', { class: 'ic' }, '👆'), h('span', {}, this.stage.guide)));
+      }
+
       // 모드와 풍경을 한 줄로 합칩니다.
       // 비슷하게 생긴 줄이 둘이면 어느 쪽을 봐야 할지 알 수 없습니다.
       const scene = global.Theme.apply(this.stage.level);
