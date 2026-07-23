@@ -82,8 +82,7 @@
         `values="0 128 126;-26 128 126;6 128 126;-26 128 126;6 128 126;0 128 126" ` +
         `dur="0.85s" repeatCount="1" additive="sum"/>`
       : (reduce || !flapDur) ? '' :
-        `<animateTransform attributeName="transform" type="rotate" values="0 128 126;-7 128 126;0 128 126" dur="${flapDur}s" ` +
-        `calcMode="spline" keySplines=".33 0 .2 1;.4 0 .58 1" keyTimes="0;.5;1" repeatCount="indefinite" additive="sum"/>`;
+        `<animateTransform attributeName="transform" type="rotate" values="0 128 126;-7 128 126;0 128 126" dur="${flapDur}s" repeatCount="indefinite" additive="sum"/>`;
 
     /* 반대쪽(뒤) 날개 — 앞 날개를 x=100 기준으로 뒤집은 것입니다.
        몸통 타원 뒤에 먼저 그려 대부분 가려지고, 몸 밖으로 살짝 삐져나온
@@ -94,16 +93,12 @@
         `values="0 72 126;26 72 126;-6 72 126;26 72 126;-6 72 126;0 72 126" ` +
         `dur="0.85s" repeatCount="1" additive="sum"/>`
       : (reduce || !flapDur) ? '' :
-        `<animateTransform attributeName="transform" type="rotate" values="0 72 126;7 72 126;0 72 126" dur="${flapDur}s" ` +
-        `calcMode="spline" keySplines=".33 0 .2 1;.4 0 .58 1" keyTimes="0;.5;1" repeatCount="indefinite" additive="sum"/>`;
+        `<animateTransform attributeName="transform" type="rotate" values="0 72 126;7 72 126;0 72 126" dur="${flapDur}s" repeatCount="indefinite" additive="sum"/>`;
 
     const bobDur = m.bob === 'hop' ? 0.7 : (m.bob === 'slow' ? 3.4 : 2.1);
     const bobVals = m.bob === 'hop' ? '0 0;0 -11;0 0' : '0 0;0 -4;0 0';
-    // calcMode="spline" 로 가감속을 주어 기계적으로 딱딱 움직이지 않고
-    // 실제 몸놀림처럼 붕 떴다가 사뿐히 내려앉게 합니다.
     const bobAnim = reduce ? '' :
-      `<animateTransform attributeName="transform" type="translate" values="${bobVals}" dur="${bobDur}s" ` +
-      `calcMode="spline" keySplines=".33 0 .2 1;.4 0 .58 1" keyTimes="0;.5;1" repeatCount="indefinite" additive="sum"/>`;
+      `<animateTransform attributeName="transform" type="translate" values="${bobVals}" dur="${bobDur}s" repeatCount="indefinite" additive="sum"/>`;
 
     // 머리 — 먹이 상태에서는 고개를 들어 받아먹고 꿀꺽합니다
     // 먹이: 앞으로 콕 집었다가(살짝 숙임) 고개를 들어 꿀꺽 삼킵니다
@@ -160,21 +155,8 @@
   <ellipse cx="100" cy="186" rx="44" ry="7" fill="#000" opacity=".08"/>
   <g transform="${tilt}">
    <g>${bobAnim}
-    <!-- 다리·발 — 가는 선 대신 발가락 세 개가 부채꼴로 벌어진 작은 물갈퀴 발 -->
-    <g fill="#f2a733">
-      <rect x="85.4" y="164" width="5.2" height="13" rx="2.6"/>
-      <rect x="109.4" y="164" width="5.2" height="13" rx="2.6"/>
-      <g transform="translate(88 179)">
-        <ellipse cx="-6" cy="-1" rx="4.2" ry="3" transform="rotate(-20 -6 -1)"/>
-        <ellipse cx="0" cy="1.4" rx="4.6" ry="3.2"/>
-        <ellipse cx="6" cy="-1" rx="4.2" ry="3" transform="rotate(20 6 -1)"/>
-      </g>
-      <g transform="translate(112 179)">
-        <ellipse cx="-6" cy="-1" rx="4.2" ry="3" transform="rotate(-20 -6 -1)"/>
-        <ellipse cx="0" cy="1.4" rx="4.6" ry="3.2"/>
-        <ellipse cx="6" cy="-1" rx="4.2" ry="3" transform="rotate(20 6 -1)"/>
-      </g>
-    </g>
+    <!-- 다리 -->
+    <path d="M88 164 v14 M82 178 h13 M112 164 v14 M106 178 h13" stroke="#f2a733" stroke-width="4.5" fill="none" stroke-linecap="round"/>
     <!-- 반대쪽 날개 — 몸통에 대부분 가려지고, 삐져나온 만큼만 살짝 보여
          "이쪽도 날개가 있고, 같이 퍼덕인다"는 게 느껴지게 합니다.
          그늘진 쪽이라 앞 날개보다 살짝 어둡게 둡니다. -->
@@ -182,16 +164,13 @@
     <g>${backWingAnim}
       <path d="M76 124 q-18 2 -20 22 q-2 16 12 24 q11 6 18 -3 q-8 -7 -9 -18 q-1 -14 6 -23 q-3 -3 -7 -2 Z"
         fill="#d7dee1" stroke="#a9b7bd" stroke-width="1.3"/>
-      <!-- 층진 깃가지 세 갈래 — 밋밋한 뭉치 하나 대신 결이 보이게 -->
-      <path d="M69 148 q-11 6 -8 20 q5 5 11 -4 q2 -10 -3 -16 Z" fill="#c3ced3"/>
-      <path d="M76 158 q-10 8 -4 21 q6 3 10 -6 q2 -10 -6 -15 Z" fill="#a3b0b6"/>
-      <path d="M85 166 q-8 8 -1 20 q6 2 9 -7 q2 -9 -8 -13 Z" fill="#8b969c"/>
+      <path d="M82 168 q-8 4 -13 -2 q-2 7 8 9 q7 -1 5 -7 Z" fill="#8b969c"/>
     </g>
     </g>
     <!-- 몸통 — 낮고 넓은 타원. 동그란 공이면 눈사람이 됩니다 -->
-    <ellipse cx="100" cy="143" rx="56" ry="36" fill="url(#gbody)" stroke="#e6dccf" stroke-width="1.6"/>
+    <ellipse cx="100" cy="142" rx="56" ry="33" fill="url(#gbody)" stroke="#e6dccf" stroke-width="2.4"/>
     <!-- 배 하이라이트 -->
-    <ellipse cx="78" cy="138" rx="26" ry="16" fill="#ffffff" opacity=".6"/>
+    <ellipse cx="78" cy="136" rx="26" ry="15" fill="#ffffff" opacity=".6"/>
     <!-- '등 회색' 패치는 없앴습니다 — 머리 바로 밑(턱 아래)에 걸쳐
          그림자처럼 보였습니다. 몸통·날개만으로도 입체감은 충분합니다. -->
     <!-- 접은 날개 — 몸통 '바깥쪽 옆선'을 따라 붙입니다. 배 쪽으로 걸치면
@@ -202,10 +181,8 @@
     <g>${wingAnim}
       <path d="M124 124 q18 2 20 22 q2 16 -12 24 q-11 6 -18 -3 q8 -7 9 -18 q1 -14 -6 -23 q3 -3 7 -2 Z"
         fill="url(#gwing)" stroke="#a9b7bd" stroke-width="1.3"/>
-      <!-- 층진 깃가지 세 갈래 — 밋밋한 뭉치 하나 대신 결이 보이게 -->
-      <path d="M131 148 q11 6 8 20 q-5 5 -11 -4 q-2 -10 3 -16 Z" fill="#c3ced3"/>
-      <path d="M124 158 q10 8 4 21 q-6 3 -10 -6 q-2 -10 6 -15 Z" fill="#a3b0b6"/>
-      <path d="M115 166 q8 8 1 20 q-6 2 -9 -7 q-2 -9 8 -13 Z" fill="#5b6770"/>
+      <!-- 검은 날개 끝 깃 -->
+      <path d="M118 168 q8 4 13 -2 q2 7 -8 9 q-7 -1 -5 -7 Z" fill="#5b6770"/>
     </g>
     </g>
 
@@ -213,7 +190,7 @@
     <g transform="${tilt ? '' : ''}">${headAnim ? '' : ''}
      <g>${headAnim}
       <!-- 머리 — 몸통보다 작고, 몸에 파묻히듯 겹칩니다(따로 얹히면 눈사람) -->
-      <circle cx="104" cy="90" r="33" fill="url(#ghead)" stroke="#e6dccf" stroke-width="1.6"/>
+      <circle cx="104" cy="90" r="33" fill="url(#ghead)" stroke="#e6dccf" stroke-width="2.4"/>
       <!-- 머리 위 깃털 -->
       <path d="M104 57 q-4 -9 2 -12 q4 5 -2 12 M111 59 q3 -8 9 -8 q-2 6 -9 8" fill="#dfe7eb"/>
       <!-- 볼 -->
