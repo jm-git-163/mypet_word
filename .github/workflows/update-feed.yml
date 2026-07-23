@@ -16,6 +16,8 @@ permissions:
 jobs:
   update-feed:
     runs-on: ubuntu-latest
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,8 +31,6 @@ jobs:
 
       - name: AI 쉬운말 변환(선택 — 키가 있을 때만)
         if: ${{ env.OPENAI_API_KEY != '' }}
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: node tools/ai_simplify.mjs
 
       - name: 바뀐 점이 있으면 main 에 바로 커밋
@@ -38,8 +38,18 @@ jobs:
           git config user.name "haeundae-feed-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/feed.json
-          git diff --cached --quiet && echo "변경 없음" || git commit -m "chore(feed): 해운대 정보 자동 갱신 $(date +%Y-%m-%d)"
-          git push
+          git diff --cached --quiet && echo "변경 없음" && exit 0
+          git commit -m "chore(feed): 해운대 정보 자동 갱신 $(date +%Y-%m-%d)"
+          # 수집(30쪽 훑기)이 오래 걸려, 그 사이 다른 곳(제 손 포함)에서
+          # main 에 먼저 커밋이 들어올 수 있습니다. 그러면 그냥 밀어붙이지
+          # 않고, 최신 main 위로 다시 얹어서 재시도합니다(최대 3번).
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "밀림 감지 — main 을 다시 받아 얹습니다 ($i/3)"
+            git fetch origin main
+            git rebase origin/main || { git rebase --abort; exit 1; }
+          done
+          exit 1
 
       - name: Vercel 배포 깨우기
         if: ${{ env.VERCEL_DEPLOY_HOOK_URL != '' }}
