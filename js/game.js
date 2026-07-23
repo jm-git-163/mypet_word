@@ -849,7 +849,7 @@
         h('div', { class: 'burst' }, global.UI.dogEl('신남', 104)),
         h('div', { class: 'big' }, chapterDone ? '마당 하나를 다 걸었어요!' : '산책을 마쳤어요!'),
         h('p', { class: 'muted', style: 'word-break:keep-all' },
-          this.reviewOnly ? `${d.pet.name}와 함께 되새겼어요.` : `${d.pet.name}가 꼬리를 흔들어요.`)));
+          this.reviewOnly ? `${H.withParticle(d.pet.name, '과/와')} 함께 되새겼어요.` : `${H.withParticle(d.pet.name, '이/가')} 날개를 파닥여요.`)));
 
       v.appendChild(h('div', { class: 'card center' },
         h('div', { class: 'muted small' }, '오늘 받은 발자국'),

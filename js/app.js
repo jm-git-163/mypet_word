@@ -307,11 +307,12 @@
      ══════════════════════════════════════════════ */
   /* 놀이 화면에서도 쓰는 아이콘 */
   const ICON = {
-    paw: SVG('<ellipse cx="12" cy="16" rx="4.2" ry="3.4" fill="currentColor" stroke="none"/>' +
-      '<ellipse cx="6.6" cy="11.4" rx="1.9" ry="2.4" fill="currentColor" stroke="none"/>' +
-      '<ellipse cx="10.2" cy="8.4" rx="1.9" ry="2.5" fill="currentColor" stroke="none"/>' +
-      '<ellipse cx="13.8" cy="8.4" rx="1.9" ry="2.5" fill="currentColor" stroke="none"/>' +
-      '<ellipse cx="17.4" cy="11.4" rx="1.9" ry="2.4" fill="currentColor" stroke="none"/>'),
+    // 갈매기 물갈퀴 발자국 — 강아지 발바닥(패드+발가락)이 아닙니다
+    paw: SVG('<path d="M12 3.6 C10.4 8 7.8 9.8 4.4 10.9 C7.4 13.4 10 15.2 12 20 C14 15.2 16.6 13.4 19.6 10.9 C16.2 9.8 13.6 8 12 3.6 Z" fill="currentColor" stroke="none"/>' +
+      '<circle cx="12" cy="3.8" r="1.5" fill="currentColor" stroke="none"/>' +
+      '<circle cx="4.5" cy="11" r="1.4" fill="currentColor" stroke="none"/>' +
+      '<circle cx="19.5" cy="11" r="1.4" fill="currentColor" stroke="none"/>' +
+      '<path d="M12 19.4 L12 22.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>'),
     // 글자 하나 — 과녁
     letter: SVG('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/>' +
       '<circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/>'),
@@ -587,7 +588,7 @@
     /** 위 띠의 발자국 숫자를 새로 적습니다 */
     topFootprints() {
       const el = document.getElementById('footchip');
-      if (el) el.textContent = '🐾 ' + Store.data.footprints;
+      if (el) el.innerHTML = paw('on').outerHTML.replace('class="paw on"', 'class="paw on" style="width:16px;height:16px;vertical-align:-3px;margin-right:3px"') + Store.data.footprints;
     },
 
     /**
@@ -766,7 +767,7 @@
               setTimeout(() => dogMood('petdog', '신남', 150), 900);
               setTimeout(() => dogMood('petdog', '반가움', 150), 1600);
               Sound.chirp();
-              this.toast(v, `${d.pet.name}가 좋아서 날개를 파닥여요!`);
+              this.toast(v, `${H.withParticle(d.pet.name, '이/가')} 좋아서 날개를 파닥여요!`);
             }
           }, h('span', { class: 'btn-stack' },
             h('b', null, '쓰다듬기'),
@@ -780,7 +781,7 @@
               dogMood('petdog', '먹이', 150);
               setTimeout(() => dogMood('petdog', '반가움', 150), 2600);
               App.topFootprints();
-              this.toast(v, `${d.pet.name}가 새우깡을 냠냠 받아먹어요!`);
+              this.toast(v, `${H.withParticle(d.pet.name, '이/가')} 새우깡을 냠냠 받아먹어요!`);
             }
           }, (() => {
             const w = h('span', { class: 'btn-stack' },
@@ -846,7 +847,15 @@
             (m && m.mine) ? h('span', { class: 'badge green', style: 'margin-left:6px' }, '✅ 나에게') : null),
           h('span', { class: 'muted small' }, day)),
         h('h3', { style: 'margin:0 0 6px;font-size:var(--t-body)' }, n.title),
-        h('p', { style: 'margin:0 0 8px;line-height:1.7;word-break:keep-all' }, n.body),
+        // AI가 쉬운 말로 바꾼 문장이 있으면 그것을 먼저 보여 드리고,
+        // 사실이 달라지지 않았는지 대조할 수 있게 원문 요지도 작게 함께 둡니다.
+        n.aiSimplified
+          ? h('div', { style: 'margin:0 0 8px' },
+            h('div', { style: 'display:flex;align-items:center;gap:6px;margin-bottom:4px' },
+              h('span', { class: 'badge', style: 'background:#e8f0ff;color:#2a5db0' }, '🤖 AI가 쉽게 풀어드려요')),
+            h('p', { style: 'margin:0 0 6px;line-height:1.7;word-break:keep-all;font-weight:700' }, n.aiSimplified),
+            h('p', { class: 'muted small', style: 'margin:0;line-height:1.6;word-break:keep-all' }, '원문 요지 · ' + n.body))
+          : h('p', { style: 'margin:0 0 8px;line-height:1.7;word-break:keep-all' }, n.body),
         // 왜 이 소식이 나에게 왔는지 밝힙니다 — 「알아서 골라 준다」는 말만으로는 못 믿습니다
         (m && m.reasons && m.reasons.length)
           ? h('p', { class: 'muted small', style: 'margin:0 0 8px' }, '내 ' + m.reasons.join(' · ') + ' 에 해당돼요')
@@ -1542,7 +1551,9 @@
         } else if (step === 1) {
           // 첫 화면에서 "이름을 지어 주시면"이라 약속했으니, 다음은 곧바로 이름 짓기입니다.
           // (글씨 크기 조정이 먼저 나오면 약속과 순서가 어긋나 헷갈립니다)
-          v.appendChild(h('div', { class: 'center' }, dogEl('갸웃', 130, 'introdog2')));
+          // '갸웃'은 몸 전체가 -8도 기울어 그려집니다(고개만 갸웃하는 게 아닙니다).
+          // 이름을 소개하는 자리에서는 반듯한 인사 자세가 낫습니다.
+          v.appendChild(h('div', { class: 'center' }, dogEl('반가움', 130, 'introdog2')));
           v.appendChild(h('div', { class: 'card' },
             h('h2', null, '갈매기 이름을 지어 주세요'),
             h('p', { class: 'muted' }, '마음에 드는 이름을 골라 주세요.'),

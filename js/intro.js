@@ -104,7 +104,7 @@
     const sub = document.createElement('div');
     sub.className = 'intro-sub';
     sub.textContent = me.done > 0
-      ? `${me.name}와 함께 걸은 지 ${me.days}일`
+      ? `${global.Hangul.withParticle(me.name, '과/와')} 함께 걸은 지 ${me.days}일`
       : '매일 함께 걷는 낱말 퍼즐';
     inner.appendChild(sub);
 

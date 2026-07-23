@@ -1,0 +1,12 @@
+{
+  "name": "haeundae-nanmal-sanchaek",
+  "private": true,
+  "type": "module",
+  "description": "해운대 낱말 산책 — 낱말 퍼즐 + 해운대 공공정보 통합 (시니어 대상 PWA)",
+  "scripts": {
+    "collect": "node tools/collect.mjs",
+    "collect:all": "node tools/collect.mjs --all",
+    "promote": "node tools/promote.mjs",
+    "ai-simplify": "node --env-file=.env tools/ai_simplify.mjs"
+  }
+}
