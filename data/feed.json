@@ -9,7 +9,7 @@
       "보건복지부·국민연금공단·정부24",
       "질병관리청·해운대구보건소"
     ],
-    "autoCount": 279
+    "autoCount": 306
   },
   "notices": [
     {
@@ -879,6 +879,68 @@
       ]
     },
     {
+      "cat": "일자리",
+      "title": "『동네방네 무료 노무상담소』 26년 8월 운영 안내",
+      "body": "▣ 운영일정 : 2026년 1월~12월 매월 첫째, 셋째 수요일 14:00~17:00 (8월 일정 : 8 . 5.(수), 8.19(수) 운영) ▣ 운영장소 : 해운대구청 1층 일자리센터 내 ▣ 상 담 관 : 1명(한국공인노무사회 선정 위촉 공인노무사) ▣ 지원대상 : 취약계층 근로자(비정규직, 일용근로 및 감정노동자 등)…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170904",
+      "date": "2026-07-23",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "건강",
+      "title": "해운대구보건소 2026년도 2기 상설운동교실(다이어트,..",
+      "body": "해운대구보건소 2026년도 2기 상설운동교실(다이어트,근력강화) 회원모집 저작물은 공공누리 “출처표시+상업적이용금지” 조건에 따라 이용할 수 있습니다.…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3162257",
+      "date": "2026-07-23",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "문화",
+      "title": "특별기획공연",
+      "body": "~ 2026-07-26 공연시간 소요시간 장소 해운대문화회관 고운홀 예매처 입장료 정보 할인정보 관람연령 홈페이지 문의전화 예매하기…",
+      "source": "해운대문화회관 공연일정",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000215&menuCd=DOM_000000901001001000&orderBy=TMP_FIELD1%20DESC&paging=ok&startPage=1&dataSid=3163978",
+      "date": "2026-07-23",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "문화",
+      "title": "19세기 프랑스, 몽마르트 화가들 - 르누아르, 루소,..",
+      "body": "전시안내 ■ 티켓수령안내 - 관람 당일 지하1층 매표소에서 예매자명 / 예매번호 / 문자 등 본인 확인 후 티켓 수령가능 ※ 공연일 이전에 티켓 수령 및 발송은 불가합니다. ■ 예매취소 및 환불안내 1.환불 및 변경 방법 - 해운대문화회관 홈페이지 또는 전화(051-749-7651)로 환불 및 변경 가능 - 해운대문화회관…",
+      "source": "해운대문화회관 전시일정",
+      "sourceUrl": "https://www.haeundae.go.kr/library/board/view.do?boardId=BBS_0000233&menuCd=DOM_000000901002001000&orderBy=TMP_FIELD1%20DESC&paging=ok&startPage=1&dataSid=3163794",
+      "date": "2026-07-23",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000233/177864696913437.jpg",
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
       "cat": "건강",
       "title": "환경성질환 취약계층을 위한 환경보건이용권 사업안내(2차..",
       "body": "환경성질환 취약계층을 위한 환경보건이용권 사업안내(2차) 저작물은 공공누리 “출처표시+상업적이용금지+변경금지” 조건에 따라 이용할 수 있습니다.…",
@@ -974,6 +1036,21 @@
         "senior",
         "resident"
       ]
+    },
+    {
+      "cat": "문화",
+      "title": "[2026 오페라시리즈] 마술피리 셋업",
+      "body": "~ 2026-07-24 공연시간 소요시간 장소 해운대문화회관 해운홀 예매처 입장료 정보 할인정보 관람연령 홈페이지 문의전화 예매하기…",
+      "source": "해운대문화회관 공연일정",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000215&menuCd=DOM_000000901001001000&orderBy=TMP_FIELD1%20DESC&paging=ok&startPage=1&dataSid=3161633",
+      "date": "2026-07-21",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
     },
     {
       "cat": "세금",
@@ -1086,12 +1163,13 @@
     {
       "cat": "생활",
       "title": "2026년 7월 2차 재송1동 소식지",
-      "body": "재송1동 2026.07.15 2026년 7월 2차 재송1동 소식지입니다.…",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170573",
       "date": "2026-07-15",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178407781671906.jpg",
       "region": [
         "재송1동"
       ],
@@ -1288,6 +1366,7 @@
       "date": "2026-07-10",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178366420323216.png",
       "region": [
         "중1동"
       ],
@@ -1322,6 +1401,43 @@
       "date": "2026-07-07",
       "verified": "2026-07-23",
       "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "생활",
+      "title": "[우1동 체육회] 꿈나무 생활체육 접수 안내",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170209",
+      "date": "2026-07-07",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178341244900778.png",
+      "region": [
+        "우1동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ]
+    },
+    {
+      "cat": "교육",
+      "title": "우1동 주민자치회 프로그램 노래교실 맛보기 수업 개최(..",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170208",
+      "date": "2026-07-07",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178341219969379.png",
+      "region": [
+        "우1동"
+      ],
       "audience": [
         "senior",
         "resident"
@@ -1375,24 +1491,6 @@
       ]
     },
     {
-      "cat": "환경",
-      "title": "2026년 7월 좌2동 주민자율방역단 방역소독 실시 일..",
-      "body": "2026년 7월 좌2동 주민자율방역단 방역소독 실시 일정 알림 좌2동 2026.07.06 · 일 시: 2026.7.7.(화)~ ※7월 매주 화요일 진행예정, 우천시 해당일 미실시 · ​ 실시장소: 좌2동 관내(공원 등) · ​ 작업방법: 친환경 분무 소독 · ​ 작업주체: 좌2동 주민자율방역단(단장:노규범) · ​ 문 의…",
-      "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170112",
-      "date": "2026-07-06",
-      "verified": "2026-07-23",
-      "auto": true,
-      "region": [
-        "좌2동"
-      ],
-      "audience": [
-        "senior",
-        "resident"
-      ],
-      "useful": true
-    },
-    {
       "cat": "안전",
       "title": "관내 석면해체·제거 작업장 현황[2026.07.06.]",
       "body": "「석면안전관리법」​ 제27조에 따라 관내 석면해체·​제거 작업장 현황을 붙임과 같이 공개합니다.…",
@@ -1408,16 +1506,17 @@
       "useful": true
     },
     {
-      "cat": "생활",
-      "title": "2026년 7월 1차 재송1동 소식지",
-      "body": "재송1동 2026.07.04 2026년 7월 1차 재송1동 소식입니다…",
+      "cat": "환경",
+      "title": "2026년 7월 좌2동 주민자율방역단 방역소독 실시 일..",
+      "body": "2026년 7월 좌2동 주민자율방역단 방역소독 실시 일정 알림 좌2동 2026.07.06 · 일 시: 2026.7.7.(화)~ ※7월 매주 화요일 진행예정, 우천시 해당일 미실시 · ​ 실시장소: 좌2동 관내(공원 등) · ​ 작업방법: 친환경 분무 소독 · ​ 작업주체: 좌2동 주민자율방역단(단장:노규범) · ​ 문 의…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3170057",
-      "date": "2026-07-04",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170112",
+      "date": "2026-07-06",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
-        "재송1동"
+        "좌2동"
       ],
       "audience": [
         "senior",
@@ -1430,12 +1529,32 @@
       "title": "우3동 2026년 3분기 주민자치프로그램 노래교실(B)..",
       "body": "우3동 2026년 3분기 주민자치프로그램 노래교실(B) 신규반 개설 안내 우3동 2026.07.04 [2026년 3분기 주민자치프로그램] 노래교실(B) 신규반을 개설하였으니 수강생 여러분들의 많은 관심과 등록 바랍니다. * 수업일시 및 장소 : 매주 월요일, 10시 ~ 11시40분, 우3동행정복지센터 대강당(4층) * 강…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3170049",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3170049",
       "date": "2026-07-04",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178311428775628.jpg",
       "region": [
         "우3동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "생활",
+      "title": "2026년 7월 1차 재송1동 소식지",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3170057",
+      "date": "2026-07-04",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178346989636545.jpg",
+      "region": [
+        "재송1동"
       ],
       "audience": [
         "senior",
@@ -1448,10 +1567,11 @@
       "title": "2026년 우3동 평생학습 프로그램 참가자 모집",
       "body": "우3동 2026.07.03 2026년 우3동 평생학습 프로그램 참가자를 아래와 같이 모집합니다. [AI로 만드는 나만의 캐릭터] 1. 교육일시 : 7.27.(월) ~ 7.28.(화) 14시~16시 2. 모집대상 : 우3동 관내 초등학생(4~6학년) 3. 접수기간 : 7.6.(월) ~ 7.17.(금) 4. 접수방법 : QR…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3170019",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3170019",
       "date": "2026-07-03",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178305792712128.jpg",
       "region": [
         "우3동"
       ],
@@ -1460,23 +1580,6 @@
         "resident"
       ],
       "useful": true
-    },
-    {
-      "cat": "생활",
-      "title": "재송2동 복합청사 신축비용공개(1단계)",
-      "body": "재송2동 복합청사 신축비용공개(1단계)…",
-      "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169926",
-      "date": "2026-07-02",
-      "verified": "2026-07-23",
-      "auto": true,
-      "region": [
-        "재송2동"
-      ],
-      "audience": [
-        "senior",
-        "resident"
-      ]
     },
     {
       "cat": "행사",
@@ -1492,6 +1595,24 @@
         "resident"
       ],
       "useful": true
+    },
+    {
+      "cat": "생활",
+      "title": "재송2동 복합청사 신축비용공개(1단계)",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169926",
+      "date": "2026-07-02",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
+      "region": [
+        "재송2동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ]
     },
     {
       "cat": "교육",
@@ -1562,6 +1683,25 @@
       "date": "2026-06-30",
       "verified": "2026-07-23",
       "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "우1동 주민자치회 프로그램 노래교실 맛보기 수업 개최",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169699",
+      "date": "2026-06-30",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178277975877119.png",
+      "region": [
+        "우1동"
+      ],
       "audience": [
         "senior",
         "resident"
@@ -1676,12 +1816,13 @@
     {
       "cat": "생활",
       "title": "2026년 3분기 중1동 주민자치 프로그램 운영안내",
-      "body": "중1동 2026.06.24 ❍ 접수기간 ► 중1동 주민‘우선’접수 – 2026. 6. 15.( 월 ) ~ 6. 16.( 화 )…",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169423",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169423",
       "date": "2026-06-24",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178226556237031.jpg",
       "region": [
         "중1동"
       ],
@@ -1738,20 +1879,20 @@
     {
       "cat": "교육",
       "title": "재송2동 인생2막 배움길 참여자 모집",
-      "body": "재송2동 2026.06.17 재송2동 인생2막 배움길 참여자 를 아래와 같이 모집하고자 합니다 . 1. 모집 기간 : 2026. 6. 17.( 수 ) ~ 24.( 수 ) 2. 모집대상: 만65세 이상 ~ 만75세 이하 재송2동 주민(20명)…",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169073",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169073",
       "date": "2026-06-17",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178166312563983.jpg",
       "region": [
         "재송2동"
       ],
       "audience": [
         "senior",
         "resident"
-      ],
-      "useful": true
+      ]
     },
     {
       "cat": "문화",
@@ -1804,10 +1945,11 @@
       "title": "2026년 3/4분기 좌3동 주민자치회 프로그램 수강생..",
       "body": "2026년 3/4분기 좌3동 주민자치회 프로그램 수강생 모집 좌3동 2026.06.16 좌 3 동 주민자치회 수강생 모집 □ 운영기간 – 2026. 7. 1.( 수 ) ~ 9. 30.( 수 ) □ 운영장소 - 좌 3 동 행정복지센터 2·3 층 문화교실 □ 신청기간 - 2026. 6. 22.( 월 ) ~ 선착순 방문접수 (…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169024",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169024",
       "date": "2026-06-16",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178157341520523.jpg",
       "region": [
         "좌3동"
       ],
@@ -1822,10 +1964,11 @@
       "title": "2026년 6월 좌2동 주민자율방역단 방역소독 실시 일..",
       "body": "2026년 6월 좌2동 주민자율방역단 방역소독 실시 일정 알림 좌2동 2026.06.12 - 일 시: 2026. 6. 16.(화)~ ※ 6월 매주 화요일 진행예정, 우천시 해당일 미실시 - 실시장소: 좌2동 관내(공원 등) - 작업방법: 친환경 분무 소독 - 작업주체: 좌2동 주민자율방역단 (단장: 노규범) -문 의 처:…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168907",
+      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168907",
       "date": "2026-06-12",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
         "좌2동"
       ],
@@ -1918,30 +2061,13 @@
       "title": "2026년 제3분기 좌2동 주민자치 프로그램 수강생 모..",
       "body": "2026년 제3분기 좌2동 주민자치 프로그램 수강생 모집 좌2동 2026.06.09 2026년 제3분기 좌2동 주민자치 프로그램 수강생을 모집합니다. ○ 신청기간 - 좌2동 주민: 2026. 6. 18.(목) 08:00~ 마감시까지 (선착순 마감, ★좌2동 주소 미확인 시 접수 불가★ ) - 좌2동 주민 외(타동): 20…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168714",
+      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168714",
       "date": "2026-06-09",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
         "좌2동"
-      ],
-      "audience": [
-        "senior",
-        "resident"
-      ],
-      "useful": true
-    },
-    {
-      "cat": "교통",
-      "title": "중1동 2026년도 하반기 주거지전용주차장 정기배정 안..",
-      "body": "중1동 2026년도 하반기 주거지전용주차장 정기배정 안내 중1동 2026.06.08 중1동 2026년도 상반기 주거지전용주차장 배정기한 만료에 따른 2026년도 하반기 주차배정을 위한 안내 드립니다. ​ 1. 신청기간 - 거주자: 2026. 6. 15.(월) 08:30~18:00- 업무자: 2026. 6. 16.(화) 0…",
-      "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168685",
-      "date": "2026-06-08",
-      "verified": "2026-07-23",
-      "auto": true,
-      "region": [
-        "중1동"
       ],
       "audience": [
         "senior",
@@ -1995,16 +2121,17 @@
       "useful": true
     },
     {
-      "cat": "생활",
-      "title": "2026년 3분기 좌1동 주민자치회 프로그램 개강 안내",
-      "body": "좌1동 2026.06.06 ◆ 운영기간 : 2026. 7. 1. ~ 2026. 9. 30.(12 주 과정 ) ◆ ​ 접수기간 - 좌 1 동 주민 \" 우선접수\" : 2026. 6. 18.( 목 ) 08:00 ~ 선착순 접 ​ 수 - 좌 1 동 주민 외 : 2026. 6. 19.( 금 ) 08:00 ~ 선착순 접수 ◆ ​ 접…",
+      "cat": "교통",
+      "title": "중1동 2026년도 하반기 주거지전용주차장 정기배정 안..",
+      "body": "중1동 2026년도 하반기 주거지전용주차장 정기배정 안내 중1동 2026.06.08 중1동 2026년도 상반기 주거지전용주차장 배정기한 만료에 따른 2026년도 하반기 주차배정을 위한 안내 드립니다. ​ 1. 신청기간 - 거주자: 2026. 6. 15.(월) 08:30~18:00- 업무자: 2026. 6. 16.(화) 0…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=6&dataSid=3168634",
-      "date": "2026-06-06",
+      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168685",
+      "date": "2026-06-08",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
-        "좌1동"
+        "중1동"
       ],
       "audience": [
         "senior",
@@ -2013,16 +2140,17 @@
       "useful": true
     },
     {
-      "cat": "교육",
-      "title": "2026년 3/4분기 우1동 주민자치회 프로그램 수강생..",
-      "body": "2026년 3/4분기 우1동 주민자치회 프로그램 수강생 모집 우1동 2026.06.05 □ 운영기간 – 2026. 7. 1.(수) ~ 9. 30.(수) □ 운영장소 - 우1동 행정복지센터 2·3층 □ 신청기간 - 2026. 6. 15.(월) ~ 선착순 방문접수 (신분증 지참, 본인접수만 가능) ○ 6. 15.(월) : 우…",
+      "cat": "생활",
+      "title": "2026년 3분기 좌1동 주민자치회 프로그램 개강 안내",
+      "body": "좌1동 2026.06.06 ◆ 운영기간 : 2026. 7. 1. ~ 2026. 9. 30.(12 주 과정 ) ◆ ​ 접수기간 - 좌 1 동 주민 \" 우선접수\" : 2026. 6. 18.( 목 ) 08:00 ~ 선착순 접 ​ 수 - 좌 1 동 주민 외 : 2026. 6. 19.( 금 ) 08:00 ~ 선착순 접수 ◆ ​ 접…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=6&dataSid=3168602",
-      "date": "2026-06-05",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=6&dataSid=3168634",
+      "date": "2026-06-06",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178075371990267.png",
       "region": [
-        "우1동"
+        "좌1동"
       ],
       "audience": [
         "senior",
@@ -2205,6 +2333,7 @@
       "date": "2026-05-27",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
         "반여1동"
       ],
@@ -2814,24 +2943,6 @@
       "useful": true
     },
     {
-      "cat": "교육",
-      "title": "우3동 주민자치프로그램 노래교실 강사모집",
-      "body": "우3동 2026.04.16 부산광역시 해운대구 우 3 동 주민자치회 운영세칙 제 14 조에 따라 주민자치 프로그램 노래교실 강사를 아래와 같이 공개모집하오니 우수하고 책임감 있는 분들의 많은 지원 바랍니다 .…",
-      "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=11&dataSid=3165953",
-      "date": "2026-04-16",
-      "verified": "2026-07-23",
-      "auto": true,
-      "region": [
-        "우3동"
-      ],
-      "audience": [
-        "senior",
-        "resident"
-      ],
-      "useful": true
-    },
-    {
       "cat": "안전",
       "title": "관내 석면해체·제거 작업장 현황[2026.04.16.]",
       "body": "「석면안전관리법」​ 제27조에 따라 관내 석면해체·​제거 작업장 현황을 붙임과 같이 공개합니다.…",
@@ -2847,16 +2958,17 @@
       "useful": true
     },
     {
-      "cat": "복지",
-      "title": "좌2동 북카페 이용 일시 중단 안내",
-      "body": "좌2동 2026.04.15 북카페 이용 일시 중단 안내 ​ 고유가 피해지원금 지급 관련 업무 진행으로 인해 아래 기간 동안 북카페 이용이 일시 중단 됨을 알려드립니다. ○중단기간: 2026. 4. 21.(화) ~ 7. 10.(금) ○중단사유: 고유가 피해지원금 접수창구 운영 ○문 의 처: 좌2동 행정복지센터((☎749-6…",
+      "cat": "교육",
+      "title": "우3동 주민자치프로그램 노래교실 강사모집",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=11&dataSid=3165868",
-      "date": "2026-04-15",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=11&dataSid=3165953",
+      "date": "2026-04-16",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
-        "좌2동"
+        "우3동"
       ],
       "audience": [
         "senior",
@@ -3242,6 +3354,7 @@
       "date": "2026-03-23",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
         "좌4동"
       ],
@@ -3262,24 +3375,6 @@
       "auto": true,
       "region": [
         "좌4동"
-      ],
-      "audience": [
-        "senior",
-        "resident"
-      ],
-      "useful": true
-    },
-    {
-      "cat": "안전",
-      "title": "좌2동 노후승강기 교체 공사 시행 안내",
-      "body": "좌2동 2026.03.19 좌2동 노후승강기 교체 공사 시행 안내 ○ 설치기간: 2026. 3. 26. ~ 4. 30. ※ 공사 종료 일정은 변경될 수 있습니다. ○ 내 용: 좌2동사 승강기 1대 교체 및 cctv 신규 설치 - 승강기 시설 안전관리법」에 따라 노후 승강기를 전면 교체하여 안전사고를 예방하고 이용자의 안전…",
-      "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=14&dataSid=3163519",
-      "date": "2026-03-19",
-      "verified": "2026-07-23",
-      "auto": true,
-      "region": [
-        "좌2동"
       ],
       "audience": [
         "senior",
@@ -3398,30 +3493,13 @@
       "title": "2026년 2/4분기 좌3동 주민자치회 프로그램 수강생..",
       "body": "2026년 2/4분기 좌3동 주민자치회 프로그램 수강생 모집 좌3동 2026.03.11 좌 3 동 주민자치회 수강생 모집 □ 운영기간 – 2026. 4. 1.( 수 ) ~ 6. 30.( 화 ) ※ 6/3 선거 업무로 인한 대회의실 수업 휴강일 : 4/28( 화 ), 5/19( 화 ), 5/28( 목 )~6/3( 수 ) □…",
       "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=15&dataSid=3162710",
+      "sourceUrl": "https://www.haeundae.go.kr/health/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=15&dataSid=3162710",
       "date": "2026-03-11",
       "verified": "2026-07-23",
       "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/177321425340007.jpg",
       "region": [
         "좌3동"
-      ],
-      "audience": [
-        "senior",
-        "resident"
-      ],
-      "useful": true
-    },
-    {
-      "cat": "교육",
-      "title": "2026년 제2분기 좌2동 주민자치 프로그램 수강생 모..",
-      "body": "2026년 제2분기 좌2동 주민자치 프로그램 수강생 모집 좌2동 2026.03.10 2026년 제2분기 좌2동 주민자치 프로그램 수강생을 모집합니다. ○ 신청기간 - 좌2동 주민: 2026. 3. 19.(목) 08:00~ 마감시까지 (선착순 마감, ★좌2동 주소 미확인 시 접수 불가★ ) - 좌2동 주민 외(타동): 20…",
-      "source": "해운대구청 공지사항",
-      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=15&dataSid=3162449",
-      "date": "2026-03-10",
-      "verified": "2026-07-23",
-      "auto": true,
-      "region": [
-        "좌2동"
       ],
       "audience": [
         "senior",
@@ -3445,6 +3523,101 @@
       "useful": true
     },
     {
+      "cat": "창업",
+      "title": "「소상공인 경영개선 토탈패키지 지원사업」 안내",
+      "body": "부산신용보증재단 은 부산지역 매출감소 , 신용취약 등 경영위기 소상공인의 성공적인 재기를 도모하고자 「 소상공인 경영개선 토탈패키지 지원사업 」 을 운영하고 있습니다. 자세한 사항은 공고문을 참고해 주시기 바랍니다. □ 사업 개요 가 . 지원대상 : 부산지역 경영위기 소상공인 120 명 *[ 붙임 1] 공고문 참조 나 .…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3162354",
+      "date": "2026-03-09",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "복지",
+      "title": "고령운전자 운전면허 자진반납 우대제도 안내",
+      "body": "▶고령운전자 운전면허 자진반납 지원제도에 많은 관심과 참여 바랍니다 ◀ ​ ​ 1.( 부산시 ) 고령운전자 운전면허 자진반납 우대제도 - 지원대상 : 만 70 세 이상 ('26 년 기준 56.12.31. 이전 출생자 ) - 지원금액 : 실운전자 30 만원 / 일반 ( 장롱면허 등 ) 운전자 10 만원 * 실운전자 증빙방법…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3162350",
+      "date": "2026-03-09",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "교통",
+      "title": "보상계획 공고(재송동 소로1-24호선 도로개설사업)",
+      "body": "국토교통부 고시 제 2023-421 호 (2023.07.17.) 로 공공개발용 토지 비축사업계획 승인 고시되고 국토교통부 고시 제 2026-82 호 (2026.02.13.) 로 공공개발용 토지 비축사업계획 변경승인 고시된 『 재송동 소로 1-24 호선 도로개설사업 』 에 편입되는 토지 등에 대하여 『 공익사업을 위한 토지…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3162326",
+      "date": "2026-03-09",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "생활",
+      "title": "2026년 3월 1차 동정소식 안내",
+      "body": "반여1동 2026.03.09 2026년 3월 1차 동정소식 안내 동정 운영과 관련한 주요 활동 사항을 구민 여러분과 공유하고자 「2026년 3월 1차 동정소식」을 ​ 아래와 같이 게시하오니 많은 관심 바랍니다. 앞으로도 구정 전반에 대한 다양한 소식을 신속하고 투명하게 전달 드릴 수 있도록 최선을 다하겠습니다. 감사합니다…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3162251",
+      "date": "2026-03-09",
+      "verified": "2026-07-23",
+      "auto": true,
+      "region": [
+        "반여1동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ]
+    },
+    {
+      "cat": "안전",
+      "title": "주민점검신청제 안내문 및 신청서",
+      "body": "반여4동 2026.03.06 - 2026 년 시설물 안전점검 주민점검신청제 - 주변에 점검이 필요한 시설을 직접 신청해 주세요 . 자세한 내용은 참조 바랍니다.…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3161961",
+      "date": "2026-03-06",
+      "verified": "2026-07-23",
+      "auto": true,
+      "region": [
+        "반여4동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "주거",
+      "title": "2026년 2월분 공동주택 음식물류 폐기물 배출량 및 ..",
+      "body": "2026년 2월분 공동주택 음식물류 폐기물 배출량 및 수수료 내역 자원순환과 2026.03.06 2026년 2월분 공동주택 음식물류 폐기물 배출량 및 수수료 내역입니다.(붙임 파일) 기타 문의사항은 해운대구 자원순환과 음식물류폐기물 담당자(051-749-4454)에게 연락주시기 바랍니다. (파일 하단 탭에 공동부담 세대와…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3161922",
+      "date": "2026-03-06",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ]
+    },
+    {
       "cat": "문화",
       "title": "[우동분관] 3월 <세 개의 시간, 마지막 히치 하이커> 원화 전시회",
       "body": "독서문화행사 게시판 상세보기 테이블 [우동분관] 3월 <세 개의 시간, 마지막 히치 하이커> 원화 전시회 해운대도서관 우동분관 등록일 2026.03.04 . 다운로드 횟수 3월 원화전시회(세 개의 시간, 마지막 히치하이커)001.png ( 1회 )…",
@@ -3453,6 +3626,55 @@
       "date": "2026-03-04",
       "verified": "2026-07-23",
       "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "행사",
+      "title": "2026년 해운대구 주민참여감독관 공개모집",
+      "body": "주민생활과 밀접한 관련이 있는 공사에 대하여 주민이 감독관으로 직접 참여하여 안전하고 투명한 공사 추진을 위해 주민참여감독관을 다음과 같이 공개모집합니다. 가. 모집기간: 2026. 2. 25.(수) ~ 3. 17.(화) 18:00까지 나. 모집인원: 총 00명 다. 자격요건: 해운대구 거주자 중 분야별(건축,토목,기계,…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3161418",
+      "date": "2026-03-04",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "안전",
+      "title": "관내 석면해체·제거 작업장 현황[2026.03.04.]",
+      "body": "「석면안전관리법」​ 제27조에 따라 관내 석면해체·​제거 작업장 현황을 붙임과 같이 공개합니다.…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=17&dataSid=3161277",
+      "date": "2026-03-04",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "생활",
+      "title": "2026년 2분기 좌1동 주민자치회 프로그램 개강 안내",
+      "body": "좌1동 2026.03.04 ◆ 운영기간 : 2026. 4. 1. ~ 2026. 6. 30.(12 주 과정 ) ◆ ​ 접수기간 - 좌 1 동 주민 \" 우선접수\" : 2026. 3. 19.( 목 ) 08:00 ~ 선착순 접 ​ 수 - 좌 1 동 주민 외 : 2026. 3. 20.( 금 ) 08:00 ~ 선착순 접수 ◆ ​ 접…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3161474",
+      "date": "2026-03-04",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/177261452774357.jpg",
+      "region": [
+        "좌1동"
+      ],
       "audience": [
         "senior",
         "resident"
@@ -3490,6 +3712,24 @@
       "useful": true
     },
     {
+      "cat": "교육",
+      "title": "2026년 2분기 주민자치회 프로그램 수강생 모집",
+      "body": "우2동 2026.03.03 2026 년 2/4 분기 주민자치회 프로그램 수강생 모집 ◈ 수강기간 : 2026. 4. 1.( 수 ) ~ 6. 30.( 화 ) (3 개월 ) ◈ 수강생 모집방법 : 우 2 동주민 우선접수 ( 단 , 일본어초급은 기존수강생 우선접수 ) ◈ 접 수 처 : 우 2 동 행정복지센터 1 층 ( ☏ 74…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=17&dataSid=3161099",
+      "date": "2026-03-03",
+      "verified": "2026-07-23",
+      "auto": true,
+      "region": [
+        "우2동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
       "cat": "문화",
       "title": "[우동분관] 3월 일상 북큐레이션 <봄을 읽다, 봄을 걷다>",
       "body": "독서문화행사 게시판 상세보기 테이블 [우동분관] 3월 일상 북큐레이션 <봄을 읽다, 봄을 걷다> 해운대도서관 우동분관 등록일 2026.02.28 다운로드 횟수 3월 우동분관 일상 북큐레이션 전시자료.pdf ( 5회 ) 미리보기 3월 우동분관 일상 북큐레이션 서평 .pdf ( 2회 ) 미리보기…",
@@ -3520,6 +3760,21 @@
       "useful": true
     },
     {
+      "cat": "행사",
+      "title": "2026년도 탄소중립포인트 자동차분야 참여자 모집",
+      "body": "부산시 탄소중립포인트 자동차 분야 참여자를 모집하오니 많은 참여 바랍니다. 1. 모집대수 : 부산시 6,551대(선착순) *전년도 대비 1,805대 증가 2. 모집일정 - 1차 모집기간 : 2026.3.9.(월) 9:00 ~ 3.19.(목) 18:00 ※ 증빙자료 제출기한 3.20.(금) 24:00 - 2차 모집기간 : …",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=17&dataSid=3160463",
+      "date": "2026-02-27",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
       "cat": "문화",
       "title": "2026년 해운대구 다문화가족 외국인을 위한 지원사업 ..",
       "body": "2026년 해운대구 다문화가족 외국인을 위한 지원사업 안내 복지새소식 가족복지과 2026.02.26 ▢ 해운대구 다문화가족·외국인 지원사업 안내서 〇 제목: Hello 해운대! Happy Neighbors! 〇 내용: 교육·언어, 가족·자녀, 취업·정착, 임신·출산 지원 등 종합 안내 수록 〇 해운대구 거주 결혼이민자 T…",
@@ -3533,6 +3788,38 @@
         "resident"
       ],
       "useful": true
+    },
+    {
+      "cat": "안전",
+      "title": "관내 석면해체·제거 작업장 현황[2026.02.25.]",
+      "body": "「석면안전관리법」​ 제27조에 따라 관내 석면해체·​제거 작업장 현황을 붙임과 같이 공개합니다.…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=17&dataSid=3160278",
+      "date": "2026-02-25",
+      "verified": "2026-07-23",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "생활",
+      "title": "2026년 2월 2차 동정소식 안내",
+      "body": "반여1동 2026.02.25 2026년 2월 2차 동정소식 안내 동정 운영과 관련한 주요 활동 사항을 구민 여러분과 공유하고자 「2026년 2월 2차 동정소식」을 ​ 아래와 같이 게시하오니 많은 관심 바랍니다. 앞으로도 구정 전반에 대한 다양한 소식을 신속하고 투명하게 전달 드릴 수 있도록 최선을 다하겠습니다. 감사합니다…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=17&dataSid=3160267",
+      "date": "2026-02-25",
+      "verified": "2026-07-23",
+      "auto": true,
+      "region": [
+        "반여1동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ]
     },
     {
       "cat": "문화",
@@ -3731,6 +4018,25 @@
       "useful": true
     },
     {
+      "cat": "생활",
+      "title": "2026년 1분기 좌1동 주민자치회 프로그램 개강 안내",
+      "body": "좌1동 2025.12.04 운영기간 : 2026. 1. 2. ~ 2026. 3. 31.(12 주 과정 ) 접수기간 - 좌 1 동 주민 우선접수 : 2025. 12. 18.( 목 ) 08:00 ~ 선착순 접 ​ 수 ​ - 좌 1 동 주민 외 : 2025. 12. 19.( 금 ) 08:00 ~ 선착순 접수 접수장소 : 좌 1…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=24&dataSid=3155985",
+      "date": "2025-12-04",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/176483804489625.png",
+      "region": [
+        "좌1동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
       "cat": "복지",
       "title": "[마감] 해운대구정신건강복지센터 2급 정신건강사회복지사 수련과정 모집공고",
       "body": "페이지 정보 해운대구정신건강복지센터 댓글 0건 ,340회 25-12-03 10:33 본문 해운대구정신건강복지센터는 해운대구 지역주민의 정신건강증진 , 정신장애인의 정신재활과 사회복귀를 위하여 보건복지부가 지정 , 해운대구보건소가 인본의료재단 해운대 자명병원에 위탁하여 운영 하고 있는 기관입니다 . 해운대구정신건강복지센터에…",
@@ -3770,6 +4076,25 @@
       "date": "2025-12-01",
       "verified": "2026-07-23",
       "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "2026년 1/4분기 좌3동 주민자치회 프로그램 수강생..",
+      "body": "2026년 1/4분기 좌3동 주민자치회 프로그램 수강생 모집 좌3동 2025.11.20 2026년 1/4분기 좌3동 주민자치회 프로그램 수강생 모집 □ 운영기간 – 2026. 1. 2.( 금 ) ~ 3. 31.( 화 ) □ 운영장소 - 좌 3 동 행정복지센터 2·3 층 문화교실 □ 신청기간 - 2025. 12. 15.( …",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=25&dataSid=3155160",
+      "date": "2025-11-20",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/176362383554786.jpg",
+      "region": [
+        "좌3동"
+      ],
       "audience": [
         "senior",
         "resident"
@@ -3830,6 +4155,25 @@
       "date": "2025-10-31",
       "verified": "2026-07-23",
       "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "안전",
+      "title": "반여2동시장 반·할·맥 페스티벌",
+      "body": "​반여2동시장 반 ​ 여 · 할 인 · 맥 주 페스티벌 ● 행사기간 : 2025. 10. 16.(목) ~ 10. 18.(토), 14~21시 ● ​행사장소 : 반여2동상가시장, 반여시장 ● ​행사내용 : 할인·경품행사, 야간 포차촌, 맥주 무료쿠폰 배부, 맥주대회, 젊음의 거리 등 ▷ 할인쿠폰 매일 최대 1만원(5천원권 2…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=29&dataSid=3152544",
+      "date": "2025-10-01",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/176006710865630.png",
+      "region": [
+        "반여2동"
+      ],
       "audience": [
         "senior",
         "resident"
@@ -3927,6 +4271,24 @@
       "useful": true
     },
     {
+      "cat": "행사",
+      "title": "좌4동 제7통장 공개모집 공고",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=32&dataSid=3151005",
+      "date": "2025-09-03",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
+      "region": [
+        "좌4동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ]
+    },
+    {
       "cat": "문화",
       "title": "[유아·어린이영어자료실] 9월 <내 사탕 어디 갔어?> 원화 전시",
       "body": "독서문화행사 게시판 상세보기 테이블 [유아·어린이영어자료실] 9월 <내 사탕 어디 갔어?> 원화 전시 해운대도서관 영어실 등록일 2025.09.02…",
@@ -3987,6 +4349,26 @@
       "useful": true
     },
     {
+      "cat": "교육",
+      "title": "[우2동/송정동]들락날락 영어랑 놀자(2기) 수강생 모..",
+      "body": "[우2동/송정동]들락날락 영어랑 놀자(2기) 수강생 모집 교육도서관과 2025.08.06 우2동·송정동 어린이작은도서관에서 원어민 선생님과 함께하는 소통형 영어교육 프로그램 '들락날락 영어랑 놀자(2기)' 를 운영합니다. 관심있는 어린이의 많은 참여 바랍니다^^ ○ 운영기간: 2025. 8. 26. ~ 12. 18.[16…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=35&dataSid=3149048",
+      "date": "2025-08-06",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/175444255334133.jpg",
+      "region": [
+        "우2동",
+        "송정동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
       "cat": "문화",
       "title": "[우동분관] 8월 일상 북큐레이션 <너의 여름방학을 맡겨줘>",
       "body": "독서문화행사 게시판 상세보기 테이블 [우동분관] 8월 일상 북큐레이션 <너의 여름방학을 맡겨줘> 해운대도서관 우동분관 등록일 2025.08.02 다운로드 횟수 8월 북큐레이션 서평 .pdf ( 4회 ) 미리보기 8월 북큐레이션 자료.pdf ( 18회 ) 미리보기…",
@@ -4000,6 +4382,24 @@
         "resident"
       ],
       "useful": true
+    },
+    {
+      "cat": "행사",
+      "title": "좌4동 제4통장 공개모집 공고",
+      "body": "(우)48095 부산광역시 해운대구 중동2로 11(중동) 대표전화 : (051)749-4000 팩스 : (051)749-4444 11, Jungdong(中洞) 2-ro, Haeundae-gu, Busan, 48095, Rep. of KOREA Copyright© 2019 Haeundae-gu. All rights rese…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=36&dataSid=3148352",
+      "date": "2025-07-28",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
+      "region": [
+        "좌4동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ]
     },
     {
       "cat": "문화",
@@ -4055,6 +4455,25 @@
       "date": "2025-07-01",
       "verified": "2026-07-23",
       "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "2025년 제3분기 반여4동 문화교실 수강생 모집 안내",
+      "body": "반여4동 2025.06.10 2025년 제3분기 반여4동 문화교실 수강생을 아래와 같이 모집하오니, 관심 있으신 분들의 많은 참여 부탁드립니다. ○ 운영기간: 2025. 7. 1.(화) ~ 7. 30.(화) ○ 접수기간 - 2025. 6. 20.(금) 09:00~18:00 ☞ 반여4동 주민 접수(신분증 확인) - 2025…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=41&dataSid=3143854",
+      "date": "2025-06-10",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/174953932967642.jpg",
+      "region": [
+        "반여4동"
+      ],
       "audience": [
         "senior",
         "resident"
@@ -4209,6 +4628,44 @@
       "useful": true
     },
     {
+      "cat": "건강",
+      "title": "반여4동 문화교실 댄스강좌 안내(댄스스포츠, 건강댄스,..",
+      "body": "반여4동 문화교실 댄스강좌 안내(댄스스포츠, 건강댄스, 라인댄스) 반여4동 2025.03.26 신나는 음악에 몸을 맡기고, 스트레스는 댄스로 날려버리세요! 반여4동 문화교실에서는 쉽고 재미있게 배울 수 있는 다양한 댄스 강좌를 운영하고 있습니다. 건강도 챙기고 생활의 활력까지 얻을 수 있는, 반여4동 문화교실로 오세요~^…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=49&dataSid=3139054",
+      "date": "2025-03-26",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
+      "region": [
+        "반여4동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "2025년 제2분기 반여4동 문화교실 수강생 모집 안내",
+      "body": "반여4동 2025.03.11 2025 년 제 1 분기 반여 4 동 문화교실 수강생을 아래와 같이 모집하오니, 관심 있으신 분들의 많은 참여 부탁드립니다 . ​ 년 제 2 분기 반여 4 동 문화교실 수강생 모집 안내 > ○ 운영기간 : 2025. 4. 1.( 화 ) ~ 6. 30.( 월 ) ○ 접수기간 - 2025. 3. …",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=51&dataSid=3137367",
+      "date": "2025-03-11",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/174167383981955.jpg",
+      "region": [
+        "반여4동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
       "cat": "교통",
       "title": "제12회 Give 'N Race(기브앤레이스) 개최에 따른 시립미술관 앞 도로 교통통제 안내",
       "body": "새소식 제12회 Give 'N Race(기브앤레이스) 개최에 따른 시립미술관 앞 도로 교통통제 안내 2025-02-27 14:01:40…",
@@ -4325,6 +4782,25 @@
         "resident"
       ],
       "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "행사",
+      "title": "반송1동 체육회 임원 모집 안내",
+      "body": "반송1동 2024.08.09 주민들에게 스포츠 참여 기회를 제공하여 생활체육의 발전 및 행복한 지역사회 건설을 추구하고, 엘리트체육과 연계하여 발전할 수 있는 토대를 마련하고자 반송1동 체육회 임원진을 아래와 같이 모집하고자 하오니 많은 참여 바랍니다. 1. 단 체 명: 해운대구 반송1동 체육회 2. 소 재 지: 부산광역…",
+      "source": "해운대구청 공지사항",
+      "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=67&dataSid=3125454",
+      "date": "2024-08-09",
+      "verified": "2026-07-23",
+      "auto": true,
+      "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
+      "region": [
+        "반송1동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
       "useful": true
     },
     {
