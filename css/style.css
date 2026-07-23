@@ -2695,19 +2695,19 @@ body.dark .intro {
    안 읽혀 밋밋해 보이므로, 실제 모래·파도 모양을 바닥에 깔고
    파도는 옆으로 계속 흘러가게 합니다. */
 .intro-shore { position: absolute; left: 0; right: 0; bottom: 0; height: 30%; z-index: 0; overflow: hidden; }
-/* 맨 아래가 바다, 그 위에 파도, 그 위(하늘과 맞닿는 자리)가 모래사장
-   — 갈매기가 모래사장 가에 선 것처럼 보이도록 순서를 이렇게 둡니다. */
+/* 하늘과 맞닿는 자리(맨 위)가 먼 바다, 그 아래 파도, 맨 아래(화면 바닥,
+   가장 가까운 자리)가 모래사장 — 해변을 위에서 내려다본 사진과 같은 순서. */
 .shore-sea {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 88px;
-  background: linear-gradient(180deg, #8fd0de 0%, #5fa8bc 100%);
+  position: absolute; left: 0; right: 0; top: 0; height: 96px;
+  background: linear-gradient(180deg, #4f9bb0 0%, #7cc4d4 100%);
 }
-body.dark .shore-sea { background: linear-gradient(180deg, #23414c 0%, #152a33 100%); }
+body.dark .shore-sea { background: linear-gradient(180deg, #152a33 0%, #23414c 100%); }
 .shore-sand {
-  position: absolute; left: 0; right: 0; top: 0; bottom: 152px;
-  background: linear-gradient(180deg, #fbeed7 0%, #f2ddb2 60%, #eacf98 100%);
+  position: absolute; left: 0; right: 0; top: 160px; bottom: 0;
+  background: linear-gradient(180deg, #f2ddb2 0%, #eacf98 55%, #e2c186 100%);
 }
-body.dark .shore-sand { background: linear-gradient(180deg, #493723 0%, #3a2c1e 60%, #2e2216 100%); }
-.shore-wave-wrap { position: absolute; left: 0; right: 0; bottom: 88px; height: 64px; overflow: hidden; }
+body.dark .shore-sand { background: linear-gradient(180deg, #3a2c1e 0%, #2e2216 55%, #241a10 100%); }
+.shore-wave-wrap { position: absolute; left: 0; right: 0; top: 96px; height: 64px; overflow: hidden; }
 .shore-wave {
   position: absolute; top: 0; left: 0; width: 200%; height: 100%;
   fill: #bfe6ee; animation: shoreDrift 7s linear infinite;
