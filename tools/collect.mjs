@@ -59,15 +59,26 @@ function extractLinks(html, baseUrl, pattern) {
     const u = abs(baseUrl, m[1].replace(/&amp;/g, '&'));
     if (!u || seen.has(u)) continue;
     seen.add(u);
+
+    // 벡스코 행사일정처럼 '상세보기 진행중 회의 <진짜제목> <날짜> <장소>'가
+    // 한 <a> 안에 뭉쳐 있는 카드형 목록이 있습니다. class="subject"/"date"
+    // 처럼 이름 붙은 칸이 있으면 그걸 진짜 제목·날짜로 우선 씁니다.
+    const subjectM = m[2].match(/class=["'][^"']*\bsubject\b[^"']*["'][^>]*>([\s\S]*?)<\/span>/i);
+    const cardDateM = m[2].match(/class=["'][^"']*\bdate\b[^"']*["'][^>]*>([\s\S]*?)<\/span>/i);
+    const text = subjectM
+      ? strip(subjectM[1]).slice(0, 120)
+      : strip(m[2]).replace(/^(새글|NEW|첨부파일)\s*/i, '').slice(0, 120);
+
     // 목록 표에 '부서 | 2026.07.23' 처럼 진짜 게시일이 같은 줄에 있는 경우가
     // 많습니다. 사진 한 장뿐인 글은 상세 페이지에서 날짜를 못 찾아 '오늘'로
     // 잘못 찍히므로, 같은 줄(같은 <tr>) 안에서 날짜를 먼저 찾아 둡니다.
     const rowStart = html.lastIndexOf('<tr', m.index);
     const rowEnd = html.indexOf('</tr>', m.index);
     const row = (rowStart >= 0 && rowEnd > rowStart) ? html.slice(rowStart, rowEnd) : '';
-    const dateM = row.match(/(20\d{2})[.\-](\d{1,2})[.\-](\d{1,2})/);
+    const dateSrc = cardDateM ? strip(cardDateM[1]) : row;
+    const dateM = dateSrc.match(/(20\d{2})[.\-](\d{1,2})[.\-](\d{1,2})/);
     const listDate = dateM ? `${dateM[1]}-${dateM[2].padStart(2, '0')}-${dateM[3].padStart(2, '0')}` : null;
-    out.push({ url: u, text: strip(m[2]).replace(/^(새글|NEW|첨부파일)\s*/i, '').slice(0, 120), listDate });
+    out.push({ url: u, text, listDate });
   }
   // 게시글 주소에는 대개 긴 일련번호가 붙는다. 그런 링크가 충분하면 메뉴 링크는 버린다.
   const withId = out.filter(l => /\d{4,}/.test(l.url));
