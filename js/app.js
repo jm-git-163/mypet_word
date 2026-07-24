@@ -1147,7 +1147,7 @@
       // 그게 이 화면의 핵심입니다. 숫자로 보여 드리고, 눌러서 '어디어디인지' 밝힙니다.
       {
         const all = this.feedNotices();
-        const orgCount = new Set(all.map(n => n.source)).size;
+        const orgCount = new Set([...all, ...this.feedGuides()].map(n => n.source).filter(Boolean)).size;
         const upd = this.feedUpdated();
         content.appendChild(h('button', {
           class: 'card', style: 'width:100%;text-align:center;background:var(--primary-c);' +
