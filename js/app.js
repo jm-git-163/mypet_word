@@ -856,14 +856,13 @@
               'max-height:480px;object-fit:contain;background:#f3ede4'
           })
           : null,
-        // AI가 쉬운 말로 바꾼 문장이 있으면 그것을 먼저 보여 드리고,
-        // 사실이 달라지지 않았는지 대조할 수 있게 원문 요지도 작게 함께 둡니다.
+        // AI가 쉬운 말로 바꾼 문장이 있으면 그것만 보여 드립니다
+        // (원문은 아래 출처 링크를 누르면 언제든 대조할 수 있습니다).
         n.aiSimplified
           ? h('div', { style: 'margin:0 0 8px' },
             h('div', { style: 'display:flex;align-items:center;gap:6px;margin-bottom:4px' },
               h('span', { class: 'badge', style: 'background:#e8f0ff;color:#2a5db0' }, '🤖 AI가 쉽게 풀어드려요')),
-            h('p', { style: 'margin:0 0 6px;line-height:1.7;word-break:keep-all;font-weight:700' }, n.aiSimplified),
-            h('p', { class: 'muted small', style: 'margin:0;line-height:1.6;word-break:keep-all' }, '원문 요지 · ' + n.body))
+            h('p', { style: 'margin:0;line-height:1.7;word-break:keep-all;font-weight:700' }, n.aiSimplified))
           : h('p', { style: 'margin:0 0 8px;line-height:1.7;word-break:keep-all' }, n.body),
         // 왜 이 소식이 나에게 왔는지 밝힙니다 — 「알아서 골라 준다」는 말만으로는 못 믿습니다
         (m && m.reasons && m.reasons.length)
