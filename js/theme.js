@@ -216,6 +216,14 @@
         && global.Landmarks.url(hood.art, this.hueDeg())) || null;
       const bgUrl = artUrl || sc.url;
 
+      /* 풍경은 4:3 그림인데 화면은 세로로 길어, background-size:cover 를 쓰면
+         가로 폭의 절반 가까이가 잘려 나가 늘 같은 가운데 부분만 보입니다.
+         (건물·파라솔 같은 볼거리가 양옆에 있으면 통째로 안 보이고,
+         매 판 똑같은 자리만 보이니 단조롭습니다.)
+         레벨마다 보이는 가로 위치를 다르게 돌려 다른 부분이 드러나게 합니다. */
+      const px = 22 + ((level * 41) % 57);   // 22%~78% 사이를 오갑니다
+      root.setProperty('--scene-px', px + '%');
+
       if (plain) {
         root.setProperty('--scene-a', '#ffffff');
         root.setProperty('--scene-b', '#ffffff');

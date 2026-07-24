@@ -62,7 +62,7 @@
       `<path d="M${cx - 8} ${y - 1} L${cx} ${y + gap} L${cx + 8} ${y - 1} Z" ` +
       `fill="url(#gbeak)" stroke="#e0902a" stroke-width="1" stroke-linejoin="round"/>` +
       `<path d="M${cx - 6} ${y + gap} L${cx} ${y + tip} L${cx + 6} ${y + gap} Z" ` +
-      `fill="#e8952c" stroke="#cf8320" stroke-width="1" stroke-linejoin="round"/>` +
+      `fill="#d9891c" stroke="#a8650f" stroke-width="1" stroke-linejoin="round"/>` +
       `</g>`;
   }
 
@@ -146,7 +146,7 @@
       <stop offset="0" stop-color="#eef3f5"/><stop offset="1" stop-color="#c4d0d6"/>
     </linearGradient>
     <linearGradient id="gbeak" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffcf6b"/><stop offset="1" stop-color="#f2a733"/>
+      <stop offset="0" stop-color="#f0b23a"/><stop offset="1" stop-color="#c8811a"/>
     </linearGradient>
     <linearGradient id="gsnack" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#f7c266"/><stop offset="1" stop-color="#eea23a"/>
@@ -155,8 +155,21 @@
   <ellipse cx="100" cy="186" rx="44" ry="7" fill="#000" opacity=".08"/>
   <g transform="${tilt}">
    <g>${bobAnim}
-    <!-- 다리 -->
-    <path d="M88 164 v14 M82 178 h13 M112 164 v14 M106 178 h13" stroke="#f2a733" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    <!-- 다리·발 — 참고 사진처럼 굵고 진한 황금빛 다리에, 발가락 세 개가 부채꼴로 -->
+    <g fill="#dd9a1f">
+      <rect x="84.6" y="162" width="7" height="16" rx="3.5"/>
+      <rect x="108.6" y="162" width="7" height="16" rx="3.5"/>
+      <g transform="translate(88 180)">
+        <ellipse cx="-6.5" cy="-1" rx="4.6" ry="3.2" transform="rotate(-20 -6.5 -1)"/>
+        <ellipse cx="0" cy="1.6" rx="5" ry="3.4"/>
+        <ellipse cx="6.5" cy="-1" rx="4.6" ry="3.2" transform="rotate(20 6.5 -1)"/>
+      </g>
+      <g transform="translate(112 180)">
+        <ellipse cx="-6.5" cy="-1" rx="4.6" ry="3.2" transform="rotate(-20 -6.5 -1)"/>
+        <ellipse cx="0" cy="1.6" rx="5" ry="3.4"/>
+        <ellipse cx="6.5" cy="-1" rx="4.6" ry="3.2" transform="rotate(20 6.5 -1)"/>
+      </g>
+    </g>
     <!-- 반대쪽 날개 — 몸통에 대부분 가려지고, 삐져나온 만큼만 살짝 보여
          "이쪽도 날개가 있고, 같이 퍼덕인다"는 게 느껴지게 합니다.
          그늘진 쪽이라 앞 날개보다 살짝 어둡게 둡니다. -->
@@ -181,6 +194,13 @@
     <g>${wingAnim}
       <path d="M124 124 q18 2 20 22 q2 16 -12 24 q-11 6 -18 -3 q8 -7 9 -18 q1 -14 -6 -23 q3 -3 7 -2 Z"
         fill="url(#gwing)" stroke="#a9b7bd" stroke-width="1.3"/>
+      <!-- 깃털 결 — 참고 사진처럼 겹쳐 쌓인 깃 무늬를 얇은 선으로 살짝 -->
+      <g stroke="#9aabb3" stroke-width="1" fill="none" opacity=".5" stroke-linecap="round">
+        <path d="M129 131 q7 4 5 11"/>
+        <path d="M132 142 q7 4 5 12"/>
+        <path d="M133 154 q7 5 4 13"/>
+        <path d="M131 166 q6 4 3 9"/>
+      </g>
       <!-- 검은 날개 끝 깃 -->
       <path d="M118 168 q8 4 13 -2 q2 7 -8 9 q-7 -1 -5 -7 Z" fill="#5b6770"/>
     </g>

@@ -540,11 +540,13 @@ body::after {
      투명도를 아무리 높여도 '하나도 안 비치는' 것처럼 보입니다. */
   height: min(78vh, 760px); pointer-events: none;
   background-image: var(--scene-img, none);
-  background-size: cover; background-position: center bottom;
+  background-size: cover; background-position: var(--scene-px, center) bottom;
   background-repeat: no-repeat;
   opacity: .62;
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.45) 26%, #000 58%, #000 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.45) 26%, #000 58%, #000 100%);
+  /* 예전엔 위쪽 42%가 거의 다 가려져(건물·풍경의 볼거리가 있는 자리),
+     아래쪽 밋밋한 바다·모래 색만 보였습니다. 가려지는 폭을 줄입니다. */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.5) 14%, #000 38%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,.5) 14%, #000 38%, #000 100%);
   transition: background-image 900ms ease;
 }
 body.dark::after { opacity: .4; }
