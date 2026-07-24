@@ -247,21 +247,26 @@
     },
     {
       "id": "senior-welfare",
-      "name": "해운대노인종합복지관",
+      "name": "해운대종합사회복지관",
       "type": "html-board",
       "trust": "partner",
       "region": "해운대구",
       "topics": [
         "복지",
-        "건강"
+        "건강",
+        "일자리"
       ],
-      "cadenceMin": 720,
-      "listUrl": "TODO(복지관 공지 주소)",
-      "enabled": false,
+      "cadenceMin": 360,
+      "listUrl": "http://haeundae.saem.or.kr/community/news1.php",
+      "linkPattern": "mode=read[^\"']*",
+      "pageParam": "page",
+      "enabled": true,
       "audience": [
         "senior",
         "resident"
-      ]
+      ],
+      "pages": 8,
+      "note": "노인복지관 독립 홈페이지는 없고, 복지 소식은 여기(종합사회복지관)와 구청 복지새소식에 실립니다. EUC-KR 게시판."
     },
     {
       "id": "busan-festival-api",

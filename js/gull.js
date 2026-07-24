@@ -10,7 +10,7 @@
   'use strict';
 
   /* 배포 캐시를 갈아엎을 때 숫자만 올리면 됩니다 */
-  const VER = '2';
+  const VER = '3';
 
   /* 기분 → 그림 파일 · CSS 움직임 클래스 */
   const MOODS = {
@@ -20,7 +20,7 @@
     신남:     { src: 'cheer.png',  anim: 'gull-hop' },
     보고싶음: { src: 'miss.png',   anim: 'gull-soft' },
     졸림:     { src: 'sleep.png',  anim: 'gull-soft', zzz: true },
-    먹이:     { src: 'eat.png',    anim: 'gull-bob' },
+    먹이:     { src: 'eat.png',    anim: 'gull-eat', crumbs: true },
     달림:     { src: 'run.png',    anim: 'gull-hop' }
   };
 
@@ -53,6 +53,8 @@
     const anim = still ? '' : (burst ? 'gull-burst' : m.anim);
     const zzz = (!still && m.zzz)
       ? '<span class="gull-zzz" aria-hidden="true">Z</span>' : '';
+    const crumbs = (!still && m.crumbs)
+      ? '<span class="gull-crumbs" aria-hidden="true"></span>' : '';
 
     return (
       '<span class="gullmascot' + (anim ? ' ' + anim : '') + '" ' +
@@ -60,7 +62,7 @@
         '<img class="gullimg" src="' + assetUrl(m.src) + '" ' +
           'alt="" width="' + s + '" height="' + s + '" draggable="false" ' +
           'decoding="async">' +
-        zzz +
+        zzz + crumbs +
       '</span>'
     );
   }

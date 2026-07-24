@@ -82,6 +82,9 @@ const unesc = s => String(s || '')
 const clean = s => unesc(s).replace(/\s+/g, ' ')
   .replace(/(공지사항\s*)?게시물\s*상세\s*정보|작성자|작성일|조회수?\s*\d*|첨부파일|이전글|다음글|목록/g, ' ')
   .replace(/-->|<!--/g, ' ')                      // 주석 찌꺼기가 제목 끝에 붙어 나옵니다
+  // 벡스코 등 상세 페이지에 붙는 AI 챗봇 위젯 안내문은 본문이 아닙니다
+  .replace(/AI가\s*생성한\s*답변은\s*부정확[\s\S]{0,400}?(4개\s*언어\s*지원|챗봇에\s*물어보세요)[^\s]*/g, ' ')
+  .replace(/챗봇\s*사용\s*가이드[\s\S]{0,200}?물어보세요[^\s]*/g, ' ')
   .replace(/\s+/g, ' ').trim();
 
 /* 본문 자리에 좌측 메뉴가 통째로 담겨 오는 기관이 있습니다.
@@ -96,6 +99,7 @@ function toNotice(it) {
   const text = `${it.rawTitle} ${it.rawBody}`;
   let body = clean(it.rawBody).replace(new RegExp('^' + it.rawTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), '').trim();
   if (NAV_BODY.test(body) || navRatio(body) > 0.28) body = '';   // 메뉴만 담겨 온 글
+  if (/챗봇|AI가\s*생성한\s*답변/.test(body) && body.length < 220) body = '';
   // 본문 앞머리에 '게시판이름 담당부서 2026.01.14' 같은 머리표가 붙어 옵니다.
   // 어르신은 그 줄부터 읽기 시작하므로 첫 날짜까지를 잘라 냅니다.
   body = body.replace(/^(?:[가-힣]{2,12}\s+){1,3}\d{4}[.\-]\d{1,2}[.\-]\d{1,2}\.?\s+/, '').trim();
@@ -209,9 +213,16 @@ const main = async () => {
   // 항상 한국 시간(KST, UTC+9) 기준 날짜로 적습니다.
   feed.meta.lastUpdated = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
   feed.meta.autoCount = notices.length;
+  // 현황판·소개 문구에 쓸 실제 통합 규모(켜 둔 기관 + 피드에 실린 출처)
+  const liveNames = src.sources.filter(x => x.enabled).map(x => x.name);
+  const noticeOrgs = [...new Set(notices.map(n => n.source).filter(Boolean))];
+  feed.meta.orgCount = Math.max(liveNames.length, noticeOrgs.length);
+  feed.meta.noticeCount = notices.length;
+  feed.meta.sources = liveNames.slice(0, 24);
 
   await fs.writeFile(FEED, JSON.stringify(feed, null, 2), 'utf8');
   console.log(`수집 ${pending.length}건 → 선별 통과 ${passed.length}건 → 새로 걷힘 ${freshNotices.length}건 + 이어 붙임 ${carried.length}건 → 피드 게시 ${notices.length}건`);
+  console.log(`통합 기관 ${feed.meta.orgCount}곳 · 소식 ${feed.meta.noticeCount}건`);
   console.log('버려진 글 예시:', pending.filter(it => DROP.test(it.rawTitle)).slice(0, 3).map(i => i.rawTitle.slice(0, 30)).join(' / ') || '(없음)');
 };
 main().catch(e => { console.error(e); process.exit(1); });

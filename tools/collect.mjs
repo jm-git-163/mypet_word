@@ -22,9 +22,22 @@ const SRC = path.join(ROOT, 'tools', 'sources.json');
 const STATE = path.join(ROOT, 'data', 'state.json');
 const PENDING = path.join(ROOT, 'data', 'pending.json');
 const ALL = process.argv.includes('--all');
+const ONLY = (process.argv.find(a => a.startsWith('--only=')) || '').slice(7);
 
 const sha1 = s => crypto.createHash('sha1').update(s).digest('hex').slice(0, 16);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* Content-Type charset 을 존중합니다.
+   복지관 등 오래된 사이트가 EUC-KR 인데 utf-8 로 읽으면 제목이 깨집니다. */
+async function readText(res) {
+  const buf = Buffer.from(await res.arrayBuffer());
+  const ct = res.headers.get('content-type') || '';
+  const m = ct.match(/charset\s*=\s*["']?([^\s;"']+)/i);
+  let cs = (m ? m[1] : 'utf-8').toLowerCase();
+  if (cs === 'ks_c_5601-1987' || cs === 'ksc5601' || cs === 'euckr') cs = 'euc-kr';
+  try { return new TextDecoder(cs).decode(buf); }
+  catch { return buf.toString('utf8'); }
+}
 
 /* 응답 없는 기관 서버 하나 때문에 전체 수집이 멈추면 안 됩니다.
    정해진 시간 안에 응답이 없으면 그 기관만 건너뜁니다.
@@ -153,7 +166,9 @@ function extractDetail(html, url, listTitle) {
     const score = text.length / (1 + links * 45);      // 링크가 많을수록 감점
     if (score > best.score) best = { score, text };
   }
-  const body = (best.text || strip(html)).slice(0, 4000);
+  const bodyRaw = (best.text || strip(html)).slice(0, 4000);
+  // 본문 후보가 전부 챗봇 위젯뿐이면 빈 본문으로 돌려, 상위에서 걸러지게 합니다
+  const body = WIDGET_HINT.test(bodyRaw) && !best.text ? '' : bodyRaw;
 
   // 제목: 목록 링크 글자 우선 → 본문 h1/h2 → 페이지 title(마지막 수단)
   const h = strip(html.match(/<h[12][^>]*>([\s\S]*?)<\/h[12]>/i)?.[1] || '');
@@ -260,7 +275,7 @@ async function checkSource(src, state, agent) {
   st.etag = res.headers.get('etag') || st.etag;
   st.lastMod = res.headers.get('last-modified') || st.lastMod;
 
-  const html = await res.text();
+  const html = await readText(res);
   let links = src.listStyle === 'dureraum-prog'
     ? extractDureraumProgList(html, src.listUrl)
     : src.idPattern
@@ -287,7 +302,7 @@ async function checkSource(src, state, agent) {
     try {
       const r2 = await fetchSafe(u.href, { headers: { 'User-Agent': agent.userAgent } }, src.timeoutMs);
       if (!r2.ok) break;
-      const h2 = await r2.text();
+      const h2 = await readText(r2);
       const more = src.idPattern
         ? extractByOnclick(h2, src)
         : extractLinks(h2, u.href, src.linkPattern || 'view');
@@ -315,7 +330,7 @@ async function checkSource(src, state, agent) {
     try {
       const r = await fetchSafe(url, { headers: { 'User-Agent': agent.userAgent } }, src.timeoutMs);
       if (!r.ok) continue;
-      const rawHtml = await r.text();
+      const rawHtml = await readText(r);
       const d = extractDetail(rawHtml, url, link.text);
       if (url.includes('EventScheduleMgr/view.do')) {
         const bexcoBody = extractBexcoDetail(rawHtml);
@@ -352,7 +367,9 @@ async function main() {
   const known = new Set(pending.map(p => p.uid));
 
   let added = 0;
-  for (const src of reg.sources.filter(s => s.enabled && s.type === 'html-board')) {
+  for (const src of reg.sources.filter(s =>
+    s.enabled && s.type === 'html-board' && (!ONLY || s.id === ONLY)
+  )) {
     const items = await checkSource(src, state, agent);
     for (const it of items) if (!known.has(it.uid)) { pending.push(it); known.add(it.uid); added++; }
   }
