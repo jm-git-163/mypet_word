@@ -105,7 +105,7 @@ function toNotice(it) {
     source: it.source,
     sourceUrl: it.sourceUrl,
     date: it.publishedAt,
-    verified: new Date().toISOString().slice(0, 10),
+    verified: new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10),   // KST 기준(위 lastUpdated와 같은 이유)
     auto: true,
     // 동 소식지는 대부분 글자가 아니라 사진 한 장입니다. 사진 자체를 카드에 보여
     // 정부 사이트를 거치지 않고 바로 볼 수 있게 합니다.
@@ -162,7 +162,10 @@ const main = async () => {
   // 손으로 정리해 둔 안내(auto 아님)는 남기고, 자동 수집분만 새로 갈아 끼운다
   const curated = (feed.notices || []).filter(n => !n.auto);
   feed.notices = [...notices, ...curated];
-  feed.meta.lastUpdated = new Date().toISOString().slice(0, 10);
+  // GitHub Actions 서버는 UTC라, 그냥 오늘 날짜를 적으면 한국 새벽에 돈 결과가
+  // "어제 날짜"로 찍혀 실제로는 방금 갱신됐는데도 "며칠 전 업데이트"처럼 보입니다.
+  // 항상 한국 시간(KST, UTC+9) 기준 날짜로 적습니다.
+  feed.meta.lastUpdated = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
   feed.meta.autoCount = notices.length;
 
   await fs.writeFile(FEED, JSON.stringify(feed, null, 2), 'utf8');
