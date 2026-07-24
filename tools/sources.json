@@ -843,6 +843,69 @@
       "listUrl": "https://www.dureraum.org/bcc/mcontents/progList.do?rbsIdx=61",
       "listStyle": "dureraum-prog",
       "enabled": true
+    },
+    {
+      "id": "bipa-notice",
+      "name": "부산정보산업진흥원 공지사항",
+      "type": "html-board",
+      "trust": "official",
+      "region": "부산광역시",
+      "topics": [
+        "교육",
+        "행사"
+      ],
+      "audience": [
+        "resident",
+        "senior"
+      ],
+      "cadenceMin": 480,
+      "pages": 3,
+      "pageParam": "page",
+      "listUrl": "https://bipa.kr/board/notice/list",
+      "linkPattern": "board/notice/view\\?seq=\\d+",
+      "enabled": true
+    },
+    {
+      "id": "cklbusan-notice",
+      "name": "부산콘텐츠코리아랩 공지사항",
+      "type": "html-board",
+      "trust": "official",
+      "region": "해운대구",
+      "topics": [
+        "교육",
+        "행사",
+        "문화"
+      ],
+      "audience": [
+        "resident",
+        "senior"
+      ],
+      "cadenceMin": 480,
+      "listUrl": "https://www.cklbusan.com/WWW/board/47",
+      "linkPattern": "/WWW/boardview/47/\\d+",
+      "enabled": true,
+      "note": "페이지네이션이 /WWW/board/47/2 처럼 경로형이라 pages 미지정(1쪽만). 1쪽에 최근 글이 충분히 잡힌다."
+    },
+    {
+      "id": "befm-notice",
+      "name": "부산영어방송 공지사항",
+      "type": "html-board",
+      "trust": "official",
+      "region": "부산광역시",
+      "topics": [
+        "행사",
+        "생활"
+      ],
+      "audience": [
+        "resident",
+        "senior"
+      ],
+      "cadenceMin": 480,
+      "pages": 3,
+      "pageParam": "page",
+      "listUrl": "https://www.befm.or.kr/sub/template.php?midx=49&lang=ko",
+      "linkPattern": "midx=49&mode=view[^\"']*",
+      "enabled": true
     }
   ]
 }
