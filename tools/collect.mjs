@@ -27,10 +27,14 @@ const sha1 = s => crypto.createHash('sha1').update(s).digest('hex').slice(0, 16)
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* 응답 없는 기관 서버 하나 때문에 전체 수집이 멈추면 안 됩니다.
-   10초 안에 응답이 없으면 그 기관만 건너뜁니다.
-   (부산시 통합공지는 GitHub Actions 쪽에서 10초를 자꾸 넘겨 계속
-   건너뛰어져서, 그 소스만 넉넉하게 줄 수 있게 시간을 받게 했습니다.) */
-const TIMEOUT_MS = 10000;
+   정해진 시간 안에 응답이 없으면 그 기관만 건너뜁니다.
+   ※ 실제로 겪은 문제: 처음엔 10초로 뒀는데, GitHub Actions(해외 서버)에서
+   .go.kr 사이트(haeundae.go.kr·busan.go.kr 등 여러 곳)에 접속하면
+   10초를 자꾸 넘겨 "타임아웃"으로 계속 건너뛰어졌습니다(제 컴퓨터에서
+   테스트할 땐 멀쩡했던 것과 대조적 — 국내/국외 접속 경로 차이로 보임).
+   한 기관만의 문제가 아니라 .go.kr 전반의 문제라, 기본값 자체를
+   넉넉하게 올립니다(정말 응답이 없는 서버는 25초여도 여전히 걸러집니다). */
+const TIMEOUT_MS = 25000;
 async function fetchSafe(url, opts, timeoutMs) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs || TIMEOUT_MS);
