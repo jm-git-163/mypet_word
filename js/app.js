@@ -186,11 +186,22 @@
 
   function say(msg, emoji) {
     sheet((box, close) => {
-      // 안내창에도 같은 강아지가 나옵니다.
+      // 발자국 이야기(🐾)는 강아지 발바닥 이모지 대신, 앱에서 쓰는
+      // '갈매기 물갈퀴 발자국' 그림을 큼직하게 보여 줍니다. 우리 마스코트가
+      // 갈매기인데 안내창만 강아지 발바닥이면 어긋나 보입니다.
+      let head;
+      if (emoji === '🐾') {
+        const p = paw('on');
+        p.style.cssText = 'display:inline-block;width:calc(60px * var(--fs));height:calc(60px * var(--fs));color:var(--primary)';
+        head = h('div', { class: 'center' }, p);
+      } else if (emoji && emoji !== '🐕') {
+        head = h('div', { class: 'center', style: 'font-size:calc(56px * var(--fs))' }, emoji);
+      } else {
+        head = h('div', { class: 'center' }, dogEl('갸웃', 96, 'saydog'));
+      }
+      // 안내창에도 같은 갈매기가 나옵니다.
       // 화면마다 다른 그림이 나오면 '한 마리'로 느껴지지 않습니다.
-      box.appendChild(emoji && emoji !== '🐕'
-        ? h('div', { class: 'center', style: 'font-size:calc(56px * var(--fs))' }, emoji)
-        : h('div', { class: 'center' }, dogEl('갸웃', 96, 'saydog')));
+      box.appendChild(head);
       box.appendChild(h('p', { class: 'center', style: 'font-size:calc(23px * var(--fs));font-weight:700;word-break:keep-all' }, msg));
       box.appendChild(h('button', { class: 'btn primary wide', onclick: close }, '알겠어요'));
     });
@@ -641,8 +652,8 @@
 
       // 배경 삽화 — 지금 동네 그림 하나로 고정하지 않고, 이 화면에 들어올
       // 때마다 열넷 명소 가운데 하나를 무작위로 골라 늘 새롭게 보이게 합니다.
-      // 그림을 자르지 않고 다 보여 준 뒤, 남는 자리는 그 그림 하늘색으로
-      // 평평하게 이어 붙입니다('함께한 날' 상자 아래까지).
+      // 그림은 '화면 아래 빈 자리'에 잘리지 않게 온전히 깔고(css body.tab-walk::after),
+      // 그림 위로 남는 화면 전체는 그 그림 하늘색으로 통일합니다(--hero-top).
       const artKeys = (global.Landmarks && global.Landmarks.keys()) || [];
       const artKey = artKeys.length ? artKeys[Math.floor(Math.random() * artKeys.length)] : null;
       const hueDeg = global.Theme.hueDeg ? global.Theme.hueDeg() : null;
@@ -650,10 +661,13 @@
       const heroTop = artKey ? global.Landmarks.topColor(artKey, hueDeg) : '#dff1f6';
       document.documentElement.style.setProperty('--hero-img', heroImg ? `url("${heroImg}")` : 'none');
       document.documentElement.style.setProperty('--hero-top', heroTop);
+      // 그림을 아래 탭줄 바로 위에 붙이기 위해, 탭줄 높이를 재서 넘깁니다
+      // (글씨 크기 설정에 따라 탭줄 높이가 달라지므로 그때그때 잽니다).
+      const tb = document.getElementById('tabbar');
+      if (tb) document.documentElement.style.setProperty('--tabbar-h', tb.offsetHeight + 'px');
 
-      const hero = h('div', { class: 'walk-hero' });
-      hero.appendChild(dogBlock('반가움', this.greet()));
-      hero.appendChild(h('div', { class: 'card center' },
+      v.appendChild(dogBlock('반가움', this.greet()));
+      v.appendChild(h('div', { class: 'card center' },
         h('div', { class: 'hood-tag' }, hood.name),
         h('div', { style: 'font-size:calc(34px * var(--fs));font-weight:800;line-height:1.4;margin:6px 0 10px' },
           d.level + '번째 산책'),
@@ -664,23 +678,26 @@
           d.totalDone === 0 ? '산책 나가기' : '이어서 산책하기')
       ));
 
-      if (due > 0) hero.appendChild(h('div', { class: 'card' },
+      if (due > 0) v.appendChild(h('div', { class: 'card' },
         h('h2', null, '되새길 낱말이 있어요'),
         h('p', { class: 'muted', style: 'margin:0 0 14px' }, `지난번에 만난 낱말 ${due}개를 다시 볼까요?`),
         h('button', { class: 'btn go wide', onclick: () => global.Game.startReview() }, '되새기러 가기')));
 
-      hero.appendChild(h('div', { class: 'card' },
+      v.appendChild(h('div', { class: 'card' },
         h('div', { class: 'statrow' },
           h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'muted small' }, '함께한 날'), h('div', { class: 'bignum' }, d.days.length + '일')),
           h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'muted small' }, '만난 낱말'), h('div', { class: 'bignum' }, Object.keys(d.memory).length + '개')),
           h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'muted small' }, '발자국'), h('div', { class: 'bignum' }, d.footprints + '개'))
         )));
-      v.appendChild(hero);
 
       // 「바탕화면에 놓기」 안내가 들어올 자리.
       // 이미 앱으로 여셨거나 안내를 닫으셨으면 아무것도 그리지 않습니다.
       v.appendChild(h('div', { id: 'installhost' }));
       if (global.Install) global.Install.render();
+
+      // 명소 삽화 — 카드들 아래 남는 빈 자리를 모두 차지해(세로 flex),
+      // 그림이 텍스트 상자에 가리지 않고 화면 아래쪽에 큼직하게 보입니다.
+      v.appendChild(h('div', { class: 'walk-illust', 'aria-hidden': 'true' }));
     },
 
     greet() {
@@ -1148,7 +1165,11 @@
       // 그게 이 화면의 핵심입니다. 숫자로 보여 드리고, 눌러서 '어디어디인지' 밝힙니다.
       {
         const all = this.feedNotices();
-        const orgCount = new Set([...all, ...this.feedGuides()].map(n => n.source).filter(Boolean)).size;
+        const metaOrgs = (this._feed && this._feed.meta && this._feed.meta.orgCount) || 0;
+        const orgCount = Math.max(
+          metaOrgs,
+          new Set([...all, ...this.feedGuides()].map(n => n.source).filter(Boolean)).size
+        );
         const upd = this.feedUpdated();
         content.appendChild(h('button', {
           class: 'card', style: 'width:100%;text-align:center;background:var(--primary-c);' +
