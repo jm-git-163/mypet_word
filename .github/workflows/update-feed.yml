@@ -43,6 +43,12 @@ jobs:
         if: ${{ env.OPENAI_API_KEY != '' }}
         run: node tools/ai_simplify.mjs
 
+      - name: 오늘의 안심 브리핑 만들기(선택 — 키가 있을 때만)
+        # 그날 소식 중 '오늘 어르신이 꼭 챙기실 것' 3가지를 AI 가 미리 골라 둡니다.
+        # 앱 실행 중에는 AI 를 부르지 않고, 여기서 만든 결과만 바로 보여 줍니다.
+        if: ${{ env.OPENAI_API_KEY != '' }}
+        run: node tools/brief.mjs
+
       - name: 바뀐 점이 있으면 main 에 바로 커밋
         run: |
           git config user.name "haeundae-feed-bot"

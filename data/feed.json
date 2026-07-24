@@ -1,25 +1,78 @@
 {
   "meta": {
-    "lastUpdated": "2026-07-24",
+    "lastUpdated": "2026-07-25",
     "note": "이 파일은 tools/build_feed.mjs 파이프라인이 공식 소스에서 수집·가공·검수하여 갱신합니다. 앱은 이 파일을 실시간으로 받아 화면에 올립니다.",
     "sources": [
-      "부산광역시 부산축제정보 OpenAPI (data.go.kr/data/15063500)",
-      "해운대구청 고시·공고 (haeundae.go.kr)",
-      "해운대구 행정복지센터 알림",
-      "보건복지부·국민연금공단·정부24",
-      "질병관리청·해운대구보건소"
+      "해운대구청 공지사항",
+      "해운대문화회관",
+      "해운대도서관 독서문화행사",
+      "부산광역시 고시공고",
+      "벡스코 공지사항",
+      "부산시립미술관 새소식",
+      "해운대구보건소",
+      "해운대종합사회복지관",
+      "비지트부산 공지",
+      "비지트부산 축제·행사",
+      "해운대구 복지새소식",
+      "해운대구 반상회 소식",
+      "벡스코 행사일정",
+      "해운대구정신건강복지센터",
+      "해운대생활체육센터",
+      "부산자원봉사센터(해운대 필터)",
+      "해운대문화회관 공연일정",
+      "해운대문화회관 전시일정",
+      "영화의전당 공연일정",
+      "부산시 통합공지사항",
+      "영화의전당 현재상영프로그램",
+      "영화의전당 상영예정프로그램",
+      "부산정보산업진흥원 공지사항",
+      "부산콘텐츠코리아랩 공지사항"
     ],
-    "autoCount": 379
+    "autoCount": 409,
+    "orgCount": 25,
+    "noticeCount": 409
   },
   "notices": [
     {
       "cat": "행사",
+      "title": "[모집]2026년 신중년 사회공헌사업 참여자 및 참여기관 모집안내",
+      "body": "공지사항 게시판 읽기 [모집]2026년 신중년 사회공헌사업 참여자 및 참여기관 모집안내 2026 신중년 사회공헌사업 참여자 및 참여기관 모집 안내문 1 2026 년 신중년 사회공헌 사업 안내 1. 사업목적 : 전문성과 경력이 보장된 퇴직 전문인력을 비영리 단체 , 사회적 기업 등에 연계하여 사회서비스를 확산하고 , 고령화…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=7&number=2740&keyfield=&key=",
+      "date": "2026-12-03",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "일자리",
+      "title": "[공지] 2026년 신중년 일자리 지원사업 참여자 추가모집(긴급) 안내",
+      "body": "공지사항 게시판 읽기 [공지] 2026년 신중년 일자리 지원사업 참여자 추가모집(긴급) 안내 본 복지관에서는 신중년의 경력과 활동역량을 활용하여 사회적 도움이 필요한 영역에 서비스를 제공하는 2026 년 신중년 일자리지원사업을 진행합니다 . 이에 아래와 같이 추가 참여자를 모집하오니 , 많은 협조 부탁드립니다 . ** 아…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=3&number=2799&keyfield=&key=",
+      "date": "2026-11-30",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "행사",
       "title": "2026 KCCV(한국컴퓨터비전학회 하계학술대회)",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16068",
       "date": "2026-08-03",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -32,11 +85,11 @@
     {
       "cat": "교통",
       "title": "부산교통공사와 함께하는 포켓몬 카드 게임 배틀 토너먼트",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16471",
       "date": "2026-08-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -49,11 +102,11 @@
     {
       "cat": "문화",
       "title": "2026 나이트레이스 인 부산",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16472",
       "date": "2026-08-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -66,11 +119,11 @@
     {
       "cat": "문화",
       "title": "일러스타 페스 12",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16233",
       "date": "2026-08-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -83,11 +136,11 @@
     {
       "cat": "문화",
       "title": "2027학년도 지역거점 수시지원전략 설명회",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16489",
       "date": "2026-08-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -100,11 +153,11 @@
     {
       "cat": "문화",
       "title": "Career in Japan 2026 BUSAN",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16490",
       "date": "2026-08-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -138,7 +191,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=6167",
       "date": "2026-07-31",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -266,11 +319,11 @@
     {
       "cat": "행사",
       "title": "2026 대입상담캠프",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16232",
       "date": "2026-07-28",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -300,11 +353,11 @@
     {
       "cat": "문화",
       "title": "라이프웨이브코리아 원데이 세미나",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16467",
       "date": "2026-07-25",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -317,11 +370,11 @@
     {
       "cat": "문화",
       "title": "DIVE 2026",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16238",
       "date": "2026-07-25",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -338,7 +391,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=6067",
       "date": "2026-07-24",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -351,11 +404,11 @@
     {
       "cat": "문화",
       "title": "국가유산청 근현대건축 문화유산 활성화 국제학술대회",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16464",
       "date": "2026-07-24",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -368,11 +421,11 @@
     {
       "cat": "문화",
       "title": "부산역사 학술대회 부산 문화유산이 세계문화유산으로 거듭나다",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16466",
       "date": "2026-07-24",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -385,11 +438,11 @@
     {
       "cat": "문화",
       "title": "K-핸드메이드페어 부산 2026",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=15810",
       "date": "2026-07-24",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -402,11 +455,11 @@
     {
       "cat": "문화",
       "title": "K-일러스트레이션페어 부산 2026",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=15811",
       "date": "2026-07-24",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -415,6 +468,384 @@
       ],
       "useful": true,
       "aiSimplified": "2026년 7월 24일부터 26일까지 오전 11시부터 오후 6시까지 제2전시장 4(A-B)홀에서 K-일러스트레이션페어가 열립니다. 관람료는 현장에서 7,000원, 사전 등록은 5,000원이며, 20명 이상 단체는 현장에서 5,000원, 사전 등록은 4,000원입니다."
+    },
+    {
+      "cat": "복지",
+      "title": "[공지] 해운대종합사회복지관 산책로 네이밍 공모전 수상 결과 안내",
+      "body": "공지사항 게시판 읽기 [공지] 해운대종합사회복지관 산책로 네이밍 공모전 수상 결과 안내 안녕하세요. 해운대종합사회복지관입니다. 해운대종합사회복지관 산책로 네이밍 공모전에 많은 관심과 성원을 보내주시고, 소중한 아이디어를 제안해 주신 모든 분들께 진심으로 감사드립니다. 이번 공모전에는 총 24개의 작품이 접수되었으며, 공정…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=1&number=2830&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "환경",
+      "title": "[공지] 제34회 청소년 가요제 홍보",
+      "body": "공지사항 게시판 읽기 [공지] 제34회 청소년 가요제 홍보 제34회 청소년 가요제 참가자 모집 해운대종합사회복지관에서는 청소년들의 문화적 재능을 발휘하고 건전한 청소년 문화를 조성하기 위해 「제34회 청소년 가요제」를 개최합니다. 노래를 좋아하는 청소년이라면 누구나 참여할 수 있으며, 솔로와 그룹 모두 참가 가능합니다. …",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=1&number=2828&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "복지",
+      "title": "[모집] 해운대종합사회복지관 산책로 네이밍 공모전",
+      "body": "복지관소개 현황 연혁 직원소개 오시는길 이용자만족 서비스 헌장 사업안내 사례관리기능 서비스제공기능 지역조직화기능 부설기관 LH행복꿈터 해운대지역아동센터 해운대 푸드마켓 해운대 푸드뱅크 프로그램 여성, 일반 유아, 아동, 청소년 어르신 장애인 무료특강 후원사업 후원안내 사례 자원봉사 자원봉사 안내 사례 알림마당 공지사항 공…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=1&number=2822&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "[모집] 파크골프 아카데미 방학특강 초등학생 모집",
+      "body": "해운대종합사회복지관에서는 여름방학을 맞아 초등학생을 대상으로 「파크골프 방학특강」을 운영합니다. 파크골프의 기본 이론부터 실전 기술까지 체계적으로 배우며 건강한 여가활동과 스포츠 경험을 제공하고자 하오니 많은 관심과 참여 바랍니다. ■ 교육기간: 2026년 8월 11일(화) ~ 8월 27일(목) 매주 화·목요일, 총 6회…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=2&number=2814&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "복지",
+      "title": "2026 영유아기 발달장애인 부모교육지원사업 부모다움 참여자 모집",
+      "body": "- 내용: 기본형 교육(부모반응성중재(RT)교육, 긍정적 행동지원, 발달장애 유아의 언어발달 교육, 정서발달 및 학습지원 활동 등), 자율형 교육(꽃으로 채우는 힐링교육, 건강한 디저트 만들기, 나를 돌보는 색의 하루(백드롭페인팅), 우리 함께 성장 운동 등)…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=2&number=2810&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "[모집] 6월 스크린파크골프 아카데미 수강생 대모집",
+      "body": "공지사항 게시판 읽기 [모집] 6월 스크린파크골프 아카데미 수강생 대모집 2026년 스크린 파크골프 아카데미 수강생 모집 기초부터 실전까지! 전문 강사와 함께 배우는 스크린 파크골프 새로운 취미를 찾고 계신가요? 건강한 여가생활과 즐거운 운동을 동시에 누릴 수 있는 스크린 파크골프 아카데미 가 여러분을 기다립니다! 파크골…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=3&number=2804&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "행사",
+      "title": "[모집] 5월 파크골프 체험의날 안내",
+      "body": "공지사항 게시판 읽기 [모집] 5월 파크골프 체험의날 안내 안녕하십니까, 해운대종합사회복지관입니다. 해운대종합사회복지관에서는 지역주민의 건강한 여가활동 지원을 위해 스크린파크골프 체험의 날 을 운영합니다. 파크골프를 처음 접하시는 분들도 쉽게 참여하실 수 있도록 기초 교육과 체험 중심으로 진행되오니 많은 관심과 참여 바랍…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=3&number=2795&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "행사",
+      "title": "[모집] 생일서비스 후원자 모집",
+      "body": "공지사항 게시판 읽기 [모집] 생일서비스 후원자 모집 ■ 생일서비스 후원자 모집 ▪ 지역 내 영세가정 및 복지사각지대 가정의 생일을 축하하실 후원자를 모집합니다 . ▪ 모집일자 : 상시모집 ▪ 참여방법 : 피자 , 치킨 , 케이크 , 모바일상품권 등 기프티콘 후원요청 ​ ( 후원 시 기부금 영수증 발행 가능 , 연말정산 …",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=3&number=2793&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "복지",
+      "title": "[공지]복지관 외부 행복한 숲 조성공사 안내",
+      "body": "5월 6일(수)-5월 30일(토)까지 해운대종합사회복지관 외부 '행복한 숲' 공사를 진행합니다. 소음이 발생할 수 있으며, 공사 구간 접근이 어렵습니다.…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=3&number=2791&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "복지",
+      "title": "제46회 장애인의 날 기념 카드뉴스",
+      "body": "공지사항 게시판 읽기 제46회 장애인의 날 기념 카드뉴스 서로 다른 모습과 속도로 살아가지만, 우리 모두는 같은 마음으로 세상을 살아가고 있습니다.…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=4&number=2788&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ]
+    },
+    {
+      "cat": "행사",
+      "title": "[모집] 우리 동네 클리닝 참여자 모집",
+      "body": "공지사항 게시판 읽기 [모집] 우리 동네 클리닝 참여자 모집  우리 동네 클리닝 참여자 모집 해운대종합사회복지관과 함께하는 “우리 동네 클리닝” 플로깅 활동 참여자를 모집합니다! 무심코 지나쳤던 우리 동네 거리, 이제는 우리가 직접 깨끗하게 만들어보세요  플로깅은 걷거나 뛰면서 쓰레기를 줍는 친환경 실천 활동으로, 단…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=4&number=2787&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "행사",
+      "title": "[모집] 파크골프 4월 체험의 날 안내",
+      "body": "공지사항 게시판 읽기 [모집] 파크골프 4월 체험의 날 안내 안녕하십니까, 해운대종합사회복지관입니다. 해운대종합사회복지관에서는 지역주민의 건강한 여가활동 지원을 위해 스크린파크골프 체험의 날 을 운영합니다. 파크골프를 처음 접하시는 분들도 쉽게 참여하실 수 있도록 기초 교육과 체험 중심으로 진행되오니 많은 관심과 참여 바…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=4&number=2781&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "[모집] 파크골프 아카데미 참여자 모집",
+      "body": "공지사항 게시판 읽기 [모집] 파크골프 아카데미 참여자 모집 안녕하십니까, 해운대종합사회복지관입니다. 해운대종합사회복지관에서는 지역주민의 건강 증진과 여가 활성화를 위해 다양한 복지 프로그램을 운영하고 있습니다. 최근 많은 관심을 받고 있는 생활체육 **‘파크골프’**를 배우고 즐길 수 있는 프로그램을 아래와 같이 진행하…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=4&number=2780&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "2026년 시나브로 배움터 「꿈꾸는 힐링Ⅱ」 참여자 모집",
+      "body": "공지사항 게시판 읽기 2026년 시나브로 배움터 「꿈꾸는 힐링Ⅱ」 참여자 모집 안녕하세요. 해운대종합사회복지관입니다. 청소년의 또래 관계 확장 및 정서 안정을 위한 청소년 사회적응력 프로그램, 2026년 시나브로 배움터 「꿈꾸는 힐링Ⅱ」 참여자를 모집합니다. ▪ 모집일자 : 2026년 3월 31일(화)까지 *모집 인원 미…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=5&number=2777&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "복지",
+      "title": "[모집] 2026 성인장애인 평생학습 「나만의 쌀베이킹」 참여자 모집",
+      "body": "공지사항 게시판 읽기 [모집] 2026 성인장애인 평생학습 「나만의 쌀베이킹」 참여자 모집 홈베이킹 프로그램에 참여할 성인장애인을 모집합니다. 쌀을 이용하여 쉽고 간단하고 재밌게 만들어보는 베이킹! 수강료 및 재료비 전액 무료이니, 많은 관심과 참여 부탁드립니다 :) ■ 대상: 성인장애인 8명 ■ 교육일정: 2026년 4…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=5&number=2762&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "[모집] 2026 지식정보취약계층 평생학습프로그램 「실버스윙」 참여자 모집",
+      "body": "복지관소개 현황 연혁 직원소개 오시는길 이용자만족 서비스 헌장 사업안내 사례관리기능 서비스제공기능 지역조직화기능 부설기관 LH행복꿈터 해운대지역아동센터 해운대 푸드마켓 해운대 푸드뱅크 프로그램 여성, 일반 유아, 아동, 청소년 어르신 장애인 무료특강 후원사업 후원안내 사례 자원봉사 자원봉사 안내 사례 알림마당 공지사항 공…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=5&number=2761&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "복지",
+      "title": "[모집] 2026 성인장애인 밴드교실 「THE 울림」 참여자 모집",
+      "body": "공지사항 게시판 읽기 [모집] 2026 성인장애인 밴드교실 「THE 울림」 참여자 모집 해운대복지관에서는 성인장애인 대상 밴드교실을 운영하고 있습니다. 보컬, 베이스기타 및 통기타 연주가 가능한 성인장애인은 누구나 참여 가능합니다. 음악밴드 개인연습 지도부터 합주연습, 연말 공연까지! 음악으로 하나되는 기회를 놓치지 마세…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=5&number=2758&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "복지",
+      "title": "[모집] 2026년 국민연금 수급자 아카데미 <生生투게더> 참여자 모집",
+      "body": "공지사항 게시판 읽기 [모집] 2026년 국민연금 수급자 아카데미 <生生투게더> 참여자 모집 안녕하세요~ 해운대종합사회복지관입니다:) 건강하고 행복한 노후를 위한 힐링교육프로그램 국민연금 수급자 아카데미 <生生투게더> 참여자를 모집 합니다! ■ 모집대상 선정기준에 해당하는 성인 30명 ① 국민연금 수급자(일시금 수급자 제…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=6&number=2748&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "[모집] 스크린파크골프센터 아카데미 참여자 모집",
+      "body": "공지사항 게시판 읽기 [모집] 스크린파크골프센터 아카데미 참여자 모집 안녕하십니까 해운대종합사회복지관입니다.:) 2026년 스크린파크골프 프로그램이 개설되었습니다! 참여자 모집 마감 전까지 상시 모집 진행 예정이며, 많은 관심 부탁드립니다. 감사합니다.​…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=6&number=2744&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "교육",
+      "title": "[모집] 성인기능교실 3-4월 수강생 모집",
+      "body": "공지사항 게시판 읽기 [모집] 성인기능교실 3-4월 수강생 모집 안녕하십니까 해운대종합사회복지관입니다 :) 2026년 3-4월 성인기능 프로그램 수강생을 모집합니다. ★따끈따끈한 신규 프로그램★ 가곡교실, 보타닝민화, 피아노 오후 및 주말반, 월드슈퍼바리스타챔피언쉽(WBSC) 3연패 박수혜 바리스타가 진행하는 커피자격과정…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=7&number=2737&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "환경",
+      "title": "[모집] 「제9회 부산센텀PMJF라이온스클럽 회장배 청소년 농구대회」 참여자 모집",
+      "body": "공지사항 게시판 읽기 [모집] 「제9회 부산센텀PMJF라이온스클럽 회장배 청소년 농구대회」 참여자 모집 해운대종합사회복지관 과 함께하는 제9회 부산센텀 PMJF라이온스클럽 회장배 청소년 농구대회(3x3) (제27회 청소년 농구대회) ● 일 시 : 2026년 3월 15일 일요일 12시 (11시 30분부터 접수 시작!) ● …",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=7&number=2736&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "행사",
+      "title": "[안내] 스크린파크골프 체험의날 참여자 모집",
+      "body": "공지사항 게시판 읽기 [안내] 스크린파크골프 체험의날 참여자 모집 안녕하십니까 해운대종합사회복지관입니다. 파크골프가 처음이라 고민이신분들! 날씨와 관계없이 누구나 쉽고 재미있게 즐길 수 있는 스크린파크골프 체험의날을 진행합니다. 파크골프에 대해서 퍼팅, 스윙, 1홀 연습까지 초보자 분도 부담없는 체험 프로그램으로 안전하고…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=8&number=2732&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "행사",
+      "title": "[모집] 창의보드게임활용지도사 2급 양성과정 참여자 모집",
+      "body": "복지관소개 현황 연혁 직원소개 오시는길 이용자만족 서비스 헌장 사업안내 사례관리기능 서비스제공기능 지역조직화기능 부설기관 LH행복꿈터 해운대지역아동센터 해운대 푸드마켓 해운대 푸드뱅크 프로그램 여성, 일반 유아, 아동, 청소년 어르신 장애인 무료특강 후원사업 후원안내 사례 자원봉사 자원봉사 안내 사례 알림마당 공지사항 공…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=8&number=2731&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "주거",
+      "title": "[모집] 주거취약 중장년 1인가구를 위한 맞춤형 지원 프로그램 「마음ON」 참여자 모집",
+      "body": "공지사항 게시판 읽기 [모집] 주거취약 중장년 1인가구를 위한 맞춤형 지원 프로그램 「마음ON」 참여자 모집 안녕하세요, 해운대종합사회복지관입니다. 지역 내 주거환경 및 사회적 관계 형성에 어려움을 겪는 중장년 1인가구를 위한 맞춤형 지원 프로그램「마음ON」참여자를 모집합니다. 많은 관심과 참여 부탁드리겠습니다. 감사합니…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=8&number=2724&keyfield=&key=",
+      "date": "2026-07-24",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
     },
     {
       "cat": "문화",
@@ -563,7 +994,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170892",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -575,11 +1006,11 @@
     {
       "cat": "행사",
       "title": "[벡스코] 2026년 벡스코 유튜브 크리에이터 추가 모집 (~6/12)",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 공지사항",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/Board/Board.do?mCode=MN105&mode=view&mgr_seq=13&board_seq=31519",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -593,11 +1024,11 @@
     {
       "cat": "행사",
       "title": "세계유산위원회 성공 개최 응원 걸음기부 챌린지",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 공지사항",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/Board/Board.do?mCode=MN105&mode=view&mgr_seq=13&board_seq=31464",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -615,7 +1046,7 @@
       "source": "비지트부산 공지",
       "sourceUrl": "https://www.visitbusan.net/board/view.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&paging=ok&startPage=1&dataSid=6075",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -630,7 +1061,7 @@
       "source": "비지트부산 공지",
       "sourceUrl": "https://www.visitbusan.net/board/view.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&paging=ok&startPage=1&dataSid=6050",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -646,7 +1077,7 @@
       "source": "비지트부산 공지",
       "sourceUrl": "https://www.visitbusan.net/board/view.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&paging=ok&startPage=1&dataSid=5807",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -661,7 +1092,7 @@
       "source": "비지트부산 공지",
       "sourceUrl": "https://www.visitbusan.net/board/view.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&paging=ok&startPage=1&dataSid=5740",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -677,7 +1108,7 @@
       "source": "비지트부산 공지",
       "sourceUrl": "https://www.visitbusan.net/board/view.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&paging=ok&startPage=1&dataSid=5525",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -693,7 +1124,7 @@
       "source": "비지트부산 공지",
       "sourceUrl": "https://www.visitbusan.net/board/view.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&paging=ok&startPage=1&dataSid=5315",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -708,7 +1139,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=6111",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -725,7 +1156,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=5907",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -742,7 +1173,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=6068",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -759,7 +1190,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169888",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -774,7 +1205,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169584",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -790,7 +1221,7 @@
       "source": "부산광역시 고시공고",
       "sourceUrl": "https://www.busan.go.kr/nbgosi/view?sno=78837&gosiGbn=N&curPage=3",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -805,7 +1236,7 @@
       "source": "부산시립미술관 새소식",
       "sourceUrl": "https://art.busan.go.kr/tblTsite07Bbs/viewNewsClient.nm?idx=2255",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -822,7 +1253,7 @@
       "source": "부산시립미술관 새소식",
       "sourceUrl": "https://art.busan.go.kr/tblTsite07Bbs/viewNewsClient.nm?idx=2240",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -839,7 +1270,7 @@
       "source": "부산시립미술관 새소식",
       "sourceUrl": "https://art.busan.go.kr/tblTsite07Bbs/viewNewsClient.nm?idx=2276",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -856,7 +1287,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=993918",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -872,7 +1303,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=938178",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -888,7 +1319,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=12&dataSid=3165645",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -904,7 +1335,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=46",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -920,7 +1351,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=201",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -935,7 +1366,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=197",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -951,7 +1382,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=192&page=2",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -966,7 +1397,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=191&page=2",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -982,7 +1413,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=184&page=2",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -997,7 +1428,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=178&page=2",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1013,7 +1444,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=173&page=3",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1028,7 +1459,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=165&page=3",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1044,7 +1475,7 @@
       "source": "해운대생활체육센터",
       "sourceUrl": "http://www.haeundaeswim.com/bbs/board.php?bo_table=notice&wr_id=9",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1059,7 +1490,7 @@
       "source": "해운대생활체육센터",
       "sourceUrl": "http://www.haeundaeswim.com/bbs/board.php?bo_table=notice&wr_id=6",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1074,7 +1505,7 @@
       "source": "해운대생활체육센터",
       "sourceUrl": "http://www.haeundaeswim.com/bbs/board.php?bo_table=notice&wr_id=5",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1089,7 +1520,7 @@
       "source": "부산자원봉사센터(해운대 필터)",
       "sourceUrl": "https://www.busan1365.kr/bbs/board.php?bo_table=news&wr_id=3336",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1104,7 +1535,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170904",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1120,7 +1551,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3162257",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1137,7 +1568,7 @@
       "source": "해운대문화회관 공연일정",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000215&menuCd=DOM_000000901001001000&orderBy=TMP_FIELD1%20DESC&paging=ok&startPage=1&dataSid=3163978",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1153,7 +1584,7 @@
       "source": "해운대문화회관 전시일정",
       "sourceUrl": "https://www.haeundae.go.kr/library/board/view.do?boardId=BBS_0000233&menuCd=DOM_000000901002001000&orderBy=TMP_FIELD1%20DESC&paging=ok&startPage=1&dataSid=3163794",
       "date": "2026-07-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000233/177864696913437.jpg",
       "audience": [
@@ -1170,7 +1601,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170563",
       "date": "2026-07-22",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1185,7 +1616,7 @@
       "source": "부산광역시 고시공고",
       "sourceUrl": "https://www.busan.go.kr/nbgosi/view?sno=78905&gosiGbn=A&curPage=1",
       "date": "2026-07-22",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1201,7 +1632,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170827",
       "date": "2026-07-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "재송1동"
@@ -1220,7 +1651,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170826",
       "date": "2026-07-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "재송1동"
@@ -1239,7 +1670,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170825",
       "date": "2026-07-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "좌4동"
@@ -1258,7 +1689,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170823",
       "date": "2026-07-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1273,7 +1704,7 @@
       "source": "해운대문화회관 공연일정",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000215&menuCd=DOM_000000901001001000&orderBy=TMP_FIELD1%20DESC&paging=ok&startPage=1&dataSid=3161633",
       "date": "2026-07-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1305,7 +1736,7 @@
       "source": "해운대구보건소",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000090&menuCd=DOM_000000805001000000&paging=ok&startPage=1&dataSid=3170782",
       "date": "2026-07-20",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1317,11 +1748,11 @@
     {
       "cat": "문화",
       "title": "제48차 유네스코 세계유산위원회",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=16410",
       "date": "2026-07-20",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1338,7 +1769,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=6090",
       "date": "2026-07-18",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -1355,7 +1786,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=6074",
       "date": "2026-07-17",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -1372,7 +1803,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=6083",
       "date": "2026-07-17",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -1389,7 +1820,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=6037",
       "date": "2026-07-17",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -1406,7 +1837,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170644",
       "date": "2026-07-16",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1456,7 +1887,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170573",
       "date": "2026-07-15",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178407781671906.jpg",
       "region": [
@@ -1492,7 +1923,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170531",
       "date": "2026-07-14",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1508,7 +1939,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170520",
       "date": "2026-07-14",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "우3동"
@@ -1527,7 +1958,7 @@
       "source": "해운대문화회관",
       "sourceUrl": "http://www.haeundae.go.kr/board/view.do?boardId=BBS_0000110&menuCd=DOM_000000904004000000&paging=ok&startPage=1&dataSid=3170528",
       "date": "2026-07-14",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1543,7 +1974,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=1&dataSid=3170473",
       "date": "2026-07-13",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1559,7 +1990,7 @@
       "source": "해운대구보건소",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000090&menuCd=DOM_000000805001000000&paging=ok&startPage=1&dataSid=3170445",
       "date": "2026-07-13",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1576,7 +2007,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=5486",
       "date": "2026-07-13",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -1593,7 +2024,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170452",
       "date": "2026-07-13",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1609,7 +2040,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170409",
       "date": "2026-07-12",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "우3동"
@@ -1628,7 +2059,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=5878",
       "date": "2026-07-10",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -1645,7 +2076,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170365",
       "date": "2026-07-10",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "중1동"
@@ -1664,7 +2095,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170363",
       "date": "2026-07-10",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178366420323216.png",
       "region": [
@@ -1684,7 +2115,7 @@
       "source": "비지트부산 축제·행사",
       "sourceUrl": "https://www.visitbusan.net/schedule/view.do?boardId=BBS_0000009&menuCd=DOM_000000204012000000&dataSid=5937",
       "date": "2026-07-09",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -1735,7 +2166,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170174",
       "date": "2026-07-07",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1751,7 +2182,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170209",
       "date": "2026-07-07",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178341244900778.png",
       "region": [
@@ -1770,7 +2201,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170208",
       "date": "2026-07-07",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178341219969379.png",
       "region": [
@@ -1822,7 +2253,7 @@
       "source": "해운대구보건소",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000090&menuCd=DOM_000000805001000000&paging=ok&startPage=1&dataSid=3170126",
       "date": "2026-07-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1838,7 +2269,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170152",
       "date": "2026-07-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "좌4동"
@@ -1856,7 +2287,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170114",
       "date": "2026-07-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1871,7 +2302,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170111",
       "date": "2026-07-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -1887,7 +2318,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=2&dataSid=3170112",
       "date": "2026-07-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -1907,7 +2338,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3170049",
       "date": "2026-07-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178311428775628.jpg",
       "region": [
@@ -1927,7 +2358,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3170057",
       "date": "2026-07-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178346989636545.jpg",
       "region": [
@@ -1964,7 +2395,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3170019",
       "date": "2026-07-03",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178305792712128.jpg",
       "region": [
@@ -2018,7 +2449,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169910",
       "date": "2026-07-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2034,7 +2465,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169926",
       "date": "2026-07-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -2053,7 +2484,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169863",
       "date": "2026-07-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2069,7 +2500,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=1006216",
       "date": "2026-07-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2085,7 +2516,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=1006182",
       "date": "2026-07-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2093,6 +2524,38 @@
       ],
       "useful": true,
       "aiSimplified": "2026년 7월에 해운대도서관 우동분관에서 <해가 왔다> 원화 전시회가 열립니다."
+    },
+    {
+      "cat": "복지",
+      "title": "[공지] 파크골프 홀인원 이벤트 안내",
+      "body": "공지사항 게시판 읽기 [공지] 파크골프 홀인원 이벤트 안내 파크골프 홀인원 이벤트 안내 해운대종합사회복지관에서는 파크골프 이용자들을 대상으로 「파크골프 홀인원 이벤트」를 진행합니다. 많은 관심과 참여 바랍니다. ■ 행사기간 2026. 7. 1.(수) ~ 7. 31.(금)…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=2&number=2813&keyfield=&key=",
+      "date": "2026-07-01",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
+    },
+    {
+      "cat": "복지",
+      "title": "[모집] 2026년 하계 사회복지현장실습생 모집",
+      "body": "공지사항 게시판 읽기 [모집] 2026년 하계 사회복지현장실습생 모집 본 기관에서는 아래와 같이 2026 년 하계 사회복지현장실습생을 모집하오니 , 많은 관심과 참여 부탁드립니다 . * 아 래 * 1. 실습목적 : 현장에서의 사회복지사업 실천과정의 경험 제공으로 예비 사회복지사들의 현장이해와 실천기술 함양을 위해 2026…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=4&number=2790&keyfield=&key=",
+      "date": "2026-07-01",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
     },
     {
       "cat": "행사",
@@ -2117,7 +2580,7 @@
       "source": "해운대구보건소",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000090&menuCd=DOM_000000805001000000&paging=ok&startPage=1&dataSid=3169757",
       "date": "2026-06-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2133,7 +2596,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=1006015",
       "date": "2026-06-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2149,7 +2612,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169699",
       "date": "2026-06-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178277975877119.png",
       "region": [
@@ -2186,7 +2649,7 @@
       "source": "해운대구보건소",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000090&menuCd=DOM_000000805001000000&paging=ok&startPage=1&dataSid=3169672",
       "date": "2026-06-29",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2202,7 +2665,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169689",
       "date": "2026-06-29",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2218,7 +2681,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=1005964",
       "date": "2026-06-29",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2234,7 +2697,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=1005760",
       "date": "2026-06-28",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2250,7 +2713,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=3&dataSid=3169559",
       "date": "2026-06-26",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2283,7 +2746,7 @@
       "source": "해운대구보건소",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000090&menuCd=DOM_000000805001000000&paging=ok&startPage=1&dataSid=3169542",
       "date": "2026-06-25",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2299,7 +2762,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169507",
       "date": "2026-06-25",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2315,7 +2778,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169423",
       "date": "2026-06-24",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178226556237031.jpg",
       "region": [
@@ -2335,7 +2798,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169296",
       "date": "2026-06-22",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2367,7 +2830,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169246",
       "date": "2026-06-20",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2383,7 +2846,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169122",
       "date": "2026-06-18",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2398,7 +2861,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169073",
       "date": "2026-06-17",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178166312563983.jpg",
       "region": [
@@ -2433,7 +2896,7 @@
       "source": "해운대문화회관",
       "sourceUrl": "http://www.haeundae.go.kr/board/view.do?boardId=BBS_0000110&menuCd=DOM_000000904004000000&paging=ok&startPage=1&dataSid=3169015",
       "date": "2026-06-16",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2449,7 +2912,7 @@
       "source": "해운대구 복지새소식",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000154&menuCd=DOM_000000103001001000&paging=ok&startPage=1&dataSid=3169033",
       "date": "2026-06-16",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2466,7 +2929,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169051",
       "date": "2026-06-16",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2482,7 +2945,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=4&dataSid=3169024",
       "date": "2026-06-16",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178157341520523.jpg",
       "region": [
@@ -2494,6 +2957,25 @@
       ],
       "useful": true,
       "aiSimplified": "2026년 3/4분기 좌3동 주민자치회 프로그램 수강생을 2026년 6월 22일부터 선착순으로 모집하니, 관심 있으신 분들은 좌3동 행정복지센터에 방문해 주시기 바랍니다."
+    },
+    {
+      "cat": "복지",
+      "title": "[안내]북한이탈주민 지원사업 이음 캠페인(송정 주민 어울림 한마당) 진행 안내",
+      "body": "공지사항 게시판 읽기 [안내]북한이탈주민 지원사업 이음 캠페인(송정 주민 어울림 한마당) 진행 안내 안녕하십니까 해운대종합사회복지관입니다. 해운대종합사회복지관에서는 사회복지공동모금회의 지원을 받아 북한이탈주민과 지역주민이 함께 만드는 따뜻한 송정동을 위한 사업 '이음(結)'을 운영 중입니다. 2026. 6. 16.(화) …",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=3&number=2806&keyfield=&key=",
+      "date": "2026-06-16",
+      "verified": "2026-07-25",
+      "auto": true,
+      "region": [
+        "송정동"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
     },
     {
       "cat": "생활",
@@ -2519,7 +3001,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168907",
       "date": "2026-06-12",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -2539,7 +3021,7 @@
       "source": "비지트부산 공지",
       "sourceUrl": "https://www.visitbusan.net/board/view.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&paging=ok&startPage=1&dataSid=5505",
       "date": "2026-06-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -2555,7 +3037,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168886",
       "date": "2026-06-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2570,7 +3052,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168839",
       "date": "2026-06-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "우3동"
@@ -2589,7 +3071,7 @@
       "source": "해운대문화회관",
       "sourceUrl": "http://www.haeundae.go.kr/board/view.do?boardId=BBS_0000110&menuCd=DOM_000000904004000000&paging=ok&startPage=1&dataSid=3168782",
       "date": "2026-06-10",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2605,7 +3087,7 @@
       "source": "부산시립미술관 새소식",
       "sourceUrl": "https://art.busan.go.kr/tblTsite07Bbs/viewNewsClient.nm?idx=2352",
       "date": "2026-06-10",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2670,7 +3152,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168714",
       "date": "2026-06-09",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -2706,7 +3188,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168670",
       "date": "2026-06-08",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2722,7 +3204,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168666",
       "date": "2026-06-08",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2738,7 +3220,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168665",
       "date": "2026-06-08",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2754,7 +3236,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=5&dataSid=3168685",
       "date": "2026-06-08",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -2774,7 +3256,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=6&dataSid=3168634",
       "date": "2026-06-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/178075371990267.png",
       "region": [
@@ -2794,7 +3276,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=6&dataSid=3168588",
       "date": "2026-06-05",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "좌4동"
@@ -2830,7 +3312,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=6&dataSid=3168556",
       "date": "2026-06-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2845,7 +3327,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=6&dataSid=3168532",
       "date": "2026-06-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2861,7 +3343,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=1001526",
       "date": "2026-06-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2877,7 +3359,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=6&dataSid=3168365",
       "date": "2026-06-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2893,7 +3375,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=7&dataSid=3168361",
       "date": "2026-06-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2909,7 +3391,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=1001069",
       "date": "2026-05-31",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2925,7 +3407,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=1001018",
       "date": "2026-05-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2941,7 +3423,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=1000825",
       "date": "2026-05-29",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2957,7 +3439,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=1000594",
       "date": "2026-05-28",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2973,7 +3455,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=7&dataSid=3168117",
       "date": "2026-05-27",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -2988,7 +3470,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=7&dataSid=3168113",
       "date": "2026-05-27",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -3024,7 +3506,7 @@
       "source": "비지트부산 공지",
       "sourceUrl": "https://www.visitbusan.net/board/view.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&paging=ok&startPage=1&dataSid=5766",
       "date": "2026-05-26",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -3056,7 +3538,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=7&dataSid=3167908",
       "date": "2026-05-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3073,7 +3555,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=7&dataSid=3167905",
       "date": "2026-05-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3089,7 +3571,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=7&dataSid=3167902",
       "date": "2026-05-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3139,7 +3621,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=7&dataSid=3167857",
       "date": "2026-05-20",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3155,7 +3637,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=7&dataSid=3167807",
       "date": "2026-05-19",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3171,7 +3653,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=8&dataSid=3167680",
       "date": "2026-05-15",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3187,7 +3669,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=8&dataSid=3167651",
       "date": "2026-05-15",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3203,7 +3685,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=8&dataSid=3167609",
       "date": "2026-05-14",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3219,7 +3701,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=8&dataSid=3167583",
       "date": "2026-05-13",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3236,7 +3718,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=8&dataSid=3167555",
       "date": "2026-05-13",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "반여1동"
@@ -3271,7 +3753,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167409",
       "date": "2026-05-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "좌2동"
@@ -3290,7 +3772,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167388",
       "date": "2026-05-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3306,7 +3788,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167353",
       "date": "2026-05-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3322,7 +3804,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167348",
       "date": "2026-05-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3372,7 +3854,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167298",
       "date": "2026-05-08",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3388,7 +3870,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167288",
       "date": "2026-05-08",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3404,7 +3886,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167263",
       "date": "2026-05-08",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3420,7 +3902,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167250",
       "date": "2026-05-08",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3436,7 +3918,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167206",
       "date": "2026-05-07",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3451,7 +3933,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167169",
       "date": "2026-05-07",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3467,7 +3949,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=9&dataSid=3167126",
       "date": "2026-05-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3500,7 +3982,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=996036",
       "date": "2026-05-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3516,7 +3998,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=996012",
       "date": "2026-05-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3532,7 +4014,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=995894",
       "date": "2026-04-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3548,7 +4030,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=995710",
       "date": "2026-04-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3564,7 +4046,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/health/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=10&dataSid=3166793",
       "date": "2026-04-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3595,7 +4077,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/health/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=10&dataSid=3166776",
       "date": "2026-04-29",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3628,7 +4110,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/health/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=10&dataSid=3166653",
       "date": "2026-04-28",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3645,7 +4127,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/health/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=10&dataSid=3166651",
       "date": "2026-04-28",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3661,7 +4143,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/health/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=10&dataSid=3166629",
       "date": "2026-04-28",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3693,7 +4175,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/health/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=10&dataSid=3166618",
       "date": "2026-04-27",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "반여1동"
@@ -3711,7 +4193,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/health/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=10&dataSid=3166617",
       "date": "2026-04-27",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "반여1동"
@@ -3729,7 +4211,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=10&dataSid=3166598",
       "date": "2026-04-27",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3762,7 +4244,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=11&dataSid=3166421",
       "date": "2026-04-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "반송2동"
@@ -3781,7 +4263,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=11&dataSid=3166344",
       "date": "2026-04-22",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3830,7 +4312,7 @@
       "source": "비지트부산 공지",
       "sourceUrl": "https://www.visitbusan.net/board/view.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&paging=ok&startPage=1&dataSid=5551",
       "date": "2026-04-20",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -3846,7 +4328,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=11&dataSid=3166128",
       "date": "2026-04-20",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3862,7 +4344,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=11&dataSid=3165989",
       "date": "2026-04-17",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3878,7 +4360,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=11&dataSid=3165949",
       "date": "2026-04-16",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3894,7 +4376,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=11&dataSid=3165953",
       "date": "2026-04-16",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -3914,7 +4396,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=11&dataSid=3165804",
       "date": "2026-04-15",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3962,7 +4444,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=12&dataSid=3165656",
       "date": "2026-04-13",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -3994,7 +4476,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=12&dataSid=3165335",
       "date": "2026-04-09",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "좌3동",
@@ -4018,7 +4500,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=12&dataSid=3165302",
       "date": "2026-04-09",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4050,7 +4532,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=12&dataSid=3165262",
       "date": "2026-04-08",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4066,7 +4548,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=12&dataSid=3165106",
       "date": "2026-04-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4082,7 +4564,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=12&dataSid=3165035",
       "date": "2026-04-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4097,7 +4579,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=12&dataSid=3164970",
       "date": "2026-04-03",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4113,7 +4595,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=13&dataSid=3164891",
       "date": "2026-04-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4129,7 +4611,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=13&dataSid=3164849",
       "date": "2026-04-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4145,7 +4627,7 @@
       "source": "비지트부산 공지",
       "sourceUrl": "https://www.visitbusan.net/board/view.do?boardId=BBS_0000001&menuCd=DOM_000000204001000000&paging=ok&startPage=1&dataSid=6033",
       "date": "2026-04-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "tourist",
@@ -4161,7 +4643,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=988626",
       "date": "2026-04-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4177,7 +4659,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=988616",
       "date": "2026-04-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4193,7 +4675,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=988608",
       "date": "2026-04-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4209,7 +4691,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=13&dataSid=3164800",
       "date": "2026-04-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4225,7 +4707,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=13&dataSid=3164719",
       "date": "2026-04-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4241,7 +4723,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=988292",
       "date": "2026-03-31",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4273,7 +4755,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=987956",
       "date": "2026-03-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4289,7 +4771,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=13&dataSid=3164552",
       "date": "2026-03-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4305,7 +4787,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=986700",
       "date": "2026-03-27",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4321,7 +4803,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=13&dataSid=3164225",
       "date": "2026-03-25",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "반여1동"
@@ -4339,7 +4821,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=13&dataSid=3164131",
       "date": "2026-03-25",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4355,7 +4837,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=13&dataSid=3164128",
       "date": "2026-03-25",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4371,7 +4853,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=13&dataSid=3163954",
       "date": "2026-03-24",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4403,7 +4885,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=14&dataSid=3163733",
       "date": "2026-03-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -4423,7 +4905,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=14&dataSid=3163610",
       "date": "2026-03-20",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "좌4동"
@@ -4442,7 +4924,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=14&dataSid=3163507",
       "date": "2026-03-19",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4458,7 +4940,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=14&dataSid=3163490",
       "date": "2026-03-19",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4474,7 +4956,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=14&dataSid=3163423",
       "date": "2026-03-18",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4489,7 +4971,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=14&dataSid=3163325",
       "date": "2026-03-17",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4505,7 +4987,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=15&dataSid=3163221",
       "date": "2026-03-16",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4521,7 +5003,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=15&dataSid=3163195",
       "date": "2026-03-16",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4538,7 +5020,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=15&dataSid=3162847",
       "date": "2026-03-12",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4555,7 +5037,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/health/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=15&dataSid=3162710",
       "date": "2026-03-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/177321425340007.jpg",
       "region": [
@@ -4575,7 +5057,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=15&dataSid=3162372",
       "date": "2026-03-09",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4591,7 +5073,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3162354",
       "date": "2026-03-09",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4607,7 +5089,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3162350",
       "date": "2026-03-09",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4624,7 +5106,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3162326",
       "date": "2026-03-09",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4640,7 +5122,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3162251",
       "date": "2026-03-09",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "반여1동"
@@ -4675,7 +5157,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3161961",
       "date": "2026-03-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "반여4동"
@@ -4694,13 +5176,29 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3161922",
       "date": "2026-03-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
         "resident"
       ],
       "aiSimplified": "2026년 2월에 공동주택에서 나온 음식물 쓰레기 양과 수수료 내역이 있습니다. 궁금한 점은 해운대구 자원순환과 음식물류폐기물 담당자(051-749-4454)에게 문의해 주시기 바랍니다."
+    },
+    {
+      "cat": "교육",
+      "title": "2026년 신중년 사회공헌사업 사전직무교육기관 모집 공고",
+      "body": "공지사항 게시판 읽기 2026년 신중년 사회공헌사업 사전직무교육기관 모집 공고 2026 년도 『 해운대구 신중년 사회공헌 사업 』 사전직무 교육기관 모집 공고 1. 사업개요 □ 신중년 사회공헌사업 신중년의 사회공헌 기회 제공을 위하여 실시하는 사업으로 , 신중년의 경력과 지식을 활용하여 비영리영역에서 재능기부를 통하여 사…",
+      "source": "해운대종합사회복지관",
+      "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=7&number=2739&keyfield=&key=",
+      "date": "2026-03-06",
+      "verified": "2026-07-25",
+      "auto": true,
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "for65": true,
+      "useful": true
     },
     {
       "cat": "행사",
@@ -4725,7 +5223,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=972017",
       "date": "2026-03-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4741,7 +5239,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3161418",
       "date": "2026-03-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4757,7 +5255,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=17&dataSid=3161277",
       "date": "2026-03-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4773,7 +5271,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=16&dataSid=3161474",
       "date": "2026-03-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/177261452774357.jpg",
       "region": [
@@ -4793,7 +5291,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=971875",
       "date": "2026-03-03",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4809,7 +5307,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=971801",
       "date": "2026-03-03",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4825,7 +5323,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=17&dataSid=3161099",
       "date": "2026-03-03",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "우2동"
@@ -4844,7 +5342,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=971598",
       "date": "2026-02-28",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4860,7 +5358,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=971567",
       "date": "2026-02-28",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4876,7 +5374,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=17&dataSid=3160463",
       "date": "2026-02-27",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4892,7 +5390,7 @@
       "source": "해운대구 복지새소식",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000154&menuCd=DOM_000000103001001000&paging=ok&startPage=1&dataSid=3160390",
       "date": "2026-02-26",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4908,7 +5406,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=17&dataSid=3160278",
       "date": "2026-02-25",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -4924,7 +5422,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=17&dataSid=3160267",
       "date": "2026-02-25",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "region": [
         "반여1동"
@@ -4990,7 +5488,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=965720",
       "date": "2026-02-03",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5006,7 +5504,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=965552",
       "date": "2026-02-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5022,7 +5520,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=965551",
       "date": "2026-02-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5038,7 +5536,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=965267",
       "date": "2026-01-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5054,7 +5552,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=965258",
       "date": "2026-01-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5102,7 +5600,7 @@
       "source": "해운대구 복지새소식",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000154&menuCd=DOM_000000103001001000&paging=ok&startPage=1&dataSid=3158208",
       "date": "2026-01-14",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5135,7 +5633,7 @@
       "source": "해운대구 복지새소식",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000154&menuCd=DOM_000000103001001000&paging=ok&startPage=1&dataSid=3158081",
       "date": "2026-01-12",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5151,7 +5649,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=962821",
       "date": "2026-01-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5167,7 +5665,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=962250",
       "date": "2026-01-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5183,7 +5681,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=962101",
       "date": "2026-01-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5199,7 +5697,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=962085",
       "date": "2026-01-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5215,7 +5713,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=962077",
       "date": "2026-01-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5297,7 +5795,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=959107",
       "date": "2025-12-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5309,11 +5807,11 @@
     {
       "cat": "문화",
       "title": "2026 상상체험 키즈월드",
-      "body": "AI가 생성한 답변은 부정확할 수 있습니다 챗봇 사용 가이드 💡 벡스코 AI 챗봇 BEX 입니다. 벡스코에 궁금한 것을 채팅으로 물어보세요. ex) \"제1전시장 위치는 어디인가요?\" 상세하게 물어볼수록 더 정확하게 답변해드릴 수 있어요. 🌐 한국어, 영어, 중국어, 일본어 4개 언어 지원…",
+      "body": "자세한 내용은 원문에서 확인하실 수 있습니다.",
       "source": "벡스코 행사일정",
       "sourceUrl": "https://www.bexco.co.kr/kor/CMS/EventScheduleMgr/view.do?mCode=MN214&&event_seq=15661",
       "date": "2025-12-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5330,7 +5828,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=24&dataSid=3155985",
       "date": "2025-12-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/176483804489625.png",
       "region": [
@@ -5350,7 +5848,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=958611",
       "date": "2025-12-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5382,7 +5880,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=958350",
       "date": "2025-12-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5431,7 +5929,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=25&dataSid=3155160",
       "date": "2025-11-20",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/176362383554786.jpg",
       "region": [
@@ -5467,7 +5965,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=955517",
       "date": "2025-11-05",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5483,7 +5981,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=955269",
       "date": "2025-11-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5499,7 +5997,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=955257",
       "date": "2025-11-04",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5531,7 +6029,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=954850",
       "date": "2025-10-31",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5611,7 +6109,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=29&dataSid=3152544",
       "date": "2025-10-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/176006710865630.png",
       "region": [
@@ -5631,7 +6129,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=951021",
       "date": "2025-09-30",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5647,7 +6145,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=950798",
       "date": "2025-09-29",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5663,7 +6161,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=950496",
       "date": "2025-09-28",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5695,7 +6193,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=947587",
       "date": "2025-09-16",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5743,7 +6241,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=945789",
       "date": "2025-09-10",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5759,7 +6257,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=945785",
       "date": "2025-09-10",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5775,7 +6273,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=32&dataSid=3151005",
       "date": "2025-09-03",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -5794,7 +6292,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=944052",
       "date": "2025-09-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5810,7 +6308,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=943482",
       "date": "2025-09-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5826,7 +6324,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=943370",
       "date": "2025-08-31",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5858,7 +6356,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=939531",
       "date": "2025-08-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5874,7 +6372,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=35&dataSid=3149048",
       "date": "2025-08-06",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/175444255334133.jpg",
       "region": [
@@ -5895,7 +6393,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=938066",
       "date": "2025-08-02",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5911,7 +6409,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=36&dataSid=3148352",
       "date": "2025-07-28",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -5930,7 +6428,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=932844",
       "date": "2025-07-12",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5946,7 +6444,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=930831",
       "date": "2025-07-03",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5962,7 +6460,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=930806",
       "date": "2025-07-03",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5978,7 +6476,7 @@
       "source": "해운대도서관 독서문화행사",
       "sourceUrl": "https://home.pen.go.kr/haeundaelib/na/ntt/selectNttInfo.do?mi=11228&bbsId=3475&nttSn=929764",
       "date": "2025-07-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -5994,7 +6492,7 @@
       "source": "해운대구 반상회 소식",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000012&menuCd=DOM_000000104002014000&paging=ok&startPage=1&dataSid=3142807",
       "date": "2025-05-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6009,7 +6507,7 @@
       "source": "해운대구 반상회 소식",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000012&menuCd=DOM_000000104002014000&paging=ok&startPage=1&dataSid=3142806",
       "date": "2025-05-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6024,7 +6522,7 @@
       "source": "해운대구 반상회 소식",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000012&menuCd=DOM_000000104002014000&paging=ok&startPage=1&dataSid=3142805",
       "date": "2025-05-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6039,7 +6537,7 @@
       "source": "해운대구 반상회 소식",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000012&menuCd=DOM_000000104002014000&paging=ok&startPage=1&dataSid=3142803",
       "date": "2025-05-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6054,7 +6552,7 @@
       "source": "해운대구 반상회 소식",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000012&menuCd=DOM_000000104002014000&paging=ok&startPage=1&dataSid=3142801",
       "date": "2025-05-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6069,7 +6567,7 @@
       "source": "해운대구 반상회 소식",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000012&menuCd=DOM_000000104002014000&paging=ok&startPage=1&dataSid=3142799",
       "date": "2025-05-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6084,7 +6582,7 @@
       "source": "해운대구 복지새소식",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000154&menuCd=DOM_000000103001001000&paging=ok&startPage=1&dataSid=3141936",
       "date": "2025-05-07",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6101,7 +6599,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=175&page=3",
       "date": "2025-05-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6117,7 +6615,7 @@
       "source": "해운대구정신건강복지센터",
       "sourceUrl": "http://www.hmhc.or.kr/bbs/board.php?bo_table=notice&wr_id=172&page=3",
       "date": "2025-05-01",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6134,7 +6632,7 @@
       "source": "부산시립미술관 새소식",
       "sourceUrl": "https://art.busan.go.kr/tblTsite07Bbs/viewNewsClient.nm?idx=2266",
       "date": "2025-04-23",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6151,7 +6649,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=49&dataSid=3139054",
       "date": "2025-03-26",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -6171,7 +6669,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=51&dataSid=3137367",
       "date": "2025-03-11",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000038/174167383981955.jpg",
       "region": [
@@ -6191,7 +6689,7 @@
       "source": "부산시립미술관 새소식",
       "sourceUrl": "https://art.busan.go.kr/tblTsite07Bbs/viewNewsClient.nm?idx=2261",
       "date": "2025-02-27",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6208,7 +6706,7 @@
       "source": "해운대구 반상회 소식",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000012&menuCd=DOM_000000104002014000&paging=ok&startPage=1&dataSid=3130387",
       "date": "2024-11-18",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6223,7 +6721,7 @@
       "source": "해운대구 반상회 소식",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000012&menuCd=DOM_000000104002014000&paging=ok&startPage=1&dataSid=3130386",
       "date": "2024-11-18",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6238,7 +6736,7 @@
       "source": "해운대구 반상회 소식",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000012&menuCd=DOM_000000104002014000&paging=ok&startPage=1&dataSid=3130385",
       "date": "2024-11-18",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6253,7 +6751,7 @@
       "source": "해운대구 반상회 소식",
       "sourceUrl": "https://www.haeundae.go.kr/culture/board/view.do?boardId=BBS_0000012&menuCd=DOM_000000104002014000&paging=ok&startPage=1&dataSid=3130384",
       "date": "2024-11-18",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6268,7 +6766,7 @@
       "source": "부산시립미술관 새소식",
       "sourceUrl": "https://art.busan.go.kr/tblTsite07Bbs/viewNewsClient.nm?idx=2257",
       "date": "2024-10-26",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6284,7 +6782,7 @@
       "source": "해운대구 복지새소식",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000154&menuCd=DOM_000000103001001000&paging=ok&startPage=1&dataSid=3125911",
       "date": "2024-08-21",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "audience": [
         "senior",
@@ -6301,7 +6799,7 @@
       "source": "해운대구청 공지사항",
       "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000038&menuCd=DOM_000000104001001000&paging=ok&startPage=67&dataSid=3125454",
       "date": "2024-08-09",
-      "verified": "2026-07-24",
+      "verified": "2026-07-25",
       "auto": true,
       "imageUrl": "https://www.haeundae.go.kr/upload_data/board_data/BBS_0000050/177422771280169.png",
       "region": [
@@ -6528,5 +7026,34 @@
       ],
       "sourceUrl": "https://www.haeundae.go.kr/tour/board/view.do?boardId=BBS_0000103&menuCd=DOM_000000301001000000&dataSid=3000150"
     }
-  ]
+  ],
+  "brief": {
+    "date": "2026-07-25",
+    "items": [
+      {
+        "title": "노인복지관 여름 무료강좌",
+        "plain": "해운대 노인종합복지관에서 스마트폰 배우기와 건강체조 강좌를 무료로 합니다.",
+        "why": "어르신의 건강과 디지털 소양을 높이는 데 도움이 됩니다.",
+        "cat": "복지",
+        "source": "해운대노인종합복지관",
+        "sourceUrl": null
+      },
+      {
+        "title": "해운대구보건소 2026년도 3기 상설운동교실(다이어트,근력강화) 모집일 ..",
+        "plain": "해운대구보건소에서 2026년도 3기 상설운동교실(다이어트, 근력강화)을 7월 13일 월요일부터 무료로 신청받습니다.",
+        "why": "건강을 유지하고 체력을 증진하는 좋은 기회입니다.",
+        "cat": "건강",
+        "source": "해운대구보건소",
+        "sourceUrl": "https://www.haeundae.go.kr/reserve/board/view.do?boardId=BBS_0000090&menuCd=DOM_000000805001000000&paging=ok&startPage=1&dataSid=3170445"
+      },
+      {
+        "title": "[모집] 2026년 국민연금 수급자 아카데미 <生生투게더> 참여자 모집",
+        "plain": "2026년 국민연금 수급자 아카데미 <生生투게더> 참여자 모집이 진행됩니다.",
+        "why": "힐링교육프로그램으로 노후 생활에 도움이 됩니다.",
+        "cat": "복지",
+        "source": "해운대종합사회복지관",
+        "sourceUrl": "http://haeundae.saem.or.kr/community/news1.php?mode=read&page=6&number=2748&keyfield=&key="
+      }
+    ]
+  }
 }

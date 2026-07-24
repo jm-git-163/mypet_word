@@ -564,6 +564,8 @@ body.tab-walk .topbar, body.playing .topbar { background: transparent; }
 body.tab-walk::before, body.playing::before { display: none; }   /* 하늘 그라데이션 끄기 */
 body.tab-walk::after, body.playing::after {
   display: block; opacity: 1;
+  /* 그림 아래 끝을 탭 메뉴 바로 위에 맞춰, 그림이 메뉴에 잘리지 않게 합니다. */
+  bottom: var(--tabbar-h, 76px);
   background-image: var(--hero-img, none);
   background-size: 100% auto;                            /* 너비에 꽉 맞춰 큼직하게 */
   background-position: bottom center;
@@ -1372,6 +1374,20 @@ body.contrast .gullmascot { filter: none; }
 .gull-hop  { animation: gullHop .7s ease-in-out infinite; }
 .gull-tilt { animation: gullTilt 2.6s ease-in-out infinite; }
 .gull-burst { animation: gullBurst .85s ease-out 1; }
+/* 새우깡 먹을 때 — 행복하게 들썩이며 콕콕 받아먹습니다 */
+.gull-eat  { animation: gullEat 1.05s ease-in-out infinite; }
+.gull-crumbs {
+  position: absolute; left: 52%; top: 42%;
+  width: 0; height: 0; pointer-events: none;
+}
+.gull-crumbs::before,
+.gull-crumbs::after {
+  content: ''; position: absolute;
+  width: 7px; height: 5px; border-radius: 50% 40%;
+  background: #e9a44a; opacity: 0;
+}
+.gull-crumbs::before { animation: gullCrumbL 1.05s ease-out infinite; }
+.gull-crumbs::after  { animation: gullCrumbR 1.05s ease-out infinite .18s; }
 @keyframes gullBob {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-4px); }
@@ -1390,8 +1406,26 @@ body.contrast .gullmascot { filter: none; }
   55%  { transform: translateY(-4px) scale(1.02) rotate(3deg); }
   100% { transform: translateY(0) scale(1); }
 }
+@keyframes gullEat {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  28%      { transform: translateY(-7px) rotate(-4deg) scale(1.04); }
+  52%      { transform: translateY(-1px) rotate(3deg) scale(1.02); }
+  76%      { transform: translateY(-9px) rotate(-2deg) scale(1.05); }
+}
+@keyframes gullCrumbL {
+  0%   { opacity: 0; transform: translate(0, 0) scale(.6); }
+  25%  { opacity: .95; }
+  100% { opacity: 0; transform: translate(-16px, 18px) scale(.3); }
+}
+@keyframes gullCrumbR {
+  0%   { opacity: 0; transform: translate(0, 0) scale(.6); }
+  25%  { opacity: .9; }
+  100% { opacity: 0; transform: translate(14px, 16px) scale(.25); }
+}
 body.reduce-motion .gullmascot,
-body.reduce-motion .gull-zzz { animation: none !important; }
+body.reduce-motion .gull-zzz,
+body.reduce-motion .gull-crumbs::before,
+body.reduce-motion .gull-crumbs::after { animation: none !important; }
 
 /* ── 동네 화면 ────────────────────────────────── */
 .hood-card { padding-top: 0 !important; overflow: hidden; }
@@ -2064,6 +2098,20 @@ body.contrast .gullmascot { filter: none; }
 .gull-hop  { animation: gullHop .7s ease-in-out infinite; }
 .gull-tilt { animation: gullTilt 2.6s ease-in-out infinite; }
 .gull-burst { animation: gullBurst .85s ease-out 1; }
+/* 새우깡 먹을 때 — 행복하게 들썩이며 콕콕 받아먹습니다 */
+.gull-eat  { animation: gullEat 1.05s ease-in-out infinite; }
+.gull-crumbs {
+  position: absolute; left: 52%; top: 42%;
+  width: 0; height: 0; pointer-events: none;
+}
+.gull-crumbs::before,
+.gull-crumbs::after {
+  content: ''; position: absolute;
+  width: 7px; height: 5px; border-radius: 50% 40%;
+  background: #e9a44a; opacity: 0;
+}
+.gull-crumbs::before { animation: gullCrumbL 1.05s ease-out infinite; }
+.gull-crumbs::after  { animation: gullCrumbR 1.05s ease-out infinite .18s; }
 @keyframes gullBob {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-4px); }
@@ -2082,8 +2130,26 @@ body.contrast .gullmascot { filter: none; }
   55%  { transform: translateY(-4px) scale(1.02) rotate(3deg); }
   100% { transform: translateY(0) scale(1); }
 }
+@keyframes gullEat {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+  28%      { transform: translateY(-7px) rotate(-4deg) scale(1.04); }
+  52%      { transform: translateY(-1px) rotate(3deg) scale(1.02); }
+  76%      { transform: translateY(-9px) rotate(-2deg) scale(1.05); }
+}
+@keyframes gullCrumbL {
+  0%   { opacity: 0; transform: translate(0, 0) scale(.6); }
+  25%  { opacity: .95; }
+  100% { opacity: 0; transform: translate(-16px, 18px) scale(.3); }
+}
+@keyframes gullCrumbR {
+  0%   { opacity: 0; transform: translate(0, 0) scale(.6); }
+  25%  { opacity: .9; }
+  100% { opacity: 0; transform: translate(14px, 16px) scale(.25); }
+}
 body.reduce-motion .gullmascot,
-body.reduce-motion .gull-zzz { animation: none !important; }
+body.reduce-motion .gull-zzz,
+body.reduce-motion .gull-crumbs::before,
+body.reduce-motion .gull-crumbs::after { animation: none !important; }
 
 /* ── 동네 화면 ────────────────────────────────── */
 .hood-card { padding-top: 0 !important; overflow: hidden; }

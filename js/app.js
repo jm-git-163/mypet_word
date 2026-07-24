@@ -591,6 +591,10 @@
      */
     applyHero(reuse) {
       const root = document.documentElement.style;
+      // 그림 아래 끝이 탭 메뉴에 가리지 않도록, 탭줄 높이만큼 띄웁니다
+      // (글씨 크기 설정에 따라 탭줄 높이가 달라지므로 그때그때 잽니다).
+      const tb = document.getElementById('tabbar');
+      if (tb && tb.offsetHeight) root.setProperty('--tabbar-h', tb.offsetHeight + 'px');
       if (reuse && this._heroKey) return this._heroKey;
       const keys = (global.Landmarks && global.Landmarks.keys && global.Landmarks.keys()) || [];
       if (!keys.length) return null;
@@ -932,6 +936,7 @@
     },
     feedNotices() { return (this._feed && this._feed.notices) || (global.RAW && global.RAW.NOTICES) || []; },
     feedGuides() { return (this._feed && this._feed.guides) || (global.Haeundae && global.Haeundae.GUIDE) || []; },
+    feedBrief() { return (this._feed && this._feed.brief) || null; },
     feedUpdated() { return this._feed && this._feed.meta && this._feed.meta.lastUpdated; },
 
     /* ── 나에게 해당되는 정보인가 ──
@@ -1193,6 +1198,39 @@
             h('div', { class: 'muted small' }, '마지막 갱신'))));
       }
 
+      // 오늘의 안심 브리핑 — 매일 파이프라인에서 AI 가 '오늘 어르신이 꼭
+      // 챙기실 것' 세 가지를 미리 골라 둔 것을 큼직하게 먼저 보여 드립니다.
+      const brief = this.feedBrief();
+      if (brief && brief.items && brief.items.length) {
+        const CATE = {
+          복지: '🧡', 건강: '🩺', 안전: '🛡️', 행사: '🎉', 교육: '📚', 일자리: '💼',
+          교통: '🚌', 문화: '🎨', 관광: '🗺️', 생활: '🏠'
+        };
+        const card = h('div', { class: 'card brief-card', style: 'text-align:left' });
+        card.appendChild(h('div', { style: 'display:flex;align-items:center;gap:7px;margin:0 0 4px' },
+          h('span', { class: 'badge', style: 'background:#fff3e0;color:#c8600f' }, '🤖 AI 안심 브리핑'),
+          h('span', { class: 'muted small' }, '오늘 꼭 챙기세요')));
+        brief.items.forEach((it, i) => {
+          const row = h('div', { style: 'padding:11px 0' + (i ? ';border-top:1px solid rgba(0,0,0,.07)' : '') });
+          row.appendChild(h('p', { style: 'margin:0 0 3px;line-height:1.6;word-break:keep-all;font-weight:700' },
+            (CATE[it.cat] || '📌') + ' ' + it.plain));
+          if (it.why) row.appendChild(h('p', { class: 'muted small', style: 'margin:0 0 4px;word-break:keep-all' }, '💡 ' + it.why));
+          const acts = h('div', { style: 'display:flex;gap:10px;align-items:center;flex-wrap:wrap' });
+          acts.appendChild(h('button', {
+            class: 'btn quiet', style: 'padding:5px 10px;font-size:calc(15px*var(--fs))',
+            onclick: (e) => speakToggle(e.currentTarget, `${it.plain} ${it.why || ''}`)
+          }, '🔊 읽어주기'));
+          if (it.sourceUrl) acts.appendChild(h('a', {
+            class: 'muted small', href: it.sourceUrl, target: '_blank', rel: 'noopener noreferrer',
+            style: 'text-decoration:underline', onclick: () => Sound.tap()
+          }, '자세히 · ' + it.source));
+          else acts.appendChild(h('span', { class: 'muted small' }, '출처 · ' + it.source));
+          row.appendChild(acts);
+          card.appendChild(row);
+        });
+        content.appendChild(card);
+      }
+
       // 오늘의 해운대 소식 — 믿을 수 있는 공지를 제때, 꾸준히 올립니다
       // 내 동네가 아닌 소식은 감추고, 나에게 해당되는 것부터 보여 드립니다.
       const scored = this.validNotices().map(n => ({ x: n, m: this.matchInfo(n) }));
@@ -1252,20 +1290,6 @@
         content.appendChild(h('div', { class: 'section-title' }, personalized ? '해운대 알아두기 · 나에게 맞는 정보 먼저' : '해운대 알아두기'));
         guide.forEach(o => content.appendChild(guideCard(o.x, o.m)));
       }
-
-      // 해운대 퀴즈
-      const all = DB.byType.PROVERB || [];
-      const met = all.filter(e => d.memory[e.id]).length;
-
-      content.appendChild(h('div', { class: 'section-title' }, '해운대 퀴즈'));
-      content.appendChild(h('div', { class: 'card center' },
-        h('p', { class: 'muted', style: 'margin:0 0 4px' }, '우리 고장 이야기'),
-        h('h2', { class: 'center', style: 'margin:0 0 6px' }, '해운대를 얼마나 아시나요'),
-        h('p', { class: 'muted small', style: 'margin:0 0 18px' },
-          `해운대 이야기 ${all.length}가지 가운데 ${met}가지를 만나셨어요`),
-        h('button', {
-          class: 'btn primary big wide', onclick: () => global.Game.startProverbs()
-        }, '해운대 퀴즈 풀러 가기')));
 
       run();   // 저장된 검색어가 있으면 결과를 바로 보여 줍니다
     },
