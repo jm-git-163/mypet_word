@@ -757,6 +757,49 @@
       "listUrl": "https://www.haeundae.go.kr/culture/board/list.do?boardId=BBS_0000233&menuCd=DOM_000000901002001000",
       "linkPattern": "view.do[^\"']*",
       "enabled": true
+    },
+    {
+      "id": "dureraum-perform",
+      "name": "영화의전당 공연일정",
+      "type": "html-board",
+      "trust": "official",
+      "region": "해운대구",
+      "topics": [
+        "행사",
+        "문화",
+        "공연"
+      ],
+      "audience": [
+        "senior",
+        "resident",
+        "tourist"
+      ],
+      "cadenceMin": 480,
+      "listUrl": "https://www.dureraum.org/bcc/ccontents/cCaleList.do?rbsIdx=39",
+      "linkPattern": "view\\.do\\?rbsIdx=39&contentsCode=\\d+",
+      "enabled": true
+    },
+    {
+      "id": "busan-nbnews",
+      "name": "부산시 통합공지사항",
+      "type": "html-board",
+      "trust": "official",
+      "region": "부산광역시",
+      "topics": [
+        "생활",
+        "안전",
+        "교통"
+      ],
+      "audience": [
+        "senior",
+        "resident"
+      ],
+      "cadenceMin": 240,
+      "pages": 3,
+      "pageParam": "curPage",
+      "listUrl": "https://www.busan.go.kr/nbnews",
+      "linkPattern": "/nbnews/\\d+",
+      "enabled": true
     }
   ]
 }

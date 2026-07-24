@@ -43,6 +43,7 @@ const strip = h => h.replace(/<script[\s\S]*?<\/script>/gi, '')
   .replace(/<style[\s\S]*?<\/style>/gi, '')
   .replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ')
   .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+  .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
   .replace(/\s+/g, ' ').trim();
 
 /* 목록에서 상세 링크 + '링크에 적힌 글 제목' 을 함께 뽑는다.
@@ -67,7 +68,11 @@ function extractLinks(html, baseUrl, pattern) {
     const cardDateM = m[2].match(/class=["'][^"']*\bdate\b[^"']*["'][^>]*>([\s\S]*?)<\/span>/i);
     const text = subjectM
       ? strip(subjectM[1]).slice(0, 120)
-      : strip(m[2]).replace(/^(새글|NEW|첨부파일)\s*/i, '').slice(0, 120);
+      // title="...<진짜 꺾쇠>..." 처럼 속성값 안에 이스케이프 안 된 '>'가
+      // 있으면(문법적으로는 틀렸지만 실제 사이트에 종종 있습니다) 태그가
+      // 그 자리에서 끝난 것으로 잘못 잘려, 앞에 '">' 부스러기가 붙어
+      // 나올 수 있습니다. 그런 부스러기만 앞에서 잘라 냅니다.
+      : strip(m[2]).replace(/^["'>\s]+(?=\S)/, '').replace(/^(새글|NEW|첨부파일)\s*/i, '').slice(0, 120);
 
     // 목록 표에 '부서 | 2026.07.23' 처럼 진짜 게시일이 같은 줄에 있는 경우가
     // 많습니다. 사진 한 장뿐인 글은 상세 페이지에서 날짜를 못 찾아 '오늘'로
@@ -75,7 +80,11 @@ function extractLinks(html, baseUrl, pattern) {
     const rowStart = html.lastIndexOf('<tr', m.index);
     const rowEnd = html.indexOf('</tr>', m.index);
     const row = (rowStart >= 0 && rowEnd > rowStart) ? html.slice(rowStart, rowEnd) : '';
-    const dateSrc = cardDateM ? strip(cardDateM[1]) : row;
+    // row를 그대로(태그 안 지운 채) 날짜를 찾으면 href 안의 검색기간
+    // 파라미터(예: srchBeginDt=2025-07-24)처럼 화면에 안 보이는 값까지
+    // 걸려, 모든 글이 똑같은 엉뚱한 날짜로 찍히는 사고가 납니다.
+    // 반드시 태그를 지운 '보이는 글자'에서만 찾습니다.
+    const dateSrc = cardDateM ? strip(cardDateM[1]) : strip(row);
     const dateM = dateSrc.match(/(20\d{2})[.\-](\d{1,2})[.\-](\d{1,2})/);
     const listDate = dateM ? `${dateM[1]}-${dateM[2].padStart(2, '0')}-${dateM[3].padStart(2, '0')}` : null;
     out.push({ url: u, text, listDate });
