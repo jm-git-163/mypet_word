@@ -117,6 +117,12 @@ function extractByOnclick(html, src) {
 /* 메뉴·머리말·꼬리말처럼 본문이 아닌 덩어리는 걸러 낸다 */
 const NAV_HINT = /(^|[^a-z])(gnb|lnb|snb|nav|menu|header|footer|sitemap|breadcrumb|quick|banner|skip)([^a-z]|$)/i;
 
+/* 요즘 관공서·기관 사이트에 흔히 붙는 'AI 챗봇 안내' 위젯 글은
+   짧고 링크가 없어(점수 계산상) 진짜 본문보다 높은 점수를 받아 버립니다
+   (실제로 벡스코 상세 페이지가 이 위젯 글만 본문으로 잘못 골랐던 적이 있습니다).
+   본문 후보에서 아예 빼서, 실제 본문이 있으면 그쪽이 뽑히게 합니다. */
+const WIDGET_HINT = /챗봇\s*사용\s*가이드|AI가\s*생성한\s*답변은\s*부정확|챗봇에게\s*물어보세요/;
+
 /* 상세에서 제목·본문·게시일·첨부를 뽑는다.
    본문은 '글자는 많고 링크는 적은' 덩어리를 고른다(메뉴는 링크투성이라 걸러진다). */
 function extractDetail(html, url, listTitle) {
@@ -126,6 +132,7 @@ function extractDetail(html, url, listTitle) {
     if (NAV_HINT.test(attrs)) continue;
     const text = strip(inner);
     if (text.length < 80) continue;
+    if (WIDGET_HINT.test(text)) continue;
     const links = (inner.match(/<a\b/gi) || []).length;
     const score = text.length / (1 + links * 45);      // 링크가 많을수록 감점
     if (score > best.score) best = { score, text };
@@ -154,6 +161,31 @@ function extractDetail(html, url, listTitle) {
   const imageUrl = image ? abs(url, image.replace(/&amp;/g, '&')) : null;
 
   return { title, body, publishedAt, attachments, imageUrl };
+}
+
+/* 벡스코 행사 상세 페이지는 대부분 '글자 설명'란이 비어 있습니다
+   (포스터 이미지만 올리고 글은 안 씀). 그러면 일반 본문 고르기가
+   챗봇 안내·꼬리말 같은 엉뚱한 덩어리를 집어 옵니다.
+   대신 이 페이지에 항상 있는 장소·시간·주최·관람료 칸을 직접 읽어
+   짧지만 정확한 본문을 만듭니다. */
+function extractBexcoDetail(html) {
+  const pick = re => (html.match(re) || [])[1];
+  const clean = s => (s || '').replace(/\s+/g, ' ').trim();
+  const date = clean(pick(/<span class="date">([\s\S]*?)<\/span>/));
+  const time = clean(pick(/<span class="time">([\s\S]*?)<\/span>/));
+  const place = clean(pick(/class="place[^"]*"[^>]*>([\s\S]*?)<\/a>/));
+  const org = clean(pick(/<em class="ltit">주최\/주관<\/em><span class="ltxt">([\s\S]*?)<\/span>/));
+  const fee = clean(pick(/<em class="ltit">관람료<\/em><span class="ltxt">([\s\S]*?)<\/span>/));
+  const desc = clean(strip(pick(/<div class="EventViewtxt">([\s\S]*?)<\/div>\s*<\/div>/) || ''));
+  if (!date && !place) return null;   // 이 틀이 아니면(다른 페이지 구조) 포기하고 일반 방식에 맡깁니다
+  const parts = [];
+  if (date) parts.push(`기간: ${date.replace(/\s*~\s*/, ' ~ ')}`);
+  if (time) parts.push(`시간: ${time.replace(/\s*~\s*/, ' ~ ')}`);
+  if (place) parts.push(`장소: ${place}`);
+  if (org) parts.push(`주최: ${org}`);
+  if (fee) parts.push(`관람료: ${fee}`);
+  if (desc && desc.length > 5) parts.push(desc);
+  return parts.join(' · ');
 }
 
 /* ── 소스 하나 확인 ── */
@@ -235,7 +267,12 @@ async function checkSource(src, state, agent) {
     try {
       const r = await fetchSafe(url, { headers: { 'User-Agent': agent.userAgent } });
       if (!r.ok) continue;
-      const d = extractDetail(await r.text(), url, link.text);
+      const rawHtml = await r.text();
+      const d = extractDetail(rawHtml, url, link.text);
+      if (url.includes('EventScheduleMgr/view.do')) {
+        const bexcoBody = extractBexcoDetail(rawHtml);
+        if (bexcoBody) d.body = bexcoBody;
+      }
       if (!d.title || d.body.length < 40) continue;
       items.push({
         uid: sha1(url), source: src.name, sourceId: src.id, sourceUrl: url,
