@@ -577,22 +577,24 @@ body.tab-walk::after, body.playing::after {
 body.contrast.tab-walk, body.contrast.playing { background: #fff; }
 body.contrast.tab-walk::after, body.contrast.playing::after { display: none; }
 
-/* 산책 화면 카드·말풍선은 살짝 비치게 해, 카드 뒤에 가려지던 삽화 가운데
-   부분이 은은하게 보이게 합니다. 글자 가독성을 위해 살짝만 투명하게 하고
-   (흰색 84%), 뒤 그림이 번지지 않도록 옅은 블러를 겁니다. */
-body.tab-walk .card,
+/* 산책 화면 카드·말풍선은 다른 화면(기본 84%)보다 조금 더 비치게 해, 카드
+   뒤에 가려지던 삽화 가운데 부분이 은은하게 보이게 합니다. 글자 가독성을
+   위해 옅은 블러를 함께 걸어 뒤 그림이 번지지 않게 합니다.
+   (#view > .card 규칙이 id라 이겨 버리므로, 여기서는 더 구체적으로 잡습니다) */
+body.tab-walk #view > .card,
 body.tab-walk .speech {
-  background: color-mix(in srgb, var(--white) 84%, transparent);
-  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  background: color-mix(in srgb, var(--white) 72%, transparent) !important;
+  -webkit-backdrop-filter: saturate(120%) blur(10px);
+  backdrop-filter: saturate(120%) blur(10px);
 }
-body.dark.tab-walk .card,
+body.dark.tab-walk #view > .card,
 body.dark.tab-walk .speech {
-  background: color-mix(in srgb, var(--white) 78%, transparent);
+  background: color-mix(in srgb, var(--white) 76%, transparent) !important;
 }
-/* 또렷하게 보기에서는 투명·블러를 끄고 완전히 불투명하게(가독성 최우선). */
-body.contrast.tab-walk .card,
+/* 또렷하게 보기에서는 비침·블러를 끄고 완전히 불투명하게(가독성 최우선). */
+body.contrast.tab-walk #view > .card,
 body.contrast.tab-walk .speech {
-  background: var(--white);
+  background: var(--white) !important;
   -webkit-backdrop-filter: none; backdrop-filter: none;
 }
 
