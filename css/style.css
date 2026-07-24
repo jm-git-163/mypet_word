@@ -564,9 +564,10 @@ body.tab-walk .topbar, body.playing .topbar { background: transparent; }
 body.tab-walk::before, body.playing::before { display: none; }   /* 하늘 그라데이션 끄기 */
 body.tab-walk::after, body.playing::after {
   display: block; opacity: 1;
-  /* 그림을 탭 메뉴 위로 살짝만 띄웁니다(메뉴에 아주 조금 걸치되, 너무 높이
-     올리면 중요한 가운데 부분이 카드 뒤로 다 숨으므로 낮게 둡니다). */
-  bottom: max(6px, calc(var(--tabbar-h, 76px) - 36px));
+  /* 그림을 화면 맨 아래까지 채웁니다. 아래 탭 메뉴가 반투명이라, 그림이
+     메뉴에 잘리지 않고 메뉴 뒤로 이어져 비쳐 보입니다(위=카드, 아래=메뉴
+     양쪽으로 그림이 은은히 이어집니다). */
+  bottom: 0;
   background-image: var(--hero-img, none);
   background-size: 100% auto;                            /* 너비에 꽉 맞춰 큼직하게 */
   background-position: bottom center;
@@ -583,13 +584,13 @@ body.contrast.tab-walk::after, body.contrast.playing::after { display: none; }
    (#view > .card 규칙이 id라 이겨 버리므로, 여기서는 더 구체적으로 잡습니다) */
 body.tab-walk #view > .card,
 body.tab-walk .speech {
-  background: color-mix(in srgb, var(--white) 72%, transparent) !important;
+  background: color-mix(in srgb, var(--white) 66%, transparent) !important;
   -webkit-backdrop-filter: saturate(120%) blur(10px);
   backdrop-filter: saturate(120%) blur(10px);
 }
 body.dark.tab-walk #view > .card,
 body.dark.tab-walk .speech {
-  background: color-mix(in srgb, var(--white) 76%, transparent) !important;
+  background: color-mix(in srgb, var(--white) 72%, transparent) !important;
 }
 /* 또렷하게 보기에서는 비침·블러를 끄고 완전히 불투명하게(가독성 최우선). */
 body.contrast.tab-walk #view > .card,
@@ -597,6 +598,21 @@ body.contrast.tab-walk .speech {
   background: var(--white) !important;
   -webkit-backdrop-filter: none; backdrop-filter: none;
 }
+
+/* 산책·퍼즐 화면에서는 아래 탭 메뉴도 더 비치게 해, 그림이 메뉴 뒤로
+   이어져 보이게 합니다(글자는 블러로 또렷하게 유지). 또렷하게 보기에선
+   불투명하게 되돌립니다. */
+body.tab-walk .tabbar, body.playing .tabbar {
+  background: color-mix(in srgb, var(--white) 56%, transparent);
+}
+body.contrast.tab-walk .tabbar, body.contrast.playing .tabbar {
+  background: color-mix(in srgb, var(--white) 90%, transparent);
+}
+
+/* 산책 화면은 카드를 위로 바짝 모아, 아래 삽화가 넓게 보이게 합니다. */
+body.tab-walk #view > .card { padding: 14px 16px; margin-bottom: 10px; }
+body.tab-walk #view > .card.compact { padding-top: 12px; padding-bottom: 14px; }
+body.tab-walk .dog-area { margin: 2px 0 8px; }          /* 인사말 위아래 여백 줄이기 */
 
 /* ── 흩날리는 것 (꽃잎·단풍·눈·잎) ──────────────
    어느 풍경에나 무언가 천천히 흩날립니다.

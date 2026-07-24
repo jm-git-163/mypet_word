@@ -680,13 +680,15 @@
       this.applyHero(false);
 
       v.appendChild(dogBlock('반가움', this.greet()));
-      v.appendChild(h('div', { class: 'card center' },
+      // 산책 카드는 아래 삽화 자리를 넉넉히 남기려고 조금 아담하게 짭니다
+      // (큰 숫자·여백을 줄이되, '산책 나가기' 단추는 어르신 손에 맞게 큼직하게).
+      v.appendChild(h('div', { class: 'card center compact' },
         h('div', { class: 'hood-tag' }, hood.name),
-        h('div', { style: 'font-size:calc(34px * var(--fs));font-weight:800;line-height:1.4;margin:6px 0 10px' },
+        h('div', { style: 'font-size:calc(27px * var(--fs));font-weight:800;line-height:1.3;margin:4px 0 7px' },
           d.level + '번째 산책'),
         h('div', { class: 'steps' }, Array.from({ length: 10 }, (_, i) =>
           paw(i < step - 1 ? 'on' : (i === step - 1 ? 'now' : '')))),
-        h('div', { class: 'muted small', style: 'margin:8px 0 16px' }, `마실 ${Math.floor((d.level - 1) / 10) + 1} · ${11 - step}걸음 남았어요`),
+        h('div', { class: 'muted small', style: 'margin:6px 0 12px' }, `마실 ${Math.floor((d.level - 1) / 10) + 1} · ${11 - step}걸음 남았어요`),
         h('button', { class: 'btn primary big wide', onclick: () => global.Game.start() },
           d.totalDone === 0 ? '산책 나가기' : '이어서 산책하기')
       ));
