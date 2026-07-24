@@ -89,6 +89,11 @@
       // 대신 CSS 에서 높이를 낮춰 판 자리를 뺏지 않게 했습니다.
       // 놀이 중에는 여백도 걷어 판이 한 화면에 들어오게 합니다.
       document.body.classList.add('playing');
+      // 산책 화면의 '카드 아래 큰 그림' 배치(tab-walk)는 퍼즐 화면엔 맞지 않으니
+      // 끄고, 대신 퍼즐 배경(body.playing)으로 명소 삽화를 은은하게 깝니다.
+      // 산책 화면에서 보던 그림을 그대로 이어(reuse) 같은 풍경 속에서 놉니다.
+      document.body.classList.remove('tab-walk');
+      App.applyHero(true);
 
       App.top(this.reviewOnly ? this.stage.modeName : this.stage.level + '번째 산책',
         h('button', { class: 'iconbtn back', 'aria-label': '산책 그만하기', onclick: () => this.leave() },

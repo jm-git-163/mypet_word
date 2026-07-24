@@ -582,6 +582,26 @@
       guardTaps();
     },
 
+    /**
+     * 명소 삽화 배경을 고릅니다.
+     * 산책 화면·퍼즐 화면 배경에 쓰는 --hero-img(그림)·--hero-top(하늘색)을
+     * 정합니다. reuse=true 면 지금 걸려 있는 그림을 그대로 두어(산책 →
+     * 퍼즐로 이어질 때 같은 풍경이 이어지게), reuse=false 면 열넷 명소 중
+     * 하나를 새로 무작위로 고릅니다(산책 화면에 들어올 때마다 바뀌게).
+     */
+    applyHero(reuse) {
+      const root = document.documentElement.style;
+      if (reuse && this._heroKey) return this._heroKey;
+      const keys = (global.Landmarks && global.Landmarks.keys && global.Landmarks.keys()) || [];
+      if (!keys.length) return null;
+      const key = keys[Math.floor(Math.random() * keys.length)];
+      const deg = global.Theme && global.Theme.hueDeg ? global.Theme.hueDeg() : null;
+      root.setProperty('--hero-img', `url("${global.Landmarks.url(key, deg)}")`);
+      root.setProperty('--hero-top', global.Landmarks.topColor(key, deg));
+      this._heroKey = key;
+      return key;
+    },
+
     /** 위 띠의 발자국 숫자를 새로 적습니다 */
     topFootprints() {
       const el = document.getElementById('footchip');
@@ -650,21 +670,10 @@
 
       const scene = global.Theme.apply(d.level);
 
-      // 배경 삽화 — 지금 동네 그림 하나로 고정하지 않고, 이 화면에 들어올
-      // 때마다 열넷 명소 가운데 하나를 무작위로 골라 늘 새롭게 보이게 합니다.
-      // 그림은 '화면 아래 빈 자리'에 잘리지 않게 온전히 깔고(css body.tab-walk::after),
-      // 그림 위로 남는 화면 전체는 그 그림 하늘색으로 통일합니다(--hero-top).
-      const artKeys = (global.Landmarks && global.Landmarks.keys()) || [];
-      const artKey = artKeys.length ? artKeys[Math.floor(Math.random() * artKeys.length)] : null;
-      const hueDeg = global.Theme.hueDeg ? global.Theme.hueDeg() : null;
-      const heroImg = artKey ? global.Landmarks.url(artKey, hueDeg) : null;
-      const heroTop = artKey ? global.Landmarks.topColor(artKey, hueDeg) : '#dff1f6';
-      document.documentElement.style.setProperty('--hero-img', heroImg ? `url("${heroImg}")` : 'none');
-      document.documentElement.style.setProperty('--hero-top', heroTop);
-      // 그림을 아래 탭줄 바로 위에 붙이기 위해, 탭줄 높이를 재서 넘깁니다
-      // (글씨 크기 설정에 따라 탭줄 높이가 달라지므로 그때그때 잽니다).
-      const tb = document.getElementById('tabbar');
-      if (tb) document.documentElement.style.setProperty('--tabbar-h', tb.offsetHeight + 'px');
+      // 배경 삽화 — 이 화면에 들어올 때마다 열넷 명소 가운데 하나를 새로
+      // 무작위로 골라 늘 새롭게 보이게 합니다. 그림은 카드 아래 빈 자리에
+      // 온전히 깔고(.walk-illust), 화면 전체는 그 그림 하늘색으로 통일합니다.
+      this.applyHero(false);
 
       v.appendChild(dogBlock('반가움', this.greet()));
       v.appendChild(h('div', { class: 'card center' },
