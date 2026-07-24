@@ -800,6 +800,48 @@
       "listUrl": "https://www.busan.go.kr/nbnews",
       "linkPattern": "/nbnews/\\d+",
       "enabled": true
+    },
+    {
+      "id": "dureraum-now",
+      "name": "영화의전당 현재상영프로그램",
+      "type": "html-list",
+      "trust": "official",
+      "region": "해운대구",
+      "topics": [
+        "행사",
+        "문화",
+        "영화"
+      ],
+      "audience": [
+        "senior",
+        "resident",
+        "tourist"
+      ],
+      "cadenceMin": 720,
+      "listUrl": "https://www.dureraum.org/bcc/mcontents/progList.do?rbsIdx=60",
+      "listStyle": "dureraum-prog",
+      "enabled": true
+    },
+    {
+      "id": "dureraum-soon",
+      "name": "영화의전당 상영예정프로그램",
+      "type": "html-list",
+      "trust": "official",
+      "region": "해운대구",
+      "topics": [
+        "행사",
+        "문화",
+        "영화"
+      ],
+      "audience": [
+        "senior",
+        "resident",
+        "tourist"
+      ],
+      "cadenceMin": 720,
+      "listUrl": "https://www.dureraum.org/bcc/mcontents/progList.do?rbsIdx=61",
+      "listStyle": "dureraum-prog",
+      "enabled": true
     }
   ]
 }

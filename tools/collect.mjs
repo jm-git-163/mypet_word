@@ -44,6 +44,7 @@ const strip = h => h.replace(/<script[\s\S]*?<\/script>/gi, '')
   .replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ')
   .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
   .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'")
+  .replace(/&#40;/g, '(').replace(/&#41;/g, ')')
   .replace(/\s+/g, ' ').trim();
 
 /* 목록에서 상세 링크 + '링크에 적힌 글 제목' 을 함께 뽑는다.
@@ -197,6 +198,28 @@ function extractBexcoDetail(html) {
   return parts.join(' · ');
 }
 
+/* 영화의전당 '현재상영/상영예정프로그램' 목록은 회차별 시간표가 아니라
+   프로그램(영화 시리즈) 한 편당 한 줄이라 '소식'에 알맞은 분량입니다.
+   목록 페이지 자체에 제목·기간·요금·소개글이 이미 다 있어(상세 페이지가
+   따로 필요 없음), 목록에서 바로 뽑아 씁니다. */
+function extractDureraumProgList(html, baseUrl) {
+  const out = [];
+  const re = /<li class="title">\s*<a href="([^"]*)"\s*title="([^"]*)">[\s\S]*?<ul class="info">([\s\S]*?)<\/ul>/g;
+  let m;
+  while ((m = re.exec(html))) {
+    const url = abs(baseUrl, m[1].replace(/&amp;/g, '&'));
+    if (!url) continue;
+    const text = strip(m[2]).slice(0, 120);
+    const lines = [...m[3].matchAll(/<li[^>]*>([\s\S]*?)<\/li>/g)].map(x => strip(x[1])).filter(Boolean);
+    const dateLine = lines[0] || '';
+    const dm = dateLine.match(/(20\d{2})-(\d{2})-(\d{2})/);
+    const listDate = dm ? `${dm[1]}-${dm[2]}-${dm[3]}` : null;
+    const bodyHint = lines.slice(1).join(' · ');
+    out.push({ url, text, listDate, bodyHint });
+  }
+  return out;
+}
+
 /* ── 소스 하나 확인 ── */
 async function checkSource(src, state, agent) {
   const st = state[src.id] || (state[src.id] = { etag: null, lastMod: null, lastCheck: null, seen: [], fails: 0 });
@@ -224,9 +247,11 @@ async function checkSource(src, state, agent) {
   st.lastMod = res.headers.get('last-modified') || st.lastMod;
 
   const html = await res.text();
-  let links = src.idPattern
-    ? extractByOnclick(html, src)
-    : extractLinks(html, src.listUrl, src.linkPattern || 'view');
+  let links = src.listStyle === 'dureraum-prog'
+    ? extractDureraumProgList(html, src.listUrl)
+    : src.idPattern
+      ? extractByOnclick(html, src)
+      : extractLinks(html, src.listUrl, src.linkPattern || 'view');
 
   /* 부산 전체 17개 구·군을 한 게시판에서 같이 다루는 기관이 있습니다(자원봉사센터 등).
      그대로 받으면 해운대 앱에 다른 구 소식이 섞여 들어갑니다.
@@ -282,6 +307,9 @@ async function checkSource(src, state, agent) {
         const bexcoBody = extractBexcoDetail(rawHtml);
         if (bexcoBody) d.body = bexcoBody;
       }
+      // 영화의전당 프로그램은 목록 페이지에 이미 기간·요금·소개글이 있어
+      // 그쪽이 상세 페이지보다 낫습니다(상세는 회차 예매용이라 오히려 부실).
+      if (link.bodyHint && link.bodyHint.length > 20) d.body = link.bodyHint;
       if (!d.title || d.body.length < 40) continue;
       items.push({
         uid: sha1(url), source: src.name, sourceId: src.id, sourceUrl: url,
