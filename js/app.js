@@ -380,27 +380,12 @@
   }
 
   /* 해운대 갈매기 — 소식을 전해 주는 안내자입니다.
-     부산 상징(갈매기)을 앱 그림체로 새로 그린 원본입니다.
-     ※ 부산시 공식 캐릭터 '부기'를 쓰려면 공공누리(출처표시) 규정에 따라
-       official 이미지를 images/ 에 넣고 이 함수만 바꾸면 됩니다. */
-  function gullSVG(size) {
-    const s = size || 64;
-    return `<svg viewBox="0 0 100 100" width="${s}" height="${s}" aria-hidden="true">
-      <ellipse cx="50" cy="88" rx="18" ry="4" fill="#000" opacity=".06"/>
-      <path d="M28 54 q-16 -6 -22 6 q14 2 22 7 Z" fill="#eef3f5" stroke="#dbe4e8" stroke-width="1.5"/>
-      <path d="M72 54 q16 -6 22 6 q-14 2 -22 7 Z" fill="#eef3f5" stroke="#dbe4e8" stroke-width="1.5"/>
-      <ellipse cx="50" cy="58" rx="24" ry="20" fill="#ffffff" stroke="#dbe4e8" stroke-width="2"/>
-      <path d="M32 50 q18 -9 36 0 q-18 6 -36 0 Z" fill="#cfd8dd" opacity=".85"/>
-      <circle cx="50" cy="35" r="15" fill="#ffffff" stroke="#dbe4e8" stroke-width="2"/>
-      <path d="M50 33 l17 5 l-17 5 Z" fill="#f6a623"/>
-      <circle cx="45" cy="33" r="2.7" fill="#33414a"/>
-      <circle cx="46" cy="32" r="1" fill="#fff"/>
-      <path d="M44 77 v6 M56 77 v6" stroke="#f6a623" stroke-width="2.6" fill="none"/>
-    </svg>`;
-  }
+     카톡·바탕화면과 같은 3D 갈매기 그림을 씁니다. */
   function gullEl(size) {
     const box = h('div', { class: 'gull' });
-    box.innerHTML = gullSVG(size);
+    box.innerHTML = global.Gull
+      ? global.Gull.make('반가움', size || 64, { still: true })
+      : '';
     return box;
   }
 
@@ -579,6 +564,7 @@
         if (global.Game && global.Game.stopHere) global.Game.stopHere();
       }
       this.tab = tab;
+      document.body.classList.toggle('tab-walk', tab === 'walk');
       this.renderTabs();
       const v = $('view'); v.innerHTML = ''; v.scrollTop = 0;
       ({ walk: this.scrWalk, hood: this.scrHood, pet: this.scrPet, learn: this.scrLearn, set: this.scrSet })[tab].call(this, v);
@@ -652,29 +638,44 @@
       const step = ((d.level - 1) % 10) + 1;
 
       const scene = global.Theme.apply(d.level);
-      v.appendChild(dogBlock('반가움', this.greet()));
-      v.appendChild(h('div', { class: 'card center' },
+
+      // 배경 삽화 — 지금 동네 그림 하나로 고정하지 않고, 이 화면에 들어올
+      // 때마다 열넷 명소 가운데 하나를 무작위로 골라 늘 새롭게 보이게 합니다.
+      // 그림을 자르지 않고 다 보여 준 뒤, 남는 자리는 그 그림 하늘색으로
+      // 평평하게 이어 붙입니다('함께한 날' 상자 아래까지).
+      const artKeys = (global.Landmarks && global.Landmarks.keys()) || [];
+      const artKey = artKeys.length ? artKeys[Math.floor(Math.random() * artKeys.length)] : null;
+      const hueDeg = global.Theme.hueDeg ? global.Theme.hueDeg() : null;
+      const heroImg = artKey ? global.Landmarks.url(artKey, hueDeg) : null;
+      const heroTop = artKey ? global.Landmarks.topColor(artKey, hueDeg) : '#dff1f6';
+      document.documentElement.style.setProperty('--hero-img', heroImg ? `url("${heroImg}")` : 'none');
+      document.documentElement.style.setProperty('--hero-top', heroTop);
+
+      const hero = h('div', { class: 'walk-hero' });
+      hero.appendChild(dogBlock('반가움', this.greet()));
+      hero.appendChild(h('div', { class: 'card center' },
         h('div', { class: 'hood-tag' }, hood.name),
         h('div', { style: 'font-size:calc(34px * var(--fs));font-weight:800;line-height:1.4;margin:6px 0 10px' },
           d.level + '번째 산책'),
         h('div', { class: 'steps' }, Array.from({ length: 10 }, (_, i) =>
           paw(i < step - 1 ? 'on' : (i === step - 1 ? 'now' : '')))),
-        h('div', { class: 'muted small', style: 'margin:8px 0 16px' }, `마당 ${Math.floor((d.level - 1) / 10) + 1} · ${11 - step}걸음 남았어요`),
+        h('div', { class: 'muted small', style: 'margin:8px 0 16px' }, `마실 ${Math.floor((d.level - 1) / 10) + 1} · ${11 - step}걸음 남았어요`),
         h('button', { class: 'btn primary big wide', onclick: () => global.Game.start() },
           d.totalDone === 0 ? '산책 나가기' : '이어서 산책하기')
       ));
 
-      if (due > 0) v.appendChild(h('div', { class: 'card' },
+      if (due > 0) hero.appendChild(h('div', { class: 'card' },
         h('h2', null, '되새길 낱말이 있어요'),
         h('p', { class: 'muted', style: 'margin:0 0 14px' }, `지난번에 만난 낱말 ${due}개를 다시 볼까요?`),
         h('button', { class: 'btn go wide', onclick: () => global.Game.startReview() }, '되새기러 가기')));
 
-      v.appendChild(h('div', { class: 'card' },
+      hero.appendChild(h('div', { class: 'card' },
         h('div', { class: 'statrow' },
           h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'muted small' }, '함께한 날'), h('div', { class: 'bignum' }, d.days.length + '일')),
           h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'muted small' }, '만난 낱말'), h('div', { class: 'bignum' }, Object.keys(d.memory).length + '개')),
           h('div', { style: 'flex:1;min-width:0' }, h('div', { class: 'muted small' }, '발자국'), h('div', { class: 'bignum' }, d.footprints + '개'))
         )));
+      v.appendChild(hero);
 
       // 「바탕화면에 놓기」 안내가 들어올 자리.
       // 이미 앱으로 여셨거나 안내를 닫으셨으면 아무것도 그리지 않습니다.
@@ -712,7 +713,7 @@
       card.appendChild(h('p', { class: 'muted center', style: 'margin:0' }, `${d.level}번째 산책 중이에요`));
       v.appendChild(card);
 
-      v.appendChild(h('div', { class: 'section-title' }, '이 동네의 마당'));
+      v.appendChild(h('div', { class: 'section-title' }, '이 동네의 마실'));
       const base = Math.floor((d.level - 1) / 100) * 100;
       for (let c = 0; c < 10; c++) {
         const startLv = base + c * 10 + 1;
@@ -730,11 +731,11 @@
             return i;
           })(),
           h('span', { class: 'grow' + (done || here ? '' : ' dim') },
-            `마당 ${Math.floor(startLv / 10) + 1} · ${startLv}~${startLv + 9}번째 산책`),
+            `마실 ${Math.floor(startLv / 10) + 1} · ${startLv}~${startLv + 9}번째 산책`),
           h('span', { class: 'badge' + (done ? ' green' : here ? ' warm' : '') }, done ? '마침' : here ? '여기' : '다음')));
       }
 
-      v.appendChild(h('div', { class: 'section-title' }, '지나갈 동네'));
+      v.appendChild(h('div', { class: 'section-title' }, '지나갈 마실'));
       NEIGHBORHOODS.forEach((n, i) => {
         const row = h('div', { class: 'list-item oneline' + (i === hoodIdx ? '' : ' faded') });
         const dot = h('span', { class: 'hue-dot' });

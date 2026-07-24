@@ -2,20 +2,28 @@
 <html lang="ko"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>부산 갈매기 마스코트</title>
+<link rel="stylesheet" href="css/style.css">
 <style>
   body{margin:0;font-family:system-ui,'Malgun Gothic',sans-serif;background:#faf7f4;color:#2a2320}
   h1{font-size:21px;margin:18px 18px 4px} p.d{margin:0 18px 10px;color:#7a6f66;font-size:14px}
   .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;padding:12px}
   figure{margin:0;background:#fff;border:1px solid #eadfd4;border-radius:18px;padding:10px;text-align:center;cursor:pointer}
-  .p{background:radial-gradient(circle at 50% 40%,#fff,#f3ece2);border-radius:14px}
+  .p{background:radial-gradient(circle at 50% 40%,#fff,#f3ece2);border-radius:14px;min-height:180px;display:flex;align-items:flex-end;justify-content:center}
   figcaption b{display:block;font-size:17px;margin-top:6px} figcaption span{font-size:13px;color:#7a6f66}
 </style></head><body>
-<h1>부산 갈매기 마스코트 — 입체·귀여움 버전</h1>
-<p class="d">그라데이션으로 통통한 입체감, 큰 눈·볼터치로 귀여움. <b>먹이</b> 카드는 고개를 들어 새우깡을 받아먹고 꿀꺽합니다. (카드를 누르면 '먹이' 동작을 다시 보여줘요)</p>
+<h1>부산 갈매기 마스코트 — 카톡·앱 통일 버전</h1>
+<p class="d">카톡 썸네일·바탕화면 아이콘과 같은 3D 갈매기입니다. 카드를 누르면 <b>먹이</b> 포즈로 바뀝니다.</p>
 <div class="g" id="g"></div>
 <script src="js/gull.js"></script>
 <script>
-  var items=[['반가움','평소 — 눈 깜빡·날갯짓'],['먹이','새우깡 먹기 — 받아먹고 꿀꺽'],['신남','신남 — 하트가 퐁퐁'],['졸림','졸림 — Z']];
+  var items=[
+    ['반가움','평소 — 서 있는 모습'],
+    ['편안함','편안 — 미소 짓는 눈'],
+    ['신남','신남 — 날개 펴고 폴짝'],
+    ['먹이','간식 — 새우 과자 먹기'],
+    ['졸림','졸림 — Z'],
+    ['달림','달림 — 폴짝 뛰어가기']
+  ];
   var g=document.getElementById('g');
   items.forEach(function(it,i){
     var f=document.createElement('figure');

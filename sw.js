@@ -1,10 +1,12 @@
 /* 낱말 산책 — 오프라인 우선 (TECH_SPEC §4.3)
    인터넷이 없어도 앱의 모든 기능이 그대로 동작합니다. */
-const CACHE = 'busan-nanmal-v112';
+const CACHE = 'busan-nanmal-v113';
 const FILES = [
   './', './play.html', './manifest.json', './css/style.css', './data/feed.json',
   './js/hangul.js', './js/data.js', './js/data2.js', './js/data3.js', './js/data4.js', './js/data5.js', './js/data6.js', './js/data7.js', './js/proverbs2.js', './js/notices.js', './js/busan_api.js', './js/haeundae_media.js', './js/crossword.js', './js/bgm.js', './js/scene.js', './js/landmarks.js', './js/theme.js', './js/dog.js', './js/gull.js', './js/install.js', './js/intro.js', './js/update.js', './js/open-outside.js',
-   './js/engine.js', './js/app.js', './js/game.js'
+   './js/engine.js', './js/app.js', './js/game.js',
+  './images/gull/stand.png', './images/gull/happy.png', './images/gull/cheer.png',
+  './images/gull/eat.png', './images/gull/run.png', './images/gull/miss.png', './images/gull/sleep.png'
 ];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

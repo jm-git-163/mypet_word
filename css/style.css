@@ -464,7 +464,9 @@ body.reduce-motion .dogsvg * { animation: none !important; }
   /* 예전에는 좁으면 강아지 아래로 말풍선을 내렸는데,
      그러면 인사말 한 줄이 화면 위쪽을 통째로 차지했습니다.
      좁아도 나란히 두고, 대신 강아지를 조금 줄입니다. */
-  .dog-area .dog svg { width: 68px; height: 68px; }
+  .dog-area .dog svg,
+  .dog-area .dog .gullmascot { width: 68px; height: 68px; }
+  .dog-area .dog .gullimg { width: 68px; height: 68px; }
   .speech { padding: 8px 12px; }
 }
 
@@ -551,6 +553,22 @@ body::after {
 }
 body.dark::after { opacity: .4; }
 body.contrast::before, body.contrast::after { background: #fff; opacity: 1; }
+
+/* ── 산책 화면 전용 배경 ──────────────────────────
+   다른 화면은 위 풍경(body::after)을 화면 전체에 흐릿하게 깔지만,
+   산책 화면만은 명소 그림을 잘리지 않게 온전히 보여 주고, 그림 아래
+   남는 자리는 그림 맨 위(하늘) 빛깔로 평평하게 채웁니다.
+   (화면을 늘리지 않고, 카드 사이 빈틈까지 색이 이어지게 하는 것이 핵심) */
+body.tab-walk::before, body.tab-walk::after { display: none; }
+body.tab-walk .scroll { background: var(--hero-top, var(--surface)); transition: background 500ms ease; }
+.walk-hero {
+  margin: 0 calc(-1 * var(--edge)) 14px; padding: 14px var(--edge) 2px;
+  background-color: var(--hero-top, var(--surface));
+  background-image: var(--hero-img, none);
+  background-repeat: no-repeat; background-position: top center;
+  background-size: 100% auto;
+  transition: background-color 500ms ease;
+}
 
 /* ── 흩날리는 것 (꽃잎·단풍·눈·잎) ──────────────
    어느 풍경에나 무언가 천천히 흩날립니다.
@@ -1304,18 +1322,72 @@ body.reduce-motion .sheet, body.reduce-motion .sheet-back { animation: none; }
     rgba(255,255,255,.90) 0%, rgba(255,255,255,.60) 40%, rgba(255,255,255,0) 66%);
   z-index: 0; pointer-events: none;
 }
-.dog svg { position: relative; z-index: 1; }
+.dog svg,
+.dog .gullmascot { position: relative; z-index: 1; }
 /* 말풍선은 조명보다 위에 둡니다 */
 .dog-area .speech { position: relative; z-index: 2; }
-.dogsvg { filter: drop-shadow(0 6px 10px rgba(45,21,13,.16)) drop-shadow(0 1px 1px rgba(45,21,13,.10)); }
+.dogsvg,
+.gullmascot { filter: drop-shadow(0 6px 10px rgba(45,21,13,.16)) drop-shadow(0 1px 1px rgba(45,21,13,.10)); }
 
 body.dark .dog::before {
   background: radial-gradient(circle,
     rgba(255,236,214,.15) 0%, rgba(255,236,214,.07) 42%, rgba(255,236,214,0) 66%);
 }
-body.dark .dogsvg { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+body.dark .dogsvg,
+body.dark .gullmascot { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
 body.contrast .dog::before { display: none; }
-body.contrast .dogsvg { filter: none; }
+body.contrast .dogsvg,
+body.contrast .gullmascot { filter: none; }
+
+/* ── 3D 갈매기 마스코트 (PNG) ─────────────────── */
+.gullmascot {
+  display: inline-flex; align-items: flex-end; justify-content: center;
+  position: relative; line-height: 0; vertical-align: bottom;
+  transform-origin: 50% 90%;
+}
+.gullimg {
+  display: block; width: 100%; height: 100%;
+  object-fit: contain; object-position: center bottom;
+  pointer-events: none; user-select: none;
+  -webkit-user-drag: none;
+}
+.gull-zzz {
+  position: absolute; top: 6%; right: 10%;
+  font: 700 18px/1 system-ui, sans-serif;
+  color: #9aa7ae; opacity: 0;
+  animation: gullZzz 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes gullZzz {
+  0%   { opacity: 0; transform: translate(0, 0) scale(.8); }
+  35%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(10px, -18px) scale(1.1); }
+}
+.gull-bob  { animation: gullBob 2.1s ease-in-out infinite; }
+.gull-soft { animation: gullBob 3.4s ease-in-out infinite; }
+.gull-hop  { animation: gullHop .7s ease-in-out infinite; }
+.gull-tilt { animation: gullTilt 2.6s ease-in-out infinite; }
+.gull-burst { animation: gullBurst .85s ease-out 1; }
+@keyframes gullBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+@keyframes gullHop {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  45%      { transform: translateY(-11px) scale(1.02, .98); }
+}
+@keyframes gullTilt {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-8deg); }
+}
+@keyframes gullBurst {
+  0%   { transform: translateY(0) scale(1); }
+  30%  { transform: translateY(-10px) scale(1.06) rotate(-4deg); }
+  55%  { transform: translateY(-4px) scale(1.02) rotate(3deg); }
+  100% { transform: translateY(0) scale(1); }
+}
+body.reduce-motion .gullmascot,
+body.reduce-motion .gull-zzz { animation: none !important; }
 
 /* ── 동네 화면 ────────────────────────────────── */
 .hood-card { padding-top: 0 !important; overflow: hidden; }
@@ -1942,18 +2014,72 @@ body.reduce-motion .sheet, body.reduce-motion .sheet-back { animation: none; }
     rgba(255,255,255,.90) 0%, rgba(255,255,255,.60) 40%, rgba(255,255,255,0) 66%);
   z-index: 0; pointer-events: none;
 }
-.dog svg { position: relative; z-index: 1; }
+.dog svg,
+.dog .gullmascot { position: relative; z-index: 1; }
 /* 말풍선은 조명보다 위에 둡니다 */
 .dog-area .speech { position: relative; z-index: 2; }
-.dogsvg { filter: drop-shadow(0 6px 10px rgba(45,21,13,.16)) drop-shadow(0 1px 1px rgba(45,21,13,.10)); }
+.dogsvg,
+.gullmascot { filter: drop-shadow(0 6px 10px rgba(45,21,13,.16)) drop-shadow(0 1px 1px rgba(45,21,13,.10)); }
 
 body.dark .dog::before {
   background: radial-gradient(circle,
     rgba(255,236,214,.15) 0%, rgba(255,236,214,.07) 42%, rgba(255,236,214,0) 66%);
 }
-body.dark .dogsvg { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
+body.dark .dogsvg,
+body.dark .gullmascot { filter: drop-shadow(0 6px 14px rgba(0,0,0,.55)); }
 body.contrast .dog::before { display: none; }
-body.contrast .dogsvg { filter: none; }
+body.contrast .dogsvg,
+body.contrast .gullmascot { filter: none; }
+
+/* ── 3D 갈매기 마스코트 (PNG) ─────────────────── */
+.gullmascot {
+  display: inline-flex; align-items: flex-end; justify-content: center;
+  position: relative; line-height: 0; vertical-align: bottom;
+  transform-origin: 50% 90%;
+}
+.gullimg {
+  display: block; width: 100%; height: 100%;
+  object-fit: contain; object-position: center bottom;
+  pointer-events: none; user-select: none;
+  -webkit-user-drag: none;
+}
+.gull-zzz {
+  position: absolute; top: 6%; right: 10%;
+  font: 700 18px/1 system-ui, sans-serif;
+  color: #9aa7ae; opacity: 0;
+  animation: gullZzz 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes gullZzz {
+  0%   { opacity: 0; transform: translate(0, 0) scale(.8); }
+  35%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(10px, -18px) scale(1.1); }
+}
+.gull-bob  { animation: gullBob 2.1s ease-in-out infinite; }
+.gull-soft { animation: gullBob 3.4s ease-in-out infinite; }
+.gull-hop  { animation: gullHop .7s ease-in-out infinite; }
+.gull-tilt { animation: gullTilt 2.6s ease-in-out infinite; }
+.gull-burst { animation: gullBurst .85s ease-out 1; }
+@keyframes gullBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+@keyframes gullHop {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  45%      { transform: translateY(-11px) scale(1.02, .98); }
+}
+@keyframes gullTilt {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-8deg); }
+}
+@keyframes gullBurst {
+  0%   { transform: translateY(0) scale(1); }
+  30%  { transform: translateY(-10px) scale(1.06) rotate(-4deg); }
+  55%  { transform: translateY(-4px) scale(1.02) rotate(3deg); }
+  100% { transform: translateY(0) scale(1); }
+}
+body.reduce-motion .gullmascot,
+body.reduce-motion .gull-zzz { animation: none !important; }
 
 /* ── 동네 화면 ────────────────────────────────── */
 .hood-card { padding-top: 0 !important; overflow: hidden; }
@@ -2385,7 +2511,8 @@ body.contrast .doghouse .niche {
    흰 조명이 켜져 있으면 창이 비어 보이지 않고 뿌옇게 막힙니다.
    테두리와 그림자만으로도 강아지가 또렷합니다. */
 .moonwin .dog::before { display: none; }
-.moonwin .dogsvg { filter: drop-shadow(0 8px 14px rgba(45,21,13,.28)); }
+.moonwin .dogsvg,
+.moonwin .gullmascot { filter: drop-shadow(0 8px 14px rgba(45,21,13,.28)); }
 
 /* 강아지 자리는 상자를 두르지 않습니다.
    창을 아무리 비워도 그 창이 담긴 카드가 흰색이면 가로막힙니다.
