@@ -89,24 +89,34 @@
   }
 
   /* 백사장과 밀려오는 파도.
-     그러데이션 색만으로는 "여기가 어디인지" 안 읽혀 밋밋해 보이므로,
-     실제 모래·파도 모양을 넣고 파도는 옆으로 천천히 흘러가게 합니다.
-     파도 SVG 는 무늬가 같은 폭 두 번을 이어 붙인 뒤 절반만큼 밀어
-     이음매 없이 계속 도는 것처럼 보이게 합니다. */
+     쌓는 순서(뒤→앞): 먼 바다 → 파도 → 모래사장.
+     화면에서는 위가 바다, 가운데가 파도, 아래(가장 가까운 곳)가 모래입니다. */
   function shore() {
     const box = document.createElement('div');
     box.className = 'intro-shore';
     box.innerHTML =
-      '<div class="shore-sea"></div>' +
-      '<div class="shore-wave-wrap">' +
-        '<svg class="shore-wave" viewBox="0 0 400 60" preserveAspectRatio="none">' +
-          '<path d="M0,26 Q25,2 50,26 T100,26 T150,26 T200,26 T250,26 T300,26 T350,26 T400,26 V60 H0 Z"/>' +
-        '</svg>' +
-        '<svg class="shore-wave shore-wave2" viewBox="0 0 400 60" preserveAspectRatio="none">' +
-          '<path d="M0,20 Q25,44 50,20 T100,20 T150,20 T200,20 T250,20 T300,20 T350,20 T400,20 V60 H0 Z"/>' +
-        '</svg>' +
+      /* 1) 먼 바다 */ 
+      '<div class="shore-sea" aria-hidden="true">' +
+        '<span class="shore-shine"></span>' +
       '</div>' +
-      '<div class="shore-sand"></div>';
+      /* 2) 파도(바다와 모래 사이) — 같은 무늬를 두 번 이어 이음매 없이 흘러가게 */
+      '<div class="shore-wave-wrap" aria-hidden="true">' +
+        '<div class="shore-wave shore-wave-a">' +
+          '<svg viewBox="0 0 800 48" preserveAspectRatio="none">' +
+            '<path d="M0 22 Q25 4 50 22 T100 22 T150 22 T200 22 T250 22 T300 22 T350 22 T400 22' +
+            ' T450 22 T500 22 T550 22 T600 22 T650 22 T700 22 T750 22 T800 22 V48 H0 Z"/>' +
+          '</svg>' +
+        '</div>' +
+        '<div class="shore-wave shore-wave-b">' +
+          '<svg viewBox="0 0 800 48" preserveAspectRatio="none">' +
+            '<path d="M0 28 Q25 12 50 28 T100 28 T150 28 T200 28 T250 28 T300 28 T350 28 T400 28' +
+            ' T450 28 T500 28 T550 28 T600 28 T650 28 T700 28 T750 28 T800 28 V48 H0 Z"/>' +
+          '</svg>' +
+        '</div>' +
+        '<div class="shore-foam"></div>' +
+      '</div>' +
+      /* 3) 모래사장(가장 앞·화면 아래) */
+      '<div class="shore-sand" aria-hidden="true"></div>';
     return box;
   }
 

@@ -2945,32 +2945,119 @@ body.dark .intro {
 }
 .intro.still .intro-flock { display: none; }
 
-/* 백사장과 밀려오는 파도 — 그러데이션만으로는 "여기가 해변"이라는 게
-   안 읽혀 밋밋해 보이므로, 실제 모래·파도 모양을 바닥에 깔고
-   파도는 옆으로 계속 흘러가게 합니다. */
-.intro-shore { position: absolute; left: 0; right: 0; bottom: 0; height: 30%; z-index: 0; overflow: hidden; }
-/* 하늘과 맞닿는 자리(맨 위)가 먼 바다, 그 아래 파도, 맨 아래(화면 바닥,
-   가장 가까운 자리)가 모래사장 — 해변을 위에서 내려다본 사진과 같은 순서. */
+/* 백사장과 밀려오는 파도
+   쌓는 순서(뒤→앞): 바다(z1) → 파도(z2) → 모래(z3)
+   화면 위→아래: 먼 바다 → 파도 물결 → 모래사장 */
+.intro-shore {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 36%; z-index: 0; overflow: hidden;
+  pointer-events: none;
+}
+
+/* ① 먼 바다 — 위쪽 절반, 가장 뒤 */
 .shore-sea {
-  position: absolute; left: 0; right: 0; top: 0; height: 96px;
-  background: linear-gradient(180deg, #4f9bb0 0%, #7cc4d4 100%);
+  position: absolute; left: 0; right: 0; top: 0; height: 52%;
+  z-index: 1;
+  background: linear-gradient(180deg,
+    #3e8fa8 0%, #5eb0c4 42%, #7ec9d6 100%);
+  animation: seaPulse 4.8s ease-in-out infinite;
 }
-body.dark .shore-sea { background: linear-gradient(180deg, #152a33 0%, #23414c 100%); }
-.shore-sand {
-  position: absolute; left: 0; right: 0; top: 160px; bottom: 0;
-  background: linear-gradient(180deg, #f2ddb2 0%, #eacf98 55%, #e2c186 100%);
+.shore-shine {
+  position: absolute; left: 8%; right: 18%; top: 18%; height: 42%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 40%,
+    rgba(255,255,255,.38) 0%, rgba(255,255,255,.08) 45%, transparent 72%);
+  animation: seaShine 5.6s ease-in-out infinite;
 }
-body.dark .shore-sand { background: linear-gradient(180deg, #3a2c1e 0%, #2e2216 55%, #241a10 100%); }
-.shore-wave-wrap { position: absolute; left: 0; right: 0; top: 96px; height: 64px; overflow: hidden; }
+body.dark .shore-sea {
+  background: linear-gradient(180deg, #12303a 0%, #1c4552 50%, #255564 100%);
+}
+
+/* ② 파도 — 바다와 모래가 만나는 띠, 바다 위·모래 아래 */
+.shore-wave-wrap {
+  position: absolute; left: 0; right: 0;
+  top: 38%; height: 28%;
+  z-index: 2; overflow: hidden;
+  animation: shoreLift 3.4s ease-in-out infinite;
+}
 .shore-wave {
-  position: absolute; top: 0; left: 0; width: 200%; height: 100%;
-  fill: #bfe6ee; animation: shoreDrift 7s linear infinite;
+  position: absolute; left: 0; top: 0;
+  width: 200%; height: 100%;
 }
-.shore-wave2 { fill: #9fd6e2; opacity: .85; animation: shoreDrift 5.2s linear infinite reverse; }
-body.dark .shore-wave { fill: #2b4048; }
-body.dark .shore-wave2 { fill: #24363d; }
-@keyframes shoreDrift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.intro.still .shore-wave, .intro.still .shore-wave2 { animation: none !important; }
+.shore-wave svg { display: block; width: 100%; height: 100%; }
+.shore-wave-a {
+  fill: #a8dcea;
+  animation: shoreDrift 8s linear infinite;
+}
+.shore-wave-b {
+  fill: #c8ecf4;
+  opacity: .92;
+  top: 28%;
+  height: 78%;
+  animation: shoreDrift 5.6s linear infinite reverse;
+}
+.shore-foam {
+  position: absolute; left: -5%; right: -5%; bottom: 0; height: 38%;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.55) 48%,
+    rgba(255,255,255,.15) 100%);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  animation: foamWash 3.2s ease-in-out infinite;
+}
+body.dark .shore-wave-a { fill: #2a4a56; }
+body.dark .shore-wave-b { fill: #356070; }
+body.dark .shore-foam {
+  background: linear-gradient(180deg,
+    rgba(200,230,240,0) 0%,
+    rgba(200,230,240,.22) 50%,
+    rgba(200,230,240,.06) 100%);
+}
+
+/* ③ 모래사장 — 화면 맨 아래, 가장 앞 */
+.shore-sand {
+  position: absolute; left: 0; right: 0;
+  top: 58%; bottom: 0;
+  z-index: 3;
+  background:
+    radial-gradient(ellipse 120% 40% at 50% 0%, rgba(255,255,255,.28) 0%, transparent 70%),
+    linear-gradient(180deg, #f0d7a8 0%, #e8c98a 40%, #dfbc78 100%);
+  /* 모래가 파도 거품 위를 살짝 덮어 '백사장 위'처럼 보이게 */
+  clip-path: ellipse(130% 100% at 50% 100%);
+}
+body.dark .shore-sand {
+  background:
+    radial-gradient(ellipse 120% 40% at 50% 0%, rgba(255,255,255,.04) 0%, transparent 70%),
+    linear-gradient(180deg, #3a2c1e 0%, #2e2216 55%, #241a10 100%);
+}
+
+@keyframes seaPulse {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(1.06); }
+}
+@keyframes seaShine {
+  0%, 100% { opacity: .7; transform: translateX(0); }
+  50%      { opacity: 1; transform: translateX(4%); }
+}
+@keyframes shoreDrift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes shoreLift {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(4px); }
+}
+@keyframes foamWash {
+  0%, 100% { opacity: .55; transform: scaleY(1) translateY(0); }
+  50%      { opacity: .9; transform: scaleY(1.15) translateY(-2px); }
+}
+
+.intro.still .shore-sea,
+.intro.still .shore-shine,
+.intro.still .shore-wave-a,
+.intro.still .shore-wave-b,
+.intro.still .shore-wave-wrap,
+.intro.still .shore-foam { animation: none !important; }
 
 /* 복실이 — 아래에서 통 튀어 올라옵니다 */
 .intro-dog {
