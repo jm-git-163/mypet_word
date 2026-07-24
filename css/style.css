@@ -564,8 +564,9 @@ body.tab-walk .topbar, body.playing .topbar { background: transparent; }
 body.tab-walk::before, body.playing::before { display: none; }   /* 하늘 그라데이션 끄기 */
 body.tab-walk::after, body.playing::after {
   display: block; opacity: 1;
-  /* 그림 아래 끝을 탭 메뉴 바로 위에 맞춰, 그림이 메뉴에 잘리지 않게 합니다. */
-  bottom: var(--tabbar-h, 76px);
+  /* 그림을 탭 메뉴 위로 살짝만 띄웁니다(메뉴에 아주 조금 걸치되, 너무 높이
+     올리면 중요한 가운데 부분이 카드 뒤로 다 숨으므로 낮게 둡니다). */
+  bottom: max(6px, calc(var(--tabbar-h, 76px) - 36px));
   background-image: var(--hero-img, none);
   background-size: 100% auto;                            /* 너비에 꽉 맞춰 큼직하게 */
   background-position: bottom center;
@@ -575,6 +576,25 @@ body.tab-walk::after, body.playing::after {
 }
 body.contrast.tab-walk, body.contrast.playing { background: #fff; }
 body.contrast.tab-walk::after, body.contrast.playing::after { display: none; }
+
+/* 산책 화면 카드·말풍선은 살짝 비치게 해, 카드 뒤에 가려지던 삽화 가운데
+   부분이 은은하게 보이게 합니다. 글자 가독성을 위해 살짝만 투명하게 하고
+   (흰색 84%), 뒤 그림이 번지지 않도록 옅은 블러를 겁니다. */
+body.tab-walk .card,
+body.tab-walk .speech {
+  background: color-mix(in srgb, var(--white) 84%, transparent);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+}
+body.dark.tab-walk .card,
+body.dark.tab-walk .speech {
+  background: color-mix(in srgb, var(--white) 78%, transparent);
+}
+/* 또렷하게 보기에서는 투명·블러를 끄고 완전히 불투명하게(가독성 최우선). */
+body.contrast.tab-walk .card,
+body.contrast.tab-walk .speech {
+  background: var(--white);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
 
 /* ── 흩날리는 것 (꽃잎·단풍·눈·잎) ──────────────
    어느 풍경에나 무언가 천천히 흩날립니다.
