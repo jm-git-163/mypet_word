@@ -60,13 +60,19 @@ async function simplifyOne(n) {
     },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 200,
+      // 한글은 영어보다 토큰을 훨씬 많이 씁니다(음절 하나가 토큰 여러 개로
+      // 쪼개지는 경우가 흔함). 200으로는 "한두 문장"도 중간에 잘려
+      // 끊긴 채로 나온 적이 있어 여유 있게 올립니다.
+      max_tokens: 400,
       temperature: 0.3,
       messages: [{ role: 'user', content: prompt }]
     })
   });
   if (!r.ok) throw new Error(`OpenAI ${r.status}: ${(await r.text()).slice(0, 200)}`);
   const j = await r.json();
+  if (j.choices?.[0]?.finish_reason === 'length') {
+    console.warn('  ⚠ 문장이 중간에 잘렸을 수 있음(max_tokens 한도 도달):', n.title.slice(0, 30));
+  }
   return (j.choices?.[0]?.message?.content || '').trim();
 }
 
