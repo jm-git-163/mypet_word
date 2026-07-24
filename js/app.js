@@ -1097,7 +1097,7 @@
         prof.appendChild(h('button', {
           class: 'btn tool wide', style: 'margin-top:8px',
           onclick: () => { st.personalize = false; Store.save(); this.go('learn'); }
-        }, '전체 다 보기'));
+        }, '맞춤 정보 그만 받기'));
       } else {
         prof.appendChild(h('p', { class: 'muted small', style: 'margin:0 0 11px;word-break:keep-all;line-height:1.6' },
           '나이와 사는 동네를 알려 주시면 나에게 해당되는 정보를 먼저 보여 드려요. 이름은 묻지 않고, 이 기기에만 저장돼요.'));
@@ -1365,15 +1365,8 @@
             });
           }
         }, h('span', { class: 'lead' }, '🧹'), h('span', { class: 'grow' }, '처음부터 다시 시작하기'))));
-
-      // 앱 끝내기 — 소리를 모두 멈추고 창을 닫습니다.
-      v.appendChild(h('div', { class: 'card' },
-        h('h2', null, '앱 끝내기'),
-        h('p', { class: 'muted small', style: 'margin:-6px 0 14px' },
-          '소리를 모두 멈추고 앱을 닫아요. 걸어오신 기록은 그대로 저장돼 있어요.'),
-        h('button', {
-          class: 'btn primary wide', onclick: () => this.quit()
-        }, '소리 끄고 앱 끝내기')));
+      // 앱을 끝내는 길은 화면 아래 '나가기' 칸 하나로 충분해, 여기 따로 두지 않습니다
+      // (똑같은 버튼이 두 군데 있으면 어느 쪽을 눌러야 할지 헷갈립니다).
     },
 
     /**

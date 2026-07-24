@@ -149,7 +149,7 @@ const main = async () => {
   });
 
   const seen = new Set();
-  const notices = passed.map(toNotice)
+  const freshNotices = passed.map(toNotice)
     .filter(n => n.title && n.date && n.date >= CUTOFF)
     // 같은 제목이라도 기관이 다르면 다른 글입니다.
     // 제목만으로 지우면 '공지사항' 같은 흔한 이름의 글이 통째로 사라집니다.
@@ -158,7 +158,47 @@ const main = async () => {
     .map(n => {
       const ai = aiByKey.get(n.source + '|' + n.title.replace(/\s/g, ''));
       return ai ? { ...n, aiSimplified: ai } : n;
-    })
+    });
+
+  // pending.json은 git에 안 실리는 파일이라(.gitignore), GitHub Actions는 매번
+  // 빈 상태에서 다시 수집합니다. 그런데 해운대구청 계열처럼 그날그날 접속이
+  // 막히는 기관이 있으면, 그 판의 pending에는 그 기관 글이 하나도 안 잡힙니다.
+  // 예전엔 그럴 때마다 이 기관의 글 전체를 지워 버렸습니다 — "어제는 최신 글이
+  // 보였는데 오늘 보니 없어지고 훨씬 예전 글만 남는다"는 문제가 바로 이것이었습니다.
+  // 그래서 이번 판에 다시 못 걷은 글이라도, 최근(2주 안)에 한 번이라도 걷혔던
+  // 글이면 그대로 이어 붙여 화면에서 갑자기 사라지지 않게 합니다. 정말 오래
+  // 못 걷힌(그 기관이 계속 막혀 있는) 글만 자연스럽게 빠집니다.
+  const CARRY_DAYS = 14;
+  const carryCutoff = new Date(Date.now() - CARRY_DAYS * 864e5 + 9 * 3600e3).toISOString().slice(0, 10);
+  const freshKeys = new Set(freshNotices.map(n => n.source + '|' + n.title.replace(/\s/g, '')));
+  const carried = (feed.notices || []).filter(n =>
+    n.auto &&
+    !freshKeys.has(n.source + '|' + n.title.replace(/\s/g, '')) &&
+    n.verified >= carryCutoff
+  );
+
+  // 같은 사업 공고를 부서 전용 게시판과 '구청 공지사항' 같은 통합 게시판에
+  // 나란히 올리는 기관이 있어, 제목 앞부분과 날짜가 같으면 사실상 같은 글로
+  // 봅니다(예: "해운대구보건소 3기 상설운동교실 모집일 안내"가 보건소 게시판과
+  // 구청 공지사항 게시판에 둘 다 올라와 카드가 두 번 뜨던 문제). 여러 부서
+  // 글을 한데 모아 올리는 통합 게시판보다, 그 부서 전용 게시판 쪽이 분류·출처가
+  // 더 정확하므로 그쪽을 남깁니다.
+  const GENERIC_BOARD = new Set([
+    '해운대구청 공지사항', '해운대구 복지새소식', '해운대구 반상회 소식',
+    '부산시 통합공지사항', '부산광역시 고시공고'
+  ]);
+  const normPrefix = t => String(t || '').replace(/[\s()·,.\-]/g, '').slice(0, 16);
+  const byFuzzy = new Map();
+  for (const n of [...freshNotices, ...carried]) {
+    const k = n.date + '|' + normPrefix(n.title);
+    const prev = byFuzzy.get(k);
+    if (!prev) { byFuzzy.set(k, n); continue; }
+    const prevGeneric = GENERIC_BOARD.has(prev.source), curGeneric = GENERIC_BOARD.has(n.source);
+    if (prevGeneric && !curGeneric) byFuzzy.set(k, n);
+    else if (prevGeneric === curGeneric && n.body.length > prev.body.length) byFuzzy.set(k, n);
+  }
+
+  const notices = [...byFuzzy.values()]
     .sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
   // 손으로 정리해 둔 안내(auto 아님)는 남기고, 자동 수집분만 새로 갈아 끼운다
@@ -171,7 +211,7 @@ const main = async () => {
   feed.meta.autoCount = notices.length;
 
   await fs.writeFile(FEED, JSON.stringify(feed, null, 2), 'utf8');
-  console.log(`수집 ${pending.length}건 → 선별 통과 ${passed.length}건 → 피드 게시 ${notices.length}건`);
+  console.log(`수집 ${pending.length}건 → 선별 통과 ${passed.length}건 → 새로 걷힘 ${freshNotices.length}건 + 이어 붙임 ${carried.length}건 → 피드 게시 ${notices.length}건`);
   console.log('버려진 글 예시:', pending.filter(it => DROP.test(it.rawTitle)).slice(0, 3).map(i => i.rawTitle.slice(0, 30)).join(' / ') || '(없음)');
 };
 main().catch(e => { console.error(e); process.exit(1); });
