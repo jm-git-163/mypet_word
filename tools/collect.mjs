@@ -27,11 +27,13 @@ const sha1 = s => crypto.createHash('sha1').update(s).digest('hex').slice(0, 16)
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 /* 응답 없는 기관 서버 하나 때문에 전체 수집이 멈추면 안 됩니다.
-   10초 안에 응답이 없으면 그 기관만 건너뜁니다. */
+   10초 안에 응답이 없으면 그 기관만 건너뜁니다.
+   (부산시 통합공지는 GitHub Actions 쪽에서 10초를 자꾸 넘겨 계속
+   건너뛰어져서, 그 소스만 넉넉하게 줄 수 있게 시간을 받게 했습니다.) */
 const TIMEOUT_MS = 10000;
-async function fetchSafe(url, opts) {
+async function fetchSafe(url, opts, timeoutMs) {
   const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
+  const t = setTimeout(() => ctrl.abort(), timeoutMs || TIMEOUT_MS);
   try { return await fetch(url, { ...opts, signal: ctrl.signal }); }
   finally { clearTimeout(t); }
 }
@@ -236,7 +238,7 @@ async function checkSource(src, state, agent) {
   if (st.lastMod) headers['If-Modified-Since'] = st.lastMod;
 
   let res;
-  try { res = await fetchSafe(src.listUrl, { headers }); }
+  try { res = await fetchSafe(src.listUrl, { headers }, src.timeoutMs); }
   catch (e) { st.fails++; console.warn(`✗ ${src.name}: ${e.message}`); return []; }
 
   st.lastCheck = new Date().toISOString();
@@ -271,7 +273,7 @@ async function checkSource(src, state, agent) {
     u.searchParams.set(pageParam, String(p));
     await sleep(agent.minDelayMs || 2000);
     try {
-      const r2 = await fetchSafe(u.href, { headers: { 'User-Agent': agent.userAgent } });
+      const r2 = await fetchSafe(u.href, { headers: { 'User-Agent': agent.userAgent } }, src.timeoutMs);
       if (!r2.ok) break;
       const h2 = await r2.text();
       const more = src.idPattern
@@ -299,7 +301,7 @@ async function checkSource(src, state, agent) {
     const url = link.url;
     await sleep(agent.minDelayMs || 2000);            // 예의 있는 간격
     try {
-      const r = await fetchSafe(url, { headers: { 'User-Agent': agent.userAgent } });
+      const r = await fetchSafe(url, { headers: { 'User-Agent': agent.userAgent } }, src.timeoutMs);
       if (!r.ok) continue;
       const rawHtml = await r.text();
       const d = extractDetail(rawHtml, url, link.text);

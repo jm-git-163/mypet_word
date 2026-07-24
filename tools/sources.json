@@ -797,6 +797,7 @@
       "cadenceMin": 240,
       "pages": 3,
       "pageParam": "curPage",
+      "timeoutMs": 25000,
       "listUrl": "https://www.busan.go.kr/nbnews",
       "linkPattern": "/nbnews/\\d+",
       "enabled": true
