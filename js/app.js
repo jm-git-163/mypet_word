@@ -703,10 +703,7 @@
       // 이미 앱으로 여셨거나 안내를 닫으셨으면 아무것도 그리지 않습니다.
       v.appendChild(h('div', { id: 'installhost' }));
       if (global.Install) global.Install.render();
-
-      // 명소 삽화 — 카드들 아래 남는 빈 자리를 모두 차지해(세로 flex),
-      // 그림이 텍스트 상자에 가리지 않고 화면 아래쪽에 큼직하게 보입니다.
-      v.appendChild(h('div', { class: 'walk-illust', 'aria-hidden': 'true' }));
+      // 명소 삽화는 화면 아래에 배경(body.tab-walk::after)으로 큼직하게 깔립니다.
     },
 
     greet() {

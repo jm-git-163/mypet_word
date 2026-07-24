@@ -554,54 +554,25 @@ body::after {
 body.dark::after { opacity: .4; }
 body.contrast::before, body.contrast::after { background: #fff; opacity: 1; }
 
-/* ── 산책 화면 전용 배경 ──────────────────────────
-   다른 화면은 위 풍경(body::after)을 화면 전체에 흐릿하게 깔지만,
-   산책 화면만은 ① 명소 그림을 '카드 아래 남는 빈 자리'에 잘리지 않게 온전히
-   깔고, ② 그림 위로 남는 화면 전체는 그림 맨 위(하늘) 빛깔 한 가지로 통일합니다.
-   (화면을 늘리지 않고, 그림과 배경이 한 장처럼 이어지게 하는 것이 핵심) */
-body.tab-walk { background: var(--hero-top, var(--surface)); transition: background 500ms ease; }
-body.tab-walk .topbar { background: transparent; }
-body.tab-walk::before, body.tab-walk::after { display: none; }   /* 하늘 그라데이션·흐림 풍경 끄기 */
-/* 카드들을 위에서부터 쌓고, 그림 자리(.walk-illust)가 남는 아래 공간을
-   모두 차지하도록 세로 flex 로 만듭니다(내용이 짧은 산책 화면에서 특히
-   아래가 넉넉히 비므로, 거기에 그림이 큼직하게 들어갑니다). */
-body.tab-walk .scroll { display: flex; flex-direction: column; background: transparent; }
-.walk-illust {
-  /* flex:1 로 카드 아래 '보이는 남은 자리'를 꼭 채웁니다. min-height 를 그 자리보다
-     크게 잡으면 화면이 넘쳐 스크롤이 생기고, 아래 정렬한 그림이 화면 밖으로
-     밀려납니다. 그래서 최소 높이는 넉넉히 보이되 넘치지 않을 만큼만 둡니다. */
-  flex: 1 1 auto; min-height: 130px;
-  margin: 8px calc(-1 * var(--edge)) 0;
-  background-image: var(--hero-img, none);
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  /* contain: 남은 자리에 그림 전체가 잘리지 않게 온전히 들어갑니다. */
-  background-size: contain;
-  transition: background-image 400ms ease;
-}
-body.contrast.tab-walk { background: #fff; }
-body.contrast .walk-illust { background-image: none; }
-
-/* ── 퍼즐(놀이) 화면 배경 ──────────────────────────
-   퍼즐 화면은 낱말판·글자 타일이 빽빽해 빈 자리가 없으므로, 삽화를 카드
-   아래 자리에 크게 두는 대신 '바탕 그림'으로 은은하게 깝니다. 화면 전체는
-   삽화 하늘색으로 통일하고, 그림은 화면 아래에 온전히(너비에 맞춰) 깔되
-   글자가 묻히지 않도록 위쪽은 서서히 사라지게 합니다.
-   (산책 화면에서 보던 그 명소를 그대로 이어 씁니다) */
-body.playing { background: var(--hero-top, var(--surface)); transition: background 500ms ease; }
-body.playing .topbar { background: transparent; }
-body.playing::before { display: none; }                 /* 하늘 그라데이션 끄기 */
-body.playing::after {
+/* ── 산책·퍼즐 화면 공통 배경 ──────────────────────
+   두 화면 모두 ① 명소 그림을 화면 아래에 큼직하게(너비에 꽉 맞춰) 깔고,
+   ② 그림 위로 남는 화면 전체는 그림 맨 위(하늘) 빛깔 한 가지로 통일합니다.
+   위쪽은 서서히 사라지게 해, 카드·낱말판 뒤가 깔끔하고 글자가 묻히지 않습니다.
+   (산책 화면에서 보던 그 명소를 퍼즐 화면까지 그대로 이어 씁니다) */
+body.tab-walk, body.playing { background: var(--hero-top, var(--surface)); transition: background 500ms ease; }
+body.tab-walk .topbar, body.playing .topbar { background: transparent; }
+body.tab-walk::before, body.playing::before { display: none; }   /* 하늘 그라데이션 끄기 */
+body.tab-walk::after, body.playing::after {
   display: block; opacity: 1;
   background-image: var(--hero-img, none);
-  background-size: 100% auto;                            /* 너비에 맞춰 온전히 */
+  background-size: 100% auto;                            /* 너비에 꽉 맞춰 큼직하게 */
   background-position: bottom center;
-  /* 위쪽은 투명하게 사라져 낱말판 뒤가 깔끔합니다(글자 가독성 우선). */
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 46%, #000 82%, #000 100%);
-  mask-image: linear-gradient(180deg, transparent 0%, transparent 46%, #000 82%, #000 100%);
+  /* 위쪽은 투명하게 사라져 카드·낱말판 뒤가 깔끔합니다(글자 가독성 우선). */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 40%, #000 78%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, transparent 40%, #000 78%, #000 100%);
 }
-body.contrast.playing { background: #fff; }
-body.contrast.playing::after { display: none; }
+body.contrast.tab-walk, body.contrast.playing { background: #fff; }
+body.contrast.tab-walk::after, body.contrast.playing::after { display: none; }
 
 /* ── 흩날리는 것 (꽃잎·단풍·눈·잎) ──────────────
    어느 풍경에나 무언가 천천히 흩날립니다.
