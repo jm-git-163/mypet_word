@@ -88,34 +88,26 @@
     return box;
   }
 
-  /* 백사장과 밀려오는 파도.
-     쌓는 순서(뒤→앞): 먼 바다 → 파도 → 모래사장.
-     화면에서는 위가 바다, 가운데가 파도, 아래(가장 가까운 곳)가 모래입니다. */
+  /* 해변 배경 — 화면 아래부터 모래 → 파도 → 바다, 그 위는 하늘(.intro 배경). */
   function shore() {
     const box = document.createElement('div');
     box.className = 'intro-shore';
     box.innerHTML =
-      /* 1) 먼 바다 */ 
-      '<div class="shore-sea" aria-hidden="true">' +
-        '<span class="shore-shine"></span>' +
-      '</div>' +
-      /* 2) 파도(바다와 모래 사이) — 같은 무늬를 두 번 이어 이음매 없이 흘러가게 */
+      '<div class="shore-sea" aria-hidden="true"><span class="shore-shine"></span></div>' +
       '<div class="shore-wave-wrap" aria-hidden="true">' +
         '<div class="shore-wave shore-wave-a">' +
-          '<svg viewBox="0 0 800 48" preserveAspectRatio="none">' +
-            '<path d="M0 22 Q25 4 50 22 T100 22 T150 22 T200 22 T250 22 T300 22 T350 22 T400 22' +
-            ' T450 22 T500 22 T550 22 T600 22 T650 22 T700 22 T750 22 T800 22 V48 H0 Z"/>' +
+          '<svg viewBox="0 0 800 40" preserveAspectRatio="none">' +
+            '<path d="M0 18 Q25 2 50 18 T100 18 T150 18 T200 18 T250 18 T300 18 T350 18 T400 18' +
+            ' T450 18 T500 18 T550 18 T600 18 T650 18 T700 18 T750 18 T800 18 V40 H0 Z"/>' +
           '</svg>' +
         '</div>' +
         '<div class="shore-wave shore-wave-b">' +
-          '<svg viewBox="0 0 800 48" preserveAspectRatio="none">' +
-            '<path d="M0 28 Q25 12 50 28 T100 28 T150 28 T200 28 T250 28 T300 28 T350 28 T400 28' +
-            ' T450 28 T500 28 T550 28 T600 28 T650 28 T700 28 T750 28 T800 28 V48 H0 Z"/>' +
+          '<svg viewBox="0 0 800 40" preserveAspectRatio="none">' +
+            '<path d="M0 22 Q25 8 50 22 T100 22 T150 22 T200 22 T250 22 T300 22 T350 22 T400 22' +
+            ' T450 22 T500 22 T550 22 T600 22 T650 22 T700 22 T750 22 T800 22 V40 H0 Z"/>' +
           '</svg>' +
         '</div>' +
-        '<div class="shore-foam"></div>' +
       '</div>' +
-      /* 3) 모래사장(가장 앞·화면 아래) */
       '<div class="shore-sand" aria-hidden="true"></div>';
     return box;
   }

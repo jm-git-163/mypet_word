@@ -564,10 +564,9 @@ body.tab-walk .topbar, body.playing .topbar { background: transparent; }
 body.tab-walk::before, body.playing::before { display: none; }   /* 하늘 그라데이션 끄기 */
 body.tab-walk::after, body.playing::after {
   display: block; opacity: 1;
-  /* 그림을 화면 맨 아래까지 채웁니다. 아래 탭 메뉴가 반투명이라, 그림이
-     메뉴에 잘리지 않고 메뉴 뒤로 이어져 비쳐 보입니다(위=카드, 아래=메뉴
-     양쪽으로 그림이 은은히 이어집니다). */
-  bottom: 0;
+  /* 그림을 화면 아래(반투명 탭 메뉴 뒤)까지 채우되, 아주 살짝만 올려 둡니다.
+     메뉴가 반투명이라 그림이 잘리지 않고 위=카드·아래=메뉴 양쪽으로 이어집니다. */
+  bottom: 12px;
   background-image: var(--hero-img, none);
   background-size: 100% auto;                            /* 너비에 꽉 맞춰 큼직하게 */
   background-position: bottom center;
@@ -609,10 +608,11 @@ body.contrast.tab-walk .tabbar, body.contrast.playing .tabbar {
   background: color-mix(in srgb, var(--white) 90%, transparent);
 }
 
-/* 산책 화면은 카드를 위로 바짝 모아, 아래 삽화가 넓게 보이게 합니다. */
-body.tab-walk #view > .card { padding: 14px 16px; margin-bottom: 10px; }
-body.tab-walk #view > .card.compact { padding-top: 12px; padding-bottom: 14px; }
-body.tab-walk .dog-area { margin: 2px 0 8px; }          /* 인사말 위아래 여백 줄이기 */
+/* 산책 화면은 카드를 낮고 위로 바짝 모아, 아래 삽화가 넓게 보이게 합니다. */
+body.tab-walk #view > .card { padding: 9px 16px; margin-bottom: 8px; }
+body.tab-walk #view > .card.compact { padding-top: 10px; padding-bottom: 12px; }
+body.tab-walk .dog-area { margin: 0 0 6px; }            /* 인사말 위아래 여백 줄이기 */
+body.tab-walk .statrow .bignum { font-size: min(calc(26px * var(--fs)), 7vw); }  /* 통계 숫자 조금 작게 */
 
 /* ── 흩날리는 것 (꽃잎·단풍·눈·잎) ──────────────
    어느 풍경에나 무언가 천천히 흩날립니다.
@@ -2912,17 +2912,16 @@ body.playing .tabbar button {
 .intro {
   position: fixed; inset: 0; z-index: 2147483600;
   display: flex; align-items: center; justify-content: center;
-  /* 해 질 녘 해운대 하늘 — 위는 밝게, 아래로 갈수록 노을빛이 짙어집니다.
-     은은한 해무리(위쪽 흰 광채)를 얹어 한 겹으로 밋밋했던 것에 깊이를 냅니다. */
+  /* ④ 하늘 — 모래색 노을이 아니라 맑은 낮하늘 */
   background:
-    radial-gradient(52% 36% at 50% 10%, rgba(255,255,255,.65) 0%, rgba(255,255,255,0) 68%),
-    linear-gradient(172deg, #fff4e7 0%, #ffe6cb 30%, #fdc9a0 58%, #f0a488 80%, #dd8f82 100%);
+    radial-gradient(60% 40% at 70% 12%, rgba(255,255,255,.55) 0%, transparent 65%),
+    linear-gradient(180deg, #8ec8ef 0%, #b7ddf5 38%, #d4ebf8 62%, #e8f4fb 100%);
   animation: introIn 240ms ease-out;
 }
 body.dark .intro {
   background:
-    radial-gradient(52% 36% at 50% 10%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 70%),
-    linear-gradient(172deg, #241a26 0%, #241a20 28%, #2c1c16 56%, #22140e 80%, #150d0a 100%);
+    radial-gradient(60% 40% at 70% 12%, rgba(255,255,255,.06) 0%, transparent 65%),
+    linear-gradient(180deg, #0e1a28 0%, #152536 40%, #1a2e40 70%, #1c3344 100%);
 }
 .intro.out { animation: introOut 320ms ease-in forwards; }
 @keyframes introIn { from { opacity: 0 } to { opacity: 1 } }
@@ -2930,14 +2929,13 @@ body.dark .intro {
 
 /* 한가운데보다 살짝 위에 둡니다.
    정확히 가운데 놓으면 아래가 허전해 보여 아래로 처져 보입니다. */
-.intro-in { position: relative; z-index: 1; text-align: center; padding: 24px; margin-bottom: 7vh; }
+.intro-in { position: relative; z-index: 2; text-align: center; padding: 24px; margin-bottom: 10vh; }
 
-/* 하늘 저편으로 지나가는 갈매기떼 — 글자·유리공보다 뒤에, 배경처럼
-   너무 작고 빠르게 파닥이면 벌레처럼 보이므로, 크고 느긋하게 둡니다. */
-.intro-flock { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+/* 하늘 저편으로 지나가는 갈매기떼 */
+.intro-flock { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
 .flock-bird {
   position: absolute; left: 0; width: calc(46px * var(--fs, 1)); height: calc(18px * var(--fs, 1));
-  color: var(--on-variant); opacity: .32;
+  color: #4a6f88; opacity: .28;
   animation-name: flockFly; animation-timing-function: linear; animation-iteration-count: infinite;
 }
 .flock-bird svg { width: 100%; height: 100%; display: block; animation-name: wingflap; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
@@ -2951,40 +2949,42 @@ body.dark .intro {
 }
 .intro.still .intro-flock { display: none; }
 
-/* 백사장과 밀려오는 파도
-   쌓는 순서(뒤→앞): 바다(z1) → 파도(z2) → 모래(z3)
-   화면 위→아래: 먼 바다 → 파도 물결 → 모래사장 */
+/* ─────────────────────────────────────────────
+   해변 — 화면 아래부터 ①모래 → ②파도 → ③바다
+   (그 위 ④하늘은 .intro 배경)
+   겹치지 않게 띠로만 쌓습니다.
+   ───────────────────────────────────────────── */
 .intro-shore {
   position: absolute; left: 0; right: 0; bottom: 0;
-  height: 36%; z-index: 0; overflow: hidden;
+  height: 48%; z-index: 0; overflow: hidden;
   pointer-events: none;
 }
 
-/* ① 먼 바다 — 위쪽 절반, 가장 뒤 */
+/* ③ 바다 — 해변 구역의 위쪽 (하늘과 맞닿음) */
 .shore-sea {
-  position: absolute; left: 0; right: 0; top: 0; height: 52%;
+  position: absolute; left: 0; right: 0;
+  top: 0; height: 46%;
   z-index: 1;
-  background: linear-gradient(180deg,
-    #3e8fa8 0%, #5eb0c4 42%, #7ec9d6 100%);
-  animation: seaPulse 4.8s ease-in-out infinite;
+  background: linear-gradient(180deg, #3a9bb8 0%, #4fadc4 55%, #62bcd0 100%);
+  animation: seaPulse 5s ease-in-out infinite;
 }
 .shore-shine {
-  position: absolute; left: 8%; right: 18%; top: 18%; height: 42%;
+  position: absolute; left: 15%; right: 25%; top: 10%; height: 50%;
   border-radius: 50%;
   background: radial-gradient(ellipse at 50% 40%,
-    rgba(255,255,255,.38) 0%, rgba(255,255,255,.08) 45%, transparent 72%);
-  animation: seaShine 5.6s ease-in-out infinite;
+    rgba(255,255,255,.35) 0%, rgba(255,255,255,.05) 50%, transparent 75%);
+  animation: seaShine 6s ease-in-out infinite;
 }
 body.dark .shore-sea {
-  background: linear-gradient(180deg, #12303a 0%, #1c4552 50%, #255564 100%);
+  background: linear-gradient(180deg, #123844 0%, #1a4a58 55%, #226070 100%);
 }
 
-/* ② 파도 — 바다와 모래가 만나는 띠, 바다 위·모래 아래 */
+/* ② 파도 — 바다와 모래 사이 한 줄 */
 .shore-wave-wrap {
   position: absolute; left: 0; right: 0;
-  top: 38%; height: 28%;
+  top: 40%; height: 18%;
   z-index: 2; overflow: hidden;
-  animation: shoreLift 3.4s ease-in-out infinite;
+  animation: shoreLift 3.2s ease-in-out infinite;
 }
 .shore-wave {
   position: absolute; left: 0; top: 0;
@@ -2992,58 +2992,37 @@ body.dark .shore-sea {
 }
 .shore-wave svg { display: block; width: 100%; height: 100%; }
 .shore-wave-a {
-  fill: #a8dcea;
-  animation: shoreDrift 8s linear infinite;
+  fill: #c5ebf4;
+  animation: shoreDrift 7.5s linear infinite;
 }
 .shore-wave-b {
-  fill: #c8ecf4;
-  opacity: .92;
-  top: 28%;
-  height: 78%;
-  animation: shoreDrift 5.6s linear infinite reverse;
+  fill: #e8f7fb;
+  opacity: .9;
+  top: 35%;
+  height: 70%;
+  animation: shoreDrift 5.2s linear infinite reverse;
 }
-.shore-foam {
-  position: absolute; left: -5%; right: -5%; bottom: 0; height: 38%;
-  background: linear-gradient(180deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,.55) 48%,
-    rgba(255,255,255,.15) 100%);
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  animation: foamWash 3.2s ease-in-out infinite;
-}
-body.dark .shore-wave-a { fill: #2a4a56; }
-body.dark .shore-wave-b { fill: #356070; }
-body.dark .shore-foam {
-  background: linear-gradient(180deg,
-    rgba(200,230,240,0) 0%,
-    rgba(200,230,240,.22) 50%,
-    rgba(200,230,240,.06) 100%);
-}
+body.dark .shore-wave-a { fill: #3a6574; }
+body.dark .shore-wave-b { fill: #4a7888; }
 
-/* ③ 모래사장 — 화면 맨 아래, 가장 앞 */
+/* ① 모래 — 화면 맨 아래 */
 .shore-sand {
   position: absolute; left: 0; right: 0;
-  top: 58%; bottom: 0;
+  top: 54%; bottom: 0;
   z-index: 3;
-  background:
-    radial-gradient(ellipse 120% 40% at 50% 0%, rgba(255,255,255,.28) 0%, transparent 70%),
-    linear-gradient(180deg, #f0d7a8 0%, #e8c98a 40%, #dfbc78 100%);
-  /* 모래가 파도 거품 위를 살짝 덮어 '백사장 위'처럼 보이게 */
-  clip-path: ellipse(130% 100% at 50% 100%);
+  background: linear-gradient(180deg, #f3e0b4 0%, #ebcf92 45%, #e2c07a 100%);
 }
 body.dark .shore-sand {
-  background:
-    radial-gradient(ellipse 120% 40% at 50% 0%, rgba(255,255,255,.04) 0%, transparent 70%),
-    linear-gradient(180deg, #3a2c1e 0%, #2e2216 55%, #241a10 100%);
+  background: linear-gradient(180deg, #3d3122 0%, #32281c 50%, #281f16 100%);
 }
 
 @keyframes seaPulse {
   0%, 100% { filter: brightness(1); }
-  50%      { filter: brightness(1.06); }
+  50%      { filter: brightness(1.05); }
 }
 @keyframes seaShine {
-  0%, 100% { opacity: .7; transform: translateX(0); }
-  50%      { opacity: 1; transform: translateX(4%); }
+  0%, 100% { opacity: .65; transform: translateX(0); }
+  50%      { opacity: 1; transform: translateX(3%); }
 }
 @keyframes shoreDrift {
   from { transform: translateX(0); }
@@ -3051,19 +3030,14 @@ body.dark .shore-sand {
 }
 @keyframes shoreLift {
   0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(4px); }
-}
-@keyframes foamWash {
-  0%, 100% { opacity: .55; transform: scaleY(1) translateY(0); }
-  50%      { opacity: .9; transform: scaleY(1.15) translateY(-2px); }
+  50%      { transform: translateY(3px); }
 }
 
 .intro.still .shore-sea,
 .intro.still .shore-shine,
 .intro.still .shore-wave-a,
 .intro.still .shore-wave-b,
-.intro.still .shore-wave-wrap,
-.intro.still .shore-foam { animation: none !important; }
+.intro.still .shore-wave-wrap { animation: none !important; }
 
 /* 복실이 — 아래에서 통 튀어 올라옵니다 */
 .intro-dog {
