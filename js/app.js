@@ -735,7 +735,7 @@
           h('span', { class: 'badge' + (done ? ' green' : here ? ' warm' : '') }, done ? '마침' : here ? '여기' : '다음')));
       }
 
-      v.appendChild(h('div', { class: 'section-title' }, '지나갈 마실'));
+      v.appendChild(h('div', { class: 'section-title' }, '지나갈 명소'));
       NEIGHBORHOODS.forEach((n, i) => {
         const row = h('div', { class: 'list-item oneline' + (i === hoodIdx ? '' : ' faded') });
         const dot = h('span', { class: 'hue-dot' });

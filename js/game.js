@@ -47,14 +47,14 @@
       const due = Generator.dueEntries(Store.data, Date.now());
       const rng = global.Engine.rngFrom('review', Date.now());
       const items = Generator.review(rng, Store.data.ability.GLOBAL.theta - 241, due, Store.data, 0.8);
-      this.stage = { level: Store.data.level, mode: 'REVIEW_MIX', modeName: '되새김 판', guide: '지난번에 만난 낱말로 판을 짰어요. 다시 만나 볼까요?', hood: { name: '되새김 마당', emoji: '📖' }, stepInChapter: 1, items };
+      this.stage = { level: Store.data.level, mode: 'REVIEW_MIX', modeName: '되새김 판', guide: '지난번에 만난 낱말로 판을 짰어요. 다시 만나 볼까요?', hood: { name: '되새김 마실', emoji: '📖' }, stepInChapter: 1, items };
       this.idx = 0; this.metEntries = [];
       if (!items.length) return say('되새길 낱말이 아직 없어요. 산책을 다녀오면 생겨요.', '📖');
       this.renderItem();
     },
 
     /**
-     * 해운대 마당 — 레벨과 따로 있는 코너입니다.
+     * 해운대 마실 — 레벨과 따로 있는 코너입니다.
      * 우리 고장 해운대의 명소·행사·생활정보를 묻고 답하며 쉬어 갑니다.
      */
     startProverbs() {
@@ -66,9 +66,9 @@
       const items = Generator.proverb(rng, bTarget, []);
       if (!items.length) return say('해운대 퀴즈를 준비하지 못했어요. 잠시 뒤에 다시 해 볼까요?', '🌊');
       this.stage = {
-        level: Store.data.level, mode: 'PROVERB_MATCH', modeName: '해운대 마당',
+        level: Store.data.level, mode: 'PROVERB_MATCH', modeName: '해운대 마실',
         guide: '해운대 이야기의 빈칸을 맞혀 보세요.',
-        hood: { name: '해운대 마당', emoji: '🌊' }, stepInChapter: 1, items
+        hood: { name: '해운대 마실', emoji: '🌊' }, stepInChapter: 1, items
       };
       this.idx = 0; this.metEntries = [];
       this.renderItem();
@@ -855,7 +855,7 @@
 
       v.appendChild(h('div', { class: 'celebrate' },
         h('div', { class: 'burst' }, global.UI.dogEl('신남', 104)),
-        h('div', { class: 'big' }, chapterDone ? '마당 하나를 다 걸었어요!' : '산책을 마쳤어요!'),
+        h('div', { class: 'big' }, chapterDone ? '마실 하나를 다 걸었어요!' : '산책을 마쳤어요!'),
         h('p', { class: 'muted', style: 'word-break:keep-all' },
           this.reviewOnly ? `${H.withParticle(d.pet.name, '과/와')} 함께 되새겼어요.` : `${H.withParticle(d.pet.name, '이/가')} 날개를 파닥여요.`)));
 

@@ -243,7 +243,15 @@ async function checkSource(src, state, agent) {
 
   let res;
   try { res = await fetchSafe(src.listUrl, { headers }, src.timeoutMs); }
-  catch (e) { st.fails++; console.warn(`✗ ${src.name}: ${e.message}`); return []; }
+  catch (e) {
+    st.fails++;
+    // 'fetch failed'만으로는 원인(타임아웃/DNS실패/연결거부/TLS오류)을 알 수 없어,
+    // 실제 원인이 담긴 e.cause까지 함께 남깁니다 — haeundae.go.kr·busan.go.kr이
+    // GitHub Actions에서만 계속 막히는 진짜 이유를 찾기 위한 진단용입니다.
+    const cause = e.cause ? ` — 원인: ${e.cause.code || e.cause.message || e.cause}` : '';
+    console.warn(`✗ ${src.name}: ${e.message}${cause}`);
+    return [];
+  }
 
   st.lastCheck = new Date().toISOString();
   if (res.status === 304) { st.fails = 0; console.log(`· ${src.name}: 변경 없음`); return []; }

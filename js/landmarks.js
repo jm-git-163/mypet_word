@@ -388,11 +388,55 @@
       (m, head, body, tail) => `${head}<defs>${f}</defs><g filter="url(#tn)">${body}</g>${tail}`);
   };
 
+  /* 그림 맨 위(하늘)의 바탕색 — 산책 화면에서 그림 아래 남는 자리를
+     이 색으로 채워, 그림과 이어 붙인 것처럼 보이게 합니다. */
+  const TOP = {
+    haeundae_beach: '#dff1f6', marine_city: '#1d2a4a', nurimaru: '#ffd9a8',
+    movie_street: '#8ccdee', dalmaji: '#ffd9a8', cheongsapo: '#dff1f6',
+    beach_train: '#dff1f6', songjeong: '#a6d7ef', jangsan: '#dff1f6',
+    bic: '#0f1830', bexco: '#7fbfe6', aquarium: '#33a6dd',
+    suyeong_marina: '#dff1f6', haeundae_spa: '#ffd9a2'
+  };
+  // tint()와 같은 만큼(±18도)만 돌려, 그림에 입힌 빛깔과 어긋나지 않게 맞춥니다.
+  const hexToHsl = (hex) => {
+    const n = parseInt(hex.slice(1), 16);
+    const r = (n >> 16 & 255) / 255, g = (n >> 8 & 255) / 255, b = (n & 255) / 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2;
+    let h = 0, s = 0;
+    const d = max - min;
+    if (d) {
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+      else if (max === g) h = (b - r) / d + 2;
+      else h = (r - g) / d + 4;
+      h *= 60;
+    }
+    return [h, s, l];
+  };
+  const hslToHex = (h, s, l) => {
+    h = ((h % 360) + 360) % 360;
+    const c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = l - c / 2;
+    const [r, g, b] = h < 60 ? [c, x, 0] : h < 120 ? [x, c, 0] : h < 180 ? [0, c, x] :
+      h < 240 ? [0, x, c] : h < 300 ? [x, 0, c] : [c, 0, x];
+    const to255 = v => Math.round((v + m) * 255).toString(16).padStart(2, '0');
+    return '#' + to255(r) + to255(g) + to255(b);
+  };
+
   global.Landmarks = {
     svg: (k, deg, opt) => L[k] ? (deg == null ? L[k] : tint(L[k], deg, opt)) : '',
     has: k => !!L[k],
+    keys: () => Object.keys(L),
     url: (k, deg, opt) => L[k]
       ? 'data:image/svg+xml;utf8,' + encodeURIComponent(deg == null ? L[k] : tint(L[k], deg, opt))
-      : ''
+      : '',
+    /** 그 명소의 하늘색(빛깔 톤 반영). deg 를 안 주면 원래 색 그대로. */
+    topColor: (k, deg) => {
+      const base = TOP[k] || '#dff1f6';
+      if (deg == null) return base;
+      const raw = ((deg - BASE_HUE + 540) % 360 - 180) * 0.14;
+      const rot = Math.max(-18, Math.min(18, raw));
+      const [h, s, l] = hexToHsl(base);
+      return hslToHex(h + rot, Math.min(1, s * 1.03), l);
+    }
   };
 })(window);
